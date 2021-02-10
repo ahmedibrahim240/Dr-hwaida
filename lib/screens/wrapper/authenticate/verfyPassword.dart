@@ -52,31 +52,42 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                   clipper: MyCliper(),
                   child: Container(
                     height: 220,
+                    padding: EdgeInsets.only(top: 30),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       gradient: AppTheme.containerBackground,
+                    ),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('lib/images/logo.png'),
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
+                padding: const EdgeInsets.only(top: 180, left: 30, right: 30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Please enter the sent code",
                       style: AppTheme.heading.copyWith(
-                        color: Colors.white,
+                        color: customColor,
                         fontSize: 20,
                       ),
                     ),
                     Text(
                       "A code has been sent to a number" + ' 0102412151',
-                      style: AppTheme.subHeading.copyWith(
-                        color: Colors.white,
-                      ),
+                      style: AppTheme.subHeading.copyWith(),
                     ),
                     SizedBox(height: 40),
                     Center(

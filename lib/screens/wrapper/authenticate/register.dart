@@ -38,9 +38,36 @@ class _RegisterState extends State<Register> {
               clipper: MyCliper(),
               child: Container(
                 height: 220,
+                padding: EdgeInsets.only(top: 10),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   gradient: AppTheme.containerBackground,
+                ),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('lib/images/logo.png'),
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        'Join Us',
+                        style: AppTheme.heading.copyWith(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -63,23 +90,12 @@ class _RegisterState extends State<Register> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
+            padding: const EdgeInsets.only(top: 150, left: 30, right: 30),
             child: Form(
               key: _formKey,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Text(
-                        "Join us",
-                        style: AppTheme.heading.copyWith(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 15),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,

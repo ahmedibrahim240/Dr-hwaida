@@ -44,19 +44,35 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
               clipper: MyCliper(),
               child: Container(
                 height: 220,
+                padding: EdgeInsets.only(top: 10),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   gradient: AppTheme.containerBackground,
                 ),
                 child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Join us",
-                    style: AppTheme.heading.copyWith(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  alignment: Alignment.topCenter,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('lib/images/logo.png'),
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        'Join Us',
+                        style: AppTheme.heading.copyWith(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

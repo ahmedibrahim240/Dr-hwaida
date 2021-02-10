@@ -64,17 +64,34 @@ class _LogInState extends State<LogIn> {
                     child: Container(
                       height: 220,
                       width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.only(top: 5),
                       decoration: BoxDecoration(
                         gradient: AppTheme.containerBackground,
                       ),
-                      child: Center(
-                        child: Text(
-                          'welcome',
-                          style: AppTheme.heading.copyWith(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900,
-                          ),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Column(
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('lib/images/logo.png'),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              'welcome',
+                              style: AppTheme.heading.copyWith(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

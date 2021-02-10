@@ -131,9 +131,23 @@ class _OnBoardingState extends State<OnBoarding> {
               clipper: MyCliper(),
               child: Container(
                 height: 220,
+                padding: EdgeInsets.only(top: 8),
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   gradient: AppTheme.containerBackground,
+                ),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('lib/images/logo.png'),
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

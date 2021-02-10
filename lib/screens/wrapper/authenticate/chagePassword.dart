@@ -27,14 +27,28 @@ class _ChagePassrowdState extends State<ChagePassrowd> {
               child: Container(
                 height: 220,
                 width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(top: 30),
                 decoration: BoxDecoration(
                   gradient: AppTheme.containerBackground,
+                ),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('lib/images/logo.png'),
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            padding: const EdgeInsets.only(top: 180, left: 30, right: 30),
             child: Form(
               key: _formKey,
               child: Column(
@@ -43,7 +57,7 @@ class _ChagePassrowdState extends State<ChagePassrowd> {
                   Text(
                     "Create a new password",
                     style: AppTheme.heading.copyWith(
-                      color: Colors.white,
+                      color: customColor,
                       fontSize: 25,
                     ),
                   ),

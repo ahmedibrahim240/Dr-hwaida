@@ -81,6 +81,7 @@ flutter:
     - lib/images/img1.png
     - lib/images/img2.png
     - lib/images/logo.png
+    - lib/images/logo2.png
     - lib/images/filter.png
     - lib/images/female.png
     

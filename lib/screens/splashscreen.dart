@@ -55,12 +55,12 @@ class _SplashScreenState extends State<SplashScreen> {
               SizedBox(height: 80),
               Center(
                 child: Container(
-                  height: 220,
-                  width: width * .7,
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('lib/images/logo.png'),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                 ),

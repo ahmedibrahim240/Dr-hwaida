@@ -27,14 +27,28 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                 child: Container(
                   height: 220,
                   width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(top: 30),
                   decoration: BoxDecoration(
                     gradient: AppTheme.containerBackground,
+                  ),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('lib/images/logo.png'),
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
+              padding: const EdgeInsets.only(top: 180, left: 30, right: 30),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -44,14 +58,12 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                       'Password Recovery',
                       style: AppTheme.heading.copyWith(
                         fontSize: 25,
-                        color: Colors.white,
+                        color: customColor,
                       ),
                     ),
                     Text(
-                      "Please enter a valid email / phone",
-                      style: AppTheme.subHeading.copyWith(
-                        color: Colors.white,
-                      ),
+                      "Please enter a valid phone",
+                      style: AppTheme.subHeading.copyWith(),
                     ),
                     SizedBox(height: 40),
                     TextFormField(
