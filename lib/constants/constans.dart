@@ -82,9 +82,6 @@ class CustomButtonWithchild extends StatelessWidget {
 void showSettingsPanel(
     {@required BuildContext context, @required Widget child}) {
   showModalBottomSheet(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(35.0),
-    ),
     context: context,
     enableDrag: true,
     builder: (context) {
