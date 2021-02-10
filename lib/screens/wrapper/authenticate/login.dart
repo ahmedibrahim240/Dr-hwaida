@@ -67,28 +67,28 @@ class _LogInState extends State<LogIn> {
                       decoration: BoxDecoration(
                         gradient: AppTheme.containerBackground,
                       ),
+                      child: Center(
+                        child: Text(
+                          'welcome',
+                          style: AppTheme.heading.copyWith(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
+                  padding: const EdgeInsets.only(top: 150, left: 30, right: 30),
                   child: Form(
                     key: _formKey,
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Center(
-                            child: Text(
-                              'welcome',
-                              style: AppTheme.heading.copyWith(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 10),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
