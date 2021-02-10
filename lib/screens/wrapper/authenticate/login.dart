@@ -154,7 +154,9 @@ class _LogInState extends State<LogIn> {
                                     child: Text(
                                       'password?',
                                       style: AppTheme.heading.copyWith(
-                                        decoration: TextDecoration.underline,
+                                        fontWeight: FontWeight.w900,
+                                        fontSize: 16,
+                                        color: customColor,
                                       ),
                                     ),
                                   ),
@@ -180,7 +182,11 @@ class _LogInState extends State<LogIn> {
                                   SizedBox(width: 5),
                                   Text(
                                     'or',
-                                    style: AppTheme.heading.copyWith(),
+                                    style: AppTheme.heading.copyWith(
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 16,
+                                      color: customColor,
+                                    ),
                                   ),
                                   SizedBox(width: 5),
                                   Container(
@@ -210,9 +216,9 @@ class _LogInState extends State<LogIn> {
                                         child: Text(
                                           "Sign Up?",
                                           style: AppTheme.heading.copyWith(
-                                            fontSize: 12,
-                                            decoration:
-                                                TextDecoration.underline,
+                                            fontWeight: FontWeight.w900,
+                                            fontSize: 16,
+                                            color: customColor,
                                           ),
                                         ),
                                       ),

@@ -147,7 +147,7 @@ class _RegisterState extends State<Register> {
                         SizedBox(height: 10),
                         CustomButton(
                           onPress: () {},
-                          text: 'Sgin Up',
+                          text: 'Sign Up',
                         ),
                         SizedBox(height: 10),
                       ],

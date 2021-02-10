@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class SginUpUserInfo extends StatefulWidget {
   final Function toggleViewSignUp;
@@ -23,10 +24,11 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
   String email = '';
   bool obscurePassword = true;
   bool obscureconPassword = true;
+  String chossenDate = DateTime.now().toString();
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: customColor,
@@ -93,37 +95,27 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        // Card(
-                        //   elevation: 2.0,
-                        //   shape: RoundedRectangleBorder(
-                        //     borderRadius: BorderRadius.circular(20.0),
-                        //   ),
-                        //   child: TextFormField(
-                        //     keyboardType: TextInputType.number,
-                        //     style: TextStyle(color: Colors.white),
-                        //     validator: (val) => val.isEmpty
-                        //         ? 'please enter your phone number'
-                        //         : null,
-                        //     onChanged: (val) {},
-                        //     decoration: textFormInputDecoration(
-                        //       Icons.person,
-                        //       "Age",
-                        //     ),
-                        //   ),
-                        // ),
-                        SizedBox(height: 10),
+
+                        //START:: DATE
+
                         InkWell(
-                          onTap: () => showSettingsPanel(
-                            context: context,
-                            child: Center(
-                              child: Text(
-                                'Age',
-                                style: AppTheme.heading.copyWith(
-                                  color: customColor,
-                                ),
-                              ),
-                            ),
-                          ),
+                          onTap: () {
+                            DatePicker.showDatePicker(
+                              context,
+                              showTitleActions: true,
+                              onChanged: (date) {
+                                print('change $date in time zone ' +
+                                    date.timeZoneOffset.inHours.toString());
+                              },
+                              onConfirm: (date) {
+                                setState(() {
+                                  chossenDate = date.toString();
+                                });
+                                print('confirm $date');
+                              },
+                              currentTime: DateTime.now(),
+                            );
+                          },
                           child: Card(
                             elevation: 2.0,
                             shape: RoundedRectangleBorder(
@@ -152,17 +144,107 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                             ),
                           ),
                         ),
+                        //END:: DATA
+
                         SizedBox(height: 10),
+                        //START:: GENDER
+
                         InkWell(
                           onTap: () => showSettingsPanel(
                             context: context,
-                            child: Center(
-                              child: Text(
-                                'Gender',
-                                style: AppTheme.heading.copyWith(
-                                  color: customColor,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  top: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: ClipPath(
+                                    clipper: MyCliper(),
+                                    child: Container(
+                                      height: 210,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        gradient: AppTheme.containerBackground,
+                                      ),
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          "Gender",
+                                          style: AppTheme.heading.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(height: 50),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Container(
+                                                height: 100,
+                                                width: 100,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'lib/images/man.png'),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            Text(
+                                              'Male',
+                                              style:
+                                                  AppTheme.heading.copyWith(),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Container(
+                                                height: 100,
+                                                width: 100,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'lib/images/female.png'),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(height: 10),
+                                            Text(
+                                              'female',
+                                              style:
+                                                  AppTheme.heading.copyWith(),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                           child: Card(
@@ -193,17 +275,133 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                             ),
                           ),
                         ),
+                        //END:: GENDER
+
                         SizedBox(height: 10),
+                        //START:: STAUTS
                         InkWell(
                           onTap: () => showSettingsPanel(
                             context: context,
-                            child: Center(
-                              child: Text(
-                                'Status',
-                                style: AppTheme.heading.copyWith(
-                                  color: customColor,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  top: 0,
+                                  left: 0,
+                                  right: 0,
+                                  child: ClipPath(
+                                    clipper: MyCliper(),
+                                    child: Container(
+                                      height: 210,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                        gradient: AppTheme.containerBackground,
+                                      ),
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          "Status",
+                                          style: AppTheme.heading.copyWith(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(height: 100),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                height: 80,
+                                                width: 80,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'lib/images/single.png'),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(height: 10),
+                                              Text(
+                                                'Single',
+                                                style:
+                                                    AppTheme.heading.copyWith(),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(width: 50),
+                                        Column(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Container(
+                                                height: 80,
+                                                width: 80,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'lib/images/engaged.png'),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            // SizedBox(height: 10),
+                                            Text(
+                                              'Engaged',
+                                              style:
+                                                  AppTheme.heading.copyWith(),
+                                            ),
+                                          ],
+                                        ),
+                                        // SizedBox(width: 10),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Container(
+                                            height: 80,
+                                            width: 80,
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    'lib/images/married.png'),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: 10),
+                                        Text(
+                                          'Married',
+                                          style: AppTheme.heading.copyWith(),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                           child: Card(
@@ -234,6 +432,8 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                             ),
                           ),
                         ),
+                        //END:: STAUTS
+
                         SizedBox(height: 10),
                         CustomButton(
                           onPress: () => widget.toggleViewSignUp(),
@@ -244,7 +444,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "I dont have an account!",
+                              "have an account!",
                               style: AppTheme.heading.copyWith(),
                             ),
                             InkWell(
@@ -252,7 +452,9 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                               child: Text(
                                 'Login?',
                                 style: AppTheme.heading.copyWith(
-                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 16,
+                                  color: customColor,
                                 ),
                               ),
                             ),
