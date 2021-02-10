@@ -1,5 +1,5 @@
 import 'package:DrHwaida/screens/wrapper/authenticate/login.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/sign_in.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
@@ -21,7 +21,7 @@ class _AuthenticateState extends State<Authenticate> {
       );
     } else {
       return Container(
-        child: SignIn(toggleView: toggleView),
+        child: SginUp(toggleView: toggleView),
       );
     }
   }
