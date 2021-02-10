@@ -114,9 +114,9 @@ class _LogInState extends State<LogIn> {
                                   Icons.visibility_off,
                                   'password',
                                   () {
-                                    // setState(() {
-                                    //   obscurePassword = !obscurePassword;
-                                    // });
+                                    setState(() {
+                                      obscurePassword = !obscurePassword;
+                                    });
                                   },
                                   obscurePassword,
                                 ),
@@ -166,7 +166,8 @@ class _LogInState extends State<LogIn> {
                               //   style:
                               //       AppTheme.heading.copyWith(color: Colors.white),
                               // ),
-                              SizedBox(height: 20),
+
+                              SizedBox(height: 10),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -186,6 +187,36 @@ class _LogInState extends State<LogIn> {
                                     height: 1,
                                     width: width * .3,
                                     color: customColor,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10),
+
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "I dont have an account!",
+                                        style: AppTheme.heading.copyWith(
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () => widget.toggleView(),
+                                        child: Text(
+                                          "Sign Up?",
+                                          style: AppTheme.heading.copyWith(
+                                            fontSize: 12,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -229,35 +260,6 @@ class _LogInState extends State<LogIn> {
                                   ],
                                 ),
                                 color: Colors.blueAccent,
-                              ),
-                              SizedBox(height: 20),
-                              Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "I dont have an account!",
-                                        style: AppTheme.heading.copyWith(
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () => widget.toggleView(),
-                                        child: Text(
-                                          "Sign Up?",
-                                          style: AppTheme.heading.copyWith(
-                                            fontSize: 12,
-                                            decoration:
-                                                TextDecoration.underline,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
                               ),
                             ],
                           ),
