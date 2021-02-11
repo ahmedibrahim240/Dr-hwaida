@@ -63,7 +63,7 @@ class _ChagePassrowdState extends State<ChagePassrowd> {
                   ),
                   SizedBox(height: 40),
                   TextFormField(
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.black),
                     obscureText: obscurePassword,
                     decoration: textFormInputDecorationForPassword(
                       Icons.visibility_off,

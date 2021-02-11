@@ -96,7 +96,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: TextFormField(
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.black),
                             validator: (val) =>
                                 val.isEmpty ? 'please enter your name' : null,
                             onChanged: (val) {
