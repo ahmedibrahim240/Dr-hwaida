@@ -329,7 +329,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    SizedBox(height: 100),
+                                    SizedBox(height: 120),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -379,7 +379,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                                                 ),
                                               ),
                                             ),
-                                            // SizedBox(height: 10),
+                                            SizedBox(height: 10),
                                             Text(
                                               'Engaged',
                                               style:
@@ -397,18 +397,18 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                                             Navigator.of(context).pop();
                                           },
                                           child: Container(
-                                            height: 80,
-                                            width: 80,
+                                            height: 100,
+                                            width: 100,
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image: AssetImage(
                                                     'lib/images/married.png'),
-                                                fit: BoxFit.cover,
+                                                fit: BoxFit.fitWidth,
                                               ),
                                             ),
                                           ),
                                         ),
-                                        SizedBox(height: 10),
+                                        // SizedBox(height: 5),
                                         Text(
                                           'Married',
                                           style: AppTheme.heading.copyWith(),
