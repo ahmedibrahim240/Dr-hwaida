@@ -17,7 +17,7 @@ class _OnBoardingState extends State<OnBoarding> {
       title: 'Title',
       contant:
           'Title Contant Title Contant Title Contant Title ContantTitle Contant Title Contant Title Contant Title Contant Title Contant Title Contant  ',
-      image: 'lib/images/img2.png',
+      image: 'lib/images/img3.png',
       backImage: 'lib/images/back2.png',
     ),
     CustomSlider(

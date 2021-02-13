@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 const customColor = Color(0xfff4DC0B1);
 
@@ -26,6 +27,7 @@ class MyCliper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
 
+/////////////////////////////////////////////////////////////////////////////////
 class CustomButton extends StatelessWidget {
   final String text;
   final Function onPress;
@@ -54,6 +56,7 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
+/////////////////////////////////////////////////////////////////////////////////
 
 class CustomButtonWithchild extends StatelessWidget {
   final Widget child;
@@ -78,6 +81,7 @@ class CustomButtonWithchild extends StatelessWidget {
     );
   }
 }
+/////////////////////////////////////////////////////////////////////////////////
 
 void showSettingsPanel(
     {@required BuildContext context, @required Widget child}) {
@@ -89,6 +93,7 @@ void showSettingsPanel(
     },
   );
 }
+/////////////////////////////////////////////////////////////////////////////////
 
 class CustomAppBar extends StatelessWidget {
   final Widget child;
@@ -113,6 +118,116 @@ class CustomAppBar extends StatelessWidget {
             gradient: AppTheme.containerBackground,
           ),
           child: child,
+        ),
+      ),
+    );
+  }
+}
+/////////////////////////////////////////////////////////////////////////////////
+
+class CustomCarouselSlider extends StatefulWidget {
+  final bool reverse;
+  final Function onTap;
+  final List<dynamic> listOfObject;
+
+  const CustomCarouselSlider({
+    Key key,
+    @required this.listOfObject,
+    @required this.reverse,
+    @required this.onTap,
+  }) : super(key: key);
+
+  @override
+  _CustomCarouselSliderState createState() => _CustomCarouselSliderState();
+}
+
+class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
+  @override
+  Widget build(BuildContext context) {
+    final List<dynamic> offer = widget.listOfObject;
+
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            CarouselSlider(
+              options: CarouselOptions(
+                autoPlayInterval: Duration(seconds: 2),
+                autoPlay: true,
+                reverse: widget.reverse,
+                aspectRatio: 2.0,
+                enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.scale,
+              ),
+              items: offer
+                  .map(
+                    (items) => Container(
+                      child: Container(
+                        margin: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            child: Stack(
+                              children: <Widget>[
+                                Container(
+                                  width: 300,
+                                  height: 140,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20.0)),
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                        items.imgUrl,
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  child: Container(
+                                    height: 100,
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(20.0),
+                                        bottomRight: Radius.circular(20.0),
+                                      ),
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Color.fromARGB(200, 0, 0, 0),
+                                          Color.fromARGB(0, 0, 0, 0)
+                                        ],
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.topCenter,
+                                      ),
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        SizedBox(height: 40),
+                                        Text(
+                                          items.contant,
+                                          style: TextStyle(
+                                            color: Colors.deepOrangeAccent,
+                                            fontSize: 25,
+                                          ),
+                                        ),
+                                        Text(
+                                          items.title,
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
         ),
       ),
     );
