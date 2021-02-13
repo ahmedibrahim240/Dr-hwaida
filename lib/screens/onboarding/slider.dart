@@ -29,27 +29,24 @@ class CustomSlider extends StatelessWidget {
         padding: const EdgeInsets.only(top: 130),
         child: Column(
           children: [
+            SizedBox(height: 30),
             Container(
               height: height * .4,
-              // decoration: BoxDecoration(
-              //   image: DecorationImage(
-              //     image: AssetImage(backImage),
-              //     fit: BoxFit.cover,
-              //   ),
-              // ),
-              child: Center(
-                child: Image(
+              decoration: BoxDecoration(
+                image: DecorationImage(
                   image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  width: width,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Center(
-                child: Text(
-              title,
-              style: AppTheme.heading.copyWith(color: customColor),
-            )),
+              child: Text(
+                title,
+                style: AppTheme.heading.copyWith(color: customColor),
+              ),
+            ),
+            SizedBox(height: 5),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Center(
