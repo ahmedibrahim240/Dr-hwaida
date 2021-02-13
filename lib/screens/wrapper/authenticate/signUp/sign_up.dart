@@ -1,5 +1,5 @@
-import 'package:DrHwaida/screens/wrapper/authenticate/register.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/sginUpUserInfo.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/signUp/register/register.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/sginUpUserInfo.dart';
 import 'package:flutter/material.dart';
 
 //create class SginUp

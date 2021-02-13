@@ -30,45 +30,31 @@ class _RegisterState extends State<Register> {
       ),
       body: Stack(
         children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: ClipPath(
-              clipper: MyCliper(),
-              child: Container(
-                height: 220,
-                padding: EdgeInsets.only(top: 10),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  gradient: AppTheme.containerBackground,
-                ),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('lib/images/logo.png'),
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
+          CustomAppBar(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Column(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('lib/images/logo.png'),
+                        fit: BoxFit.fitHeight,
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        'Join Us',
-                        style: AppTheme.heading.copyWith(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  SizedBox(height: 5),
+                  Text(
+                    'Join Us',
+                    style: AppTheme.heading.copyWith(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

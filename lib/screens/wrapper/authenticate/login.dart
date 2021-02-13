@@ -12,32 +12,10 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-  // DatabaseServices _databaseServices = DatabaseServices();
-
-  // final AuthServices _auth = AuthServices();
   final _formKey = GlobalKey<FormState>();
-  // String email = '';
-  // String password = '';
-  // String error = '';
+  String error = '';
   bool loading = false;
   bool obscurePassword = true;
-  // saveUserLogInINfo(String email, String pasword) {
-  //   DBHelper.saveUserSingIn(true);
-  //   QuerySnapshot _snapshot;
-  //   _databaseServices.getUserByUseremail(email).then(
-  //     (val) {
-  //       setState(() {
-  //         _snapshot = val;
-  //       });
-  //       DBHelper.saveUserUserName(_snapshot.documents[0].data['name']);
-  //       DBHelper.saveUserImageUrl(_snapshot.documents[0].data['userImageUrl']);
-  //       DBHelper.saveUserUserEmail(_snapshot.documents[0].data['email']);
-  //       DBHelper.saveUserUserPassrod(pasword);
-  //       DBHelper.saveUserUserPhoneNumber(
-  //           _snapshot.documents[0].data['phoneNamber']);
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,45 +33,31 @@ class _LogInState extends State<LogIn> {
             )
           : Stack(
               children: [
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: ClipPath(
-                    clipper: MyCliper(),
-                    child: Container(
-                      height: 220,
-                      width: MediaQuery.of(context).size.width,
-                      padding: EdgeInsets.only(top: 5),
-                      decoration: BoxDecoration(
-                        gradient: AppTheme.containerBackground,
-                      ),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: Column(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('lib/images/logo.png'),
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ),
+                CustomAppBar(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('lib/images/logo.png'),
+                              fit: BoxFit.fitHeight,
                             ),
-                            SizedBox(height: 5),
-                            Text(
-                              'welcome',
-                              style: AppTheme.heading.copyWith(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        SizedBox(height: 5),
+                        Text(
+                          'welcome',
+                          style: AppTheme.heading.copyWith(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -179,13 +143,6 @@ class _LogInState extends State<LogIn> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 12),
-                              // Text(
-                              //   error,
-                              //   style:
-                              //       AppTheme.heading.copyWith(color: Colors.white),
-                              // ),
-
                               SizedBox(height: 10),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +171,6 @@ class _LogInState extends State<LogIn> {
                                 ],
                               ),
                               SizedBox(height: 10),
-
                               Column(
                                 children: [
                                   Row(

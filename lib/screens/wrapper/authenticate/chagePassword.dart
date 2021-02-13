@@ -18,30 +18,16 @@ class _ChagePassrowdState extends State<ChagePassrowd> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: ClipPath(
-              clipper: MyCliper(),
+          CustomAppBar(
+            child: Align(
+              alignment: Alignment.topCenter,
               child: Container(
-                height: 220,
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(top: 30),
+                height: 100,
                 decoration: BoxDecoration(
-                  gradient: AppTheme.containerBackground,
-                ),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('lib/images/logo.png'),
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ),
+                  image: DecorationImage(
+                    image: AssetImage('lib/images/logo.png'),
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
               ),

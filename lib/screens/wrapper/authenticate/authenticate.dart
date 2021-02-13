@@ -1,5 +1,5 @@
 import 'package:DrHwaida/screens/wrapper/authenticate/login.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/sign_up.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/signUp/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
