@@ -21,13 +21,14 @@ class _AgeState extends State<Age> {
         DatePicker.showDatePicker(
           context,
           showTitleActions: true,
+          minTime: new DateTime(1900),
           onChanged: (date) {
             print('change $date in time zone ' +
                 date.timeZoneOffset.inHours.toString());
           },
           onConfirm: (date) {
             setState(() {
-              _chossenDate = '$date';
+              _chossenDate = "${date.day}/${date.month}/${date.year}";
             });
             print('confirm $date');
           },
