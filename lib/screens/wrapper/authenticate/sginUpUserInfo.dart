@@ -3,6 +3,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SginUpUserInfo extends StatefulWidget {
   final Function toggleViewSignUp;
@@ -16,15 +17,16 @@ class SginUpUserInfo extends StatefulWidget {
 class _SginUpUserInfoState extends State<SginUpUserInfo> {
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-  String phoneNumber = '';
-  String password = '';
-  String confirmPassword = '';
+  String sigle;
+  String married;
+  String engaged;
+  String male;
+  String female;
   String name = '';
   String error = '';
-  String email = '';
   bool obscurePassword = true;
   bool obscureconPassword = true;
-  String chossenDate = DateTime.now().toString();
+  String chossenDate;
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +127,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                               },
                               onConfirm: (date) {
                                 setState(() {
-                                  chossenDate = date.toString();
+                                  chossenDate = '$date';
                                 });
                                 print('confirm $date');
                               },
@@ -145,11 +147,21 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Age',
-                                    style: AppTheme.heading.copyWith(
-                                      color: customColor,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.person,
+                                        color: Colors.grey[500],
+                                        size: 15,
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        (chossenDate) ?? 'Age',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Icon(
                                     Icons.arrow_drop_down_circle_outlined,
@@ -216,7 +228,8 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
                                                     image: AssetImage(
-                                                        'lib/images/man.png'),
+                                                      'lib/images/man.png',
+                                                    ),
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -276,11 +289,21 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Gender',
-                                    style: AppTheme.heading.copyWith(
-                                      color: customColor,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        FontAwesomeIcons.venusMars,
+                                        color: Colors.grey[500],
+                                        size: 15,
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        'Gender',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Icon(
                                     Icons.arrow_drop_down_circle_outlined,
@@ -433,11 +456,28 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Status',
-                                    style: AppTheme.heading.copyWith(
-                                      color: customColor,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 20,
+                                        width: 20,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              'lib/images/status.png',
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        'Status',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Icon(
                                     Icons.arrow_drop_down_circle_outlined,
