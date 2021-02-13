@@ -5,8 +5,6 @@ import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/comp
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/comppans/status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SginUpUserInfo extends StatefulWidget {
   final Function toggleViewSignUp;
@@ -102,23 +100,11 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                           ),
                         ),
                         SizedBox(height: 10),
-
-                        //START:: DATE
                         Age(),
-
-                        //END:: DATA
-
                         SizedBox(height: 10),
-                        //START:: GENDER
-
                         Gender(),
-                        //END:: GENDER
-
                         SizedBox(height: 10),
-                        //START:: STAUTS
                         Status(),
-                        //END:: STAUTS
-
                         SizedBox(height: 10),
                         CustomButton(
                           onPress: () => widget.toggleViewSignUp(),

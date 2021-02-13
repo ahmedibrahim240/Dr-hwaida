@@ -39,121 +39,113 @@ class _VerifyPhoneState extends State<VerifyPhone> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Stack(
-            children: [
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: ClipPath(
-                  clipper: MyCliper(),
-                  child: Container(
-                    height: 220,
-                    padding: EdgeInsets.only(top: 30),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      gradient: AppTheme.containerBackground,
-                    ),
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('lib/images/logo.png'),
-                            fit: BoxFit.fitHeight,
-                          ),
+      appBar: AppBar(
+        backgroundColor: customColor,
+        toolbarHeight: 0,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Stack(
+              children: [
+                CustomAppBar(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('lib/images/logo.png'),
+                          fit: BoxFit.fitHeight,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 180, left: 30, right: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Please enter the sent code",
-                      style: AppTheme.heading.copyWith(
-                        color: customColor,
-                        fontSize: 20,
+                Padding(
+                  padding: const EdgeInsets.only(top: 180, left: 30, right: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Please enter the sent code",
+                        style: AppTheme.heading.copyWith(
+                          color: customColor,
+                          fontSize: 20,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "A code has been sent to a number" + ' 0102412151',
-                      style: AppTheme.subHeading.copyWith(),
-                    ),
-                    SizedBox(height: 40),
-                    Center(
-                      child: CodeFields(
-                        length: codeLength,
-                        validator: validateCode,
-                        textStyle: TextStyle(color: Colors.white),
-                        autofocus: true,
-                        inputDecoration: InputDecoration(
-                          filled: true,
-                          fillColor: customColor,
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(24.0),
-                            borderSide: BorderSide(
-                              style: BorderStyle.solid,
-                              color: customColor,
+                      Text(
+                        "A code has been sent to a number" + ' 0102412151',
+                        style: AppTheme.subHeading.copyWith(),
+                      ),
+                      SizedBox(height: 40),
+                      Center(
+                        child: CodeFields(
+                          length: codeLength,
+                          validator: validateCode,
+                          textStyle: TextStyle(color: Colors.white),
+                          autofocus: true,
+                          inputDecoration: InputDecoration(
+                            filled: true,
+                            fillColor: customColor,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(24.0),
+                              borderSide: BorderSide(
+                                style: BorderStyle.solid,
+                                color: customColor,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(24.0),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(24.0),
+                              borderSide: BorderSide(color: customColor),
                             ),
                           ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(24.0),
-                            borderSide: BorderSide(color: Colors.transparent),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(24.0),
-                            borderSide: BorderSide(color: customColor),
-                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Not sent",
-                          style: AppTheme.heading.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Text(
-                            "Resend!",
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Not sent",
                             style: AppTheme.heading.copyWith(
                               color: Colors.white,
-                              decoration: TextDecoration.underline,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    CustomButton(
-                      text: 'send',
-                      onPress: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => ChagePassrowd(),
+                          InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "Resend!",
+                              style: AppTheme.heading.copyWith(
+                                color: Colors.white,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
                           ),
-                        );
-                      },
-                    ),
-                  ],
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      CustomButton(
+                        text: 'send',
+                        onPress: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => ChagePassrowd(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
