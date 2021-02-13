@@ -4,11 +4,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Gender extends StatelessWidget {
+class Gender extends StatefulWidget {
   const Gender({
     Key key,
   }) : super(key: key);
 
+  @override
+  _GenderState createState() => _GenderState();
+}
+
+class _GenderState extends State<Gender> {
+  String _gender;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -40,6 +46,9 @@ class Gender extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
+                            setState(() {
+                              _gender = 'Male';
+                            });
                             Navigator.of(context).pop();
                           },
                           child: Container(
@@ -66,6 +75,9 @@ class Gender extends StatelessWidget {
                       children: [
                         InkWell(
                           onTap: () {
+                            setState(() {
+                              _gender = 'Female';
+                            });
                             Navigator.of(context).pop();
                           },
                           child: Container(
@@ -81,7 +93,7 @@ class Gender extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'female',
+                          'Female',
                           style: AppTheme.heading.copyWith(),
                         ),
                       ],
@@ -114,7 +126,7 @@ class Gender extends StatelessWidget {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    'Gender',
+                    _gender ?? 'Gender',
                     style: AppTheme.heading.copyWith(
                       color: customColor,
                     ),
