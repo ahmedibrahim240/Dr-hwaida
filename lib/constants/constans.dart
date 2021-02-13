@@ -89,3 +89,32 @@ void showSettingsPanel(
     },
   );
 }
+
+class CustomAppBar extends StatelessWidget {
+  final Widget child;
+  const CustomAppBar({
+    Key key,
+    this.child,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: ClipPath(
+        clipper: MyCliper(),
+        child: Container(
+          height: 220,
+          padding: EdgeInsets.only(top: 8),
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            gradient: AppTheme.containerBackground,
+          ),
+          child: child,
+        ),
+      ),
+    );
+  }
+}

@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
-import 'package:DrHwaida/screens/slider.dart';
 import 'package:flutter/material.dart';
+
+import 'onboarding/onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
   static bool slider = true;
