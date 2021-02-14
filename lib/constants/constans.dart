@@ -4,7 +4,21 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 const customColor = Color(0xfff4DC0B1);
 const customColorIcon = Color(0xfff807d7d);
+const customColorDivider = Color(0xfffe1e1e1);
+//////////////////////////////////////////////////////////
+PreferredSizeWidget customAppBar({String title}) => AppBar(
+      centerTitle: true,
+      toolbarHeight: 80,
+      backgroundColor: customColor,
+      title: Text(
+        title,
+        style: AppTheme.heading.copyWith(
+          color: Colors.white,
+        ),
+      ),
+    );
 
+//////////////////////////////////////////////////////
 class MyCliper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

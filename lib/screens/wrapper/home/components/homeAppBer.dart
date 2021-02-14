@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,13 @@ class CustomHomeAppBer extends StatelessWidget {
             ],
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => Notificatios(),
+                ),
+              );
+            },
             child: Stack(
               children: [
                 Icon(
