@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/myReview/myreview.dart';
 import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,13 @@ class MenuBody extends StatelessWidget {
                 MenuContent(
                   title: 'My Reviews',
                   icon: FontAwesomeIcons.starHalfAlt,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => MyReview(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 20),
                 MenuContent(
