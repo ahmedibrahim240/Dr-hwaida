@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 const customColor = Color(0xfff4DC0B1);
 const customColorIcon = Color(0xfff807d7d);
@@ -248,3 +249,30 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
     );
   }
 }
+
+///////////////////////////////////////////////////////////
+class RatingStar extends StatelessWidget {
+  final double rating;
+  final bool isReadOnly;
+
+  const RatingStar({Key key, @required this.rating, @required this.isReadOnly})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return SmoothStarRating(
+      rating: rating,
+      size: 20,
+      isReadOnly: isReadOnly,
+      filledIconData: Icons.star,
+      color: Colors.yellow[700],
+      halfFilledIconData: Icons.star_half,
+      borderColor: Colors.yellow[900],
+      defaultIconData: Icons.star_border,
+      starCount: 5,
+      allowHalfRating: true,
+      spacing: 2.0,
+    );
+  }
+}
+
+///////////////////////////////////////////////////////////

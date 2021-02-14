@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -51,7 +52,13 @@ class MenuBody extends StatelessWidget {
                 MenuContent(
                   title: 'My Courses',
                   icon: FontAwesomeIcons.bookOpen,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => MyCourses(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 20),
                 MenuContent(
