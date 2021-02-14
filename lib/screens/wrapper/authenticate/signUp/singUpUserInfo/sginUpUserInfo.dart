@@ -1,10 +1,10 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/comppans/age.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/comppans/gender.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/comppans/status.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/gender.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/status.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'components/age.dart';
 
 class SginUpUserInfo extends StatefulWidget {
   final Function toggleViewSignUp;

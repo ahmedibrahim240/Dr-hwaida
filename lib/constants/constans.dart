@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 const customColor = Color(0xfff4DC0B1);
+const customColorIcon = Color(0xfff807d7d);
 
 class MyCliper extends CustomClipper<Path> {
   @override

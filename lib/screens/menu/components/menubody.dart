@@ -1,0 +1,108 @@
+import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/constants/themes.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'menucontant.dart';
+
+class MenuBody extends StatelessWidget {
+  const MenuBody({
+    Key key,
+    @required this.height,
+  }) : super(key: key);
+
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height - 261,
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'Profile',
+                  icon: FontAwesomeIcons.idCard,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'My Courses',
+                  icon: FontAwesomeIcons.bookOpen,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'My Reviews',
+                  icon: FontAwesomeIcons.starHalfAlt,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'My Payment',
+                  icon: FontAwesomeIcons.idCardAlt,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'Payment History',
+                  icon: FontAwesomeIcons.history,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'Harmony Game',
+                  icon: FontAwesomeIcons.gamepad,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'Visit History',
+                  icon: FontAwesomeIcons.history,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'Contact Us',
+                  icon: Icons.phone,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                MenuContent(
+                  title: 'About Us',
+                  icon: Icons.info_outlined,
+                  onTap: () {},
+                ),
+                SizedBox(height: 20),
+                FlatButton.icon(
+                  onPressed: () {},
+                  icon: Transform.rotate(
+                    angle: 180 * 3.14 / 180,
+                    child: Icon(
+                      Icons.logout,
+                      color: customColorIcon,
+                    ),
+                  ),
+                  label: Text(
+                    'Log Out',
+                    style: AppTheme.heading.copyWith(
+                      color: customColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
