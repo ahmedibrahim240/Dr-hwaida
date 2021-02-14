@@ -1,14 +1,19 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'menucontant.dart';
 
 class MenuBody extends StatelessWidget {
+  final String userName;
+  final String userImUrl;
   const MenuBody({
     Key key,
     @required this.height,
+    @required this.userName,
+    @required this.userImUrl,
   }) : super(key: key);
 
   final double height;
@@ -31,7 +36,16 @@ class MenuBody extends StatelessWidget {
                 MenuContent(
                   title: 'Profile',
                   icon: FontAwesomeIcons.idCard,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => UserProfile(
+                          userName: userName,
+                          userimgUrl: userImUrl,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 20),
                 MenuContent(

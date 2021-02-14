@@ -94,7 +94,7 @@ class MenuAppBer extends StatelessWidget {
         Hero(
           tag: 'UserName',
           child: Text(
-            userName,
+            '@' + userName,
             style: AppTheme.heading,
           ),
         ),

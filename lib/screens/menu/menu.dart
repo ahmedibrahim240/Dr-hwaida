@@ -10,6 +10,8 @@ class Menu extends StatefulWidget {
 }
 
 class _MenuState extends State<Menu> {
+  String userName = 'Naden Droz';
+  String userImgUrl = 'lib/images/female.png';
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -24,14 +26,18 @@ class _MenuState extends State<Menu> {
         children: [
           MenuAppBer(
             width: width,
-            userImageurl: 'lib/images/man.png',
-            userName: '@Naden Droz',
+            userImageurl: userImgUrl,
+            userName: userName,
           ),
           Divider(
             color: Colors.grey[300],
             thickness: 2,
           ),
-          MenuBody(height: height),
+          MenuBody(
+            height: height,
+            userImUrl: userImgUrl,
+            userName: userName,
+          ),
         ],
       ),
     );
