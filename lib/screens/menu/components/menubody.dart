@@ -4,6 +4,7 @@ import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/myReview/myreview.dart';
 import 'package:DrHwaida/screens/mycourses/mycourses.dart';
+import 'package:DrHwaida/screens/payment/payment.dart';
 import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
 import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,13 @@ class MenuBody extends StatelessWidget {
                 MenuContent(
                   title: 'My Payment',
                   icon: FontAwesomeIcons.idCardAlt,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => Payment(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 20),
                 MenuContent(

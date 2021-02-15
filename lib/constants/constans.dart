@@ -102,6 +102,7 @@ class CustomButtonWithchild extends StatelessWidget {
 void showSettingsPanel(
     {@required BuildContext context, @required Widget child}) {
   showModalBottomSheet(
+    isScrollControlled: true,
     context: context,
     enableDrag: true,
     builder: (context) {
