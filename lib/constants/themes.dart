@@ -121,11 +121,11 @@ InputDecoration conectedTextFormStyle({String lableText}) {
       borderSide: BorderSide(color: customColor),
       gapPadding: 10,
     ),
-    suffixIcon: Icon(
-      Icons.edit,
-      color: customColor,
-    ),
-    contentPadding: EdgeInsets.symmetric(horizontal: 42, vertical: 20),
+    // suffixIcon: Icon(
+    //   Icons.edit,
+    //   color: customColor,
+    // ),
+    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
     labelStyle: AppTheme.heading.copyWith(
       color: customColor,
     ),

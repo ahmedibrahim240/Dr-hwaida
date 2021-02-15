@@ -1,3 +1,4 @@
+import 'package:DrHwaida/Consultant/consultant.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,18 @@ class _HomeState extends State<Home> {
         shrinkWrap: true,
         children: [
           CustomHomeAppBer(scaffoldKey: scaffoldKey),
+          Center(
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => Consultant(),
+                  ),
+                );
+              },
+              child: Text('Consultant'),
+            ),
+          ),
         ],
       ),
     );

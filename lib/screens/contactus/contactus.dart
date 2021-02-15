@@ -38,15 +38,16 @@ class _ContatactUsState extends State<ContatactUs> {
                   TextFormField(
                     decoration: conectedTextFormStyle(lableText: 'Name'),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 12),
                   TextFormField(
                     decoration: conectedTextFormStyle(lableText: 'Email'),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 12),
                   TextFormField(
+                    maxLines: null,
                     decoration: conectedTextFormStyle(lableText: 'Massage'),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Text(
                     'Contact Us ',
                     style: AppTheme.heading.copyWith(
@@ -54,7 +55,7 @@ class _ContatactUsState extends State<ContatactUs> {
                       fontSize: 16,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     child: Row(
@@ -79,7 +80,7 @@ class _ContatactUsState extends State<ContatactUs> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 25),
                   CustomButtonWithchild(
                     color: customColor,
                     child: Text(
@@ -91,7 +92,7 @@ class _ContatactUsState extends State<ContatactUs> {
                     ),
                     onPress: () {},
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 15),
                   Center(
                     child: Text(
                       'Thanh You! ',
