@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/myReview/myreview.dart';
 import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
@@ -114,7 +115,13 @@ class MenuBody extends StatelessWidget {
                 MenuContent(
                   title: 'About Us',
                   icon: Icons.info_outlined,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => AboutUS(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 20),
                 FlatButton.icon(
