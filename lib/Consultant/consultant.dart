@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:flutter/material.dart';
 import 'conponents/cinsltantAppBar.dart';
 import 'conponents/consultantCard.dart';
@@ -14,6 +15,7 @@ class _ConsultantState extends State<Consultant> {
   String oldPrice = '550';
   String newPrice = '450';
   String rating = '4.5';
+  String imgUrl = 'lib/images/person.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +39,25 @@ class _ConsultantState extends State<Consultant> {
             ),
             itemBuilder: (context, index) {
               return ConsaultantCard(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder: (_) => ConsultantPageView(
+                              consultName: consultName,
+                              location: location,
+                              oldPrice: oldPrice,
+                              newPrice: newPrice,
+                              rating: rating,
+                              imagUrl: imgUrl,
+                            )),
+                  );
+                },
                 consultName: consultName,
                 location: location,
                 oldPrice: oldPrice,
                 newPrice: newPrice,
                 rating: rating,
+                imagUrl: imgUrl,
               );
             },
           ),

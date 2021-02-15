@@ -12,6 +12,7 @@ class ConsaultantCard extends StatelessWidget {
     @required this.oldPrice,
     @required this.newPrice,
     @required this.rating,
+    @required this.imagUrl,
   }) : super(key: key);
 
   final Function onTap;
@@ -20,6 +21,7 @@ class ConsaultantCard extends StatelessWidget {
   final String oldPrice;
   final String newPrice;
   final String rating;
+  final String imagUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class ConsaultantCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     image: DecorationImage(
-                      image: AssetImage('lib/images/person.jpg'),
+                      image: AssetImage(imagUrl),
                       fit: BoxFit.cover,
                     ),
                   ),
