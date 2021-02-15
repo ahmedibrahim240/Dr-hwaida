@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/scheduleAppo/scheduleAppo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -76,7 +77,13 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                 vertical: 10,
               ),
               child: CustomButtonWithchild(
-                onPress: () {},
+                onPress: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => ScheduleAppo(),
+                    ),
+                  );
+                },
                 child: Text(
                   'Schedule Appointment',
                   style: AppTheme.heading.copyWith(color: Colors.white),
