@@ -85,7 +85,7 @@ class CustomMyCoutsesCard extends StatelessWidget {
                         Text(
                           oldPrice + '\$',
                           style: AppTheme.heading.copyWith(
-                            color: Colors.grey[600],
+                            color: Colors.grey[500],
                             fontSize: 8,
                             decoration: TextDecoration.lineThrough,
                           ),
