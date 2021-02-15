@@ -24,6 +24,7 @@ class AppTheme {
   );
 }
 
+///////////////////////////////////////////////////////////////////////////
 InputDecoration textFormInputDecorationForPassword(
     IconData icon, String label, Function obscureText, bool obscurepasswrod) {
   return InputDecoration(
@@ -68,6 +69,7 @@ InputDecoration textFormInputDecorationForPassword(
   );
 }
 
+//////////////////////////////////////////////////////////////////////
 InputDecoration textFormInputDecoration(
   IconData icon,
   String label,
@@ -105,3 +107,30 @@ InputDecoration textFormInputDecoration(
     ),
   );
 }
+
+///////////////////////////////////////////////////////////////
+InputDecoration conectedTextFormStyle({String lableText}) {
+  return InputDecoration(
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(28),
+      borderSide: BorderSide(color: customColor),
+      gapPadding: 10,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(28),
+      borderSide: BorderSide(color: customColor),
+      gapPadding: 10,
+    ),
+    suffixIcon: Icon(
+      Icons.edit,
+      color: customColor,
+    ),
+    contentPadding: EdgeInsets.symmetric(horizontal: 42, vertical: 20),
+    labelStyle: AppTheme.heading.copyWith(
+      color: customColor,
+    ),
+    labelText: lableText,
+  );
+}
+
+/////////////////////////////////////////////////////////

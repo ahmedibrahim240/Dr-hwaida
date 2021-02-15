@@ -315,4 +315,15 @@ GestureDetector addCard({BuildContext context, Function onTap}) {
     ),
   );
 }
+
 /////////////////////////////////////////////////////////////
+InkWell customSocialMdiaBottom({Function onTap, IconData icon, Color color}) {
+  return InkWell(
+    onTap: onTap,
+    child: Icon(
+      icon,
+      color: color,
+      size: 35,
+    ),
+  );
+}

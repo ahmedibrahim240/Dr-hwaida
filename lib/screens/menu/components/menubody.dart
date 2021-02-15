@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
+import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/myReview/myreview.dart';
 import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
@@ -109,7 +110,13 @@ class MenuBody extends StatelessWidget {
                 MenuContent(
                   title: 'Contact Us',
                   icon: Icons.phone,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ContatactUs(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(height: 20),
                 MenuContent(
