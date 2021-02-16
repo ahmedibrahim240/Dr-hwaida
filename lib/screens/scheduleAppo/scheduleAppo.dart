@@ -122,7 +122,10 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                     SizedBox(height: 20),
                     Text(
                       '$index',
-                      style: AppTheme.subHeading,
+                      style: AppTheme.subHeading.copyWith(
+                        color:
+                            tappedDate == index ? Colors.white : Colors.black,
+                      ),
                     ),
                   ],
                 ),
