@@ -38,81 +38,81 @@ class MenuBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20),
-                MenuContent(
-                  title: 'Profile',
-                  icon: FontAwesomeIcons.idCard,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => UserProfile(
-                          userName: userName,
-                          userimgUrl: userImUrl,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(height: 20),
-                MenuContent(
-                  title: 'My Courses',
-                  icon: FontAwesomeIcons.bookOpen,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => MyCourses(),
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(height: 20),
-                MenuContent(
-                  title: 'My Reviews',
-                  icon: FontAwesomeIcons.starHalfAlt,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => MyReview(),
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(height: 20),
-                MenuContent(
-                  title: 'My Payment',
-                  icon: FontAwesomeIcons.idCardAlt,
-                  onTap: () {
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (_) => Payment(),
-                    //   ),
-                    // );
-                  },
-                ),
-                SizedBox(height: 20),
-                MenuContent(
-                  title: 'Payment History',
-                  icon: FontAwesomeIcons.history,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => PaymentHistory(),
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(height: 20),
-                MenuContent(
-                  title: 'Harmony Game',
-                  icon: FontAwesomeIcons.gamepad,
-                  onTap: () {},
-                ),
-                SizedBox(height: 20),
-                MenuContent(
-                  title: 'Visit History',
-                  icon: FontAwesomeIcons.history,
-                  onTap: () {},
-                ),
-                SizedBox(height: 20),
+                // MenuContent(
+                //   title: 'Profile',
+                //   icon: FontAwesomeIcons.idCard,
+                //   onTap: () {
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (_) => UserProfile(
+                //           userName: userName,
+                //           userimgUrl: userImUrl,
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // ),
+                // SizedBox(height: 20),
+                // MenuContent(
+                //   title: 'My Courses',
+                //   icon: FontAwesomeIcons.bookOpen,
+                //   onTap: () {
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (_) => MyCourses(),
+                //       ),
+                //     );
+                //   },
+                // ),
+                // SizedBox(height: 20),
+                // MenuContent(
+                //   title: 'My Reviews',
+                //   icon: FontAwesomeIcons.starHalfAlt,
+                //   onTap: () {
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (_) => MyReview(),
+                //       ),
+                //     );
+                //   },
+                // ),
+                // SizedBox(height: 20),
+                // MenuContent(
+                //   title: 'My Payment',
+                //   icon: FontAwesomeIcons.idCardAlt,
+                //   onTap: () {
+                //     // Navigator.of(context).push(
+                //     //   MaterialPageRoute(
+                //     //     builder: (_) => Payment(),
+                //     //   ),
+                //     // );
+                //   },
+                // ),
+                // SizedBox(height: 20),
+                // MenuContent(
+                //   title: 'Payment History',
+                //   icon: FontAwesomeIcons.history,
+                //   onTap: () {
+                //     Navigator.of(context).push(
+                //       MaterialPageRoute(
+                //         builder: (_) => PaymentHistory(),
+                //       ),
+                //     );
+                //   },
+                // ),
+                // SizedBox(height: 20),
+                // MenuContent(
+                //   title: 'Harmony Game',
+                //   icon: FontAwesomeIcons.gamepad,
+                //   onTap: () {},
+                // ),
+                // SizedBox(height: 20),
+                // MenuContent(
+                //   title: 'Visit History',
+                //   icon: FontAwesomeIcons.history,
+                //   onTap: () {},
+                // ),
+                // SizedBox(height: 20),
                 MenuContent(
                   title: 'Contact Us',
                   icon: Icons.phone,
