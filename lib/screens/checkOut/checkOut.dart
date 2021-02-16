@@ -1,7 +1,8 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visaCard.dart';
-import 'package:DrHwaida/screens/payment/components/functions.dart';
+import 'package:DrHwaida/screens/checkOut/components/functions.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

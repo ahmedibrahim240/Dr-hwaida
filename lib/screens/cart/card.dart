@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
-import 'package:DrHwaida/screens/payment/payment.dart';
+import 'package:DrHwaida/screens/checkOut/checkOut.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

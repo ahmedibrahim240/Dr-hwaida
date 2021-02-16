@@ -1,9 +1,11 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visaCard.dart';
-import 'package:DrHwaida/screens/payment/payment.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+
+import '../checkOut.dart';
 
 class AddFileBottomSheet extends StatefulWidget {
   @override

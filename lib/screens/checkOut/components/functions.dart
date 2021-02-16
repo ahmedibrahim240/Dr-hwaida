@@ -1,4 +1,4 @@
-import 'package:DrHwaida/screens/payment/components/creatVisaCard.dart';
+import 'package:DrHwaida/screens/checkOut/components/creatVisaCard.dart';
 import 'package:flutter/material.dart';
 
 Future createVisaCard(BuildContext context) {

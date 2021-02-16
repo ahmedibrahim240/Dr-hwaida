@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
+import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 
 import 'package:DrHwaida/screens/menu/menu.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,21 +27,29 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Menu(),
       ),
-      body: ListView(
-        shrinkWrap: true,
+      body: Stack(
         children: [
-          CustomHomeAppBer(scaffoldKey: scaffoldKey),
-          Center(
-            child: RaisedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => Consultant(),
-                  ),
-                );
-              },
-              child: Text('Consultant'),
-            ),
+          ListView(
+            shrinkWrap: true,
+            children: [
+              CustomHomeAppBer(scaffoldKey: scaffoldKey),
+              Center(
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => Consultant(),
+                      ),
+                    );
+                  },
+                  child: Text('Consultant'),
+                ),
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomBottomNavigationBar(),
           ),
         ],
       ),
