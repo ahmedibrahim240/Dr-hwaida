@@ -32,45 +32,41 @@ class _ConsultantState extends State<Consultant> {
             left: 0,
             right: 0,
             bottom: 50,
-            child: Column(
+            child: ListView(
+              shrinkWrap: true,
+              primary: false,
               children: [
-                ListView(
+                consultantAppBer(context),
+                ListView.builder(
                   shrinkWrap: true,
                   primary: false,
-                  children: [
-                    consultantAppBer(context),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      primary: false,
-                      itemCount: 30,
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      itemBuilder: (context, index) {
-                        return ConsaultantCard(
-                          index: index,
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => ConsultantPageView(
-                                  consultName: consultName,
-                                  location: location,
-                                  oldPrice: oldPrice,
-                                  newPrice: newPrice,
-                                  rating: rating,
-                                  imagUrl: imgUrl,
-                                ),
-                              ),
-                            );
-                          },
-                          consultName: consultName,
-                          location: location,
-                          oldPrice: oldPrice,
-                          newPrice: newPrice,
-                          rating: rating,
-                          imagUrl: imgUrl,
+                  itemCount: 30,
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  itemBuilder: (context, index) {
+                    return ConsaultantCard(
+                      index: index,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ConsultantPageView(
+                              consultName: consultName,
+                              location: location,
+                              oldPrice: oldPrice,
+                              newPrice: newPrice,
+                              rating: rating,
+                              imagUrl: imgUrl,
+                            ),
+                          ),
                         );
                       },
-                    ),
-                  ],
+                      consultName: consultName,
+                      location: location,
+                      oldPrice: oldPrice,
+                      newPrice: newPrice,
+                      rating: rating,
+                      imagUrl: imgUrl,
+                    );
+                  },
                 ),
               ],
             ),
