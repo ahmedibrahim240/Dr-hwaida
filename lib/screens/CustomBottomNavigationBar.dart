@@ -1,3 +1,4 @@
+import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => ComingSoon(),
+                  ),
+                );
+              },
               child: Container(
                 height: 50,
                 width: 50,
@@ -67,7 +74,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => ComingSoon(),
+                  ),
+                );
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
