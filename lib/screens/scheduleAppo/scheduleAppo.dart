@@ -13,82 +13,74 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
   bool showDate = false;
   bool showTime = false;
   bool showEvenig = false;
+  int tappedDate;
+  int tappedTime;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: 'Schedule Appointment'),
-      body: ListView(
-        shrinkWrap: true,
-        primary: true,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        children: [
-          rowTitle(
-            title: 'date',
-            onPrssed: () {
-              setState(() {
-                showDate = !showDate;
-              });
-            },
-          ),
-          SizedBox(height: 20),
-          (showDate) ? dateListView() : Container(),
-          SizedBox(height: 10),
-          rowTitle(
-            title: 'Time',
-            onPrssed: () {
-              setState(() {
-                showTime = !showTime;
-              });
-            },
-          ),
-          SizedBox(height: 20),
-          (showTime) ? Container() : timeListView(),
-          SizedBox(height: 10),
-          rowTitle(
-            title: 'Evening',
-            onPrssed: () {
-              setState(() {
-                showEvenig = !showEvenig;
-              });
-            },
-          ),
-          (showEvenig) ? Container() : timeListView(),
-          SizedBox(height: 10),
-          CustomButtonWithchild(
-            color: customColor,
-            onPress: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => Cart(),
-                ),
-              );
-            },
-            child: Text(
-              'Confirm Appoinent',
-              style: AppTheme.heading.copyWith(
-                color: Colors.white,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Column(
+                children: [
+                  rowTitle(
+                    title: 'date',
+                  ),
+                  dateListView(),
+                ],
               ),
             ),
-          ),
-        ],
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  rowTitle(
+                    title: 'Time',
+                  ),
+                  timeListView(),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomButtonWithchild(
+                color: customColor,
+                onPress: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => Cart(),
+                    ),
+                  );
+                },
+                child: Text(
+                  'Confirm Appoinent',
+                  style: AppTheme.heading.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Container timeListView() {
     return Container(
-      height: 120,
+      height: 110,
       child: ListView.builder(
         shrinkWrap: true,
         itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              timeCard(index + 1),
-              timeCard(index + 2),
-            ],
-          );
+          return timeCard(index + 1);
         },
       ),
     );
@@ -96,33 +88,44 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
 
   Container dateListView() {
     return Container(
-      height: 100,
+      height: 110,
       child: ListView.builder(
         shrinkWrap: true,
         itemCount: 10,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return Card(
-            elevation: 4,
-            semanticContainer: false,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Container(
-              width: 60,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Day',
-                    style: AppTheme.heading,
-                  ),
-                  SizedBox(height: 20),
-                  Text(
-                    '$index',
-                    style: AppTheme.subHeading,
-                  ),
-                ],
+          return InkWell(
+            onTap: () {
+              setState(() {
+                tappedDate = index;
+              });
+            },
+            child: Card(
+              elevation: 4,
+              semanticContainer: false,
+              color: tappedDate == index ? customColor : Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Container(
+                width: 60,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Day',
+                      style: AppTheme.heading.copyWith(
+                        color:
+                            tappedDate == index ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      '$index',
+                      style: AppTheme.subHeading,
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -131,64 +134,71 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
     );
   }
 
-  Card timeCard(int index) {
-    return Card(
-      elevation: 4,
-      semanticContainer: false,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Container(
-        width: 110,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                FontAwesomeIcons.clock,
-                color: Colors.black,
-                size: 20,
-              ),
-              SizedBox(width: 5),
-              Text(
-                '0$index:00 Am',
-                style: AppTheme.subHeading,
-              ),
-            ],
+  timeCard(int index) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          tappedTime = index;
+        });
+      },
+      child: Card(
+        elevation: 4,
+        color: tappedTime == index ? customColor : Colors.white,
+        semanticContainer: false,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Container(
+          width: 80,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.clock,
+                  color: tappedTime == index ? Colors.white : Colors.black,
+                  size: 35,
+                ),
+                SizedBox(height: 5),
+                Text(
+                  '0$index:00 Am',
+                  style: AppTheme.subHeading.copyWith(
+                    color: tappedTime == index ? Colors.white : Colors.black,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  rowTitle({String title, Function onPrssed}) {
-    return GestureDetector(
-      onTap: onPrssed,
-      child: Container(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: AppTheme.heading,
-                ),
-                SizedBox(width: 10),
-                Icon(
-                  Icons.arrow_drop_down,
-                  color: customColor,
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Divider(
-              color: customColorDivider,
-              thickness: 1,
-            ),
-          ],
-        ),
+  rowTitle({String title}) {
+    return Container(
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: AppTheme.heading,
+              ),
+              SizedBox(width: 10),
+              Icon(
+                Icons.arrow_drop_down,
+                color: customColor,
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Divider(
+            color: customColorDivider,
+            thickness: 1,
+          ),
+        ],
       ),
     );
   }
