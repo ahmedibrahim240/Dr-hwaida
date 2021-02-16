@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:flutter/material.dart';
+import '../CustomBottomNavigationBar.dart';
 import 'conponents/cinsltantAppBar.dart';
 import 'conponents/consultantCard.dart';
 
@@ -24,42 +25,59 @@ class _ConsultantState extends State<Consultant> {
         backgroundColor: customColor,
         toolbarHeight: 0,
       ),
-      body: ListView(
-        shrinkWrap: true,
-        primary: false,
+      body: Stack(
         children: [
-          consultantAppBer(context),
-          ListView.builder(
-            shrinkWrap: true,
-            primary: false,
-            itemCount: 4,
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-              vertical: 20,
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 50,
+            child: Column(
+              children: [
+                ListView(
+                  shrinkWrap: true,
+                  primary: false,
+                  children: [
+                    consultantAppBer(context),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: 30,
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      itemBuilder: (context, index) {
+                        return ConsaultantCard(
+                          index: index,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => ConsultantPageView(
+                                  consultName: consultName,
+                                  location: location,
+                                  oldPrice: oldPrice,
+                                  newPrice: newPrice,
+                                  rating: rating,
+                                  imagUrl: imgUrl,
+                                ),
+                              ),
+                            );
+                          },
+                          consultName: consultName,
+                          location: location,
+                          oldPrice: oldPrice,
+                          newPrice: newPrice,
+                          rating: rating,
+                          imagUrl: imgUrl,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
-            itemBuilder: (context, index) {
-              return ConsaultantCard(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (_) => ConsultantPageView(
-                              consultName: consultName,
-                              location: location,
-                              oldPrice: oldPrice,
-                              newPrice: newPrice,
-                              rating: rating,
-                              imagUrl: imgUrl,
-                            )),
-                  );
-                },
-                consultName: consultName,
-                location: location,
-                oldPrice: oldPrice,
-                newPrice: newPrice,
-                rating: rating,
-                imagUrl: imgUrl,
-              );
-            },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomBottomNavigationBar(),
           ),
         ],
       ),
