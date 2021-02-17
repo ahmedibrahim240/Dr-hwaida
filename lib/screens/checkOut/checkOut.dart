@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visaCard.dart';
+import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/checkOut/components/functions.dart';
 
 import 'package:flutter/material.dart';
@@ -60,6 +61,7 @@ class _CheckOutState extends State<CheckOut> {
           style: AppTheme.heading.copyWith(color: Colors.white),
         ),
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(),
       body: ListView(
         shrinkWrap: true,
         primary: true,
@@ -114,7 +116,10 @@ class _CheckOutState extends State<CheckOut> {
                               SizedBox(width: 10),
                               Column(
                                 children: [
-                                  Text("Card Number"),
+                                  Text(
+                                    "Card Number",
+                                    style: AppTheme.subHeading,
+                                  ),
                                   SizedBox(height: 10),
                                   Text("Expriy Date"),
                                 ],
@@ -123,9 +128,15 @@ class _CheckOutState extends State<CheckOut> {
                           ),
                           Column(
                             children: [
-                              Text("${data.cardNumber}"),
+                              Text(
+                                "${data.cardNumber.substring(0, 3)}*********",
+                                style: AppTheme.subHeading,
+                              ),
                               SizedBox(height: 10),
-                              Text("${data.exDate}"),
+                              Text(
+                                "${data.exDate}",
+                                style: AppTheme.subHeading,
+                              ),
                             ],
                           ),
                         ],
