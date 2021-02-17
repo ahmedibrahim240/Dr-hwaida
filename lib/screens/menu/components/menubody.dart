@@ -8,7 +8,6 @@ import 'package:DrHwaida/screens/notifications/notifications.dart';
 // import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
 // import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';s
 
 import 'menucontant.dart';
