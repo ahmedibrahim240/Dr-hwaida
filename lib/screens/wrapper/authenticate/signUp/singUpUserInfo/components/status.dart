@@ -3,8 +3,10 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:flutter/material.dart';
 
 class Status extends StatefulWidget {
+  final String stauts;
   const Status({
     Key key,
+    this.stauts,
   }) : super(key: key);
 
   @override
@@ -12,7 +14,7 @@ class Status extends StatefulWidget {
 }
 
 class _StatusState extends State<Status> {
-  String stauts;
+  String _stauts;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -43,7 +45,7 @@ class _StatusState extends State<Status> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          stauts = 'Single';
+                          _stauts = 'Single';
                         });
                         Navigator.of(context).pop();
                       },
@@ -73,7 +75,7 @@ class _StatusState extends State<Status> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              stauts = 'Engaged';
+                              _stauts = 'Engaged';
                             });
                             Navigator.of(context).pop();
                           },
@@ -103,7 +105,7 @@ class _StatusState extends State<Status> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          stauts = 'Married';
+                          _stauts = 'Married';
                         });
                         Navigator.of(context).pop();
                       },
@@ -158,7 +160,11 @@ class _StatusState extends State<Status> {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    stauts ?? 'Status',
+                    (_stauts != null)
+                        ? _stauts
+                        : (widget.stauts != null)
+                            ? widget.stauts
+                            : 'Stauts',
                     style: AppTheme.heading.copyWith(
                       color: customColor,
                     ),

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class Age extends StatefulWidget {
+  final age;
   const Age({
     Key key,
+    this.age,
   }) : super(key: key);
 
   @override
@@ -56,7 +58,11 @@ class _AgeState extends State<Age> {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    (_chossenDate) ?? 'Age',
+                    (_chossenDate != null)
+                        ? _chossenDate
+                        : (widget.age != null)
+                            ? widget.age
+                            : 'Age',
                     style: AppTheme.heading.copyWith(
                       color: customColor,
                     ),

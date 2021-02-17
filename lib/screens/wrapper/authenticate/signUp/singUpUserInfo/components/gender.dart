@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Gender extends StatefulWidget {
+  final gender;
   const Gender({
     Key key,
+    this.gender,
   }) : super(key: key);
 
   @override
@@ -126,7 +128,11 @@ class _GenderState extends State<Gender> {
                   ),
                   SizedBox(width: 5),
                   Text(
-                    _gender ?? 'Gender',
+                    (_gender != null)
+                        ? _gender
+                        : (widget.gender != null)
+                            ? widget.gender
+                            : 'Gender',
                     style: AppTheme.heading.copyWith(
                       color: customColor,
                     ),
