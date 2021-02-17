@@ -36,13 +36,13 @@ class MenuContent extends StatelessWidget {
               ),
             ],
           ),
-          Transform.rotate(
-            angle: 180 * 3.14 / 180,
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: customColorIcon,
-            ),
-          ),
+          // Transform.rotate(
+          //   angle: 180 * 3.14 / 180,
+          //   child: Icon(
+          //     Icons.arrow_back_ios,
+          //     color: customColorIcon,
+          //   ),
+          // ),
         ],
       ),
     );

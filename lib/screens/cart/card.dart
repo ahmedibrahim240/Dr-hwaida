@@ -1,11 +1,8 @@
-import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/checkOut/checkOut.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../CustomBottomNavigationBar.dart';
 
 class Cart extends StatefulWidget {
