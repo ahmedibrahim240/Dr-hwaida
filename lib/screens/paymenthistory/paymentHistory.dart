@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/visaCard.dart';
@@ -18,6 +19,7 @@ class _PaymentHistoryState extends State<PaymentHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: 'Payment History'),
+      bottomNavigationBar: CustomBottomNavigationBar(),
       body: ListView(
         shrinkWrap: true,
         primary: true,

@@ -4,6 +4,8 @@ import 'package:DrHwaida/screens/cart/card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../CustomBottomNavigationBar.dart';
+
 class ScheduleAppo extends StatefulWidget {
   @override
   _ScheduleAppoState createState() => _ScheduleAppoState();
@@ -19,6 +21,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: 'Schedule Appointment'),
+      bottomNavigationBar: CustomBottomNavigationBar(),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
