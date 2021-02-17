@@ -1,5 +1,7 @@
 import 'package:DrHwaida/comingSoon.dart';
+import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/visaCard.dart';
 import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,93 +16,146 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 50,
-      decoration: BoxDecoration(gradient: AppTheme.containerBackground),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => UserProfile(
-                      userName: 'Tessting',
-                      userimgUrl: 'lib/images/female.png',
+      height: 100,
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 50,
+            color: Colors.grey[100],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          Helper.tappedBottomShet = 1;
+                        });
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => UserProfile(
+                              userName: 'Tessting',
+                              userimgUrl: 'lib/images/female.png',
+                            ),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.person,
+                            color: (Helper.tappedBottomShet == 1)
+                                ? customColor
+                                : Colors.black,
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            'Profile',
+                            style: AppTheme.heading.copyWith(
+                              color: (Helper.tappedBottomShet == 1)
+                                  ? customColor
+                                  : Colors.black,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                );
-              },
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Profile',
-                    style: AppTheme.heading.copyWith(
-                      color: Colors.white,
-                      fontSize: 10,
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          Helper.tappedBottomShet = 3;
+                        });
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ComingSoon(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.bookOpen,
+                            color: (Helper.tappedBottomShet == 3)
+                                ? customColor
+                                : Colors.black,
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            'Courses',
+                            style: AppTheme.heading.copyWith(
+                              color: (Helper.tappedBottomShet == 3)
+                                  ? customColor
+                                  : Colors.black,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            InkWell(
+          ),
+          Positioned(
+            top: 20,
+            child: InkWell(
               onTap: () {
+                setState(() {
+                  Helper.tappedBottomShet = 2;
+                });
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (_) => ComingSoon(),
                   ),
                 );
               },
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('lib/images/logo.png'),
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => ComingSoon(),
-                  ),
-                );
-              },
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(
-                    FontAwesomeIcons.bookOpen,
-                    color: Colors.white,
+                  Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Helper.tappedBottomShet == 2)
+                          ? customColor
+                          : Colors.black,
+                      image: DecorationImage(
+                        image: AssetImage('lib/images/logo.png'),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
                   ),
-                  SizedBox(height: 5),
-                  Text(
-                    'Courses',
-                    style: AppTheme.heading.copyWith(
-                      color: Colors.white,
-                      fontSize: 10,
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      'Harmony Game',
+                      style: AppTheme.heading.copyWith(
+                        color: (Helper.tappedBottomShet == 2)
+                            ? customColor
+                            : Colors.black,
+                        fontSize: 10,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
