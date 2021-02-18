@@ -1,6 +1,7 @@
 import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
@@ -115,7 +116,7 @@ Container rowofHmeTaps(BuildContext context) {
       children: [
         homeTabs(
           title: 'Consultants',
-          icon: Icons.home,
+          iconImage: 'lib/images/consulantent.png',
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -126,7 +127,7 @@ Container rowofHmeTaps(BuildContext context) {
         ),
         homeTabs(
           title: 'Courses',
-          icon: FontAwesomeIcons.bookOpen,
+          iconImage: 'lib/images/courses.png',
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -137,7 +138,7 @@ Container rowofHmeTaps(BuildContext context) {
         ),
         homeTabs(
           title: 'Events',
-          icon: FontAwesomeIcons.bookOpen,
+          iconImage: 'lib/images/eventicons.png',
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
@@ -152,7 +153,7 @@ Container rowofHmeTaps(BuildContext context) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 
-Container homeTabs({String title, IconData icon, Function onTap}) {
+Container homeTabs({String title, String iconImage, Function onTap}) {
   return Container(
     width: 120,
     child: InkWell(
@@ -164,14 +165,22 @@ Container homeTabs({String title, IconData icon, Function onTap}) {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                icon,
-                color: Colors.black,
+              Container(
+                height: 60,
+                width: 60,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(iconImage),
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
               ),
               SizedBox(height: 20),
               Text(
                 title,
-                style: AppTheme.heading,
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
               ),
             ],
           ),
