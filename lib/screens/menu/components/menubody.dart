@@ -3,6 +3,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
+import 'package:DrHwaida/screens/settings/settings.dart';
 // import 'package:DrHwaida/screens/myReview/myreview.dart';
 // import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 // import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
@@ -48,6 +49,18 @@ class MenuBody extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (_) => Notificatios(),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    MenuContent(
+                      title: 'Settings',
+                      icon: Icons.settings,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => Settings(),
                           ),
                         );
                       },

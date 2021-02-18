@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visaCard.dart';
+import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/age.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/gender.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/status.dart';
@@ -34,7 +35,13 @@ class _UserProfileState extends State<UserProfile> {
         )),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => Settings(),
+                ),
+              );
+            },
             icon: Icon(Icons.settings),
           ),
         ],
@@ -112,7 +119,7 @@ class _UserProfileState extends State<UserProfile> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => Home(),
+                            builder: (_) => Settings(),
                           ),
                         );
                       },
