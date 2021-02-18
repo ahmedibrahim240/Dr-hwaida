@@ -10,7 +10,7 @@ const customColorGray = Color(0xfff7d7d7d);
 //////////////////////////////////////////////////////////
 PreferredSizeWidget customAppBar({String title}) => AppBar(
       centerTitle: true,
-      toolbarHeight: 80,
+      toolbarHeight: 70,
       backgroundColor: customColor,
       title: Text(
         title,

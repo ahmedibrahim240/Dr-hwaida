@@ -19,7 +19,7 @@ class _EventsPageState extends State<EventsPage> {
       body: ListView.builder(
         shrinkWrap: true,
         itemCount: listEvent.length,
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -34,9 +34,9 @@ class _EventsPageState extends State<EventsPage> {
                   );
                 },
                 child: Card(
-                  elevation: 4,
+                  elevation: 3,
                   child: Container(
-                    height: 120,
+                    height: 150,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(listEvent[index].imageUl),
@@ -77,7 +77,7 @@ class _EventsPageState extends State<EventsPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 5),
             ],
           );
         },
