@@ -379,7 +379,7 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
   return GestureDetector(
     onTap: onTap,
     child: SizedBox(
-      width: 210,
+      width: 240,
       child: Card(
         elevation: 3,
         child: Column(
@@ -402,27 +402,27 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                   children: [
                     Row(
                       children: [
-                        SizedBox(width: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              width: 170,
+                              width: 200,
                               child: Text(
-                                courses.contant,
+                                courses.contant.substring(0, 100),
                                 style: AppTheme.subHeading.copyWith(
                                   fontSize: 10,
                                 ),
                               ),
                             ),
-                            SizedBox(height: 8),
+                            SizedBox(height: 10),
                             Text(
                               courses.title,
                               style: AppTheme.heading.copyWith(
                                 color: customColor,
+                                fontSize: 10,
                               ),
                             ),
-                            SizedBox(height: 8),
+                            SizedBox(height: 10),
                             Text(
                               date,
                               style: AppTheme.heading.copyWith(
@@ -455,7 +455,7 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                             Text(
                               courses.newPrice + '\$',
                               style: AppTheme.heading.copyWith(
-                                fontSize: 16,
+                                fontSize: 10,
                               ),
                             ),
                           ],

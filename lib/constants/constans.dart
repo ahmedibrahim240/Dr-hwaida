@@ -278,45 +278,45 @@ class RatingStar extends StatelessWidget {
 }
 
 ///////////////////////////////////////////////////////////
-GestureDetector addCard({BuildContext context, Function onTap}) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 30,
-      ),
-      width: MediaQuery.of(context).size.width,
-      height: 40,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            Colors.grey,
-            Colors.grey[500],
-          ],
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'Add New Card',
-            style: AppTheme.heading.copyWith(
-              color: Colors.white,
-              fontSize: 14,
-            ),
-          ),
-          Icon(
-            Icons.add,
-            size: 30,
-          ),
-        ],
-      ),
-    ),
-  );
-}
+// GestureDetector addCard({BuildContext context, Function onTap}) {
+//   return GestureDetector(
+//     onTap: onTap,
+//     child: Container(
+//       padding: EdgeInsets.symmetric(
+//         horizontal: 30,
+//       ),
+//       width: MediaQuery.of(context).size.width,
+//       height: 40,
+//       decoration: BoxDecoration(
+//         gradient: LinearGradient(
+//           begin: Alignment.topRight,
+//           end: Alignment.bottomLeft,
+//           colors: [
+//             Colors.grey,
+//             Colors.grey[500],
+//           ],
+//         ),
+//       ),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           Text(
+//             'Add New Card',
+//             style: AppTheme.heading.copyWith(
+//               color: Colors.white,
+//               fontSize: 14,
+//             ),
+//           ),
+//           Icon(
+//             Icons.add,
+//             size: 30,
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
 
 /////////////////////////////////////////////////////////////
 InkWell customSocialMdiaBottom({Function onTap, IconData icon, Color color}) {

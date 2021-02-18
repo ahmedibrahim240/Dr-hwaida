@@ -24,7 +24,6 @@ class _PaymentHistoryState extends State<PaymentHistory> {
         shrinkWrap: true,
         primary: true,
         children: [
-          addCard(context: context, onTap: () {}),
           ListView.builder(
             shrinkWrap: true,
             primary: false,
