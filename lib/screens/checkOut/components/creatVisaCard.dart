@@ -112,7 +112,7 @@ class _AddFileBottomSheetState extends State<AddFileBottomSheet> {
                     Helper.cardConut = Helper.cardConut + 1;
                   });
                   print('CardConut:${Helper.cardConut}');
-                  Helper.flist.add(
+                  Helper.visaCardList.add(
                     VisaCard(
                       cardNumber: '333333333333333',
                       exDate: '02/2021',

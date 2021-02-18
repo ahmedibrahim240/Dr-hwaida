@@ -3,6 +3,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../CustomBottomNavigationBar.dart';
 import 'components/mycoursescard.dart';
 
 class MyCourses extends StatefulWidget {
@@ -22,6 +23,7 @@ class _MyCoursesState extends State<MyCourses> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: ''),
+      bottomNavigationBar: CustomBottomNavigationBar(),
       body: ListView(
         shrinkWrap: true,
         primary: true,

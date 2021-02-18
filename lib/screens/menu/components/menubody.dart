@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
+import 'package:DrHwaida/screens/mypayment/myPayment.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
@@ -72,11 +73,11 @@ class MenuBody extends StatelessWidget {
                       title: 'My Payment',
                       icon: FontAwesomeIcons.idCardAlt,
                       onTap: () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (_) => Payment(),
-                        //   ),
-                        // );
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => MyPayment(),
+                          ),
+                        );
                       },
                     ),
                     SizedBox(height: 20),

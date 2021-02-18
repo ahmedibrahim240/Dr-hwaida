@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,6 +14,7 @@ class _ContatactUsState extends State<ContatactUs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: 'contact Us'),
+      bottomNavigationBar: CustomBottomNavigationBar(),
       body: ListView(
         shrinkWrap: true,
         primary: true,

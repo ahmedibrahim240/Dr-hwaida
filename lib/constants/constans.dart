@@ -278,45 +278,32 @@ class RatingStar extends StatelessWidget {
 }
 
 ///////////////////////////////////////////////////////////
-// GestureDetector addCard({BuildContext context, Function onTap}) {
-//   return GestureDetector(
-//     onTap: onTap,
-//     child: Container(
-//       padding: EdgeInsets.symmetric(
-//         horizontal: 30,
-//       ),
-//       width: MediaQuery.of(context).size.width,
-//       height: 40,
-//       decoration: BoxDecoration(
-//         gradient: LinearGradient(
-//           begin: Alignment.topRight,
-//           end: Alignment.bottomLeft,
-//           colors: [
-//             Colors.grey,
-//             Colors.grey[500],
-//           ],
-//         ),
-//       ),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           Text(
-//             'Add New Card',
-//             style: AppTheme.heading.copyWith(
-//               color: Colors.white,
-//               fontSize: 14,
-//             ),
-//           ),
-//           Icon(
-//             Icons.add,
-//             size: 30,
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
+class DismissibleWidget<T> extends StatelessWidget {
+  final T item;
+  final Widget child;
+  final DismissDirectionCallback onDismissed;
+
+  const DismissibleWidget({
+    @required this.item,
+    @required this.child,
+    @required this.onDismissed,
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => Dismissible(
+        key: UniqueKey(),
+        background: buildSwipeActionRight(),
+        child: child,
+        onDismissed: onDismissed,
+      );
+  Widget buildSwipeActionRight() => Container(
+        alignment: Alignment.centerRight,
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        color: Colors.red,
+        child: Icon(Icons.delete_forever, color: Colors.white, size: 32),
+      );
+}
 
 /////////////////////////////////////////////////////////////
 InkWell customSocialMdiaBottom({Function onTap, IconData icon, Color color}) {

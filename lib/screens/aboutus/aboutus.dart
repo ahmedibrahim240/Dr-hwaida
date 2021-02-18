@@ -2,6 +2,8 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:flutter/material.dart';
 
+import '../CustomBottomNavigationBar.dart';
+
 class AboutUS extends StatefulWidget {
   @override
   _AboutUSState createState() => _AboutUSState();
@@ -14,6 +16,7 @@ class _AboutUSState extends State<AboutUS> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: 'About Us'),
+      bottomNavigationBar: CustomBottomNavigationBar(),
       body: ListView(
         shrinkWrap: true,
         primary: true,

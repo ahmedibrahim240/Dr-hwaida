@@ -95,53 +95,54 @@ class _CheckOutState extends State<CheckOut> {
             },
           ),
           Column(
-            children: Helper.flist.map((data) {
+            children: Helper.visaCardList.map((data) {
               return RadioListTile(
                 groupValue: id,
                 value: data.index,
                 title: Card(
-                    elevation: 3,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                FontAwesomeIcons.ccVisa,
-                                color: Colors.blue,
-                              ),
-                              SizedBox(width: 10),
-                              Column(
-                                children: [
-                                  Text(
-                                    "Card Number",
-                                    style: AppTheme.subHeading,
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text("Expriy Date"),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                "${data.cardNumber.substring(0, 3)}*********",
-                                style: AppTheme.subHeading,
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                "${data.exDate}",
-                                style: AppTheme.subHeading,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    )),
+                  elevation: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.ccVisa,
+                              color: Colors.blue,
+                            ),
+                            SizedBox(width: 10),
+                            Column(
+                              children: [
+                                Text(
+                                  "Card Number",
+                                  style: AppTheme.subHeading,
+                                ),
+                                SizedBox(height: 10),
+                                Text("Expriy Date"),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "${data.cardNumber.substring(0, 3)}*********",
+                              style: AppTheme.subHeading,
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              "${data.exDate}",
+                              style: AppTheme.subHeading,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 onChanged: (val) {
                   setState(() {
                     id = data.index;
