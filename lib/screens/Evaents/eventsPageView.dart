@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/events.dart';
+import 'package:DrHwaida/screens/cart/card.dart';
 import 'package:flutter/material.dart';
 
 import '../CustomBottomNavigationBar.dart';
@@ -78,7 +79,13 @@ class _EventsPageViewState extends State<EventsPageView> {
                   ),
                   child: CustomButtonWithchild(
                     color: customColor,
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => Cart(),
+                        ),
+                      );
+                    },
                     child: Text(
                       'Booking Naw',
                       style: AppTheme.heading.copyWith(color: Colors.white),
