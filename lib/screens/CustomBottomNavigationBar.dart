@@ -53,7 +53,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                             Icons.person,
                             color: (Helper.tappedBottomShet == 1)
                                 ? customColor
-                                : Colors.black,
+                                : customColorGray,
                           ),
                           SizedBox(height: 5),
                           Text(
@@ -61,7 +61,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                             style: AppTheme.heading.copyWith(
                               color: (Helper.tappedBottomShet == 1)
                                   ? customColor
-                                  : Colors.black,
+                                  : customColorGray,
                               fontSize: 10,
                             ),
                           ),
@@ -89,7 +89,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                             FontAwesomeIcons.bookOpen,
                             color: (Helper.tappedBottomShet == 3)
                                 ? customColor
-                                : Colors.black,
+                                : customColorGray,
                           ),
                           SizedBox(height: 5),
                           Text(
@@ -97,7 +97,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                             style: AppTheme.heading.copyWith(
                               color: (Helper.tappedBottomShet == 3)
                                   ? customColor
-                                  : Colors.black,
+                                  : customColorGray,
                               fontSize: 10,
                             ),
                           ),
@@ -132,7 +132,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       shape: BoxShape.circle,
                       color: (Helper.tappedBottomShet == 2)
                           ? customColor
-                          : Colors.black,
+                          : customColorGray,
                       image: DecorationImage(
                         image: AssetImage('lib/images/logo.png'),
                         fit: BoxFit.fitWidth,
@@ -146,7 +146,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       style: AppTheme.heading.copyWith(
                         color: (Helper.tappedBottomShet == 2)
                             ? customColor
-                            : Colors.black,
+                            : customColorGray,
                         fontSize: 10,
                       ),
                     ),

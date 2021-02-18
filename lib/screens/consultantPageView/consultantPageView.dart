@@ -65,7 +65,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   Container consultantData(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .672,
+      height: MediaQuery.of(context).size.height * .8,
       child: Stack(
         children: [
           Container(

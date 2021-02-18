@@ -6,6 +6,7 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 const customColor = Color(0xfff4DC0B1);
 const customColorIcon = Color(0xfff807d7d);
 const customColorDivider = Color(0xfffe1e1e1);
+const customColorGray = Color(0xfff7d7d7d);
 //////////////////////////////////////////////////////////
 PreferredSizeWidget customAppBar({String title}) => AppBar(
       centerTitle: true,
@@ -328,3 +329,16 @@ InkWell customSocialMdiaBottom({Function onTap, IconData icon, Color color}) {
     ),
   );
 }
+
+//////////////////////////////////////////////////////////////////////
+List eventsList = [
+  'lib/images/event.jpg',
+  'lib/images/event.jpg',
+  'lib/images/event.jpg',
+  'lib/images/event.jpg',
+  'lib/images/event.jpg',
+  'lib/images/event.jpg',
+  'lib/images/event.jpg',
+  'lib/images/event.jpg',
+  'lib/images/event.jpg',
+];
