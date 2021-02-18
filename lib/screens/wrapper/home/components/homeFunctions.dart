@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
+import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -88,6 +89,7 @@ Container eventSlider({BuildContext context, List evetList}) {
     ),
   );
 }
+///////////////////////////////////////////////////////////////////////////////////////
 
 Container rowofHmeTaps(BuildContext context) {
   return Container(
@@ -132,6 +134,7 @@ Container rowofHmeTaps(BuildContext context) {
     ),
   );
 }
+///////////////////////////////////////////////////////////////////////////////////////
 
 Container homeTabs({String title, IconData icon, Function onTap}) {
   return Container(
@@ -161,6 +164,7 @@ Container homeTabs({String title, IconData icon, Function onTap}) {
     ),
   );
 }
+///////////////////////////////////////////////////////////////////////////////////////
 
 consulHomeCard({
   String imageUrl,
@@ -248,6 +252,7 @@ consulHomeCard({
     ),
   );
 }
+///////////////////////////////////////////////////////////////////////////////////////
 
 sctionTitle({String title, Function onTap}) {
   return Padding(
@@ -273,6 +278,7 @@ sctionTitle({String title, Function onTap}) {
     ),
   );
 }
+///////////////////////////////////////////////////////////////////////////////////////
 
 eventView(BuildContext context) {
   return Card(
@@ -286,6 +292,43 @@ eventView(BuildContext context) {
           fit: BoxFit.cover,
         ),
       ),
+    ),
+  );
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+Container consulHomeList(String imageUrl, String oldPrie, String newPrie,
+    String consulName, double rate) {
+  return Container(
+    height: 200,
+    child: ListView.builder(
+      scrollDirection: Axis.horizontal,
+      shrinkWrap: true,
+      itemCount: 10,
+      padding: EdgeInsets.symmetric(horizontal: 5),
+      itemBuilder: (context, index) {
+        return consulHomeCard(
+          imageUrl: imageUrl,
+          oldPrie: oldPrie,
+          newPrie: newPrie,
+          consulName: consulName,
+          rate: rate,
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => ConsultantPageView(
+                  consultName: consulName,
+                  imagUrl: imageUrl,
+                  rating: rate.toString(),
+                  location: 'elmansora',
+                  oldPrice: oldPrie,
+                  newPrice: newPrie,
+                ),
+              ),
+            );
+          },
+        );
+      },
     ),
   );
 }

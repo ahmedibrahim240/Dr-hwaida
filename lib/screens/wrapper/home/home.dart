@@ -51,38 +51,7 @@ class _HomeState extends State<Home> {
                   ),
                 );
               }),
-          Container(
-            height: 200,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: 10,
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              itemBuilder: (context, index) {
-                return consulHomeCard(
-                  imageUrl: imageUrl,
-                  oldPrie: oldPrie,
-                  newPrie: newPrie,
-                  consulName: consulName,
-                  rate: rate,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => ConsultantPageView(
-                          consultName: consulName,
-                          imagUrl: imageUrl,
-                          rating: rate.toString(),
-                          location: 'elmansora',
-                          oldPrice: oldPrie,
-                          newPrice: newPrie,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
+          consulHomeList(imageUrl, oldPrie, newPrie, consulName, rate),
         ],
       ),
     );
