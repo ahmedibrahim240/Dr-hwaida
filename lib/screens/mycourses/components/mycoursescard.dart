@@ -1,25 +1,16 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/courses.dart';
 import 'package:flutter/material.dart';
 
 class CustomMyCoutsesCard extends StatelessWidget {
   const CustomMyCoutsesCard({
     Key key,
-    @required this.courseImageUrl,
-    @required this.contant,
-    @required this.title,
-    @required this.date,
-    @required this.oldPrice,
-    @required this.newPrice,
+    @required this.courses,
     @required this.onTap,
   }) : super(key: key);
 
-  final String courseImageUrl;
-  final String contant;
-  final String title;
-  final String date;
-  final String oldPrice;
-  final String newPrice;
+  final Courses courses;
   final Function onTap;
 
   @override
@@ -39,7 +30,7 @@ class CustomMyCoutsesCard extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       minRadius: 40,
-                      backgroundImage: AssetImage(courseImageUrl),
+                      backgroundImage: AssetImage(courses.courseImageUrl),
                     ),
                     SizedBox(width: 10),
                     Column(
@@ -48,7 +39,7 @@ class CustomMyCoutsesCard extends StatelessWidget {
                         SizedBox(
                           width: 200,
                           child: Text(
-                            contant,
+                            courses.contant,
                             style: AppTheme.subHeading.copyWith(
                               fontSize: 10,
                             ),
@@ -56,7 +47,7 @@ class CustomMyCoutsesCard extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          title,
+                          courses.title,
                           style: AppTheme.heading.copyWith(
                             color: customColor,
                           ),
@@ -77,13 +68,13 @@ class CustomMyCoutsesCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RatingStar(
-                      rating: 4,
+                      rating: courses.rating,
                       isReadOnly: true,
                     ),
                     Row(
                       children: [
                         Text(
-                          oldPrice + '\$',
+                          courses.oldPrice + '\$',
                           style: AppTheme.heading.copyWith(
                             color: Colors.grey[500],
                             fontSize: 8,
@@ -92,7 +83,7 @@ class CustomMyCoutsesCard extends StatelessWidget {
                         ),
                         SizedBox(width: 5),
                         Text(
-                          newPrice + '\$',
+                          courses.newPrice + '\$',
                           style: AppTheme.heading.copyWith(
                             fontSize: 16,
                           ),

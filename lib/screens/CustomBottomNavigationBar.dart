@@ -17,6 +17,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
+      color: Colors.transparent,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [

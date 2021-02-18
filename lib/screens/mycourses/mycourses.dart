@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/courses.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/mycoursescard.dart';
@@ -20,14 +21,14 @@ class _MyCoursesState extends State<MyCourses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: 'My Courses'),
+      appBar: customAppBar(title: ''),
       body: ListView(
         shrinkWrap: true,
         primary: true,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         children: [
           Text(
-            'Video List',
+            'Courses',
             style: AppTheme.heading.copyWith(
               color: customColor,
               fontSize: 20,
@@ -37,20 +38,15 @@ class _MyCoursesState extends State<MyCourses> {
           ListView.builder(
             shrinkWrap: true,
             primary: false,
-            itemCount: 50,
-            itemBuilder: (context, indx) {
+            itemCount: listCourses.length,
+            itemBuilder: (context, index) {
               return Column(
                 children: [
                   SizedBox(height: 20),
                   CustomMyCoutsesCard(
-                    courseImageUrl: courseImageUrl,
-                    contant: contant,
-                    title: title,
-                    date: date,
-                    oldPrice: oldPrice,
-                    newPrice: newPrice,
+                    courses: listCourses[index],
                     onTap: () {
-                      print('card=>$indx');
+                      print('card=>$index');
                     },
                   ),
                   SizedBox(height: 20),

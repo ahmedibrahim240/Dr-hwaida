@@ -6,6 +6,7 @@ import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
+import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -129,7 +130,7 @@ Container rowofHmeTaps(BuildContext context) {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => ComingSoon(),
+                builder: (_) => MyCourses(),
               ),
             );
           },
@@ -299,7 +300,7 @@ paner(BuildContext context) {
   return Card(
     elevation: 4,
     child: Container(
-      height: 120,
+      height: 80,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         image: DecorationImage(
