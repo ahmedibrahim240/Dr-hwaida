@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
+import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,45 +23,56 @@ class _EventsPageState extends State<EventsPage> {
         itemBuilder: (context, index) {
           return Column(
             children: [
-              Card(
-                elevation: 4,
-                child: Container(
-                  height: 120,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(listEvent[index].imageUl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Container(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color.fromARGB(200, 0, 0, 0),
-                          Color.fromARGB(0, 0, 0, 0)
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => EventsPageView(
+                        events: listEvent[index],
                       ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: 40),
-                        Text(
-                          listEvent[index].title,
-                          style: TextStyle(
-                            color: Colors.deepOrangeAccent,
-                            fontSize: 25,
+                  );
+                },
+                child: Card(
+                  elevation: 4,
+                  child: Container(
+                    height: 120,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(listEvent[index].imageUl),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Container(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Color.fromARGB(200, 0, 0, 0),
+                            Color.fromARGB(0, 0, 0, 0)
+                          ],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(height: 40),
+                          Text(
+                            listEvent[index].title,
+                            style: TextStyle(
+                              color: Colors.deepOrangeAccent,
+                              fontSize: 25,
+                            ),
                           ),
-                        ),
-                        Text(
-                          listEvent[index].contant,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
+                          Text(
+                            listEvent[index].contant.substring(0, 25),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

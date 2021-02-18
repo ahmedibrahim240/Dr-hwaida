@@ -9,37 +9,44 @@ class CustomEvent {
 List<CustomEvent> listEvent = [
   CustomEvent(
     imageUl: 'lib/images/event.jpg',
-    title: 'Curved AppBar Exemple',
-    contant: 'text to add optionnal',
+    title: 'Event Name Exemple',
+    contant:
+        'text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant',
   ),
   CustomEvent(
     imageUl: 'lib/images/event.jpg',
-    title: 'Curved AppBar Exemple',
-    contant: 'text to add optionnal',
+    title: 'Event Name Exemple',
+    contant:
+        'text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant',
   ),
   CustomEvent(
     imageUl: 'lib/images/event.jpg',
-    title: 'Curved AppBar Exemple',
-    contant: 'text to add optionnal',
+    title: 'Event Name Exemple',
+    contant:
+        'text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant',
   ),
   CustomEvent(
     imageUl: 'lib/images/event.jpg',
-    title: 'Curved AppBar Exemple',
-    contant: 'text to add optionnal',
+    title: 'Event Name Exemple',
+    contant:
+        'text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant',
   ),
   CustomEvent(
     imageUl: 'lib/images/event.jpg',
-    title: 'Curved AppBar Exemple',
-    contant: 'text to add optionnal',
+    title: 'Event Name Exemple',
+    contant:
+        'text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant',
   ),
   CustomEvent(
     imageUl: 'lib/images/event.jpg',
-    title: 'Curved AppBar Exemple',
-    contant: 'text to add optionnal',
+    title: 'Event Name Exemple',
+    contant:
+        'text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant',
   ),
   CustomEvent(
     imageUl: 'lib/images/event.jpg',
-    title: 'Curved AppBar Exemple',
-    contant: 'text to add optionnal',
+    title: 'Event Name Exemple',
+    contant:
+        'text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant text to show Evet contant',
   ),
 ];

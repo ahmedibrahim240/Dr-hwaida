@@ -1,7 +1,10 @@
+import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
+import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
+import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +26,15 @@ Container eventSlider({BuildContext context, List<CustomEvent> evetList}) {
           items: evetList
               .map(
                 (items) => GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => EventsPageView(
+                          events: items,
+                        ),
+                      ),
+                    );
+                  },
                   child: Container(
                     child: Container(
                       margin: EdgeInsets.all(5.0),
@@ -74,7 +85,7 @@ Container eventSlider({BuildContext context, List<CustomEvent> evetList}) {
                                         ),
                                       ),
                                       Text(
-                                        items.contant,
+                                        items.contant.substring(0, 25),
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ],
@@ -118,7 +129,7 @@ Container rowofHmeTaps(BuildContext context) {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => Consultant(),
+                builder: (_) => ComingSoon(),
               ),
             );
           },
@@ -129,7 +140,7 @@ Container rowofHmeTaps(BuildContext context) {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => Consultant(),
+                builder: (_) => EventsPage(),
               ),
             );
           },
