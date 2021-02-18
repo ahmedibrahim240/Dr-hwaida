@@ -4,7 +4,7 @@ String title = 'Dr/ Ahmed Ibrahim';
 String date = '12 May 2021';
 String oldPrice = '300';
 String newPrice = '255';
-String courseImageUrl = 'lib/images/person.jpg';
+String courseImageUrl = 'lib/images/aboutus.jpg';
 double rating = 4;
 
 class Courses {

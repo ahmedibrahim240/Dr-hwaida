@@ -4,6 +4,7 @@ import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
+import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/homeAppBer.dart';
@@ -33,34 +34,55 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Menu(),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
-      body: ListView(
-        shrinkWrap: true,
-        primary: true,
+      // bottomNavigationBar: CustomBottomNavigationBar(),
+      body: Stack(
         children: [
-          CustomHomeAppBer(scaffoldKey: scaffoldKey),
-          rowofHmeTaps(context),
-          paner(context),
-          sctionTitle(
-              title: 'ُEvents',
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => EventsPage(),
-                  ),
-                );
-              }),
-          eventSlider(context: context, evetList: listEvent),
-          sctionTitle(
-              title: 'Consultants',
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => Consultant(),
-                  ),
-                );
-              }),
-          consulHomeList(imageUrl, oldPrie, newPrie, consulName, rate),
+          Container(
+            height: MediaQuery.of(context).size.height - 80,
+            child: ListView(
+              shrinkWrap: true,
+              primary: true,
+              children: [
+                CustomHomeAppBer(scaffoldKey: scaffoldKey),
+                rowofHmeTaps(context),
+                paner(context),
+                sctionTitle(
+                    title: 'ُEvents',
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => EventsPage(),
+                        ),
+                      );
+                    }),
+                eventSlider(context: context, evetList: listEvent),
+                sctionTitle(
+                    title: 'Courses',
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => MyCourses(),
+                        ),
+                      );
+                    }),
+                homecoursesList(context),
+                sctionTitle(
+                    title: 'Consultants',
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => Consultant(),
+                        ),
+                      );
+                    }),
+                consulHomeList(imageUrl, oldPrie, newPrie, consulName, rate),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomBottomNavigationBar(),
+          ),
         ],
       ),
     );

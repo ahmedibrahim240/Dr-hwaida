@@ -1,4 +1,3 @@
-import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/courses.dart';
@@ -10,7 +9,6 @@ import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 Container eventSlider({BuildContext context, List<CustomEvent> evetList}) {
   return Container(
@@ -309,7 +307,7 @@ paner(BuildContext context) {
   return Card(
     elevation: 4,
     child: Container(
-      height: 80,
+      height: 120,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -354,6 +352,123 @@ Container consulHomeList(String imageUrl, String oldPrie, String newPrie,
           },
         );
       },
+    ),
+  );
+}
+
+///////////////////////////////////////////////////////////////
+Container homecoursesList(context) {
+  return Container(
+    height: 250,
+    child: ListView.builder(
+      itemCount: listCourses.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        return homeCoursesCard(
+          onTap: () {},
+          courses: listCourses[index],
+          context: context,
+        );
+      },
+    ),
+  );
+}
+
+////////////////////////////////////////////////////////////////
+homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: SizedBox(
+      width: 210,
+      child: Card(
+        elevation: 3,
+        child: Column(
+          children: [
+            Container(
+              height: 100,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage(courses.courseImageUrl),
+                fit: BoxFit.cover,
+              )),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(width: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 170,
+                              child: Text(
+                                courses.contant,
+                                style: AppTheme.subHeading.copyWith(
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              courses.title,
+                              style: AppTheme.heading.copyWith(
+                                color: customColor,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              date,
+                              style: AppTheme.heading.copyWith(
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RatingStar(
+                          rating: courses.rating,
+                          isReadOnly: true,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              courses.oldPrice + '\$',
+                              style: AppTheme.heading.copyWith(
+                                color: Colors.grey[500],
+                                fontSize: 8,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              courses.newPrice + '\$',
+                              style: AppTheme.heading.copyWith(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     ),
   );
 }
