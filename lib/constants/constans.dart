@@ -331,14 +331,3 @@ InkWell customSocialMdiaBottom({Function onTap, IconData icon, Color color}) {
 }
 
 //////////////////////////////////////////////////////////////////////
-List eventsList = [
-  'lib/images/event.jpg',
-  'lib/images/event.jpg',
-  'lib/images/event.jpg',
-  'lib/images/event.jpg',
-  'lib/images/event.jpg',
-  'lib/images/event.jpg',
-  'lib/images/event.jpg',
-  'lib/images/event.jpg',
-  'lib/images/event.jpg',
-];

@@ -1,12 +1,13 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-Container eventSlider({BuildContext context, List evetList}) {
+Container eventSlider({BuildContext context, List<CustomEvent> evetList}) {
   return Container(
     child: Column(
       children: <Widget>[
@@ -19,67 +20,70 @@ Container eventSlider({BuildContext context, List evetList}) {
             enlargeCenterPage: true,
             enlargeStrategy: CenterPageEnlargeStrategy.scale,
           ),
-          items: eventsList
+          items: evetList
               .map(
-                (items) => Container(
+                (items) => GestureDetector(
+                  onTap: () {},
                   child: Container(
-                    margin: EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        child: Stack(
-                          children: <Widget>[
-                            Container(
-                              width: 300,
-                              height: 140,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20.0)),
-                                image: DecorationImage(
-                                  image: AssetImage(items),
-                                  //  NetworkImage(
-                                  //   items,
-                                  // ),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              child: Container(
-                                height: 100,
-                                width: MediaQuery.of(context).size.width,
+                    child: Container(
+                      margin: EdgeInsets.all(5.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                          child: Stack(
+                            children: <Widget>[
+                              Container(
+                                width: 300,
+                                height: 140,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(20.0),
-                                    bottomRight: Radius.circular(20.0),
-                                  ),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color.fromARGB(200, 0, 0, 0),
-                                      Color.fromARGB(0, 0, 0, 0)
-                                    ],
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  image: DecorationImage(
+                                    image: AssetImage(items.imageUl),
+                                    //  NetworkImage(
+                                    //   items,
+                                    // ),
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    SizedBox(height: 40),
-                                    Text(
-                                      'Event',
-                                      style: TextStyle(
-                                        color: Colors.deepOrangeAccent,
-                                        fontSize: 25,
+                                child: Container(
+                                  height: 100,
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(20.0),
+                                      bottomRight: Radius.circular(20.0),
+                                    ),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(200, 0, 0, 0),
+                                        Color.fromARGB(0, 0, 0, 0)
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      SizedBox(height: 40),
+                                      Text(
+                                        items.title,
+                                        style: TextStyle(
+                                          color: Colors.deepOrangeAccent,
+                                          fontSize: 25,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      'contant',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
+                                      Text(
+                                        items.contant,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )),
+                            ],
+                          )),
+                    ),
                   ),
                 ),
               )
@@ -280,11 +284,11 @@ sctionTitle({String title, Function onTap}) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 
-eventView(BuildContext context) {
+paner(BuildContext context) {
   return Card(
     elevation: 4,
     child: Container(
-      height: 200,
+      height: 120,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         image: DecorationImage(

@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
         // scaffoldBackgroundColor: Color(0xfffeeeeee),
         primaryIconTheme: IconThemeData(color: Colors.white),
         primaryColor: customColor,
+
         iconTheme: IconThemeData(color: Colors.white),
       ),
       home: Home(),

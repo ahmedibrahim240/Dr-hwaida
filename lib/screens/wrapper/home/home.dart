@@ -1,7 +1,8 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
-import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
+import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +40,17 @@ class _HomeState extends State<Home> {
         children: [
           CustomHomeAppBer(scaffoldKey: scaffoldKey),
           rowofHmeTaps(context),
-          sctionTitle(title: 'ُEvents', onTap: () {}),
-          eventView(context),
-          eventSlider(context: context, evetList: eventsList),
+          paner(context),
+          sctionTitle(
+              title: 'ُEvents',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => EventsPage(),
+                  ),
+                );
+              }),
+          eventSlider(context: context, evetList: listEvent),
           sctionTitle(
               title: 'Consultants',
               onTap: () {
