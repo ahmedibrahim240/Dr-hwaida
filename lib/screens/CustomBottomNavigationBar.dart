@@ -25,7 +25,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           Container(
             width: MediaQuery.of(context).size.width,
             height: 50,
-            color: Colors.grey[100],
+            color: Colors.white,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,

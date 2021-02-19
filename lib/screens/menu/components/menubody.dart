@@ -2,18 +2,13 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
+import 'package:DrHwaida/screens/courses/mycourses.dart';
 import 'package:DrHwaida/screens/mypayment/myPayment.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
-// import 'package:DrHwaida/screens/myReview/myreview.dart';
-// import 'package:DrHwaida/screens/mycourses/mycourses.dart';
-// import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
-// import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';s
-
 import 'menucontant.dart';
 
 class MenuBody extends StatelessWidget {
@@ -76,6 +71,18 @@ class MenuBody extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (_) => MyPayment(),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    MenuContent(
+                      title: 'My Courses',
+                      icon: FontAwesomeIcons.idCardAlt,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => MyCourses(),
                           ),
                         );
                       },

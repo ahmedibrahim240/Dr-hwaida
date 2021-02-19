@@ -3,8 +3,8 @@ import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
+import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
-import 'package:DrHwaida/screens/mycourses/mycourses.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/homeAppBer.dart';
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => MyCourses(),
+                          builder: (_) => CoursesPage(),
                         ),
                       );
                     }),
