@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
+import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,15 @@ class _CoursesPageState extends State<CoursesPage> {
           return Padding(
             padding: const EdgeInsets.all(1.0),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => CoursesDetails(
+                      courses: listCourses[index],
+                    ),
+                  ),
+                );
+              },
               child: Card(
                 elevation: 4,
                 child: Column(
@@ -180,7 +189,15 @@ class _CoursesPageState extends State<CoursesPage> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => CoursesDetails(
+                      courses: listCourses[index],
+                    ),
+                  ),
+                );
+              },
               child: Card(
                 elevation: 4,
                 child: Column(
