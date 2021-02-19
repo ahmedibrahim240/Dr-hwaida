@@ -1,10 +1,9 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/courses/components/coursesfillter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import 'consultantfillter.dart';
 
 Container consultantAppBer(BuildContext context) {
   return Container(
@@ -32,7 +31,7 @@ Container consultantAppBer(BuildContext context) {
           ],
         ),
         Text(
-          'Consultant',
+          'Courses',
           style: AppTheme.heading.copyWith(
             color: Colors.white,
           ),
@@ -41,7 +40,7 @@ Container consultantAppBer(BuildContext context) {
           onPressed: () {
             flitter(
               context: context,
-              child: ConsultantFillter(),
+              child: CoursesFillter(),
             );
           },
           icon: Transform.rotate(

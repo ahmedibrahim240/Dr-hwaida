@@ -318,10 +318,10 @@ InkWell customSocialMdiaBottom({Function onTap, IconData icon, Color color}) {
 }
 
 //////////////////////////////////////////////////////////////////////
-flitter(BuildContext context, Widget clild) {
+flitter({BuildContext context, Widget child}) {
   return showModalBottomSheet(
     context: context,
-    builder: (context) => clild,
+    builder: (context) => child,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(25),

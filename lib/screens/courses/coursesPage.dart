@@ -5,6 +5,8 @@ import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'components/coursesPageAppber.dart';
+
 class CoursesPage extends StatefulWidget {
   @override
   _CoursesPageState createState() => _CoursesPageState();
@@ -14,13 +16,18 @@ class _CoursesPageState extends State<CoursesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: 'Courses'),
-      // bottomNavigationBar: CustomBottomNavigationBar(),
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height - 160,
-            child: coursesgraidView(),
+            height: MediaQuery.of(context).size.height - 50,
+            child: ListView(
+              shrinkWrap: true,
+              primary: true,
+              children: [
+                consultantAppBer(context),
+                coursesgraidView(),
+              ],
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -39,7 +46,7 @@ class _CoursesPageState extends State<CoursesPage> {
       crossAxisCount: 2,
       crossAxisSpacing: 1.0,
       mainAxisSpacing: 1.0,
-      primary: true,
+      primary: false,
       childAspectRatio: (itemWidth / itemHeight),
       shrinkWrap: true,
       children: List.generate(
