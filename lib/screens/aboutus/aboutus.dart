@@ -16,41 +16,51 @@ class _AboutUSState extends State<AboutUS> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppBar(title: 'About Us'),
-      bottomNavigationBar: CustomBottomNavigationBar(),
-      body: ListView(
-        shrinkWrap: true,
-        primary: true,
+      body: Stack(
         children: [
           Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  'lib/images/aboutus.jpg',
+            height: MediaQuery.of(context).size.height - 160,
+            child: ListView(
+              shrinkWrap: true,
+              primary: true,
+              children: [
+                Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'lib/images/aboutus.jpg',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                fit: BoxFit.cover,
-              ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: Text(
+                    contant +
+                        contant +
+                        contant +
+                        contant +
+                        contant +
+                        contant +
+                        contant +
+                        contant +
+                        contant,
+                    style: AppTheme.subHeading.copyWith(
+                      height: 1.5,
+                      letterSpacing: .07,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-            child: Text(
-              contant +
-                  contant +
-                  contant +
-                  contant +
-                  contant +
-                  contant +
-                  contant +
-                  contant +
-                  contant,
-              style: AppTheme.subHeading.copyWith(
-                height: 1.5,
-                letterSpacing: .07,
-              ),
-            ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomBottomNavigationBar(),
           ),
         ],
       ),

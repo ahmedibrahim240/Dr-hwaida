@@ -21,79 +21,96 @@ class _EventsPageViewState extends State<EventsPageView> {
       appBar: AppBar(
         toolbarHeight: 0,
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
-      body: ListView(
-        shrinkWrap: true,
+      body: Stack(
         children: [
           Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(widget.events.imageUl),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Column(
+            height: MediaQuery.of(context).size.height - 80,
+            child: ListView(
+              shrinkWrap: true,
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+                Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(widget.events.imageUl),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_back),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          widget.events.title,
+                          style: AppTheme.heading.copyWith(
+                            color: customColor,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        widget.events.contant +
+                            widget.events.contant +
+                            widget.events.contant +
+                            widget.events.contant +
+                            widget.events.contant +
+                            widget.events.contant +
+                            widget.events.contant +
+                            widget.events.contant,
+                        textAlign: TextAlign.start,
+                        style: AppTheme.subHeading.copyWith(
+                          height: 1.5,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 10,
+                        ),
+                        child: CustomButtonWithchild(
+                          color: customColor,
+                          onPress: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => Cart(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Booking Naw',
+                            style:
+                                AppTheme.heading.copyWith(color: Colors.white),
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Center(
-                  child: Text(
-                    widget.events.title,
-                    style: AppTheme.heading.copyWith(
-                      color: customColor,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  widget.events.contant +
-                      widget.events.contant +
-                      widget.events.contant,
-                  textAlign: TextAlign.start,
-                  style: AppTheme.subHeading.copyWith(
-                    height: 1.5,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40,
-                    vertical: 10,
-                  ),
-                  child: CustomButtonWithchild(
-                    color: customColor,
-                    onPress: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => Cart(),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      'Booking Naw',
-                      style: AppTheme.heading.copyWith(color: Colors.white),
-                    ),
-                  ),
-                )
-              ],
-            ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomBottomNavigationBar(),
           ),
         ],
       ),
