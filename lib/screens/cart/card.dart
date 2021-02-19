@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/prodact.dart';
 import 'package:DrHwaida/screens/checkOut/checkOut.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,25 +61,32 @@ class _CartState extends State<Cart> {
             height: MediaQuery.of(context).size.height - 200,
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: 20,
+              itemCount: productList.length,
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               itemBuilder: (context, index) {
                 return Card(
                   elevation: 3,
                   child: ListTile(
-                    title: Text('Title'),
-                    subtitle: Text('Price'),
+                    title: Text(productList[index].title),
+                    subtitle: Text(
+                      productList[index].price + '\$',
+                    ),
                     trailing: IconButton(
                       icon: Icon(
                         Icons.delete,
                         size: 30,
                         color: Colors.blueAccent,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          productList.remove(productList[index]);
+                        });
+                      },
                     ),
                     leading: CircleAvatar(
                       maxRadius: 30,
-                      backgroundImage: AssetImage('lib/images/person.jpg'),
+                      backgroundImage:
+                          AssetImage(productList[index].proImageUrl),
                     ),
                   ),
                 );

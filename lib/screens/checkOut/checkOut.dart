@@ -61,113 +61,123 @@ class _CheckOutState extends State<CheckOut> {
           style: AppTheme.heading.copyWith(color: Colors.white),
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
-      body: ListView(
-        shrinkWrap: true,
-        primary: true,
+      body: Stack(
         children: [
-          RadioListTile(
-            groupValue: id,
-            value: 0,
-            title: Card(
-              elevation: 3,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                child: Row(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.dollarSign,
-                      color: customColor,
+          Container(
+            height: MediaQuery.of(context).size.height - 160,
+            child: ListView(
+              shrinkWrap: true,
+              primary: true,
+              children: [
+                RadioListTile(
+                  groupValue: id,
+                  value: 0,
+                  title: Card(
+                    elevation: 3,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 20),
+                      child: Row(
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.dollarSign,
+                            color: customColor,
+                          ),
+                          SizedBox(width: 10),
+                          Text('Cash'),
+                        ],
+                      ),
                     ),
-                    SizedBox(width: 10),
-                    Text('Cash'),
-                  ],
-                ),
-              ),
-            ),
-            onChanged: (val) {
-              setState(() {
-                print('Val:: $val');
+                  ),
+                  onChanged: (val) {
+                    setState(() {
+                      print('Val:: $val');
 
-                id = val;
-              });
-            },
-          ),
-          Column(
-            children: Helper.visaCardList.map((data) {
-              return RadioListTile(
-                groupValue: id,
-                value: data.index,
-                title: Card(
-                  elevation: 3,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              FontAwesomeIcons.ccVisa,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(width: 10),
-                            Column(
-                              children: [
-                                Text(
-                                  "Card Number",
-                                  style: AppTheme.subHeading,
-                                ),
-                                SizedBox(height: 10),
-                                Text("Expriy Date"),
-                              ],
-                            ),
-                          ],
+                      id = val;
+                    });
+                  },
+                ),
+                Column(
+                  children: Helper.visaCardList.map((data) {
+                    return RadioListTile(
+                      groupValue: id,
+                      value: data.index,
+                      title: Card(
+                        elevation: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.ccVisa,
+                                    color: Colors.blue,
+                                  ),
+                                  SizedBox(width: 10),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "Card Number",
+                                        style: AppTheme.subHeading,
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text("Expriy Date"),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    "${data.cardNumber.substring(0, 3)}*********",
+                                    style: AppTheme.subHeading,
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(
+                                    "${data.exDate}",
+                                    style: AppTheme.subHeading,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                        Column(
-                          children: [
-                            Text(
-                              "${data.cardNumber.substring(0, 3)}*********",
-                              style: AppTheme.subHeading,
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "${data.exDate}",
-                              style: AppTheme.subHeading,
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
+                      onChanged: (val) {
+                        setState(() {
+                          id = data.index;
+                          print('index ::::${data.index}');
+                        });
+                      },
+                    );
+                  }).toList(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  child: CustomButtonWithchild(
+                    color: customColor,
+                    onPress: () {},
+                    child: Text(
+                      'Confirm',
+                      style: AppTheme.heading.copyWith(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
-                onChanged: (val) {
-                  setState(() {
-                    id = data.index;
-                    print('index ::::${data.index}');
-                  });
-                },
-              );
-            }).toList(),
+              ],
+            ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 20,
-            ),
-            child: CustomButtonWithchild(
-              color: customColor,
-              onPress: () {},
-              child: Text(
-                'Confirm',
-                style: AppTheme.heading.copyWith(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
-              ),
-            ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomBottomNavigationBar(),
           ),
         ],
       ),
