@@ -27,7 +27,7 @@ class _CoursesPageState extends State<CoursesPage> {
               children: [
                 consultantAppBer(context),
                 // coursesgraidView(),
-                coursesgraidView2(),
+                coursesgraidView(),
                 SizedBox(height: 20),
               ],
             ),
@@ -42,138 +42,6 @@ class _CoursesPageState extends State<CoursesPage> {
   }
 
   coursesgraidView() {
-    var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - 350) / 1.2;
-    final double itemWidth = size.width / 2;
-    return GridView.count(
-      crossAxisCount: 2,
-      crossAxisSpacing: 1.0,
-      mainAxisSpacing: 1.0,
-      primary: false,
-      childAspectRatio: (itemWidth / itemHeight),
-      shrinkWrap: true,
-      children: List.generate(
-        listCourses.length,
-        (index) {
-          return Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => CoursesDetails(
-                      courses: listCourses[index],
-                    ),
-                  ),
-                );
-              },
-              child: Card(
-                elevation: 4,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 100,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                        image: AssetImage(listCourses[index].courseImageUrl),
-                        fit: BoxFit.cover,
-                      )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
-                      child: Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width -
-                                          211,
-                                      // height: 20,
-                                      child: Text(
-                                        listCourses[index]
-                                            .contant
-                                            .substring(0, 50),
-                                        style: AppTheme.subHeading.copyWith(
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      listCourses[index].title,
-                                      style: AppTheme.heading.copyWith(
-                                        color: customColor,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      date,
-                                      style: AppTheme.heading.copyWith(
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      listCourses[index].oldPrice + '\$',
-                                      style: AppTheme.heading.copyWith(
-                                        color: Colors.grey[500],
-                                        fontSize: 8,
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Text(
-                                      listCourses[index].newPrice + '\$',
-                                      style: AppTheme.heading.copyWith(
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                RatingStar(
-                                  rating: listCourses[index].rating,
-                                  isReadOnly: true,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  coursesgraidView2() {
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - 350) / 2;
     final double itemWidth = size.width / 2;
