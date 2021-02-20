@@ -36,21 +36,22 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                     title: 'date',
                   ),
                   dateListView(),
+                  SizedBox(height: 20),
+                  Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        rowTitle(
+                          title: 'Time',
+                        ),
+                        timeListView(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
             SizedBox(height: 20),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  rowTitle(
-                    title: 'Time',
-                  ),
-                  timeListView(),
-                ],
-              ),
-            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: CustomButtonWithchild(
