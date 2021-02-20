@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/Hermonygame/result.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -19,6 +20,64 @@ class _GameQPageViewState extends State<GameQPageView> {
         primary: true,
         padding: EdgeInsets.symmetric(vertical: 20),
         children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '1',
+                    style: AppTheme.heading.copyWith(
+                      color: customColor,
+                      fontSize: 30,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'question',
+                    style: AppTheme.heading.copyWith(),
+                  ),
+                  Text(
+                    'one',
+                    style: AppTheme.heading.copyWith(),
+                  ),
+                ],
+              ),
+              SizedBox(width: 20),
+              Text(
+                'Of',
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                  fontSize: 30,
+                ),
+              ),
+              SizedBox(width: 20),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '20',
+                    style: AppTheme.heading.copyWith(
+                      color: customColor,
+                      fontSize: 30,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'question',
+                    style: AppTheme.heading.copyWith(),
+                  ),
+                  Text(
+                    'tewenty',
+                    style: AppTheme.heading.copyWith(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 50),
           Center(
             child: Text(
               'تجد صعوبه في تقديم نفسك لشريكك',
@@ -43,7 +102,13 @@ class _GameQPageViewState extends State<GameQPageView> {
             ],
           ),
           CustomButtonWithchild(
-            onPress: () {},
+            onPress: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => Result(),
+                ),
+              );
+            },
             color: customColor,
             child: Center(
               child: Text(
