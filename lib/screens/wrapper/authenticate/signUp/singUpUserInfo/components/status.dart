@@ -38,7 +38,6 @@ class _StatusState extends State<Status> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 120),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -100,30 +99,65 @@ class _StatusState extends State<Status> {
                     // SizedBox(width: 10),
                   ],
                 ),
-                Column(
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _stauts = 'Married';
-                        });
-                        Navigator.of(context).pop();
-                      },
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('lib/images/married.png'),
-                            fit: BoxFit.fitWidth,
+                    Column(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _stauts = 'Married';
+                            });
+                            Navigator.of(context).pop();
+                          },
+                          child: Container(
+                            height: 100,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('lib/images/married.png'),
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        // SizedBox(height: 5),
+                        Text(
+                          'Married',
+                          style: AppTheme.heading.copyWith(),
+                        ),
+                      ],
                     ),
-                    // SizedBox(height: 5),
-                    Text(
-                      'Married',
-                      style: AppTheme.heading.copyWith(),
+                    SizedBox(width: 50),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            setState(() {
+                              _stauts = 'Detached';
+                            });
+                            Navigator.of(context).pop();
+                          },
+                          child: Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('lib/images/single.png'),
+                                fit: BoxFit.fitWidth,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          'Detached',
+                          style: AppTheme.heading.copyWith(),
+                        ),
+                      ],
                     ),
                   ],
                 ),

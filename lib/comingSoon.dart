@@ -2,7 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/svg.dart';
 import 'constants/themes.dart';
 import 'models/visaCard.dart';
 
@@ -16,15 +16,7 @@ class _ComingSoonState extends State<ComingSoon> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: (IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            setState(() {
-              Helper.tappedBottomShet = 0;
-            });
-            Navigator.of(context).pop();
-          },
-        )),
+        toolbarHeight: 0,
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -33,22 +25,35 @@ class _ComingSoonState extends State<ComingSoon> {
           alignment: Alignment.center,
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  height: 250,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: AppTheme.containerBackground,
-                    image: DecorationImage(
-                      image: AssetImage('lib/images/logo.png'),
-                      fit: BoxFit.fill,
+                CustomAppBar(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('lib/images/logo.png'),
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                Container(
+                  height: 200,
+                  width: 200,
+                  child: SvgPicture.asset(
+                    'assets/icons/comingsoon.svg',
+                  ),
+                ),
                 Text(
                   'Coming Soon.......',
                   style: AppTheme.heading.copyWith(
@@ -57,6 +62,18 @@ class _ComingSoonState extends State<ComingSoon> {
                   ),
                 ),
               ],
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {
+                  setState(() {
+                    Helper.tappedBottomShet = 0;
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
