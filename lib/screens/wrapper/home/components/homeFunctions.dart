@@ -6,6 +6,7 @@ import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
+import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -365,7 +366,15 @@ Container homecoursesList(context) {
       scrollDirection: Axis.horizontal,
       itemBuilder: (context, index) {
         return homeCoursesCard(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => CoursesDetails(
+                  courses: listCourses[index],
+                ),
+              ),
+            );
+          },
           courses: listCourses[index],
           context: context,
         );

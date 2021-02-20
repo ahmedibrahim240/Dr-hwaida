@@ -1,9 +1,8 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/events.dart';
-import 'package:DrHwaida/screens/cart/card.dart';
+import 'package:DrHwaida/screens/checkOut/checkOut.dart';
 import 'package:flutter/material.dart';
-
 import '../CustomBottomNavigationBar.dart';
 
 class EventsPageView extends StatefulWidget {
@@ -91,7 +90,7 @@ class _EventsPageViewState extends State<EventsPageView> {
                           onPress: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => Cart(),
+                                builder: (_) => CheckOut(),
                               ),
                             );
                           },
