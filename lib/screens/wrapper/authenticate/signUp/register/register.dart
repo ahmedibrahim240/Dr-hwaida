@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -148,7 +149,13 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: 10),
                         CustomButton(
-                          onPress: () {},
+                          onPress: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => Home(),
+                              ),
+                            );
+                          },
                           text: 'Sign Up',
                         ),
                         SizedBox(height: 10),
