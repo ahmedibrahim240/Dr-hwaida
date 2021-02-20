@@ -22,8 +22,7 @@ class _MyCoursesState extends State<MyCourses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: ''),
-      // bottomNavigationBar: CustomBottomNavigationBar(),
+      appBar: AppBar(),
       body: Stack(
         children: [
           Container(
@@ -33,12 +32,15 @@ class _MyCoursesState extends State<MyCourses> {
               primary: true,
               padding: EdgeInsets.symmetric(vertical: 20),
               children: [
-                Text(
-                  'Courses',
-                  style: AppTheme.heading.copyWith(
-                    color: customColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w900,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Courses',
+                    style: AppTheme.heading.copyWith(
+                      color: customColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),

@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/Hermonygame/hormonyQpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -42,7 +43,13 @@ class _PlayingWaitState extends State<PlayingWait> {
                 ),
               ),
               color: customColor,
-              onPress: () {},
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => GameQPageView(),
+                  ),
+                );
+              },
             ),
           ],
         ),
