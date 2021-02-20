@@ -39,6 +39,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                 ],
               ),
             ),
+            SizedBox(height: 20),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
