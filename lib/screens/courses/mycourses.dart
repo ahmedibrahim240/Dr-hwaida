@@ -55,7 +55,9 @@ class _MyCoursesState extends State<MyCourses> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => MyCoursesDetails(),
+                                builder: (_) => MyCoursesDetails(
+                                  courses: listCourses[index],
+                                ),
                               ),
                             );
                           },

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../CustomBottomNavigationBar.dart';
+import 'components/videoscreens.dart';
 
 class CoursesDetails extends StatefulWidget {
   final Courses courses;
@@ -322,7 +323,11 @@ class _CoursesDetailsState extends State<CoursesDetails> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            cousrsImage(),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 200,
+              child: ChewieVideo(),
+            ),
             courseDetail(),
           ],
         ),

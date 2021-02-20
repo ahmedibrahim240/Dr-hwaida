@@ -26,7 +26,7 @@ class _CoursesPageState extends State<CoursesPage> {
               primary: true,
               children: [
                 consultantAppBer(context),
-                coursesgraidView(),
+                // coursesgraidView(),
                 coursesgraidView2(),
                 SizedBox(height: 20),
               ],
@@ -43,7 +43,7 @@ class _CoursesPageState extends State<CoursesPage> {
 
   coursesgraidView() {
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - 350) / 1.6;
+    final double itemHeight = (size.height - 350) / 1.2;
     final double itemWidth = size.width / 2;
     return GridView.count(
       crossAxisCount: 2,
@@ -96,7 +96,8 @@ class _CoursesPageState extends State<CoursesPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      width: 145,
+                                      width: MediaQuery.of(context).size.width -
+                                          211,
                                       // height: 20,
                                       child: Text(
                                         listCourses[index]
@@ -174,7 +175,7 @@ class _CoursesPageState extends State<CoursesPage> {
 
   coursesgraidView2() {
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - 350) / 3;
+    final double itemHeight = (size.height - 350) / 2;
     final double itemWidth = size.width / 2;
     return GridView.count(
       crossAxisCount: 1,

@@ -1,3 +1,4 @@
+import 'package:DrHwaida/constants/constans.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -32,8 +33,9 @@ class _ChewieVideoState extends State<ChewieVideo> {
     await _videoPlayerController1.initialize();
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
-      autoPlay: true,
-      looping: true,
+      autoPlay: false,
+      allowFullScreen: true,
+      fullScreenByDefault: true,
     );
     setState(() {});
   }
@@ -43,8 +45,13 @@ class _ChewieVideoState extends State<ChewieVideo> {
     return Center(
       child: _chewieController != null &&
               _chewieController.videoPlayerController.value.initialized
-          ? Chewie(
-              controller: _chewieController,
+          ? Theme(
+              data: Theme.of(context).copyWith(
+                dialogBackgroundColor: customColor,
+              ),
+              child: Chewie(
+                controller: _chewieController,
+              ),
             )
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,
