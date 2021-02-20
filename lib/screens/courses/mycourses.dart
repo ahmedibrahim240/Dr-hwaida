@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/courses.dart';
+import 'package:DrHwaida/screens/courses/mycoursesdetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../CustomBottomNavigationBar.dart';
@@ -52,7 +53,11 @@ class _MyCoursesState extends State<MyCourses> {
                         CustomMyCoutsesCard(
                           courses: listCourses[index],
                           onTap: () {
-                            print('card=>$index');
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => MyCoursesDetails(),
+                              ),
+                            );
                           },
                         ),
                         SizedBox(height: 20),
