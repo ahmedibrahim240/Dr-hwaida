@@ -1,6 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
-import 'package:DrHwaida/screens/cart/card.dart';
+import 'package:DrHwaida/screens/cart/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

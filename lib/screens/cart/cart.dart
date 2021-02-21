@@ -48,6 +48,8 @@ class _CartState extends State<Cart> {
               shrinkWrap: true,
               primary: true,
               children: [
+                SizedBox(height: 20),
+                totalPrieCard(context),
                 ListView.builder(
                   shrinkWrap: true,
                   primary: false,
@@ -84,74 +86,6 @@ class _CartState extends State<Cart> {
                     );
                   },
                 ),
-                Container(
-                  height: 60,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                      side: BorderSide(color: customColor),
-                    ),
-                    elevation: 3,
-                    child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Total Price: ',
-                                style: AppTheme.subHeading.copyWith(),
-                              ),
-                              Text(
-                                totalPrice.toString(),
-                                style: AppTheme.subHeading.copyWith(
-                                  color: customColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                            ),
-                            child: FlatButton.icon(
-                              color: customColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                side: BorderSide(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (_) => CheckOut(
-                                      totalPrice: totalPrice.toString(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              icon: Icon(
-                                FontAwesomeIcons.moneyCheckAlt,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                              label: Text(
-                                'Check Out',
-                                style: AppTheme.subHeading.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
@@ -160,6 +94,76 @@ class _CartState extends State<Cart> {
             child: CustomBottomNavigationBar(),
           ),
         ],
+      ),
+    );
+  }
+
+  Container totalPrieCard(BuildContext context) {
+    return Container(
+      height: 60,
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+          side: BorderSide(color: customColor),
+        ),
+        elevation: 3,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'Total Price: ',
+                    style: AppTheme.subHeading.copyWith(),
+                  ),
+                  Text(
+                    totalPrice.toString(),
+                    style: AppTheme.subHeading.copyWith(
+                      color: customColor,
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                ),
+                child: FlatButton.icon(
+                  color: customColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    side: BorderSide(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => CheckOut(
+                          totalPrice: totalPrice.toString(),
+                        ),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    FontAwesomeIcons.moneyCheckAlt,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                  label: Text(
+                    'Check Out',
+                    style: AppTheme.subHeading.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

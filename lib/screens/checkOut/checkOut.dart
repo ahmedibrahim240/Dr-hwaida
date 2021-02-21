@@ -34,6 +34,7 @@ class _CheckOutState extends State<CheckOut> {
               shrinkWrap: true,
               primary: true,
               children: [
+                SizedBox(height: 20),
                 Container(
                   height: 60,
                   padding: EdgeInsets.symmetric(horizontal: 10),
@@ -75,20 +76,14 @@ class _CheckOutState extends State<CheckOut> {
                                   color: Colors.white,
                                 ),
                               ),
-                              onPressed: () {
-                                // Navigator.of(context).push(
-                                //   MaterialPageRoute(
-                                //     builder: (_) => CheckOut(),
-                                //   ),
-                                // );
-                              },
+                              onPressed: () {},
                               icon: Icon(
                                 FontAwesomeIcons.moneyCheckAlt,
                                 color: Colors.white,
                                 size: 20,
                               ),
                               label: Text(
-                                'Check Out',
+                                'Confirm',
                                 style: AppTheme.subHeading.copyWith(
                                   color: Colors.white,
                                 ),
@@ -186,23 +181,23 @@ class _CheckOutState extends State<CheckOut> {
                     );
                   }).toList(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
-                  ),
-                  child: CustomButtonWithchild(
-                    color: customColor,
-                    onPress: () {},
-                    child: Text(
-                      'Confirm',
-                      style: AppTheme.heading.copyWith(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(
+                //     horizontal: 20,
+                //     vertical: 20,
+                //   ),
+                //   child: CustomButtonWithchild(
+                //     color: customColor,
+                //     onPress: () {},
+                //     child: Text(
+                //       'Confirm',
+                //       style: AppTheme.heading.copyWith(
+                //         color: Colors.white,
+                //         fontSize: 16,
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

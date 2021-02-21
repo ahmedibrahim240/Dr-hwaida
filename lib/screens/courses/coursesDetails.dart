@@ -49,7 +49,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                     },
                     child: Center(
                       child: Text(
-                        'Booking course',
+                        'Add to Cart',
                         style: AppTheme.heading.copyWith(
                           color: Colors.white,
                         ),
@@ -142,7 +142,6 @@ class _CoursesDetailsState extends State<CoursesDetails> {
     return Column(
       children: [
         Container(
-          height: 200,
           width: MediaQuery.of(context).size.width,
           color: customColorDivider.withOpacity(.5),
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -166,16 +165,6 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                     ),
                   ),
                 ],
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: InkWell(
-                  onTap: () {},
-                  child: Text(
-                    'View All',
-                    style: AppTheme.heading,
-                  ),
-                ),
               ),
             ],
           ),
