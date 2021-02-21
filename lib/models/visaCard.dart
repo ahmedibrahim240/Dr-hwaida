@@ -18,7 +18,7 @@ class Helper {
   static String chossenDate = '';
   static bool status = false;
   static int cardConut = 0;
-  static int tappedBottomShet;
+  static int tappedBottomShet = 0;
 
   static List<VisaCard> visaCardList = [
     VisaCard(

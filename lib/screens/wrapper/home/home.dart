@@ -34,7 +34,6 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Menu(),
       ),
-      // bottomNavigationBar: CustomBottomNavigationBar(),
       body: Stack(
         children: [
           Container(

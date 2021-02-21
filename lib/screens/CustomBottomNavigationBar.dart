@@ -1,11 +1,10 @@
-import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visaCard.dart';
 import 'package:DrHwaida/screens/Hermonygame/hormonygame.dart';
 import 'package:DrHwaida/screens/userProfile/userprofile.dart';
+import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   @override
@@ -33,7 +32,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               child: Stack(
                 children: [
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.centerRight,
                     child: InkWell(
                       onTap: () {
                         setState(() {
@@ -72,15 +71,15 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     ),
                   ),
                   Align(
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.centerLeft,
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          Helper.tappedBottomShet = 3;
+                          Helper.tappedBottomShet = 0;
                         });
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => ComingSoon(),
+                            builder: (_) => Home(),
                           ),
                         );
                       },
@@ -88,16 +87,16 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            FontAwesomeIcons.bookOpen,
-                            color: (Helper.tappedBottomShet == 3)
+                            Icons.home,
+                            color: (Helper.tappedBottomShet == 0)
                                 ? customColor
                                 : customColorGray,
                           ),
                           SizedBox(height: 5),
                           Text(
-                            'Courses',
+                            'Home',
                             style: AppTheme.heading.copyWith(
-                              color: (Helper.tappedBottomShet == 3)
+                              color: (Helper.tappedBottomShet == 0)
                                   ? customColor
                                   : customColorGray,
                               fontSize: 10,
