@@ -2,13 +2,14 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visaCard.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
-import 'package:DrHwaida/screens/checkOut/components/functions.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CheckOut extends StatefulWidget {
+  final String totalPrice;
+
+  const CheckOut({Key key, @required this.totalPrice}) : super(key: key);
   @override
   _CheckOutState createState() => _CheckOutState();
 }
@@ -20,42 +21,6 @@ class _CheckOutState extends State<CheckOut> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 5,
-              vertical: 20,
-            ),
-            child: FlatButton.icon(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: Colors.white,
-                ),
-                borderRadius: BorderRadius.circular(35),
-              ),
-              icon: Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 15,
-              ),
-              label: Text(
-                'Add New Card',
-                style: AppTheme.heading.copyWith(
-                  color: Colors.white,
-                  fontSize: 9,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              onPressed: () {
-                setState(() {
-                  Helper.chossenDate = '';
-                });
-
-                createVisaCard(context);
-              },
-            ),
-          ),
-        ],
         title: Text(
           'Payment',
           style: AppTheme.heading.copyWith(color: Colors.white),
@@ -69,6 +34,72 @@ class _CheckOutState extends State<CheckOut> {
               shrinkWrap: true,
               primary: true,
               children: [
+                Container(
+                  height: 60,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      side: BorderSide(color: customColor),
+                    ),
+                    elevation: 3,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Total Price: ',
+                                style: AppTheme.subHeading.copyWith(),
+                              ),
+                              Text(
+                                widget.totalPrice,
+                                style: AppTheme.subHeading.copyWith(
+                                  color: customColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                            ),
+                            child: FlatButton.icon(
+                              color: customColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                side: BorderSide(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              onPressed: () {
+                                // Navigator.of(context).push(
+                                //   MaterialPageRoute(
+                                //     builder: (_) => CheckOut(),
+                                //   ),
+                                // );
+                              },
+                              icon: Icon(
+                                FontAwesomeIcons.moneyCheckAlt,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                              label: Text(
+                                'Check Out',
+                                style: AppTheme.subHeading.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 RadioListTile(
                   groupValue: id,
                   value: 0,

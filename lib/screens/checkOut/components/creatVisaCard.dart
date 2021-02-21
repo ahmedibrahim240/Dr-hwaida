@@ -1,11 +1,8 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visaCard.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-
-import '../checkOut.dart';
 
 class AddFileBottomSheet extends StatefulWidget {
   @override
@@ -120,11 +117,12 @@ class _AddFileBottomSheetState extends State<AddFileBottomSheet> {
                       index: Helper.cardConut,
                     ),
                   );
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => CheckOut()),
-                    ModalRoute.withName('/'),
-                  );
+                  // Navigator.of(context).pushAndRemoveUntil(
+                  //  MaterialPageRoute(
+                  //     builder: (BuildContext context) => CheckOut(),
+                  //   ),
+                  //   ModalRoute.withName('/'),
+                  // );
                 },
                 child: Text(
                   'Save',
