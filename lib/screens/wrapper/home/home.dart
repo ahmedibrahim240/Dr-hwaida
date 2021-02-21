@@ -1,8 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
-import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
-import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
 import 'package:flutter/cupertino.dart';
@@ -55,15 +53,6 @@ class _HomeState extends State<Home> {
                       );
                     }),
                 consulHomeList(imageUrl, oldPrie, newPrie, consulName, rate),
-                sctionTitle(
-                    title: 'ُEvents',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => EventsPage(),
-                        ),
-                      );
-                    }),
                 sctionTitle(
                     title: 'Courses',
                     onTap: () {
