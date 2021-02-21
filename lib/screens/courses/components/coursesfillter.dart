@@ -6,6 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CoursesFillter extends StatefulWidget {
+  final String title;
+
+  const CoursesFillter({Key key, @required this.title}) : super(key: key);
   @override
   _CoursesFillterState createState() => _CoursesFillterState();
 }
@@ -107,7 +110,9 @@ class _CoursesFillterState extends State<CoursesFillter> {
             onPress: () {
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                    builder: (BuildContext context) => CoursesPage()),
+                    builder: (BuildContext context) => CoursesPage(
+                          title: widget.title,
+                        )),
                 ModalRoute.withName('/'),
               );
             },

@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'components/coursesPageAppber.dart';
 
 class CoursesPage extends StatefulWidget {
+  final String title;
+
+  const CoursesPage({Key key, @required this.title}) : super(key: key);
   @override
   _CoursesPageState createState() => _CoursesPageState();
 }
@@ -25,8 +28,18 @@ class _CoursesPageState extends State<CoursesPage> {
               shrinkWrap: true,
               primary: true,
               children: [
-                consultantAppBer(context),
-                // coursesgraidView(),
+                consultantAppBer(context, widget.title),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: Text(
+                    widget.title,
+                    style: AppTheme.heading.copyWith(
+                      color: customColor,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
                 coursesgraidView(),
                 SizedBox(height: 20),
               ],

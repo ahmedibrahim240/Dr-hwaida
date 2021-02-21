@@ -6,8 +6,8 @@ import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
+import 'package:DrHwaida/screens/courses/chosesColurses.dart';
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
-import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -57,41 +57,6 @@ Container eventSlider({BuildContext context, List<CustomEvent> evetList}) {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                child: Container(
-                                  height: 100,
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(20.0),
-                                    ),
-                                    gradient: LinearGradient(
-                                      colors: [
-                                        Color.fromARGB(200, 0, 0, 0),
-                                        Color.fromARGB(0, 0, 0, 0)
-                                      ],
-                                      begin: Alignment.bottomCenter,
-                                      end: Alignment.topCenter,
-                                    ),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      SizedBox(height: 40),
-                                      Text(
-                                        items.title,
-                                        style: TextStyle(
-                                          color: Colors.deepOrangeAccent,
-                                          fontSize: 25,
-                                        ),
-                                      ),
-                                      Text(
-                                        items.contant.substring(0, 25),
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                               ),
                             ],
                           )),
@@ -130,7 +95,7 @@ Container rowofHmeTaps(BuildContext context) {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => CoursesPage(),
+                builder: (_) => ChosesCourses(),
               ),
             );
           },

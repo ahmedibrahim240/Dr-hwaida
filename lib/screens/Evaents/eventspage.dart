@@ -46,37 +46,6 @@ class _EventsPageState extends State<EventsPage> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          child: Container(
-                            height: 100,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(200, 0, 0, 0),
-                                  Color.fromARGB(0, 0, 0, 0)
-                                ],
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                              ),
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                SizedBox(height: 40),
-                                Text(
-                                  listEvent[index].title,
-                                  style: TextStyle(
-                                    color: Colors.deepOrangeAccent,
-                                    fontSize: 25,
-                                  ),
-                                ),
-                                Text(
-                                  listEvent[index].contant.substring(0, 25),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
-                            ),
-                          ),
                         ),
                       ),
                     ),
