@@ -64,7 +64,6 @@ class _HomeState extends State<Home> {
                         ),
                       );
                     }),
-                eventSlider(context: context, evetList: listEvent),
                 sctionTitle(
                     title: 'Courses',
                     onTap: () {

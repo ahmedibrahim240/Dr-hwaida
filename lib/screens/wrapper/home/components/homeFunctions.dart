@@ -1,75 +1,13 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/courses.dart';
-import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
-import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:DrHwaida/screens/courses/chosesColurses.dart';
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-Container eventSlider({BuildContext context, List<CustomEvent> evetList}) {
-  return Container(
-    child: Column(
-      children: <Widget>[
-        CarouselSlider(
-          options: CarouselOptions(
-            autoPlayInterval: Duration(seconds: 2),
-            autoPlay: true,
-            // reverse: widget.reverse,
-            aspectRatio: 2.0,
-            enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.scale,
-          ),
-          items: evetList
-              .map(
-                (items) => GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => EventsPageView(
-                          events: items,
-                        ),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    child: Container(
-                      margin: EdgeInsets.all(5.0),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                          child: Stack(
-                            children: <Widget>[
-                              Container(
-                                width: 300,
-                                height: 140,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20.0)),
-                                  image: DecorationImage(
-                                    image: AssetImage(items.imageUl),
-                                    //  NetworkImage(
-                                    //   items,
-                                    // ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
-        ),
-      ],
-    ),
-  );
-}
 ///////////////////////////////////////////////////////////////////////////////////////
 
 Container rowofHmeTaps(BuildContext context) {
