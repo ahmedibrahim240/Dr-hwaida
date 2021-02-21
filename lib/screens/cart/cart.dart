@@ -21,81 +21,210 @@ class _CartState extends State<Cart> {
   }
 
   culcTotalPrice() {
-    for (int i = 0; i < productList.length; i++) {
+    for (int i = 0; i < productConsualtList.length; i++) {
       setState(() {
-        totalPrice = totalPrice + double.parse('${productList[i].price}');
+        totalPrice =
+            totalPrice + double.parse('${productConsualtList[i].price}');
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 80,
-        title: (Text(
-          'Cart',
-          style: AppTheme.heading.copyWith(
-            color: Colors.white,
-          ),
-        )),
-      ),
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height - 200,
-            child: ListView(
-              shrinkWrap: true,
-              primary: true,
-              children: [
-                SizedBox(height: 20),
-                totalPrieCard(context),
-                ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: productList.length,
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 3,
-                      child: ListTile(
-                        title: Text(productList[index].title),
-                        subtitle: Text(
-                          productList[index].price + '\$',
-                        ),
-                        trailing: IconButton(
-                          icon: Icon(
-                            Icons.delete,
-                            size: 30,
-                            color: Colors.red,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              productList.remove(productList[index]);
-                              totalPrice = totalPrice -
-                                  double.parse('${productList[index].price}');
-                            });
-                          },
-                        ),
-                        leading: CircleAvatar(
-                          maxRadius: 30,
-                          backgroundImage:
-                              AssetImage(productList[index].proImageUrl),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ],
+    if (productConsualtList.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 80,
+          title: (Text(
+            'Cart',
+            style: AppTheme.heading.copyWith(
+              color: Colors.white,
+            ),
+          )),
+        ),
+        body: Center(
+          child: Text(
+            'isEmpty',
+            style: AppTheme.heading.copyWith(
+              color: customColor,
+              fontSize: 20,
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(),
-          ),
-        ],
-      ),
-    );
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 80,
+          title: (Text(
+            'Cart',
+            style: AppTheme.heading.copyWith(
+              color: Colors.white,
+            ),
+          )),
+        ),
+        body: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height - 200,
+              child: ListView(
+                shrinkWrap: true,
+                primary: true,
+                children: [
+                  SizedBox(height: 20),
+                  totalPrieCard(context),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: productConsualtList.length,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                      itemBuilder: (context, index) {
+                        return Card(
+                          elevation: 3,
+                          child: Column(
+                            children: [
+                              ListTile(
+                                title: Row(
+                                  children: [
+                                    Text(
+                                      'title: ',
+                                      style: AppTheme.heading.copyWith(
+                                        color: customColor,
+                                      ),
+                                    ),
+                                    Text(
+                                      productConsualtList[index].title,
+                                      style: AppTheme.subHeading.copyWith(
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                subtitle: Row(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Price: ',
+                                          style: AppTheme.heading.copyWith(
+                                            color: customColor,
+                                          ),
+                                        ),
+                                        Text(
+                                          productConsualtList[index].price,
+                                          style: AppTheme.subHeading.copyWith(
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        Icon(
+                                          FontAwesomeIcons.poundSign,
+                                          color: Colors.black,
+                                          size: 10,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(
+                                    Icons.delete,
+                                    size: 30,
+                                    color: Colors.red,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      totalPrice = totalPrice -
+                                          double.parse(
+                                              '${productConsualtList[index].price}');
+                                      productConsualtList
+                                          .remove(productConsualtList[index]);
+                                    });
+                                  },
+                                ),
+                                leading: CircleAvatar(
+                                  maxRadius: 30,
+                                  backgroundImage: AssetImage(
+                                      productConsualtList[index].proImageUrl),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Date: ',
+                                              style: AppTheme.heading.copyWith(
+                                                color: customColor,
+                                              ),
+                                            ),
+                                            Text(
+                                              productConsualtList[index].date,
+                                              style:
+                                                  AppTheme.subHeading.copyWith(
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                            Icon(
+                                              FontAwesomeIcons.poundSign,
+                                              color: Colors.black,
+                                              size: 10,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Time: ',
+                                              style: AppTheme.heading.copyWith(
+                                                color: customColor,
+                                              ),
+                                            ),
+                                            Text(
+                                              productConsualtList[index].time,
+                                              style:
+                                                  AppTheme.subHeading.copyWith(
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                            Icon(
+                                              FontAwesomeIcons.poundSign,
+                                              color: Colors.black,
+                                              size: 10,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomBottomNavigationBar(),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Container totalPrieCard(BuildContext context) {

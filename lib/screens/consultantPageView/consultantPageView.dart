@@ -64,7 +64,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   Container consultantData(BuildContext context) {
     return Container(
-      height: 500,
+      height: 520,
       child: Stack(
         children: [
           Container(
@@ -263,7 +263,11 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               onPress: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (_) => ScheduleAppo(),
+                                    builder: (_) => ScheduleAppo(
+                                      consultName: widget.consultName,
+                                      price: widget.newPrice,
+                                      consultimageUrl: widget.imagUrl,
+                                    ),
                                   ),
                                 );
                               },

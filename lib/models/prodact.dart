@@ -1,45 +1,20 @@
-class Product {
+class ProductCourses {
   final title;
   final price;
   final proImageUrl;
 
-  Product({this.proImageUrl, this.title, this.price});
+  ProductCourses({this.proImageUrl, this.title, this.price});
 }
 
-List<Product> productList = [
-  Product(
-    price: '450',
-    title: 'CoursesTitle',
-    proImageUrl: 'lib/images/person.jpg',
-  ),
-  Product(
-    price: '400',
-    title: 'CoursesTitle',
-    proImageUrl: 'lib/images/person.jpg',
-  ),
-  Product(
-    price: '1000',
-    title: 'CoursesTitle',
-    proImageUrl: 'lib/images/person.jpg',
-  ),
-  Product(
-    price: '2000',
-    title: 'CoursesTitle',
-    proImageUrl: 'lib/images/person.jpg',
-  ),
-  Product(
-    price: '100000000',
-    title: 'CoursesTitle',
-    proImageUrl: 'lib/images/person.jpg',
-  ),
-  Product(
-    price: '23342',
-    title: 'CoursesTitle',
-    proImageUrl: 'lib/images/person.jpg',
-  ),
-  Product(
-    price: '545454',
-    title: 'CoursesTitle',
-    proImageUrl: 'lib/images/person.jpg',
-  ),
-];
+class ProductConsualt {
+  final title;
+  final price;
+  final proImageUrl;
+  final date;
+  final time;
+
+  ProductConsualt(
+      {this.date, this.time, this.proImageUrl, this.title, this.price});
+}
+
+List<ProductConsualt> productConsualtList = [];

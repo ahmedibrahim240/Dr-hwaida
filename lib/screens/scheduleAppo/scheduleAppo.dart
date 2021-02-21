@@ -1,26 +1,47 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
-import 'package:DrHwaida/screens/cart/cart.dart';
+import 'package:DrHwaida/models/prodact.dart';
+import 'package:DrHwaida/models/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../CustomBottomNavigationBar.dart';
 
 class ScheduleAppo extends StatefulWidget {
+  final String consultName;
+  final String price;
+  final String consultimageUrl;
+
+  const ScheduleAppo(
+      {Key key,
+      @required this.consultName,
+      @required this.price,
+      @required this.consultimageUrl})
+      : super(key: key);
   @override
   _ScheduleAppoState createState() => _ScheduleAppoState();
 }
 
 class _ScheduleAppoState extends State<ScheduleAppo> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool showDate = false;
   bool showTime = false;
   bool showEvenig = false;
   int tappedDate;
   int tappedTime;
+
   @override
   Widget build(BuildContext context) {
+    var _prondet = ProductConsualt(
+      date: '12/2/2012',
+      time: '7 Am',
+      title: widget.consultName.toString(),
+      price: widget.price.toString(),
+      proImageUrl: widget.consultimageUrl.toString(),
+    );
     return Scaffold(
       appBar: customAppBar(title: 'Schedule Appointment'),
+      key: _scaffoldKey,
       bottomNavigationBar: CustomBottomNavigationBar(),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -57,14 +78,21 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
               child: CustomButtonWithchild(
                 color: customColor,
                 onPress: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => Cart(),
+                  productConsualtList.add(_prondet);
+                  _scaffoldKey.currentState.showSnackBar(
+                    new SnackBar(
+                      content: new Text('Items Was added'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          productConsualtList.remove(_prondet);
+                        },
+                      ),
                     ),
                   );
                 },
                 child: Text(
-                  'Confirm Appoinent',
+                  'Add to Cart',
                   style: AppTheme.heading.copyWith(
                     color: Colors.white,
                   ),
