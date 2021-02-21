@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'components/creatVisaCard.dart';
+
 class CheckOut extends StatefulWidget {
   final String totalPrice;
 
@@ -21,6 +23,37 @@ class _CheckOutState extends State<CheckOut> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            child: FlatButton.icon(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+                side: BorderSide(
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => AddFileBottomSheet(),
+                  ),
+                );
+              },
+              icon: Icon(
+                FontAwesomeIcons.moneyCheckAlt,
+                color: Colors.white,
+                size: 20,
+              ),
+              label: Text(
+                'Add Card',
+                style: AppTheme.subHeading.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
         title: Text(
           'Payment',
           style: AppTheme.heading.copyWith(color: Colors.white),

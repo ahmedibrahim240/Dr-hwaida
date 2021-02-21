@@ -20,30 +20,5 @@ class Helper {
   static int cardConut = 0;
   static int tappedBottomShet = 0;
 
-  static List<VisaCard> visaCardList = [
-    VisaCard(
-      cardNumber: '333333333333333',
-      exDate: '02/2021',
-      cVV: '2121',
-      index: Helper.cardConut,
-    ),
-    VisaCard(
-      cardNumber: '333333333333333',
-      exDate: '02/2021',
-      cVV: '2121',
-      index: Helper.cardConut,
-    ),
-    VisaCard(
-      cardNumber: '333333333333333',
-      exDate: '02/2021',
-      cVV: '2121',
-      index: Helper.cardConut,
-    ),
-    VisaCard(
-      cardNumber: '333333333333333',
-      exDate: '02/2021',
-      cVV: '2121',
-      index: Helper.cardConut,
-    ),
-  ];
+  static List<VisaCard> visaCardList = [];
 }

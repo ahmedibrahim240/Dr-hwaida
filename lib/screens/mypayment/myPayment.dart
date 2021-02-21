@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/models/visaCard.dart';
+import 'package:DrHwaida/screens/checkOut/components/creatVisaCard.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,8 +14,44 @@ class MyPayment extends StatefulWidget {
 class _MyPaymentState extends State<MyPayment> {
   @override
   Widget build(BuildContext context) {
+    if (Helper.visaCardList.isEmpty) {
+      return Scaffold(
+        appBar: customAppBar(title: 'My Payment'),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            child: FlatButton.icon(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+                side: BorderSide(
+                  color: Colors.white,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => AddFileBottomSheet(),
+                  ),
+                );
+              },
+              color: customColor,
+              icon: Icon(
+                FontAwesomeIcons.moneyCheckAlt,
+                color: Colors.white,
+                size: 20,
+              ),
+              label: Text(
+                'Add Card',
+                style: AppTheme.subHeading.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: customAppBar(title: 'My Payment'),
       body: ListView.separated(
         itemCount: Helper.visaCardList.length,
