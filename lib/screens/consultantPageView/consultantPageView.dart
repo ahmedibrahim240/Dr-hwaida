@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/Consultant/conponents/conSultantRating.dart';
 import 'package:DrHwaida/screens/myReview/myreview.dart';
 import 'package:DrHwaida/screens/scheduleAppo/scheduleAppo.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,6 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: customColor,
       appBar: AppBar(
         backgroundColor: customColor,
         toolbarHeight: 0,
@@ -49,7 +49,6 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
               consultantData(context),
               Container(
                 height: 1100,
-                color: Colors.amber,
                 child: MyReview(),
               ),
             ],
@@ -65,7 +64,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   Container consultantData(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * .8,
+      height: 500,
       child: Stack(
         children: [
           Container(
@@ -134,33 +133,68 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                       ),
                       SizedBox(height: 10),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          RatingStar(
-                            isReadOnly: true,
-                            rating: 4,
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            widget.rating,
-                            style: AppTheme.heading.copyWith(
-                              color: customColor,
+                          Expanded(
+                            flex: 2,
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    RatingStar(
+                                      isReadOnly: true,
+                                      rating: 4,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      widget.rating,
+                                      style: AppTheme.heading.copyWith(
+                                        color: customColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.location_pin,
+                                      color: Colors.black38,
+                                      size: 20,
+                                    ),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      widget.location,
+                                      style: AppTheme.heading.copyWith(
+                                        color: customColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.location_pin,
-                            color: Colors.black38,
-                            size: 20,
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            widget.location,
-                            style: AppTheme.heading.copyWith(
+                          Expanded(
+                            flex: 1,
+                            child: CustomButtonWithchild(
                               color: customColor,
+                              onPress: () {
+                                flitter(
+                                  context: context,
+                                  child: ConsultantRating(
+                                    title: widget.consultName,
+                                  ),
+                                );
+                              },
+                              child: Center(
+                                child: Text(
+                                  'Review',
+                                  style: AppTheme.heading.copyWith(
+                                    fontSize: 12,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ],

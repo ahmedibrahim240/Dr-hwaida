@@ -328,6 +328,6 @@ flitter({BuildContext context, Widget child}) {
         topRight: Radius.circular(25),
       ),
     ),
-    isScrollControlled: true,
+    // isScrollControlled: true,
   );
 }
