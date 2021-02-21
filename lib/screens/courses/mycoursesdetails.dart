@@ -3,6 +3,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 import '../CustomBottomNavigationBar.dart';
 import 'components/videoscreens.dart';
 
@@ -46,83 +47,164 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      InkWell(
+                      taps(
+                        index: 0,
+                        title: 'Lecture',
                         onTap: () {
-                          setState(() {
-                            lecTapped = 0;
-                          });
+                          setState(
+                            () {
+                              lecTapped = 0;
+                            },
+                          );
                         },
-                        child: Column(
-                          children: [
-                            Text(
-                              'lecture',
-                              style: AppTheme.subHeading.copyWith(
-                                color: (lecTapped == 0)
-                                    ? Colors.black
-                                    : Colors.grey[400],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 50,
-                              child: Divider(
-                                color: (lecTapped == 0)
-                                    ? Colors.black
-                                    : Colors.transparent,
-                                thickness: 2,
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
                       SizedBox(width: 20),
-                      InkWell(
+                      taps(
+                        index: 1,
+                        title: 'More',
                         onTap: () {
-                          setState(() {
-                            lecTapped = 1;
-                          });
+                          setState(
+                            () {
+                              lecTapped = 1;
+                            },
+                          );
                         },
-                        child: Column(
-                          children: [
-                            Text(
-                              'More',
-                              style: AppTheme.subHeading.copyWith(
-                                color: (lecTapped != 0)
-                                    ? Colors.black
-                                    : Colors.grey[400],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 50,
-                              child: Divider(
-                                color: (lecTapped != 0)
-                                    ? Colors.black
-                                    : Colors.transparent,
-                                thickness: 2,
-                              ),
-                            ),
-                          ],
-                        ),
+                      ),
+                      SizedBox(width: 20),
+                      taps(
+                        index: 2,
+                        title: 'Review',
+                        onTap: () {
+                          setState(
+                            () {
+                              lecTapped = 2;
+                            },
+                          );
+                        },
                       ),
                     ],
                   ),
                 ),
                 (lecTapped == 0)
                     ? lectureBody()
-                    : Container(
-                        child: Center(
-                          child: Text(
-                            widget.courses.contant,
-                            style: AppTheme.subHeading,
-                          ),
-                        ),
-                      ),
+                    : (lecTapped == 1)
+                        ? Container(
+                            child: Center(
+                              child: Text(
+                                widget.courses.contant,
+                                style: AppTheme.subHeading,
+                              ),
+                            ),
+                          )
+                        : reviewBody(),
               ],
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: CustomBottomNavigationBar(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container reviewBody() {
+    return Container(
+      child: Form(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Text(
+                  'Add your rate',
+                  style: AppTheme.heading.copyWith(
+                    color: customColor,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                widget.courses.title,
+                style: AppTheme.heading.copyWith(),
+              ),
+              SizedBox(height: 10),
+              Center(
+                child: SmoothStarRating(
+                  rating: 2.5,
+                  size: 25,
+                  filledIconData: Icons.star,
+                  color: Colors.yellow[700],
+                  halfFilledIconData: Icons.star_half,
+                  borderColor: Colors.yellow[900],
+                  defaultIconData: Icons.star_border,
+                  starCount: 5,
+                  allowHalfRating: true,
+                  spacing: 2.0,
+                ),
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                decoration: conectedTextFormStyle(
+                  lableText: 'Add comment',
+                ),
+              ),
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  'سؤال سؤال سؤال سؤال',
+                  textDirection: TextDirection.ltr,
+                  style: AppTheme.heading.copyWith(),
+                ),
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                decoration: conectedTextFormStyle(
+                  lableText: 'Answer',
+                ),
+              ),
+              SizedBox(height: 10),
+              CustomButtonWithchild(
+                color: customColor,
+                onPress: () {},
+                child: Center(
+                  child: Text(
+                    'Rating',
+                    style: AppTheme.heading.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  InkWell taps({Function onTap, String title, int index}) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Text(
+            title,
+            style: AppTheme.subHeading.copyWith(
+              color: (lecTapped == index) ? Colors.black : Colors.grey[400],
+            ),
+          ),
+          SizedBox(
+            width: 50,
+            child: Divider(
+              color: (lecTapped == index) ? Colors.black : Colors.transparent,
+              thickness: 2,
+            ),
           ),
         ],
       ),
