@@ -16,7 +16,7 @@ class CoursesFillter extends StatefulWidget {
 class _CoursesFillterState extends State<CoursesFillter> {
   List<String> fillterList = [
     'Recent',
-    'Closest',
+    'HD Certified',
     'Price Low to High',
     'Price High to low',
     'Rate',
@@ -32,9 +32,17 @@ class _CoursesFillterState extends State<CoursesFillter> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Seach by',
-              style: AppTheme.heading.copyWith(color: Colors.grey[300]),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.search, color: Colors.grey[500]),
+                  onPressed: () {},
+                ),
+                Text(
+                  'Seach by',
+                  style: AppTheme.heading.copyWith(color: Colors.grey[500]),
+                ),
+              ],
             ),
             Transform.rotate(
               angle: 180 * 3.14 / 365,
@@ -69,7 +77,7 @@ class _CoursesFillterState extends State<CoursesFillter> {
                         style: AppTheme.heading.copyWith(
                           color: (filtterTapped == index)
                               ? Colors.black
-                              : Colors.grey[300],
+                              : Colors.grey[500],
                         ),
                       ),
                       Container(

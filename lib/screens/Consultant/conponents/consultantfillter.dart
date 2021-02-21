@@ -13,9 +13,7 @@ class ConsultantFillter extends StatefulWidget {
 class _ConsultantFillterState extends State<ConsultantFillter> {
   List<String> fillterList = [
     'Recent',
-    'Closest',
-    'Price Low to High',
-    'Price High to low',
+    'HD Certified',
     'Rate',
   ];
   int filtterTapped;
@@ -29,9 +27,17 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Seach by',
-              style: AppTheme.heading.copyWith(color: Colors.grey[300]),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.search, color: Colors.grey[500]),
+                  onPressed: () {},
+                ),
+                Text(
+                  'Seach by',
+                  style: AppTheme.heading.copyWith(color: Colors.grey[500]),
+                ),
+              ],
             ),
             Transform.rotate(
               angle: 180 * 3.14 / 365,
@@ -66,7 +72,7 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
                         style: AppTheme.heading.copyWith(
                           color: (filtterTapped == index)
                               ? Colors.black
-                              : Colors.grey[300],
+                              : Colors.grey[500],
                         ),
                       ),
                       Container(
