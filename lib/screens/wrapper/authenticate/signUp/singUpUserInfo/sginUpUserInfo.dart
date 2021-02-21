@@ -68,7 +68,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 150, left: 30, right: 30),
+            padding: const EdgeInsets.only(top: 200, left: 30, right: 30),
             child: Form(
               key: _formKey,
               child: SingleChildScrollView(

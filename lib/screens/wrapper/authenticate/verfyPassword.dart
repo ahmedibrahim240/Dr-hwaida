@@ -65,7 +65,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 180, left: 30, right: 30),
+                  padding: const EdgeInsets.only(top: 220, left: 30, right: 30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

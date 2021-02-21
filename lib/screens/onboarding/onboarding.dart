@@ -182,11 +182,7 @@ class SliderContoler extends StatelessWidget {
                     ),
                   );
                 },
-                child:
-                    // (_currentPage == (_pages.length - 1))
-                    //     ? Container()
-                    // :
-                    Row(
+                child: Row(
                   children: [
                     Text(
                       'skip',

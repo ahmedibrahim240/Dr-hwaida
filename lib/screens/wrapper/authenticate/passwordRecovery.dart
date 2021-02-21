@@ -39,7 +39,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 180, left: 30, right: 30),
+                padding: const EdgeInsets.only(top: 220, left: 30, right: 30),
                 child: Form(
                   key: _formKey,
                   child: Column(

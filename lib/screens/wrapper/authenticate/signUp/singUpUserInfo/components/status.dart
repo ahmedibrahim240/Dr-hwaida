@@ -154,7 +154,7 @@ class _StatusState extends State<Status> {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          'Detached',
+                          'Divorced',
                           style: AppTheme.heading.copyWith(),
                         ),
                       ],
