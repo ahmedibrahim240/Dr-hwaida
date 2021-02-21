@@ -1,3 +1,4 @@
+import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
@@ -7,6 +8,7 @@ import 'package:DrHwaida/screens/mypayment/myPayment.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/registerAsConsultant/registerAsConsultant.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'menucontant.dart';
@@ -78,7 +80,7 @@ class MenuBody extends StatelessWidget {
                     SizedBox(height: 20),
                     MenuContent(
                       title: 'My Courses',
-                      icon: FontAwesomeIcons.idCardAlt,
+                      icon: FontAwesomeIcons.bookOpen,
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
@@ -95,6 +97,30 @@ class MenuBody extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (_) => PaymentHistory(),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    MenuContent(
+                      title: 'Coming Soon',
+                      icon: FontAwesomeIcons.history,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ComingSoon(),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    MenuContent(
+                      title: 'Register as consultant',
+                      icon: FontAwesomeIcons.registered,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => RegisterAsConsultant(),
                           ),
                         );
                       },
@@ -124,29 +150,26 @@ class MenuBody extends StatelessWidget {
                       },
                     ),
                     SizedBox(height: 20),
+                    FlatButton.icon(
+                      onPressed: () {},
+                      icon: Transform.rotate(
+                        angle: 180 * 3.14 / 180,
+                        child: Icon(
+                          Icons.logout,
+                          color: customColorIcon,
+                        ),
+                      ),
+                      label: Text(
+                        'Log Out',
+                        style: AppTheme.heading.copyWith(
+                          color: customColor,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: FlatButton.icon(
-              onPressed: () {},
-              icon: Transform.rotate(
-                angle: 180 * 3.14 / 180,
-                child: Icon(
-                  Icons.logout,
-                  color: customColorIcon,
-                ),
-              ),
-              label: Text(
-                'Log Out',
-                style: AppTheme.heading.copyWith(
-                  color: customColor,
-                ),
-              ),
-            ),
           ),
         ],
       ),
