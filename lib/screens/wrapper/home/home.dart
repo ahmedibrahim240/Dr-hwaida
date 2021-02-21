@@ -46,6 +46,16 @@ class _HomeState extends State<Home> {
                 rowofHmeTaps(context),
                 paner(context),
                 sctionTitle(
+                    title: 'Consultants',
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => Consultant(),
+                        ),
+                      );
+                    }),
+                consulHomeList(imageUrl, oldPrie, newPrie, consulName, rate),
+                sctionTitle(
                     title: 'ُEvents',
                     onTap: () {
                       Navigator.of(context).push(
@@ -65,16 +75,6 @@ class _HomeState extends State<Home> {
                       );
                     }),
                 homecoursesList(context),
-                sctionTitle(
-                    title: 'Consultants',
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => Consultant(),
-                        ),
-                      );
-                    }),
-                consulHomeList(imageUrl, oldPrie, newPrie, consulName, rate),
               ],
             ),
           ),
