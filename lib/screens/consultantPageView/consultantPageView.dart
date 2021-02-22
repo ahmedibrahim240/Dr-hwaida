@@ -258,7 +258,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               ),
                             ],
                           ),
-                          (widget.consultant.available_in.isEmpty)
+                          (widget.consultant.available_in == null)
                               ? Container()
                               : Expanded(
                                   flex: 2,
