@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/prodact.dart';
@@ -5,33 +7,58 @@ import 'package:DrHwaida/screens/checkOut/checkOut.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class Cart extends StatefulWidget {
+  static var consultProdect = List<SaveProduct>();
+  static SharedPreferences sharedPreferences;
+  static initSharedPreferences() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+  }
+
+  static saveDataOfConsulPro() {
+    List<String> listFavorite = Cart.consultProdect
+        .map(
+          (items) => jsonEncode(
+            items.toMap(),
+          ),
+        )
+        .toList();
+    sharedPreferences.setStringList('consulProdect', listFavorite);
+  }
+
   @override
   _CartState createState() => _CartState();
 }
 
 class _CartState extends State<Cart> {
+  var items = List<SaveProduct>();
+
   double totalPrice = 0.0;
+
   @override
   void initState() {
     culcTotalPrice();
+    setState(() {
+      items = Cart.consultProdect;
+    });
     super.initState();
+    Cart.initSharedPreferences();
   }
 
   culcTotalPrice() {
-    for (int i = 0; i < productConsualtList.length; i++) {
+    for (int i = 0; i < Cart.consultProdect.length; i++) {
       setState(() {
         totalPrice =
-            totalPrice + double.parse('${productConsualtList[i].price}');
+            totalPrice + double.parse('${Cart.consultProdect[i].price}');
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (productConsualtList.isEmpty) {
+    if (Cart.consultProdect.isEmpty) {
       return Scaffold(
         appBar: AppBar(
           toolbarHeight: 80,
@@ -73,147 +100,146 @@ class _CartState extends State<Cart> {
                 children: [
                   SizedBox(height: 20),
                   totalPrieCard(context),
-                  ListView.builder(
-                      shrinkWrap: true,
-                      primary: false,
-                      itemCount: productConsualtList.length,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                      itemBuilder: (context, index) {
-                        return Card(
-                          elevation: 3,
-                          child: Column(
-                            children: [
-                              ListTile(
-                                title: Row(
-                                  children: [
-                                    Text(
-                                      'title: ',
-                                      style: AppTheme.heading.copyWith(
-                                        color: customColor,
-                                      ),
-                                    ),
-                                    Text(
-                                      productConsualtList[index].title,
-                                      style: AppTheme.subHeading.copyWith(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                subtitle: Row(
-                                  children: [
-                                    Row(
+                  (items == null)
+                      ? Container()
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          primary: false,
+                          itemCount: Cart.consultProdect.length,
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                          itemBuilder: (context, index) {
+                            return Card(
+                              elevation: 3,
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    title: Row(
                                       children: [
                                         Text(
-                                          'Price: ',
+                                          'title: ',
                                           style: AppTheme.heading.copyWith(
                                             color: customColor,
                                           ),
                                         ),
                                         Text(
-                                          productConsualtList[index].price,
+                                          Cart.consultProdect[index].title,
                                           style: AppTheme.subHeading.copyWith(
                                             fontSize: 12,
                                           ),
                                         ),
-                                        Icon(
-                                          FontAwesomeIcons.poundSign,
-                                          color: Colors.black,
-                                          size: 10,
+                                      ],
+                                    ),
+                                    subtitle: Row(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              'Price: ',
+                                              style: AppTheme.heading.copyWith(
+                                                color: customColor,
+                                              ),
+                                            ),
+                                            Text(
+                                              Cart.consultProdect[index].price,
+                                              style:
+                                                  AppTheme.subHeading.copyWith(
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                            Icon(
+                                              FontAwesomeIcons.poundSign,
+                                              color: Colors.black,
+                                              size: 10,
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                                trailing: IconButton(
-                                  icon: Icon(
-                                    Icons.delete,
-                                    size: 30,
-                                    color: Colors.red,
+                                    trailing: IconButton(
+                                      icon: Icon(
+                                        Icons.delete,
+                                        size: 30,
+                                        color: Colors.red,
+                                      ),
+                                      onPressed: () async {
+                                        setState(() {
+                                          totalPrice = totalPrice -
+                                              double.parse(
+                                                  '${Cart.consultProdect[index].price}');
+                                          Cart.consultProdect.remove(
+                                              Cart.consultProdect[index]);
+                                          Cart.saveDataOfConsulPro();
+                                        });
+                                      },
+                                    ),
+                                    leading: CircleAvatar(
+                                      maxRadius: 30,
+                                      backgroundImage: NetworkImage(
+                                        Cart.consultProdect[index].proImageUrl,
+                                      ),
+                                    ),
                                   ),
-                                  onPressed: () {
-                                    setState(() {
-                                      totalPrice = totalPrice -
-                                          double.parse(
-                                              '${productConsualtList[index].price}');
-                                      productConsualtList
-                                          .remove(productConsualtList[index]);
-                                    });
-                                  },
-                                ),
-                                leading: CircleAvatar(
-                                  maxRadius: 30,
-                                  backgroundImage: AssetImage(
-                                      productConsualtList[index].proImageUrl),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 20),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           children: [
-                                            Text(
-                                              'Date: ',
-                                              style: AppTheme.heading.copyWith(
-                                                color: customColor,
-                                              ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'Date: ',
+                                                  style:
+                                                      AppTheme.heading.copyWith(
+                                                    color: customColor,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  Cart.consultProdect[index]
+                                                      .date,
+                                                  style: AppTheme.subHeading
+                                                      .copyWith(
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            Text(
-                                              productConsualtList[index].date,
-                                              style:
-                                                  AppTheme.subHeading.copyWith(
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                            Icon(
-                                              FontAwesomeIcons.poundSign,
-                                              color: Colors.black,
-                                              size: 10,
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'Time: ',
+                                                  style:
+                                                      AppTheme.heading.copyWith(
+                                                    color: customColor,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  Cart.consultProdect[index]
+                                                      .time,
+                                                  style: AppTheme.subHeading
+                                                      .copyWith(
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              'Time: ',
-                                              style: AppTheme.heading.copyWith(
-                                                color: customColor,
-                                              ),
-                                            ),
-                                            Text(
-                                              productConsualtList[index].time,
-                                              style:
-                                                  AppTheme.subHeading.copyWith(
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                            Icon(
-                                              FontAwesomeIcons.poundSign,
-                                              color: Colors.black,
-                                              size: 10,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        );
-                      }),
+                            );
+                          }),
                 ],
               ),
             ),

@@ -1,7 +1,9 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
-// import 'package:DrHwaida/models/prodact.dart';
+import 'package:DrHwaida/models/prodact.dart';
+import 'package:DrHwaida/screens/cart/cart.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -23,17 +25,12 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
   int tappedTime;
   List<AvailableTimes> listTimes = [];
   String _date;
+  String _time;
+  String _timeID;
+
   @override
   Widget build(BuildContext context) {
     List<ConsulAvailable> consulAvailable = widget.consultant.available_in;
-
-    // var _prondet = ProductConsualt(
-    //   date: '12/2/2012',
-    //   time: '7 Am',
-    //   title: widget.consultant.name.toString(),
-    //   price: widget.consultant.total_coust.toString(),
-    //   proImageUrl: widget.consultant.image.toString(),
-    // );
 
     return Scaffold(
       appBar: customAppBar(title: 'Schedule Appointment'),
@@ -71,6 +68,8 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                                   ],
                                 ),
                               ),
+                        (_date == null) ? Container() : Text(_date),
+                        (_time == null) ? Container() : Text(_time),
                       ],
                     ),
                   ),
@@ -79,19 +78,44 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
               alignment: Alignment.bottomCenter,
               child: CustomButtonWithchild(
                 color: customColor,
-                onPress: () {
-                  // productConsualtList.add(_prondet);
-                  _scaffoldKey.currentState.showSnackBar(
-                    new SnackBar(
-                      content: new Text('Items Was added'),
-                      action: SnackBarAction(
-                        label: 'Undo',
-                        onPressed: () {
-                          // productConsualtList.remove(_prondet);
-                        },
+                onPress: () async {
+                  if (_date != null && _time != null) {
+                    var _prondet = SaveProduct(
+                      date: _date,
+                      time: _time,
+                      dateId: _timeID,
+                      consulId: widget.consultant.id.toString(),
+                      title: widget.consultant.name.toString(),
+                      price: widget.consultant.total_coust.toString(),
+                      proImageUrl: widget.consultant.image.toString(),
+                    );
+                    Cart.consultProdect.add(_prondet);
+                    Cart.saveDataOfConsulPro();
+                    _scaffoldKey.currentState.showSnackBar(
+                      new SnackBar(
+                        content: new Text('Items Was added'),
+                        action: SnackBarAction(
+                          label: 'Undo',
+                          onPressed: () {
+                            productConsualtList.remove(_prondet);
+                            Cart.saveDataOfConsulPro();
+                          },
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } else {
+                    _scaffoldKey.currentState.showSnackBar(
+                      new SnackBar(
+                        content: new Text('you shoud choses  date and time'),
+                        // action: SnackBarAction(
+                        //   label: 'Undo',
+                        //   onPressed: () {
+                        //     productConsualtList.remove(_prondet);
+                        //   },
+                        // ),
+                      ),
+                    );
+                  }
                 },
                 child: Text(
                   'Add to Cart',
@@ -116,7 +140,11 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           if (listTimes[index].date == _date) {
-            return timeCard(time: listTimes[index].time, index: index);
+            return timeCard(
+              time: listTimes[index].time,
+              index: index,
+              timeID: listTimes[index].time.toString(),
+            );
           } else {
             return Container();
           }
@@ -178,11 +206,13 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
     );
   }
 
-  timeCard({int index, String time}) {
+  timeCard({int index, String time, String timeID}) {
     return InkWell(
       onTap: () {
         setState(() {
           tappedTime = index;
+          _timeID = timeID;
+          _time = time;
         });
       },
       child: Card(
