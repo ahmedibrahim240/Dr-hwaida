@@ -10,6 +10,7 @@ class Consultant {
   String rate;
   String image;
   String experince;
+  var availableIn;
   // ignore: non_constant_identifier_names
   List<ConsulAvailable> available_in;
 
@@ -27,6 +28,7 @@ class Consultant {
     this.experince,
     // ignore: non_constant_identifier_names
     this.available_in,
+    this.availableIn,
   });
 }
 

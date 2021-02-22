@@ -32,6 +32,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.consultant.availableIn.toString());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: customColor,
@@ -161,10 +162,14 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                       size: 20,
                                     ),
                                     SizedBox(width: 10),
-                                    Text(
-                                      widget.consultant.address,
-                                      style: AppTheme.heading.copyWith(
-                                        color: customColor,
+                                    SizedBox(
+                                      width: 150,
+                                      child: Text(
+                                        widget.consultant.address,
+                                        style: AppTheme.heading.copyWith(
+                                          fontSize: 10,
+                                          color: customColor,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -188,7 +193,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                 child: Text(
                                   'Review',
                                   style: AppTheme.heading.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 10,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -224,7 +229,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               Row(
                                 children: [
                                   Icon(
-                                    FontAwesomeIcons.dollarSign,
+                                    FontAwesomeIcons.poundSign,
                                     color: Colors.black38,
                                     size: 20,
                                   ),
@@ -258,7 +263,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               ),
                             ],
                           ),
-                          (widget.consultant.available_in == null)
+                          (widget.consultant.availableIn == null)
                               ? Container()
                               : Expanded(
                                   flex: 2,

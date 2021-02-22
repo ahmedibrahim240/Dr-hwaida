@@ -19,6 +19,7 @@ class ConsultantApi {
         for (var itmes in jsonData['data']) {
           listOfDate = [];
           listOfConsulAvailable = [];
+          listOfTime = [];
           if (itmes['available_in'] != null) {
             for (var item in itmes['available_in']) {
               Date date = Date(data: item['date']);
@@ -52,6 +53,7 @@ class ConsultantApi {
             total_coust: double.parse(itmes['total_cost'].toString()),
             rate: itmes['rate'],
             available_in: listOfConsulAvailable,
+            availableIn: itmes['available_in'],
           );
 
           listOfConsultant.add(consultant);
