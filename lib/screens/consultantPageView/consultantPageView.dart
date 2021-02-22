@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/conSultantRating.dart';
 import 'package:DrHwaida/screens/myReview/myreview.dart';
 import 'package:DrHwaida/screens/scheduleAppo/scheduleAppo.dart';
@@ -9,21 +10,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class ConsultantPageView extends StatefulWidget {
-  final String consultName;
-  final String location;
-  final String oldPrice;
-  final String newPrice;
-  final String rating;
-  final String imagUrl;
+  final Consultant consultant;
 
   const ConsultantPageView({
     Key key,
-    @required this.consultName,
-    @required this.location,
-    @required this.oldPrice,
-    @required this.newPrice,
-    @required this.rating,
-    @required this.imagUrl,
+    @required this.consultant,
   }) : super(key: key);
 
   @override
@@ -80,7 +71,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                 bottomRight: Radius.circular(15),
               ),
               image: DecorationImage(
-                image: AssetImage(widget.imagUrl),
+                image: AssetImage(widget.consultant.imgUrl),
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -122,7 +113,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            widget.consultName,
+                            widget.consultant.consultName,
                             style: AppTheme.heading,
                           ),
                           Text(
@@ -147,7 +138,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                     ),
                                     SizedBox(width: 10),
                                     Text(
-                                      widget.rating,
+                                      widget.consultant.rating,
                                       style: AppTheme.heading.copyWith(
                                         color: customColor,
                                       ),
@@ -164,7 +155,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                     ),
                                     SizedBox(width: 10),
                                     Text(
-                                      widget.location,
+                                      widget.consultant.location,
                                       style: AppTheme.heading.copyWith(
                                         color: customColor,
                                       ),
@@ -182,7 +173,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                 flitter(
                                   context: context,
                                   child: ConsultantRating(
-                                    title: widget.consultName,
+                                    title: widget.consultant.consultName,
                                   ),
                                 );
                               },
@@ -201,7 +192,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'About ' + widget.consultName,
+                        'About ' + widget.consultant.consultName,
                         style: AppTheme.heading,
                       ),
                       SizedBox(height: 10),
@@ -242,7 +233,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               Row(
                                 children: [
                                   Text(
-                                    widget.oldPrice + '\$',
+                                    widget.consultant.oldPrice + '\$',
                                     style: AppTheme.subHeading.copyWith(
                                       color: customColorIcon,
                                       decoration: TextDecoration.lineThrough,
@@ -250,7 +241,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    widget.newPrice + '\$',
+                                    widget.consultant.newPrice + '\$',
                                     style: AppTheme.heading.copyWith(),
                                   ),
                                 ],
@@ -264,9 +255,10 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (_) => ScheduleAppo(
-                                      consultName: widget.consultName,
-                                      price: widget.newPrice,
-                                      consultimageUrl: widget.imagUrl,
+                                      consultName:
+                                          widget.consultant.consultName,
+                                      price: widget.consultant.newPrice,
+                                      consultimageUrl: widget.consultant.imgUrl,
                                     ),
                                   ),
                                 );

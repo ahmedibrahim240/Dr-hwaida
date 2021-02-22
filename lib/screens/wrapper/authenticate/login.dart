@@ -267,7 +267,7 @@ class _LogInState extends State<LogIn> {
                                                     style: AppTheme.heading
                                                         .copyWith(
                                                       color: Colors.white,
-                                                      fontSize: 12,
+                                                      fontSize: 8,
                                                     ),
                                                   ),
                                                   Text(
@@ -275,7 +275,7 @@ class _LogInState extends State<LogIn> {
                                                     style: AppTheme.heading
                                                         .copyWith(
                                                       color: Colors.white,
-                                                      fontSize: 12,
+                                                      fontSize: 8,
                                                     ),
                                                   ),
                                                 ],
@@ -304,7 +304,7 @@ class _LogInState extends State<LogIn> {
                                                     style: AppTheme.heading
                                                         .copyWith(
                                                       color: Colors.white,
-                                                      fontSize: 12,
+                                                      fontSize: 8,
                                                     ),
                                                   ),
                                                   Text(
@@ -312,7 +312,7 @@ class _LogInState extends State<LogIn> {
                                                     style: AppTheme.heading
                                                         .copyWith(
                                                       color: Colors.white,
-                                                      fontSize: 12,
+                                                      fontSize: 8,
                                                     ),
                                                   ),
                                                 ],

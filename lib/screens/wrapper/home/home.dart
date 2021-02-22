@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/coursesPage.dart';
@@ -18,11 +19,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    String imageUrl = 'lib/images/person.jpg';
-    String oldPrie = '550';
-    String newPrie = '450';
-    String consulName = 'DR.Assma Alla';
-    double rate = 4;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: customColor,
@@ -48,11 +44,22 @@ class _HomeState extends State<Home> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => Consultant(),
+                          builder: (_) => ConsultantPage(),
                         ),
                       );
                     }),
-                consulHomeList(imageUrl, oldPrie, newPrie, consulName, rate),
+                Container(
+                  height: 200,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: consultantList.length,
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      itemBuilder: (context, index) {
+                        return consulHomeList(
+                            consultant: consultantList[index]);
+                      }),
+                ),
                 sctionTitle(
                     title: 'Courses',
                     onTap: () {

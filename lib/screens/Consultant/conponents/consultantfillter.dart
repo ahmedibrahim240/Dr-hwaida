@@ -113,7 +113,7 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
             onPress: () {
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
-                    builder: (BuildContext context) => Consultant()),
+                    builder: (BuildContext context) => ConsultantPage()),
                 ModalRoute.withName('/'),
               );
             },

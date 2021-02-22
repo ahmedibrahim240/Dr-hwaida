@@ -1,23 +1,17 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:flutter/material.dart';
 import '../CustomBottomNavigationBar.dart';
 import 'conponents/cinsltantAppBar.dart';
 import 'conponents/consultantCard.dart';
 
-class Consultant extends StatefulWidget {
+class ConsultantPage extends StatefulWidget {
   @override
-  _ConsultantState createState() => _ConsultantState();
+  _ConsultantPageState createState() => _ConsultantPageState();
 }
 
-class _ConsultantState extends State<Consultant> {
-  String consultName = 'Dr.Asmaa Mohamed';
-  String location = 'Cairo,Naser City';
-  String oldPrice = '550';
-  String newPrice = '450';
-  String rating = '4.5';
-  String imgUrl = 'lib/images/person.jpg';
-
+class _ConsultantPageState extends State<ConsultantPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +34,7 @@ class _ConsultantState extends State<Consultant> {
                 ListView.builder(
                   shrinkWrap: true,
                   primary: false,
-                  itemCount: 30,
+                  itemCount: consultantList.length,
                   padding: EdgeInsets.symmetric(horizontal: 5),
                   itemBuilder: (context, index) {
                     return ConsaultantCard(
@@ -49,22 +43,12 @@ class _ConsultantState extends State<Consultant> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (_) => ConsultantPageView(
-                              consultName: consultName,
-                              location: location,
-                              oldPrice: oldPrice,
-                              newPrice: newPrice,
-                              rating: rating,
-                              imagUrl: imgUrl,
+                              consultant: consultantList[index],
                             ),
                           ),
                         );
                       },
-                      consultName: consultName,
-                      location: location,
-                      oldPrice: oldPrice,
-                      newPrice: newPrice,
-                      rating: rating,
-                      imagUrl: imgUrl,
+                      consultant: consultantList[index],
                     );
                   },
                 ),

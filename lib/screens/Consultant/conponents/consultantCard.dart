@@ -1,28 +1,21 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/consultant.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ConsaultantCard extends StatelessWidget {
+  final Consultant consultant;
+
   const ConsaultantCard({
     Key key,
     @required this.onTap,
-    @required this.consultName,
-    @required this.location,
-    @required this.oldPrice,
-    @required this.newPrice,
-    @required this.rating,
-    @required this.imagUrl,
     @required this.index,
+    @required this.consultant,
   }) : super(key: key);
 
   final Function onTap;
-  final String consultName;
-  final String location;
-  final String oldPrice;
-  final String newPrice;
-  final String rating;
-  final String imagUrl;
+
   final int index;
 
   @override
@@ -46,7 +39,7 @@ class ConsaultantCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        consultName,
+                        consultant.consultName,
                         style: AppTheme.heading,
                       ),
                       Row(
@@ -68,14 +61,14 @@ class ConsaultantCard extends StatelessWidget {
                           Column(
                             children: [
                               Text(
-                                oldPrice + '\$',
+                                consultant.oldPrice + '\$',
                                 style: AppTheme.subHeading.copyWith(
                                   color: Colors.grey[500],
                                   decoration: TextDecoration.lineThrough,
                                 ),
                               ),
                               Text(
-                                newPrice + '\$',
+                                consultant.newPrice + '\$',
                                 style: AppTheme.heading,
                               ),
                             ],
@@ -165,7 +158,7 @@ class ConsaultantCard extends StatelessWidget {
       width: 130,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(imagUrl),
+          image: AssetImage(consultant.imgUrl),
           fit: BoxFit.cover,
         ),
       ),

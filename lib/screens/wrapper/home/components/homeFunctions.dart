@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
@@ -22,7 +23,7 @@ Container rowofHmeTaps(BuildContext context) {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => Consultant(),
+                builder: (_) => ConsultantPage(),
               ),
             );
           },
@@ -224,36 +225,22 @@ paner(BuildContext context) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-Container consulHomeList(String imageUrl, String oldPrie, String newPrie,
-    String consulName, double rate) {
+Container consulHomeList({Consultant consultant, BuildContext context}) {
   return Container(
     height: 200,
-    child: ListView.builder(
-      scrollDirection: Axis.horizontal,
-      shrinkWrap: true,
-      itemCount: 10,
-      padding: EdgeInsets.symmetric(horizontal: 5),
-      itemBuilder: (context, index) {
-        return consulHomeCard(
-          imageUrl: imageUrl,
-          oldPrie: oldPrie,
-          newPrie: newPrie,
-          consulName: consulName,
-          rate: rate,
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => ConsultantPageView(
-                  consultName: consulName,
-                  imagUrl: imageUrl,
-                  rating: rate.toString(),
-                  location: 'elmansora',
-                  oldPrice: oldPrie,
-                  newPrice: newPrie,
-                ),
-              ),
-            );
-          },
+    child: consulHomeCard(
+      imageUrl: consultant.imgUrl,
+      oldPrie: consultant.oldPrice,
+      newPrie: consultant.newPrice,
+      consulName: consultant.consultName,
+      rate: double.parse(consultant.rating),
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => ConsultantPageView(
+              consultant: consultant,
+            ),
+          ),
         );
       },
     ),
