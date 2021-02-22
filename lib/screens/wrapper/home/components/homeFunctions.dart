@@ -1,13 +1,57 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/consultant.dart';
+import 'package:DrHwaida/models/consultantApi.dart';
 
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
+import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../comingSoon.dart';
+
+FutureBuilder<List<Consultant>> getConsultant() {
+  return FutureBuilder(
+    future: ConsultantApi.fetchAllConsultant(),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return (snapshot.data == null)
+            ? Container()
+            : ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: snapshot.data.length,
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                itemBuilder: (context, index) {
+                  return consulHomeCard(
+                    imageUrl: snapshot.data[index].image,
+                    oldPrie: snapshot.data[index].coust,
+                    newPrie: snapshot.data[index].total_coust,
+                    consulName: snapshot.data[index].name,
+                    discount: snapshot.data[index].discount,
+                    rate: double.parse(
+                      snapshot.data[index].rate,
+                    ),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => ConsultantPageView(
+                            consultant: snapshot.data[index],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              );
+      } else {
+        return Center(child: CircularProgressIndicator());
+      }
+    },
+  );
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////
 

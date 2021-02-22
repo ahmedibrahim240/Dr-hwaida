@@ -1,10 +1,10 @@
 import 'package:DrHwaida/constants/constans.dart';
-import 'package:DrHwaida/models/consultant.dart';
-import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
+
 import 'package:flutter/material.dart';
 import '../CustomBottomNavigationBar.dart';
 import 'conponents/cinsltantAppBar.dart';
-import 'conponents/consultantCard.dart';
+
+import 'conponents/getConsultant.dart';
 
 class ConsultantPage extends StatefulWidget {
   @override
@@ -31,27 +31,7 @@ class _ConsultantPageState extends State<ConsultantPage> {
               primary: false,
               children: [
                 consultantAppBer(context),
-                ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: consultantList.length,
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  itemBuilder: (context, index) {
-                    return ConsaultantCard(
-                      index: index,
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => ConsultantPageView(
-                              consultant: consultantList[index],
-                            ),
-                          ),
-                        );
-                      },
-                      consultant: consultantList[index],
-                    );
-                  },
-                ),
+                getAllConsultant(),
               ],
             ),
           ),
