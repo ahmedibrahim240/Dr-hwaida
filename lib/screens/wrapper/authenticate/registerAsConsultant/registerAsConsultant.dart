@@ -46,6 +46,7 @@ class _RegisterAsConsultantState extends State<RegisterAsConsultant> {
                 ),
                 SizedBox(height: 20),
                 TextFormField(
+                  maxLines: null,
                   decoration: conectedTextFormStyle(
                     lableText: 'About yourself',
                   ),

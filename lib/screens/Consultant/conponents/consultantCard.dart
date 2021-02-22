@@ -39,7 +39,7 @@ class ConsaultantCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        consultant.consultName,
+                        consultant.name,
                         style: AppTheme.heading,
                       ),
                       Row(
@@ -49,7 +49,7 @@ class ConsaultantCard extends StatelessWidget {
                             color: Colors.black38,
                           ),
                           Text(
-                            location,
+                            consultant.address,
                             style: AppTheme.subHeading
                                 .copyWith(color: customColor),
                           ),
@@ -60,15 +60,17 @@ class ConsaultantCard extends StatelessWidget {
                         children: [
                           Column(
                             children: [
+                              (consultant.discount != '0')
+                                  ? Text(
+                                      consultant.coust + '\$',
+                                      style: AppTheme.subHeading.copyWith(
+                                        color: Colors.grey[500],
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
+                                    )
+                                  : Container(),
                               Text(
-                                consultant.oldPrice + '\$',
-                                style: AppTheme.subHeading.copyWith(
-                                  color: Colors.grey[500],
-                                  decoration: TextDecoration.lineThrough,
-                                ),
-                              ),
-                              Text(
-                                consultant.newPrice + '\$',
+                                consultant.total_coust.toString(),
                                 style: AppTheme.heading,
                               ),
                             ],
@@ -158,7 +160,7 @@ class ConsaultantCard extends StatelessWidget {
       width: 130,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(consultant.imgUrl),
+          image: AssetImage(consultant.image),
           fit: BoxFit.cover,
         ),
       ),
@@ -179,7 +181,7 @@ class ConsaultantCard extends StatelessWidget {
               ),
               SizedBox(width: 5),
               Text(
-                '$rating K ',
+                '${consultant.rate} K ',
                 style: AppTheme.heading.copyWith(
                   color: Colors.white,
                 ),

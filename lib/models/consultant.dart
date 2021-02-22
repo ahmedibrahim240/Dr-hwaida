@@ -1,74 +1,52 @@
-String consultName = 'Dr.Asmaa Mohamed';
-String location = 'Cairo,Naser City';
-String oldPrice = '550';
-String newPrice = '450';
-String rating = '4.5';
-String imgUrl = 'lib/images/person.jpg';
-
 class Consultant {
-  final String consultName;
-  final String location;
-  final String oldPrice;
-  final String newPrice;
-  final String rating;
-  final String imgUrl;
-
-  Consultant(
-      {this.consultName,
-      this.location,
-      this.oldPrice,
-      this.newPrice,
-      this.rating,
-      this.imgUrl});
+  int id;
+  String name;
+  String address;
+  String bio;
+  // ignore: non_constant_identifier_names
+  double total_coust;
+  String coust;
+  String discount;
+  String rate;
+  String image;
+  String experince;
+  // ignore: non_constant_identifier_names
+  List<ConsulAvailable> available_in;
+  Consultant({
+    this.id,
+    this.name,
+    this.address,
+    this.bio,
+    // ignore: non_constant_identifier_names
+    this.total_coust,
+    this.coust,
+    this.discount,
+    this.rate,
+    this.image,
+    this.experince,
+    // ignore: non_constant_identifier_names
+    this.available_in,
+  });
 }
 
-List<Consultant> consultantList = [
-  Consultant(
-    consultName: consultName,
-    location: location,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    imgUrl: imgUrl,
-    rating: rating,
-  ),
-  Consultant(
-    consultName: consultName,
-    location: location,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    imgUrl: imgUrl,
-    rating: rating,
-  ),
-  Consultant(
-    consultName: consultName,
-    location: location,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    imgUrl: imgUrl,
-    rating: rating,
-  ),
-  Consultant(
-    consultName: consultName,
-    location: location,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    imgUrl: imgUrl,
-    rating: rating,
-  ),
-  Consultant(
-    consultName: consultName,
-    location: location,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    imgUrl: imgUrl,
-    rating: rating,
-  ),
-  Consultant(
-    consultName: consultName,
-    location: location,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    imgUrl: imgUrl,
-    rating: rating,
-  ),
-];
+class ConsulAvailable {
+  String date;
+  List<AvailableTimes> availableTimes;
+  ConsulAvailable({
+    this.date,
+    this.availableTimes,
+  });
+}
+
+class AvailableTimes {
+  int id;
+  String date;
+  String time;
+  AvailableTimes({
+    this.id,
+    this.date,
+    this.time,
+  });
+}
+
+List<Consultant> consultantList = [];

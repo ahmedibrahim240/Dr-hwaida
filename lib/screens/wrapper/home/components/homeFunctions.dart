@@ -1,13 +1,13 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
-import 'package:DrHwaida/models/consultant.dart';
+
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
-import 'package:DrHwaida/screens/Evaents/eventspage.dart';
-import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
-import 'package:DrHwaida/screens/courses/chosesColurses.dart';
+
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../comingSoon.dart';
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,7 +34,7 @@ Container rowofHmeTaps(BuildContext context) {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => ChosesCourses(),
+                builder: (_) => ComingSoon(),
               ),
             );
           },
@@ -45,7 +45,7 @@ Container rowofHmeTaps(BuildContext context) {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (_) => EventsPage(),
+                builder: (_) => ComingSoon(),
               ),
             );
           },
@@ -97,9 +97,10 @@ Container homeTabs({String title, String iconImage, Function onTap}) {
 consulHomeCard({
   String imageUrl,
   String oldPrie,
-  String newPrie,
+  double newPrie,
   String consulName,
   double rate,
+  String discount,
   Function onTap,
 }) {
   return InkWell(
@@ -118,7 +119,7 @@ consulHomeCard({
                   children: [
                     CircleAvatar(
                       maxRadius: 65,
-                      backgroundImage: AssetImage(imageUrl),
+                      backgroundImage: NetworkImage(imageUrl),
                     ),
                     Positioned(
                       bottom: 0,
@@ -134,16 +135,18 @@ consulHomeCard({
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              (discount != '0')
+                                  ? Text(
+                                      oldPrie,
+                                      style: AppTheme.subHeading.copyWith(
+                                        color: customColorDivider,
+                                        decoration: TextDecoration.lineThrough,
+                                        fontSize: 12,
+                                      ),
+                                    )
+                                  : Container(),
                               Text(
-                                oldPrie + '\$',
-                                style: AppTheme.subHeading.copyWith(
-                                  color: customColorDivider,
-                                  decoration: TextDecoration.lineThrough,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Text(
-                                newPrie + '\$',
+                                newPrie.toString(),
                                 style: AppTheme.heading.copyWith(
                                   color: Colors.white,
                                 ),
@@ -225,27 +228,6 @@ paner(BuildContext context) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-Container consulHomeList({Consultant consultant, BuildContext context}) {
-  return Container(
-    height: 200,
-    child: consulHomeCard(
-      imageUrl: consultant.imgUrl,
-      oldPrie: consultant.oldPrice,
-      newPrie: consultant.newPrice,
-      consulName: consultant.consultName,
-      rate: double.parse(consultant.rating),
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => ConsultantPageView(
-              consultant: consultant,
-            ),
-          ),
-        );
-      },
-    ),
-  );
-}
 
 ///////////////////////////////////////////////////////////////
 Container homecoursesList(context) {

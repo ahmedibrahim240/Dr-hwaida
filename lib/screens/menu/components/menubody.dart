@@ -3,10 +3,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
-import 'package:DrHwaida/screens/courses/mycourses.dart';
-import 'package:DrHwaida/screens/mypayment/myPayment.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
-import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/registerAsConsultant/registerAsConsultant.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +69,7 @@ class MenuBody extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => MyPayment(),
+                            builder: (_) => ComingSoon(),
                           ),
                         );
                       },
@@ -84,7 +81,7 @@ class MenuBody extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => MyCourses(),
+                            builder: (_) => ComingSoon(),
                           ),
                         );
                       },
@@ -96,23 +93,23 @@ class MenuBody extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => PaymentHistory(),
-                          ),
-                        );
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    MenuContent(
-                      title: 'Coming Soon',
-                      icon: FontAwesomeIcons.history,
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
                             builder: (_) => ComingSoon(),
                           ),
                         );
                       },
                     ),
+                    // SizedBox(height: 20),
+                    // MenuContent(
+                    //   title: 'Coming Soon',
+                    //   icon: FontAwesomeIcons.history,
+                    //   onTap: () {
+                    //     Navigator.of(context).push(
+                    //       MaterialPageRoute(
+                    //         builder: (_) => ComingSoon(),
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
                     SizedBox(height: 20),
                     MenuContent(
                       title: 'Register as consultant',
