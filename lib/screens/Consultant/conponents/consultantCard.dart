@@ -77,52 +77,52 @@ class ConsaultantCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // (index == 0)
-                      //     ? Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           consulCardBotom(
-                      //             title: 'Recent',
-                      //             color: customColor,
-                      //           ),
-                      //           SizedBox(width: 5),
-                      //           consulCardBotom(
-                      //             title: 'Selected',
-                      //             color: Colors.lightBlue,
-                      //           ),
-                      //         ],
-                      //       )
-                      //     : (index == 1)
-                      //         ? Row(
-                      //             mainAxisAlignment:
-                      //                 MainAxisAlignment.spaceBetween,
-                      //             children: [
-                      //               consulCardBotom(
-                      //                 title: 'Recent',
-                      //                 color: customColor,
-                      //               ),
-                      //             ],
-                      //           )
-                      //         : Row(
-                      //             mainAxisAlignment:
-                      //                 MainAxisAlignment.spaceBetween,
-                      //             children: [
-                      //               consulCardBotom(
-                      //                 title: 'Recent',
-                      //                 color: customColor,
-                      //               ),
-                      //               SizedBox(width: 5),
-                      //               consulCardBotom(
-                      //                 title: 'Selected',
-                      //                 color: Colors.lightBlue,
-                      //               ),
-                      //               SizedBox(width: 5),
-                      //               consulCardBotom(
-                      //                 title: 'Our Stars',
-                      //                 color: Colors.gold,
-                      //               ),
-                      //             ],
-                      //           ),
+                      (index == 0)
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                consulCardBotom(
+                                  title: 'Recent',
+                                  color: customColor,
+                                ),
+                                SizedBox(width: 5),
+                                consulCardBotom(
+                                  title: 'Selected',
+                                  color: Colors.lightBlue,
+                                ),
+                              ],
+                            )
+                          : (index == 1)
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    consulCardBotom(
+                                      title: 'Recent',
+                                      color: customColor,
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    consulCardBotom(
+                                      title: 'Recent',
+                                      color: customColor,
+                                    ),
+                                    SizedBox(width: 5),
+                                    consulCardBotom(
+                                      title: 'Selected',
+                                      color: Colors.lightBlue,
+                                    ),
+                                    SizedBox(width: 5),
+                                    consulCardBotom(
+                                      title: 'Our Stars',
+                                      color: Colors.gold,
+                                    ),
+                                  ],
+                                ),
                     ],
                   ),
                 ),

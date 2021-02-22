@@ -6,29 +6,39 @@ import 'dart:convert';
 class ConsultantApi {
   static Future<List<Consultant>> fetchAllConsultant() async {
     List<Consultant> listOfConsultant = [];
+
+    List<Date> listOfDate = [];
+    List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
-    List<AvailableTimes> listOfAvailableTimes = [];
+    print(listOfDate);
     var response = await http
         .get(Utils.Consultant_URL, headers: {'Accept': 'application/json'});
     var jsonData = json.decode(response.body);
     try {
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
-          for (var item in itmes['available_in']) {
-            for (var i in item['times']) {
-              AvailableTimes times = AvailableTimes(
-                id: i['id'],
-                time: i['time'],
-              );
-              listOfAvailableTimes.add(times);
+          listOfDate = [];
+          listOfConsulAvailable = [];
+          if (itmes['available_in'] != null) {
+            for (var item in itmes['available_in']) {
+              Date date = Date(data: item['date']);
+              listOfDate.add(date);
+              for (var i in item['times']) {
+                AvailableTimes times = AvailableTimes(
+                  id: i['id'],
+                  date: i['date'],
+                  time: i['time'],
+                );
+                listOfTime.add(times);
+              }
+              ConsulAvailable consulAvailable = ConsulAvailable(
+                  availableTimes: listOfTime, date: item['date']);
+              listOfConsulAvailable.add(consulAvailable);
             }
-            ConsulAvailable consulAvailable = ConsulAvailable(
-              date: item['date'],
-              availableTimes: listOfAvailableTimes,
-            );
-
-            listOfConsulAvailable.add(consulAvailable);
           }
+          print(
+            listOfDate.toString() + itmes['id'].toString(),
+          );
 
           Consultant consultant = Consultant(
             id: itmes['id'],

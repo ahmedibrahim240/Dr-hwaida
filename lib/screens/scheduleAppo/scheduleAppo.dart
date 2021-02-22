@@ -1,22 +1,15 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
-import 'package:DrHwaida/models/prodact.dart';
+import 'package:DrHwaida/models/consultant.dart';
+// import 'package:DrHwaida/models/prodact.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../CustomBottomNavigationBar.dart';
 
 class ScheduleAppo extends StatefulWidget {
-  final String consultName;
-  final String price;
-  final String consultimageUrl;
-
-  const ScheduleAppo(
-      {Key key,
-      @required this.consultName,
-      @required this.price,
-      @required this.consultimageUrl})
-      : super(key: key);
+  final Consultant consultant;
+  const ScheduleAppo({Key key, @required this.consultant}) : super(key: key);
   @override
   _ScheduleAppoState createState() => _ScheduleAppoState();
 }
@@ -28,16 +21,20 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
   bool showEvenig = false;
   int tappedDate;
   int tappedTime;
-
+  List<AvailableTimes> listTimes = [];
+  String _date;
   @override
   Widget build(BuildContext context) {
-    var _prondet = ProductConsualt(
-      date: '12/2/2012',
-      time: '7 Am',
-      title: widget.consultName.toString(),
-      price: widget.price.toString(),
-      proImageUrl: widget.consultimageUrl.toString(),
-    );
+    List<ConsulAvailable> consulAvailable = widget.consultant.available_in;
+
+    // var _prondet = ProductConsualt(
+    //   date: '12/2/2012',
+    //   time: '7 Am',
+    //   title: widget.consultant.name.toString(),
+    //   price: widget.consultant.total_coust.toString(),
+    //   proImageUrl: widget.consultant.image.toString(),
+    // );
+
     return Scaffold(
       appBar: customAppBar(title: 'Schedule Appointment'),
       key: _scaffoldKey,
@@ -48,43 +45,49 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Stack(
           children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Column(
-                children: [
-                  rowTitle(
-                    title: 'date',
-                  ),
-                  dateListView(),
-                  SizedBox(height: 20),
-                  Center(
+            (widget.consultant.available_in.isEmpty)
+                ? Container()
+                : Align(
+                    alignment: Alignment.topCenter,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         rowTitle(
-                          title: 'Time',
+                          title: 'date',
                         ),
-                        timeListView(),
+                        (widget.consultant.available_in.isEmpty)
+                            ? Container()
+                            : dateListView(date: consulAvailable),
+                        SizedBox(height: 20),
+                        (listTimes.isEmpty)
+                            ? Container()
+                            : Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    rowTitle(
+                                      title: 'Time',
+                                    ),
+                                    timeListView(),
+                                  ],
+                                ),
+                              ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
             SizedBox(height: 20),
             Align(
               alignment: Alignment.bottomCenter,
               child: CustomButtonWithchild(
                 color: customColor,
                 onPress: () {
-                  productConsualtList.add(_prondet);
+                  // productConsualtList.add(_prondet);
                   _scaffoldKey.currentState.showSnackBar(
                     new SnackBar(
                       content: new Text('Items Was added'),
                       action: SnackBarAction(
                         label: 'Undo',
                         onPressed: () {
-                          productConsualtList.remove(_prondet);
+                          // productConsualtList.remove(_prondet);
                         },
                       ),
                     ),
@@ -109,27 +112,33 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
       height: 110,
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: 10,
+        itemCount: listTimes.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return timeCard(index + 1);
+          if (listTimes[index].date == _date) {
+            return timeCard(time: listTimes[index].time, index: index);
+          } else {
+            return Container();
+          }
         },
       ),
     );
   }
 
-  Container dateListView() {
+  Container dateListView({List<ConsulAvailable> date}) {
     return Container(
       height: 110,
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: 10,
+        itemCount: date.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
               setState(() {
                 tappedDate = index;
+                listTimes = date[index].availableTimes;
+                _date = date[index].date;
               });
             },
             child: Card(
@@ -140,12 +149,12 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Container(
-                width: 60,
+                width: 100,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Day',
+                      'Date',
                       style: AppTheme.heading.copyWith(
                         color:
                             tappedDate == index ? Colors.white : Colors.black,
@@ -153,7 +162,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      '$index',
+                      date[index].date,
                       style: AppTheme.subHeading.copyWith(
                         color:
                             tappedDate == index ? Colors.white : Colors.black,
@@ -169,7 +178,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
     );
   }
 
-  timeCard(int index) {
+  timeCard({int index, String time}) {
     return InkWell(
       onTap: () {
         setState(() {
@@ -197,7 +206,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  '0$index:00 Am',
+                  time,
                   style: AppTheme.subHeading.copyWith(
                     color: tappedTime == index ? Colors.white : Colors.black,
                   ),

@@ -12,6 +12,7 @@ class Consultant {
   String experince;
   // ignore: non_constant_identifier_names
   List<ConsulAvailable> available_in;
+
   Consultant({
     this.id,
     this.name,
@@ -27,6 +28,11 @@ class Consultant {
     // ignore: non_constant_identifier_names
     this.available_in,
   });
+}
+
+class Date {
+  String data;
+  Date({this.data});
 }
 
 class ConsulAvailable {

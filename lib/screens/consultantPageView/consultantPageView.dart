@@ -258,33 +258,33 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               ),
                             ],
                           ),
-                          Expanded(
-                            flex: 2,
-                            child: CustomButtonWithchild(
-                              onPress: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (_) => ScheduleAppo(
-                                      consultName: widget.consultant.name,
-                                      price: widget.consultant.coust,
-                                      consultimageUrl: widget.consultant.image,
+                          (widget.consultant.available_in.isEmpty)
+                              ? Container()
+                              : Expanded(
+                                  flex: 2,
+                                  child: CustomButtonWithchild(
+                                    onPress: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (_) => ScheduleAppo(
+                                            consultant: widget.consultant,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Center(
+                                      child: Text(
+                                        'Schedule \n Appointment',
+                                        textAlign: TextAlign.center,
+                                        style: AppTheme.heading.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
-                              child: Center(
-                                child: Text(
-                                  'Schedule \n Appointment',
-                                  textAlign: TextAlign.center,
-                                  style: AppTheme.heading.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 12,
+                                    color: customColor,
                                   ),
                                 ),
-                              ),
-                              color: customColor,
-                            ),
-                          ),
                         ],
                       ),
                     ],
