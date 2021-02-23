@@ -6,7 +6,6 @@ import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/registerAsConsultant/registerAsConsultant.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/material.dart';
