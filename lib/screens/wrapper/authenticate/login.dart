@@ -1,9 +1,16 @@
+import 'dart:convert';
+
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/passwordRecovery.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../sharedPreferences.dart';
 
 class LogIn extends StatefulWidget {
   final Function toggleView;
@@ -17,10 +24,73 @@ class _LogInState extends State<LogIn> {
   String error = '';
   bool loading = false;
   bool obscurePassword = true;
+  String phoneNamber;
+  String password;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    logInWithPhoneAndPassword({
+      String phoneNummber,
+      String password,
+      String age,
+      String name,
+      String gender,
+      String status,
+    }) async {
+      try {
+        var response = await http.post(
+          Utils.LOGIN_URL,
+          body: {
+            'mobile': phoneNummber,
+            'password': password,
+          },
+        );
+
+        Map<String, dynamic> map = json.decode(response.body);
+        setState(() async {
+          if (map['success'] == true) {
+            setState(() {
+              User.userToken = map['data']['api_token'].toString();
+            });
+            MySharedPreferences.saveUserSingIn(true);
+
+            MySharedPreferences.saveUserUserName(
+              map['data']['name'].toString(),
+            );
+            MySharedPreferences.saveUserUserPhoneNumber(
+              map['data']['mobile'].toString(),
+            );
+            MySharedPreferences.saveUserUserGender(
+              map['data']['gender'].toString(),
+            );
+            MySharedPreferences.saveUserUserAge(
+              map['data']['age'].toString(),
+            );
+            MySharedPreferences.saveUserUserStutas(
+              map['data']['status'].toString(),
+            );
+            MySharedPreferences.saveUserUserToken(
+              map['data']['api_token'].toString(),
+            );
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (_) => Home(),
+              ),
+            );
+          } else {
+            setState(() {
+              error = 'invalid phone number or password';
+
+              loading = false;
+            });
+          }
+        });
+        // Navigator.pop(context);
+      } catch (e) {
+        print(e);
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -83,17 +153,19 @@ class _LogInState extends State<LogIn> {
                                 children: [
                                   TextFormField(
                                     style: TextStyle(color: Colors.black),
+                                    keyboardType: TextInputType.phone,
                                     decoration: textFormInputDecoration(
                                       Icons.phone,
                                       'Phome Number',
                                     ),
-                                    // validator: (val) =>
-                                    //     val.isEmpty ? 'please enter an email' : null,
-                                    // onChanged: (val) {
-                                    //   setState(() {
-                                    //     email = val;
-                                    //   });
-                                    // },
+                                    validator: (val) => val.isEmpty
+                                        ? 'please enter an phoneNamber'
+                                        : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        phoneNamber = val;
+                                      });
+                                    },
                                   ),
                                   SizedBox(height: 20),
                                   TextFormField(
@@ -109,14 +181,15 @@ class _LogInState extends State<LogIn> {
                                       },
                                       obscurePassword,
                                     ),
-                                    // validator: (val) =>
-                                    //     val.isEmpty ? 'please enter a password' : null,
-                                    // obscureText: obscurePassword,
-                                    // onChanged: (val) {
-                                    //   setState(() {
-                                    //     password = val;
-                                    //   });
-                                    // },
+                                    validator: (val) => val.isEmpty
+                                        ? 'please enter a password'
+                                        : null,
+                                    obscureText: obscurePassword,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        password = val;
+                                      });
+                                    },
                                   ),
                                   SizedBox(height: 10),
                                   InkWell(
@@ -147,13 +220,25 @@ class _LogInState extends State<LogIn> {
                                     ),
                                   ),
                                   SizedBox(height: 10),
+                                  Center(
+                                    child: Text(
+                                      error,
+                                      style: AppTheme.heading,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
                                   CustomButton(
-                                    onPress: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (_) => Home(),
-                                        ),
-                                      );
+                                    onPress: () async {
+                                      if (_formKey.currentState.validate()) {
+                                        setState(() {
+                                          loading = true;
+                                        });
+
+                                        logInWithPhoneAndPassword(
+                                          phoneNummber: phoneNamber,
+                                          password: password,
+                                        );
+                                      }
                                     },
                                     text: 'Log In',
                                   ),

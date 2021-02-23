@@ -32,7 +32,7 @@ class _RegisterState extends State<Register> {
   bool obscurePassword = true;
   bool obscureconPassword = true;
 
-  egisterWithPhoneAndPassword({
+  registerWithPhoneAndPassword({
     String phoneNummber,
     String password,
     String age,
@@ -66,7 +66,7 @@ class _RegisterState extends State<Register> {
             map['data']['name'].toString(),
           );
           MySharedPreferences.saveUserUserPhoneNumber(
-            map['data']['phone'].toString(),
+            map['data']['mobile'].toString(),
           );
           MySharedPreferences.saveUserUserGender(
             map['data']['gender'].toString(),
@@ -86,8 +86,8 @@ class _RegisterState extends State<Register> {
             ),
           );
         } else {
-          error = 'plwase supply a vaild phone';
           setState(() {
+            error = 'please supply a valid phone';
             loading = false;
           });
         }
@@ -241,8 +241,11 @@ class _RegisterState extends State<Register> {
                               CustomButton(
                                 onPress: () async {
                                   if (_formKey.currentState.validate()) {
-                                    loading = true;
-                                    egisterWithPhoneAndPassword(
+                                    setState(() {
+                                      loading = true;
+                                    });
+
+                                    registerWithPhoneAndPassword(
                                       age: Age.resAge,
                                       name: SginUpUserInfo.name,
                                       status: Status.resStautes,

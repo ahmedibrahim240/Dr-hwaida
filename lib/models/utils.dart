@@ -14,6 +14,8 @@ class Utils {
   static final Consultant_URL = BASE_URL + "/consultants";
   // ignore: non_constant_identifier_names
   static final REGISTER_URL = BASE_URL + "/clients/register";
+  // ignore: non_constant_identifier_names
+  static final LOGIN_URL = BASE_URL + "/clients/login";
   // // ignore: non_constant_identifier_names
   // static final REGISTERWITHFACEBOOK_URL = BASE_URL + "/fb-register";
   // // ignore: non_constant_identifier_names
