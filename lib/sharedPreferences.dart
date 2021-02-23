@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:DrHwaida/models/prodact.dart';
+// import 'package:DrHwaida/models/prodact.dart';
 import 'package:DrHwaida/screens/cart/cart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,22 +16,23 @@ class MySharedPreferences {
   static String sharedPrefCartConslProdect = 'cartConsulPro';
   static saveDataOfConsulPro() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    List<String> listFavorite = Cart.consultProdect
+    List<String> listConsulPro = Cart.consultProdect
         .map(
           (items) => jsonEncode(
             items.toMap(),
           ),
         )
         .toList();
-    preferences.setStringList(sharedPrefCartConslProdect, listFavorite);
+    preferences.setStringList(sharedPrefCartConslProdect, listConsulPro);
   }
 
   static getDataOfConsulPro() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    List<String> listFavorite = preferences.get(sharedPrefCartConslProdect);
-    Cart.consultProdect = listFavorite
-        .map((itmes) => SaveProduct.formMap(jsonDecode(itmes)))
-        .toList();
+    var listConsulPro = preferences.get(sharedPrefCartConslProdect);
+    return listConsulPro;
+    // Cart.consultProdect = listConsulPro
+    //     .map((itmes) => SaveProduct.formMap(jsonDecode(itmes)))
+    //     .toList();
   }
 }
