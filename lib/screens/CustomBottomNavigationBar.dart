@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/visaCard.dart';
 import 'package:DrHwaida/screens/Hermonygame/hormonygame.dart';
 import 'package:DrHwaida/screens/userProfile/userprofile.dart';
@@ -41,8 +42,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (_) => UserProfile(
-                              userName: 'Tessting',
-                              userimgUrl: 'lib/images/female.png',
+                              userName: (User.userName) ?? 'Tessting',
+                              userimgUrl: 'lib/images/man.png',
                             ),
                           ),
                         );

@@ -12,8 +12,8 @@ class Utils {
       "http://technomasrsystems.com/Demos/Others/ShyBeLbn/public/api";
   // ignore: non_constant_identifier_names
   static final Consultant_URL = BASE_URL + "/consultants";
-  // // ignore: non_constant_identifier_names
-  // static final REGISTER_URL = BASE_URL + "/register";
+  // ignore: non_constant_identifier_names
+  static final REGISTER_URL = BASE_URL + "/clients/register";
   // // ignore: non_constant_identifier_names
   // static final REGISTERWITHFACEBOOK_URL = BASE_URL + "/fb-register";
   // // ignore: non_constant_identifier_names

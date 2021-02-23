@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class Status extends StatefulWidget {
   final String stauts;
+  static String resStautes;
   const Status({
     Key key,
     this.stauts,
@@ -45,6 +46,7 @@ class _StatusState extends State<Status> {
                       onTap: () {
                         setState(() {
                           _stauts = 'Single';
+                          Status.resStautes = _stauts;
                         });
                         Navigator.of(context).pop();
                       },
@@ -75,6 +77,7 @@ class _StatusState extends State<Status> {
                           onTap: () {
                             setState(() {
                               _stauts = 'Engaged';
+                              Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();
                           },
@@ -109,6 +112,7 @@ class _StatusState extends State<Status> {
                           onTap: () {
                             setState(() {
                               _stauts = 'Married';
+                              Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();
                           },
@@ -138,6 +142,7 @@ class _StatusState extends State<Status> {
                           onTap: () {
                             setState(() {
                               _stauts = 'Detached';
+                              Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();
                           },

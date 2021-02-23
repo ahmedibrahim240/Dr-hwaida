@@ -1,8 +1,20 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/onboarding/slider.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';
+
+class OnBoard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    if (User.userLogIn == true) {
+      return Authenticate();
+    } else {
+      return OnBoarding();
+    }
+  }
+}
 
 class OnBoarding extends StatefulWidget {
   @override

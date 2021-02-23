@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Gender extends StatefulWidget {
   final gender;
+  static String resGender;
   const Gender({
     Key key,
     this.gender,
@@ -50,6 +51,7 @@ class _GenderState extends State<Gender> {
                           onTap: () {
                             setState(() {
                               _gender = 'Male';
+                              Gender.resGender = _gender;
                             });
                             Navigator.of(context).pop();
                           },
@@ -79,6 +81,7 @@ class _GenderState extends State<Gender> {
                           onTap: () {
                             setState(() {
                               _gender = 'Female';
+                              Gender.resGender = _gender;
                             });
                             Navigator.of(context).pop();
                           },

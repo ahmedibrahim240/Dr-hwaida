@@ -5,6 +5,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class Age extends StatefulWidget {
   final age;
+  static String resAge;
   const Age({
     Key key,
     this.age,
@@ -31,6 +32,7 @@ class _AgeState extends State<Age> {
           onConfirm: (date) {
             setState(() {
               _chossenDate = "${date.day}/${date.month}/${date.year}";
+              Age.resAge = _chossenDate;
             });
             print('confirm $date');
           },

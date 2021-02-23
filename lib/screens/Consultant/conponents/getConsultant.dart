@@ -2,11 +2,9 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
-import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:path/path.dart';
 
 FutureBuilder<List<Consultant>> getAllConsultant() {
   return FutureBuilder(

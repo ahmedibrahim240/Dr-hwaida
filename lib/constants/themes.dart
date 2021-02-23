@@ -76,7 +76,7 @@ InputDecoration textFormInputDecoration(
 ) {
   return InputDecoration(
     errorStyle: AppTheme.subHeading.copyWith(
-      color: Colors.white,
+      color: customColor,
     ),
     hintText: label,
     hintStyle: AppTheme.heading.copyWith(

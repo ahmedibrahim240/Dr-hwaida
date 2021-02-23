@@ -1,7 +1,9 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
+import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,13 +17,17 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  // getDate() async {
-  //   Cart.consultProdect = await MySharedPreferences.getDataOfConsulPro();
-  // }
+  getDateOfUser() async {
+    User.userAge = await MySharedPreferences.getUserUserAge();
+    User.userGender = await MySharedPreferences.getUserUserGender();
+    User.userStutes = await MySharedPreferences.getUserUserStutes();
+    User.userName = await MySharedPreferences.getUserUserName();
+    User.userPhoneNum = await MySharedPreferences.getUserUserPhoneNumber();
+  }
 
   @override
   void initState() {
-    // getDate();
+    getDateOfUser();
     super.initState();
   }
 

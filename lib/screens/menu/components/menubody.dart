@@ -5,12 +5,14 @@ import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/registerAsConsultant/registerAsConsultant.dart';
+import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'menucontant.dart';
 
-class MenuBody extends StatelessWidget {
+class MenuBody extends StatefulWidget {
   final String userName;
   final String userImUrl;
   const MenuBody({
@@ -23,9 +25,14 @@ class MenuBody extends StatelessWidget {
   final double height;
 
   @override
+  _MenuBodyState createState() => _MenuBodyState();
+}
+
+class _MenuBodyState extends State<MenuBody> {
+  @override
   Widget build(BuildContext context) {
     return Container(
-      height: height - 272,
+      height: widget.height - 272,
       child: Stack(
         children: [
           ListView(
@@ -148,7 +155,17 @@ class MenuBody extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     FlatButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          MySharedPreferences.saveUserUserToken(null);
+                          MySharedPreferences.saveUserSingIn(false);
+                        });
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (_) => Authenticate(),
+                          ),
+                        );
+                      },
                       icon: Transform.rotate(
                         angle: 180 * 3.14 / 180,
                         child: Icon(

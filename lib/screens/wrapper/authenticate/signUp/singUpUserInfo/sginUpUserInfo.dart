@@ -9,6 +9,7 @@ import 'components/age.dart';
 class SginUpUserInfo extends StatefulWidget {
   final Function toggleViewSignUp;
   final Function toggleView;
+  static String name;
 
   SginUpUserInfo({this.toggleViewSignUp, this.toggleView});
   @override
@@ -16,23 +17,18 @@ class SginUpUserInfo extends StatefulWidget {
 }
 
 class _SginUpUserInfoState extends State<SginUpUserInfo> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-  String sigle;
-  String married;
-  String engaged;
-  String male;
-  String female;
-  String name = '';
+
   String error = '';
-  bool obscurePassword = true;
-  bool obscureconPassword = true;
-  String chossenDate;
 
   @override
   Widget build(BuildContext context) {
     // double width = MediaQuery.of(context).size.width;
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: customColor,
         toolbarHeight: 0,
@@ -90,7 +86,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                                 val.isEmpty ? 'please enter your name' : null,
                             onChanged: (val) {
                               setState(() {
-                                name = val;
+                                SginUpUserInfo.name = val;
                               });
                             },
                             decoration: textFormInputDecoration(
@@ -107,7 +103,29 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                         Status(),
                         SizedBox(height: 10),
                         CustomButton(
-                          onPress: () => widget.toggleViewSignUp(),
+                          onPress: () {
+                            if (Age.resAge != null &&
+                                Status.resStautes != null &&
+                                Gender.resGender != null) {
+                              if (_formKey.currentState.validate()) {
+                                widget.toggleViewSignUp();
+                              }
+                            } else {
+                              _scaffoldKey.currentState.showSnackBar(
+                                new SnackBar(
+                                  content: new Text(
+                                    'you shoud input your data',
+                                  ),
+                                  // action: SnackBarAction(
+                                  //   label: 'Undo',
+                                  //   onPressed: () {
+                                  //     productConsualtList.remove(_prondet);
+                                  //   },
+                                  // ),
+                                ),
+                              );
+                            }
+                          },
                           text: 'Next',
                         ),
                         SizedBox(height: 10),
