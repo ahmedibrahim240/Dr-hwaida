@@ -51,7 +51,7 @@ class SaveProduct {
       this.proImageUrl,
       this.time,
       this.title});
-  SaveProduct.foromMap(Map<String, dynamic> data) {
+  SaveProduct.formMap(Map<String, dynamic> data) {
     consulId = data['consulId'];
     dateId = data['dateId'];
     title = data['title'];

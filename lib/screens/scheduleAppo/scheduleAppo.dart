@@ -7,6 +7,7 @@ import 'package:DrHwaida/screens/cart/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../sharedPreferences.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class ScheduleAppo extends StatefulWidget {
@@ -90,7 +91,8 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                       proImageUrl: widget.consultant.image.toString(),
                     );
                     Cart.consultProdect.add(_prondet);
-                    Cart.saveDataOfConsulPro();
+                    MySharedPreferences.saveDataOfConsulPro();
+
                     _scaffoldKey.currentState.showSnackBar(
                       new SnackBar(
                         content: new Text('Items Was added'),
@@ -98,7 +100,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                           label: 'Undo',
                           onPressed: () {
                             productConsualtList.remove(_prondet);
-                            Cart.saveDataOfConsulPro();
+                            MySharedPreferences.saveDataOfConsulPro();
                           },
                         ),
                       ),

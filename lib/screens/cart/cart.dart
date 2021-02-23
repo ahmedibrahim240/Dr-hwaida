@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/prodact.dart';
 import 'package:DrHwaida/screens/checkOut/checkOut.dart';
+import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,20 +12,6 @@ import '../CustomBottomNavigationBar.dart';
 class Cart extends StatefulWidget {
   static var consultProdect = List<SaveProduct>();
   static SharedPreferences sharedPreferences;
-  static initSharedPreferences() async {
-    sharedPreferences = await SharedPreferences.getInstance();
-  }
-
-  static saveDataOfConsulPro() {
-    List<String> listFavorite = Cart.consultProdect
-        .map(
-          (items) => jsonEncode(
-            items.toMap(),
-          ),
-        )
-        .toList();
-    sharedPreferences.setStringList('consulProdect', listFavorite);
-  }
 
   @override
   _CartState createState() => _CartState();
@@ -40,11 +25,11 @@ class _CartState extends State<Cart> {
   @override
   void initState() {
     culcTotalPrice();
+    MySharedPreferences.getDataOfConsulPro();
     setState(() {
       items = Cart.consultProdect;
     });
     super.initState();
-    Cart.initSharedPreferences();
   }
 
   culcTotalPrice() {
@@ -169,7 +154,8 @@ class _CartState extends State<Cart> {
                                                   '${Cart.consultProdect[index].price}');
                                           Cart.consultProdect.remove(
                                               Cart.consultProdect[index]);
-                                          Cart.saveDataOfConsulPro();
+                                          MySharedPreferences
+                                              .saveDataOfConsulPro();
                                         });
                                       },
                                     ),

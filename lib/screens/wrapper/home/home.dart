@@ -4,6 +4,7 @@ import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../../sharedPreferences.dart';
 import 'components/homeAppBer.dart';
 import 'components/homeFunctions.dart';
 
@@ -14,6 +15,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  void initState() {
+    MySharedPreferences.getDataOfConsulPro();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
