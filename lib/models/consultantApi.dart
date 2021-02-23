@@ -6,24 +6,18 @@ import 'dart:convert';
 class ConsultantApi {
   static Future<List<Consultant>> fetchAllConsultant() async {
     List<Consultant> listOfConsultant = [];
-
-    List<Date> listOfDate = [];
     List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
-    print(listOfDate);
     var response = await http
         .get(Utils.Consultant_URL, headers: {'Accept': 'application/json'});
     var jsonData = json.decode(response.body);
     try {
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
-          listOfDate = [];
           listOfConsulAvailable = [];
           listOfTime = [];
           if (itmes['available_in'] != null) {
             for (var item in itmes['available_in']) {
-              Date date = Date(data: item['date']);
-              listOfDate.add(date);
               for (var i in item['times']) {
                 AvailableTimes times = AvailableTimes(
                   id: i['id'],
@@ -37,9 +31,6 @@ class ConsultantApi {
               listOfConsulAvailable.add(consulAvailable);
             }
           }
-          print(
-            listOfDate.toString() + itmes['id'].toString(),
-          );
 
           Consultant consultant = Consultant(
             id: itmes['id'],
@@ -54,6 +45,8 @@ class ConsultantApi {
             rate: itmes['rate'],
             available_in: listOfConsulAvailable,
             availableIn: itmes['available_in'],
+            mapLink: itmes['map_link'],
+            badges: itmes['badges'],
           );
 
           listOfConsultant.add(consultant);

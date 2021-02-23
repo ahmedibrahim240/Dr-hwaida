@@ -9,6 +9,7 @@ import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../comingSoon.dart';
 
@@ -25,6 +26,7 @@ FutureBuilder<List<Consultant>> getConsultant() {
                 itemCount: snapshot.data.length,
                 padding: EdgeInsets.symmetric(horizontal: 5),
                 itemBuilder: (context, index) {
+                  print(snapshot.data[index].badges);
                   return consulHomeCard(
                     imageUrl: snapshot.data[index].image,
                     oldPrie: snapshot.data[index].coust,
@@ -180,20 +182,42 @@ consulHomeCard({
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               (discount != '0')
-                                  ? Text(
-                                      oldPrie,
-                                      style: AppTheme.subHeading.copyWith(
-                                        color: customColorDivider,
-                                        decoration: TextDecoration.lineThrough,
-                                        fontSize: 12,
-                                      ),
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          oldPrie,
+                                          style: AppTheme.subHeading.copyWith(
+                                            color: customColorDivider,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                        Icon(
+                                          FontAwesomeIcons.poundSign,
+                                          color: Colors.white,
+                                          size: 10,
+                                        ),
+                                      ],
                                     )
                                   : Container(),
-                              Text(
-                                newPrie.toString(),
-                                style: AppTheme.heading.copyWith(
-                                  color: Colors.white,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    newPrie.toString(),
+                                    style: AppTheme.heading.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  Icon(
+                                    FontAwesomeIcons.poundSign,
+                                    color: Colors.white,
+                                    size: 10,
+                                  ),
+                                ],
                               ),
                             ],
                           ),

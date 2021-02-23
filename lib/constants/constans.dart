@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const customColor = Color(0xfff4DC0B1);
 const customColorIcon = Color(0xfff807d7d);
@@ -330,4 +331,18 @@ flitter({BuildContext context, Widget child}) {
     ),
     // isScrollControlled: true,
   );
+}
+
+/////////////////////////////////////////////////////////////
+Future<void> launchInBrowser(String url) async {
+  if (await canLaunch(url)) {
+    await launch(
+      url,
+      forceSafariVC: false,
+      forceWebView: false,
+      headers: <String, String>{'my_header_key': 'my_header_value'},
+    );
+  } else {
+    throw 'Could not launch $url';
+  }
 }

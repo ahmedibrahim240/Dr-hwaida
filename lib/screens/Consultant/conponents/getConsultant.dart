@@ -2,9 +2,11 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
+import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:path/path.dart';
 
 FutureBuilder<List<Consultant>> getAllConsultant() {
   return FutureBuilder(
@@ -73,75 +75,54 @@ FutureBuilder<List<Consultant>> getAllConsultant() {
                                           children: [
                                             (snapshot.data[index].discount !=
                                                     '0')
-                                                ? Text(
-                                                    snapshot.data[index].coust +
-                                                        '\$',
-                                                    style: AppTheme.subHeading
-                                                        .copyWith(
-                                                      color: Colors.grey[500],
-                                                      decoration: TextDecoration
-                                                          .lineThrough,
-                                                    ),
+                                                ? Row(
+                                                    children: [
+                                                      Text(
+                                                        snapshot
+                                                            .data[index].coust,
+                                                        style: AppTheme
+                                                            .subHeading
+                                                            .copyWith(
+                                                          color:
+                                                              Colors.grey[500],
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .lineThrough,
+                                                        ),
+                                                      ),
+                                                      Icon(
+                                                        FontAwesomeIcons
+                                                            .poundSign,
+                                                        color: Colors.grey[500],
+                                                        size: 10,
+                                                      ),
+                                                    ],
                                                   )
                                                 : Container(),
-                                            Text(
-                                              snapshot.data[index].total_coust
-                                                  .toString(),
-                                              style: AppTheme.heading,
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  snapshot
+                                                      .data[index].total_coust
+                                                      .toString(),
+                                                  style: AppTheme.heading,
+                                                ),
+                                                Icon(
+                                                  FontAwesomeIcons.poundSign,
+                                                  color: Colors.grey[500],
+                                                  size: 10,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
                                       ],
                                     ),
-                                    (index == 0)
-                                        ? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              consulCardBotom(
-                                                title: 'Recent',
-                                                color: customColor,
-                                              ),
-                                              SizedBox(width: 5),
-                                              consulCardBotom(
-                                                title: 'Selected',
-                                                color: Colors.lightBlue,
-                                              ),
-                                            ],
-                                          )
-                                        : (index == 1)
-                                            ? Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  consulCardBotom(
-                                                    title: 'Recent',
-                                                    color: customColor,
-                                                  ),
-                                                ],
-                                              )
-                                            : Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  consulCardBotom(
-                                                    title: 'Recent',
-                                                    color: customColor,
-                                                  ),
-                                                  SizedBox(width: 5),
-                                                  consulCardBotom(
-                                                    title: 'Selected',
-                                                    color: Colors.lightBlue,
-                                                  ),
-                                                  SizedBox(width: 5),
-                                                  consulCardBotom(
-                                                    title: 'Our Stars',
-                                                    color: Colors.gold,
-                                                  ),
-                                                ],
-                                              ),
+                                    (snapshot.data[index].badges == null)
+                                        ? Container()
+                                        : listOfBadges(
+                                            badges: snapshot.data[index].badges,
+                                          ),
                                   ],
                                 ),
                               ),
@@ -155,9 +136,64 @@ FutureBuilder<List<Consultant>> getAllConsultant() {
                 },
               );
       } else {
-        return Center(child: CircularProgressIndicator());
+        return Align(
+          alignment: Alignment.center,
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       }
     },
+  );
+}
+
+listOfBadges({List badges}) {
+  String selected = 'selected_badge';
+  String recent = 'recent_badge';
+  String ourstars = 'our_stars_badge';
+  return Container(
+    height: 100,
+    child: ListView.builder(
+      shrinkWrap: true,
+      primary: false,
+      scrollDirection: Axis.horizontal,
+      itemCount: badges.length,
+      itemBuilder: (context, index) {
+        if (badges[index] == selected) {
+          return Row(
+            children: [
+              consulCardBotom(
+                title: 'Selected',
+                color: Colors.lightBlue,
+              ),
+              SizedBox(width: 2),
+            ],
+          );
+        } else if (badges[index] == recent) {
+          return Row(
+            children: [
+              consulCardBotom(
+                title: 'Recent',
+                color: customColor,
+              ),
+              SizedBox(width: 2),
+            ],
+          );
+        } else if (badges[index] == ourstars) {
+          return Row(
+            children: [
+              consulCardBotom(
+                title: 'Our Stars',
+                color: Colors.gold,
+              ),
+              SizedBox(width: 2),
+            ],
+          );
+        } else {
+          return Container();
+        }
+      },
+    ),
   );
 }
 

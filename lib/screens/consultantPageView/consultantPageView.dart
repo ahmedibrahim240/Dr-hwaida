@@ -23,6 +23,8 @@ class ConsultantPageView extends StatefulWidget {
 }
 
 class _ConsultantPageViewState extends State<ConsultantPageView> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   String _parseHtmlString(String htmlString) {
     final document = parse(htmlString);
     final String parsedString = parse(document.body.text).documentElement.text;
@@ -34,6 +36,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
   Widget build(BuildContext context) {
     print(widget.consultant.availableIn.toString());
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: customColor,
         toolbarHeight: 0,
@@ -62,7 +65,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   Container consultantData(BuildContext context) {
     return Container(
-      height: 520,
+      height: 530,
       child: Stack(
         children: [
           Container(
@@ -201,6 +204,44 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                             ),
                           ),
                         ],
+                      ),
+                      // SizedBox(height: 10),
+                      InkWell(
+                        onTap: () {
+                          if (widget.consultant.mapLink != null) {
+                            launchInBrowser(widget.consultant.mapLink);
+                          } else {
+                            _scaffoldKey.currentState.showSnackBar(
+                              new SnackBar(
+                                content: new Text(
+                                    'This Consultant don\'t have map address'),
+                                // action: SnackBarAction(
+                                //   label: 'Undo',
+                                //   onPressed: () {
+                                //     productConsualtList.remove(_prondet);
+                                //   },
+                                // ),
+                              ),
+                            );
+                          }
+                        },
+                        child: Container(
+                          height: 30,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(35),
+                            gradient: AppTheme.containerBackground,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Open Map',
+                              style: AppTheme.heading.copyWith(
+                                fontSize: 8,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(height: 10),
                       Text(

@@ -9,8 +9,10 @@ class Consultant {
   String discount;
   String rate;
   String image;
+  String mapLink;
   String experince;
   var availableIn;
+  List<dynamic> badges;
   // ignore: non_constant_identifier_names
   List<ConsulAvailable> available_in;
 
@@ -25,10 +27,12 @@ class Consultant {
     this.discount,
     this.rate,
     this.image,
+    this.mapLink,
     this.experince,
     // ignore: non_constant_identifier_names
     this.available_in,
     this.availableIn,
+    this.badges,
   });
 }
 
