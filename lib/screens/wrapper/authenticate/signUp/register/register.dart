@@ -62,6 +62,8 @@ class _RegisterState extends State<Register> {
           });
           MySharedPreferences.saveUserSingIn(true);
           MySharedPreferences.saveUserSkipLogIn(false);
+          MySharedPreferences.saveUserUserPassword(password);
+
           MySharedPreferences.saveUserUserName(
             map['data']['name'].toString(),
           );

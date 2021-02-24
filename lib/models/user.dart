@@ -5,6 +5,7 @@ class User {
   static String userAge;
   static String userStutes;
   static String userGender;
+  static String userPassword;
   static bool userLogIn;
   static bool userSkipLogIn;
 }

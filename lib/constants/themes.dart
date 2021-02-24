@@ -29,7 +29,7 @@ InputDecoration textFormInputDecorationForPassword(
     IconData icon, String label, Function obscureText, bool obscurepasswrod) {
   return InputDecoration(
     errorStyle: AppTheme.subHeading.copyWith(
-      color: Colors.white,
+      color: customColor,
     ),
     hintText: label,
     hintStyle: AppTheme.heading.copyWith(
@@ -40,18 +40,6 @@ InputDecoration textFormInputDecorationForPassword(
     filled: true,
     isDense: true,
     contentPadding: EdgeInsets.all(10),
-    suffixIcon: IconButton(
-      onPressed: obscureText,
-      icon: obscurepasswrod
-          ? Icon(
-              icon,
-              color: customColor,
-            )
-          : Icon(
-              Icons.visibility,
-              color: customColor,
-            ),
-    ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
       borderSide: BorderSide(
@@ -65,6 +53,18 @@ InputDecoration textFormInputDecorationForPassword(
         style: BorderStyle.solid,
         color: customColor,
       ),
+    ),
+    suffixIcon: IconButton(
+      onPressed: obscureText,
+      icon: obscurepasswrod
+          ? Icon(
+              icon,
+              color: customColor,
+            )
+          : Icon(
+              Icons.visibility,
+              color: customColor,
+            ),
     ),
   );
 }

@@ -15,6 +15,7 @@ class MySharedPreferences {
   static String sharedPrefUserUserGender = 'Usergender';
   static String sharedPrefUserUserStutes = 'UserStuts';
   static String sharedPrefUserUserPhone = 'UserPhome';
+  static String sharedPrefUserUserPassword = 'UserPassword';
   static String sharedPrefUserImageUrl = 'userImageUrl';
   static String sharedPrefUserToken = 'userToken';
   static String sharedPrefCartConslProdect = 'cartConsulPro';
@@ -38,6 +39,12 @@ class MySharedPreferences {
   static Future<bool> saveUserUserName(String userName) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.setString(sharedPrefUserName, userName);
+  }
+
+  static Future<bool> saveUserUserPassword(String userPasswrod) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString(
+        sharedPrefUserUserPassword, userPasswrod);
   }
 
   static Future<bool> saveUserUserToken(String userToken) async {
@@ -105,6 +112,12 @@ class MySharedPreferences {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String name = preferences.getString(sharedPrefUserName);
     return name;
+  }
+
+  static getUserUserPassword() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String password = preferences.getString(sharedPrefUserUserPassword);
+    return password;
   }
 
   static getUserUserToken() async {

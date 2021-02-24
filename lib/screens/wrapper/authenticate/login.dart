@@ -55,6 +55,7 @@ class _LogInState extends State<LogIn> {
             });
             MySharedPreferences.saveUserSingIn(true);
             MySharedPreferences.saveUserSkipLogIn(false);
+            MySharedPreferences.saveUserUserPassword(password);
 
             MySharedPreferences.saveUserUserName(
               map['data']['name'].toString(),

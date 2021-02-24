@@ -24,6 +24,9 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  // final _formKey = GlobalKey<FormState>();
+
+  String name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +92,7 @@ class _UserProfileState extends State<UserProfile> {
                           ),
                           SizedBox(height: 20),
                           Text(
-                            widget.userName,
+                            (name) ?? userData.name,
                             style: AppTheme.heading.copyWith(
                               fontSize: 20,
                               color: customColor,
@@ -103,6 +106,13 @@ class _UserProfileState extends State<UserProfile> {
                           children: [
                             TextFormField(
                               initialValue: userData.name,
+                              onChanged: (val) {
+                                setState(
+                                  () {
+                                    name = val;
+                                  },
+                                );
+                              },
                               decoration: InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.edit,
@@ -178,6 +188,35 @@ class _UserProfileState extends State<UserProfile> {
                             Gender(
                               gender: userData.userGender,
                             ),
+                            SizedBox(height: 20),
+                            RaisedButton(
+                              color: customColor,
+                              onPressed: () {
+                                print('kelck');
+                                // print('Name is:' + name);
+                                // print('Age is:' + Age.resAge);
+                                // print('Stuts is:' + Status.resStautes);
+                                // print('gender is:' + Gender.resGender);
+                                // print('userToken:' + User.userToken);
+
+                                DatabaseServices(userToken: User.userToken)
+                                    .upDateUserData(
+                                  age: (Age.resAge) ?? userData.userAge,
+                                  name: (name) ?? userData.name,
+                                  status: (Status.resStautes) ?? userData.name,
+                                  gender:
+                                      (Gender.resGender) ?? userData.userGender,
+                                  phoneNummber: userData.phoneNumber,
+                                );
+                              },
+                              child: Text(
+                                'Save Change',
+                                style: AppTheme.heading.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
                           ],
                         ),
                       ),

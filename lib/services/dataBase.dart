@@ -16,12 +16,40 @@ class DatabaseServices {
           .get(Utils.GITUSERDATA_URL, headers: {'x-api-key': userToken});
 
       final data = json.decode(response.body);
-      if (data['success'] == true) {}
 
       final user = _userFromDatabaseUser(data);
       controller.add(user);
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+  upDateUserData(
+      {String phoneNummber,
+      String age,
+      String name,
+      String gender,
+      String status,
+      String userImage}) async {
+    var body = jsonEncode({
+      'name': name,
+      'mobile': phoneNummber,
+      'image': userImage,
+      'age': age,
+      'gender': gender,
+      'status': status,
+    });
+    try {
+      var respes = await http.put(
+        Utils.UPDATEUSERDATA_URL,
+        headers: {'x-api-key': userToken},
+        body: body,
+      );
+
+      print(jsonDecode(respes.body));
+    } catch (e) {
+      print('errrrroe');
+      print('catch Error is:' + e.toString());
     }
   }
 

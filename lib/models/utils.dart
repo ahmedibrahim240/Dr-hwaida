@@ -45,4 +45,6 @@ class Utils {
   static final GITUSERDATA_URL = BASE_URL + "/clients/profile";
   // ignore: non_constant_identifier_names
   static final UPDATEUSERDATA_URL = BASE_URL + "/clients/update";
+  // ignore: non_constant_identifier_names
+  static final CHANGEPASSWORD_URL = BASE_URL + "/clients/change_password";
 }
