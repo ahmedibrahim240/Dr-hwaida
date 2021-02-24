@@ -7,7 +7,6 @@ import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/registerAsConsultant/registerAsConsultant.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/material.dart';
@@ -167,6 +166,12 @@ class _MenuBodyState extends State<MenuBody> {
                     FlatButton.icon(
                       onPressed: () {
                         if (User.userSkipLogIn == true) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) => SplashScreen(),
+                            ),
+                          );
+                        } else {
                           setState(
                             () {
                               MySharedPreferences.saveUserUserToken(null);
@@ -175,12 +180,6 @@ class _MenuBodyState extends State<MenuBody> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (_) => SplashScreen(),
-                            ),
-                          );
-                        } else {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (_) => Authenticate(),
                             ),
                           );
                         }

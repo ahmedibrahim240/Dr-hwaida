@@ -1,12 +1,14 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/models/visaCard.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/age.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/gender.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/status.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
+import 'package:DrHwaida/services/dataBase.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -60,126 +62,142 @@ class _UserProfileState extends State<UserProfile> {
           },
         )),
       ),
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height - 150,
-            child: ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 40,
-              ),
+      body: StreamBuilder<Users>(
+        stream: DatabaseServices(userToken: User.userToken).userData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Users userData = snapshot.data;
+            print('UserIMageURl:' + userData.userImageUrl.toString());
+            return Stack(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    UserPorfileImage(
-                      onTap: () {},
-                      userimgUrl: widget.userimgUrl,
+                Container(
+                  height: MediaQuery.of(context).size.height - 150,
+                  child: ListView(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 40,
                     ),
-                    SizedBox(height: 20),
-                    Text(
-                      widget.userName,
-                      style: AppTheme.heading.copyWith(
-                        fontSize: 20,
-                        color: customColor,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Form(
-                  child: Column(
                     children: [
-                      TextFormField(
-                        initialValue: widget.userName,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.edit,
-                          ),
-                          prefixIcon: Container(
-                            margin: EdgeInsets.all(8),
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              gradient: AppTheme.containerBackground,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      TextFormField(
-                        initialValue: User.userPhoneNum,
-                        readOnly: true,
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => Settings(),
-                            ),
-                          );
-                        },
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.edit,
-                          ),
-                          prefixIcon: Container(
-                            margin: EdgeInsets.all(8),
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              gradient: AppTheme.containerBackground,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.phone,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: Status(
-                              stauts: User.userStutes,
-                            ),
+                          UserPorfileImage(
+                            onTap: () {},
+                            userimgUrl: userData.userImageUrl,
+                            gender: userData.userGender,
                           ),
-                          SizedBox(width: 20),
-                          Expanded(
-                            flex: 1,
-                            child: Age(
-                              age: User.userAge,
+                          SizedBox(height: 20),
+                          Text(
+                            widget.userName,
+                            style: AppTheme.heading.copyWith(
+                              fontSize: 20,
+                              color: customColor,
                             ),
                           ),
                         ],
                       ),
                       SizedBox(height: 20),
-                      Gender(
-                        gender: User.userGender,
+                      Form(
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              initialValue: userData.name,
+                              decoration: InputDecoration(
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                ),
+                                prefixIcon: Container(
+                                  margin: EdgeInsets.all(8),
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    gradient: AppTheme.containerBackground,
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.person,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            TextFormField(
+                              initialValue: userData.phoneNumber,
+                              readOnly: true,
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => Settings(),
+                                  ),
+                                );
+                              },
+                              decoration: InputDecoration(
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                ),
+                                prefixIcon: Container(
+                                  margin: EdgeInsets.all(8),
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    gradient: AppTheme.containerBackground,
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.phone,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Status(
+                                    stauts: userData.userStutes,
+                                  ),
+                                ),
+                                SizedBox(width: 20),
+                                Expanded(
+                                  flex: 1,
+                                  child: Age(
+                                    age: userData.userAge,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            Gender(
+                              gender: userData.userGender,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: CustomBottomNavigationBar(),
+                ),
               ],
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(),
-          ),
-        ],
+            );
+          } else {
+            return Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        },
       ),
     );
   }
@@ -190,10 +208,12 @@ class UserPorfileImage extends StatelessWidget {
     Key key,
     @required this.onTap,
     @required this.userimgUrl,
+    @required this.gender,
   }) : super(key: key);
 
   final Function onTap;
   final String userimgUrl;
+  final String gender;
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +241,11 @@ class UserPorfileImage extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
-                      image: AssetImage(userimgUrl),
+                      image: (userimgUrl == null)
+                          ? NetworkImage(userimgUrl)
+                          : AssetImage(
+                              Utils.userImageURL(gender: gender),
+                            ),
                       fit: BoxFit.cover,
                     ),
                   ),

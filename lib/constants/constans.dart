@@ -1,6 +1,5 @@
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/login.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';

@@ -36,7 +36,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     alignment: Alignment.centerRight,
                     child: InkWell(
                       onTap: () {
-                        if (User.userSkipLogIn == true) {
+                        if (User.userSkipLogIn != true) {
                           setState(() {
                             Helper.tappedBottomShet = 1;
                           });
