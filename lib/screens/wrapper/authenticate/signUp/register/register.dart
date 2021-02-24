@@ -61,7 +61,7 @@ class _RegisterState extends State<Register> {
             User.userToken = map['data']['api_token'].toString();
           });
           MySharedPreferences.saveUserSingIn(true);
-
+          MySharedPreferences.saveUserSkipLogIn(false);
           MySharedPreferences.saveUserUserName(
             map['data']['name'].toString(),
           );

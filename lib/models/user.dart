@@ -6,4 +6,5 @@ class User {
   static String userStutes;
   static String userGender;
   static bool userLogIn;
+  static bool userSkipLogIn;
 }

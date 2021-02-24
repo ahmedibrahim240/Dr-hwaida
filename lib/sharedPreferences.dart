@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharedPreferences {
   static String sharedPrefUserSinginKey = 'IsSingIn';
+  static String sharedPrefUserSkipLogIn = 'SkipLogIn';
   static String sharedPrefUserselectedProImage = 'IsSelected';
   static String sharedPrefAppLang = 'AppLan';
   static String sharedPrefUserName = 'UserName';
@@ -21,6 +22,11 @@ class MySharedPreferences {
   static Future<bool> saveUserSingIn(bool isSingin) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.setBool(sharedPrefUserSinginKey, isSingin);
+  }
+
+  static Future<bool> saveUserSkipLogIn(bool isSkipLogIn) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setBool(sharedPrefUserSkipLogIn, isSkipLogIn);
   }
 
   static Future<bool> saveUserselectedProImage(bool isSelected) async {
@@ -80,6 +86,12 @@ class MySharedPreferences {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var isSingin = (preferences.getBool(sharedPrefUserSinginKey) ?? false);
     return isSingin;
+  }
+
+  static getUserSkipLogIn() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var isSkipLogIn = (preferences.getBool(sharedPrefUserSkipLogIn) ?? false);
+    return isSkipLogIn;
   }
 
   static getUserselectedProImage() async {

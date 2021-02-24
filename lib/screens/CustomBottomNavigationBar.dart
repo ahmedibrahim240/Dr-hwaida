@@ -36,17 +36,22 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     alignment: Alignment.centerRight,
                     child: InkWell(
                       onTap: () {
-                        setState(() {
-                          Helper.tappedBottomShet = 1;
-                        });
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => UserProfile(
-                              userName: (User.userName) ?? 'Tessting',
-                              userimgUrl: 'lib/images/man.png',
+                        if (User.userSkipLogIn == true) {
+                          setState(() {
+                            Helper.tappedBottomShet = 1;
+                          });
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => UserProfile(
+                                userName: (User.userName) ?? 'Tessting',
+                                userimgUrl: 'lib/images/man.png',
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          showMyDialog(context: context);
+                        }
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,

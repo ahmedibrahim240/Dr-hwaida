@@ -1,4 +1,6 @@
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/login.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -8,6 +10,62 @@ const customColor = Color(0xfff4DC0B1);
 const customColorIcon = Color(0xfff807d7d);
 const customColorDivider = Color(0xfffe1e1e1);
 const customColorGray = Color(0xfff7d7d7d);
+////////////////////////////////////////////////////////////
+Future<void> showMyDialog({BuildContext context}) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(
+                'you Shoud be login frist',
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              'Cancel',
+              style: AppTheme.heading.copyWith(
+                color: customColor,
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          RaisedButton(
+            color: customColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35),
+            ),
+            child: Text(
+              'LogIn',
+              style: AppTheme.heading.copyWith(
+                color: Colors.white,
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (_) => Authenticate(),
+                ),
+              );
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 //////////////////////////////////////////////////////////
 PreferredSizeWidget customAppBar({String title}) => AppBar(
       centerTitle: true,

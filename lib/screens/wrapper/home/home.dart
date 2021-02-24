@@ -23,6 +23,7 @@ class _HomeState extends State<Home> {
     User.userStutes = await MySharedPreferences.getUserUserStutes();
     User.userName = await MySharedPreferences.getUserUserName();
     User.userPhoneNum = await MySharedPreferences.getUserUserPhoneNumber();
+    User.userSkipLogIn = await MySharedPreferences.getUserSkipLogIn();
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/conSultantRating.dart';
 import 'package:DrHwaida/screens/myReview/myreview.dart';
 import 'package:DrHwaida/screens/scheduleAppo/scheduleAppo.dart';
@@ -185,12 +186,16 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                             child: CustomButtonWithchild(
                               color: customColor,
                               onPress: () {
-                                flitter(
-                                  context: context,
-                                  child: ConsultantRating(
-                                    title: widget.consultant.name,
-                                  ),
-                                );
+                                if (User.userSkipLogIn == true) {
+                                  flitter(
+                                    context: context,
+                                    child: ConsultantRating(
+                                      title: widget.consultant.name,
+                                    ),
+                                  );
+                                } else {
+                                  showMyDialog(context: context);
+                                }
                               },
                               child: Center(
                                 child: Text(
@@ -208,21 +213,25 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                       // SizedBox(height: 10),
                       InkWell(
                         onTap: () {
-                          if (widget.consultant.mapLink != null) {
-                            launchInBrowser(widget.consultant.mapLink);
+                          if (User.userSkipLogIn == true) {
+                            if (widget.consultant.mapLink != null) {
+                              launchInBrowser(widget.consultant.mapLink);
+                            } else {
+                              _scaffoldKey.currentState.showSnackBar(
+                                new SnackBar(
+                                  content: new Text(
+                                      'This Consultant don\'t have map address'),
+                                  // action: SnackBarAction(
+                                  //   label: 'Undo',
+                                  //   onPressed: () {
+                                  //     productConsualtList.remove(_prondet);
+                                  //   },
+                                  // ),
+                                ),
+                              );
+                            }
                           } else {
-                            _scaffoldKey.currentState.showSnackBar(
-                              new SnackBar(
-                                content: new Text(
-                                    'This Consultant don\'t have map address'),
-                                // action: SnackBarAction(
-                                //   label: 'Undo',
-                                //   onPressed: () {
-                                //     productConsualtList.remove(_prondet);
-                                //   },
-                                // ),
-                              ),
-                            );
+                            showMyDialog(context: context);
                           }
                         },
                         child: Container(
@@ -310,13 +319,17 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                   flex: 2,
                                   child: CustomButtonWithchild(
                                     onPress: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (_) => ScheduleAppo(
-                                            consultant: widget.consultant,
+                                      if (User.userSkipLogIn == true) {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (_) => ScheduleAppo(
+                                              consultant: widget.consultant,
+                                            ),
                                           ),
-                                        ),
-                                      );
+                                        );
+                                      } else {
+                                        showMyDialog(context: context);
+                                      }
                                     },
                                     child: Center(
                                       child: Text(

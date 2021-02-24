@@ -1,11 +1,13 @@
 import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/registerAsConsultant/registerAsConsultant.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/material.dart';
@@ -50,11 +52,15 @@ class _MenuBodyState extends State<MenuBody> {
                       title: 'Notifcations',
                       icon: Icons.notifications,
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => Notificatios(),
-                          ),
-                        );
+                        if (User.userSkipLogIn == false) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => Notificatios(),
+                            ),
+                          );
+                        } else {
+                          showMyDialog(context: context);
+                        }
                       },
                     ),
                     SizedBox(height: 20),
@@ -62,11 +68,15 @@ class _MenuBodyState extends State<MenuBody> {
                       title: 'Settings',
                       icon: Icons.settings,
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => Settings(),
-                          ),
-                        );
+                        if (User.userSkipLogIn == false) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => Settings(),
+                            ),
+                          );
+                        } else {
+                          showMyDialog(context: context);
+                        }
                       },
                     ),
                     SizedBox(height: 20),
@@ -156,15 +166,24 @@ class _MenuBodyState extends State<MenuBody> {
                     SizedBox(height: 20),
                     FlatButton.icon(
                       onPressed: () {
-                        setState(() {
-                          MySharedPreferences.saveUserUserToken(null);
-                          MySharedPreferences.saveUserSingIn(false);
-                        });
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (_) => SplashScreen(),
-                          ),
-                        );
+                        if (User.userSkipLogIn == true) {
+                          setState(
+                            () {
+                              MySharedPreferences.saveUserUserToken(null);
+                            },
+                          );
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) => SplashScreen(),
+                            ),
+                          );
+                        } else {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (_) => Authenticate(),
+                            ),
+                          );
+                        }
                       },
                       icon: Transform.rotate(
                         angle: 180 * 3.14 / 180,
@@ -174,7 +193,7 @@ class _MenuBodyState extends State<MenuBody> {
                         ),
                       ),
                       label: Text(
-                        'Log Out',
+                        (User.userSkipLogIn == true) ? 'LogIn' : 'Log Out',
                         style: AppTheme.heading.copyWith(
                           color: customColor,
                         ),

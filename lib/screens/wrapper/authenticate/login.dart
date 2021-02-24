@@ -54,6 +54,7 @@ class _LogInState extends State<LogIn> {
               User.userToken = map['data']['api_token'].toString();
             });
             MySharedPreferences.saveUserSingIn(true);
+            MySharedPreferences.saveUserSkipLogIn(false);
 
             MySharedPreferences.saveUserUserName(
               map['data']['name'].toString(),
@@ -194,7 +195,11 @@ class _LogInState extends State<LogIn> {
                                   SizedBox(height: 10),
                                   InkWell(
                                     onTap: () {
-                                      Navigator.of(context).push(
+                                      setState(() {
+                                        MySharedPreferences.saveUserSkipLogIn(
+                                            true);
+                                      });
+                                      Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                           builder: (_) => Home(),
                                         ),
