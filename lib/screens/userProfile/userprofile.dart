@@ -70,7 +70,6 @@ class _UserProfileState extends State<UserProfile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Users userData = snapshot.data;
-            print('UserIMageURl:' + userData.userImageUrl.toString());
             return Stack(
               children: [
                 Container(
@@ -192,18 +191,13 @@ class _UserProfileState extends State<UserProfile> {
                             RaisedButton(
                               color: customColor,
                               onPressed: () {
-                                print('kelck');
-                                // print('Name is:' + name);
-                                // print('Age is:' + Age.resAge);
-                                // print('Stuts is:' + Status.resStautes);
-                                // print('gender is:' + Gender.resGender);
-                                // print('userToken:' + User.userToken);
-
+                                print(userData.userGender);
                                 DatabaseServices(userToken: User.userToken)
                                     .upDateUserData(
                                   age: (Age.resAge) ?? userData.userAge,
                                   name: (name) ?? userData.name,
-                                  status: (Status.resStautes) ?? userData.name,
+                                  status: (Status.resStautes) ??
+                                      userData.userStutes,
                                   gender:
                                       (Gender.resGender) ?? userData.userGender,
                                   phoneNummber: userData.phoneNumber,

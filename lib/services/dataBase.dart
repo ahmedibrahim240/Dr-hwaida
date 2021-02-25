@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:http/http.dart' as http;
@@ -24,13 +23,14 @@ class DatabaseServices {
     }
   }
 
-  upDateUserData(
-      {String phoneNummber,
-      String age,
-      String name,
-      String gender,
-      String status,
-      String userImage}) async {
+  upDateUserData({
+    String phoneNummber,
+    String age,
+    String name,
+    String gender,
+    String status,
+    String userImage,
+  }) async {
     var body = jsonEncode({
       'name': name,
       'mobile': phoneNummber,
@@ -39,16 +39,30 @@ class DatabaseServices {
       'gender': gender,
       'status': status,
     });
+
+    final uri = Uri.parse(Utils.UPDATEUSERDATA_URL).replace(
+      queryParameters: <String, String>{
+        'name': "$name",
+        'age': "$age",
+        'gender': "$gender",
+        'status': "$status",
+        'mobile': "$phoneNummber",
+        'image': "$userImage",
+      },
+    );
+    print(uri.toString());
+
     try {
       var respes = await http.put(
-        Utils.UPDATEUSERDATA_URL,
+        uri.toString(),
         headers: {'x-api-key': userToken},
         body: body,
       );
-
-      print(jsonDecode(respes.body));
+      final data = json.decode(respes.body);
+      if (data['success'] == false) {}
     } catch (e) {
       print('errrrroe');
+
       print('catch Error is:' + e.toString());
     }
   }
