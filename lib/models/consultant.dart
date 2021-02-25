@@ -12,6 +12,7 @@ class Consultant {
   String mapLink;
   String experince;
   var availableIn;
+  var rates;
   List<dynamic> badges;
   // ignore: non_constant_identifier_names
   List<ConsulAvailable> available_in;
@@ -33,6 +34,7 @@ class Consultant {
     this.available_in,
     this.availableIn,
     this.badges,
+    this.rates,
   });
 }
 

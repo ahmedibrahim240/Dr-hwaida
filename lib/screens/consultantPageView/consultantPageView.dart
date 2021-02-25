@@ -3,7 +3,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/conSultantRating.dart';
-import 'package:DrHwaida/screens/myReview/myreview.dart';
+import 'package:DrHwaida/screens/consultantPageView/counsultantRating.dart';
 import 'package:DrHwaida/screens/scheduleAppo/scheduleAppo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,10 +13,11 @@ import '../CustomBottomNavigationBar.dart';
 
 class ConsultantPageView extends StatefulWidget {
   final Consultant consultant;
-
+  final int consulId;
   const ConsultantPageView({
     Key key,
     @required this.consultant,
+    @required this.consulId,
   }) : super(key: key);
 
   @override
@@ -51,7 +52,9 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
               consultantData(context),
               Container(
                 height: 1100,
-                child: MyReview(),
+                child: CounsultantRating(
+                  id: widget.consultant.id,
+                ),
               ),
             ],
           ),
@@ -213,7 +216,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                       // SizedBox(height: 10),
                       InkWell(
                         onTap: () {
-                          if (User.userSkipLogIn == true) {
+                          if (User.userSkipLogIn == false) {
                             if (widget.consultant.mapLink != null) {
                               launchInBrowser(widget.consultant.mapLink);
                             } else {
@@ -319,7 +322,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                   flex: 2,
                                   child: CustomButtonWithchild(
                                     onPress: () {
-                                      if (User.userSkipLogIn == true) {
+                                      if (User.userSkipLogIn == false) {
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (_) => ScheduleAppo(

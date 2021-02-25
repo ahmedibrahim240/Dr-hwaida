@@ -41,6 +41,7 @@ FutureBuilder<List<Consultant>> getConsultant() {
                         MaterialPageRoute(
                           builder: (_) => ConsultantPageView(
                             consultant: snapshot.data[index],
+                            consulId: snapshot.data[index].id,
                           ),
                         ),
                       );

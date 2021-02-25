@@ -31,14 +31,14 @@ class DatabaseServices {
     String status,
     String userImage,
   }) async {
-    var body = jsonEncode({
-      'name': name,
-      'mobile': phoneNummber,
-      'image': userImage,
-      'age': age,
-      'gender': gender,
-      'status': status,
-    });
+    // var body = jsonEncode({
+    //   'name': name,
+    //   'mobile': phoneNummber,
+    //   'image': userImage,
+    //   'age': age,
+    //   'gender': gender,
+    //   'status': status,
+    // });
 
     final uri = Uri.parse(Utils.UPDATEUSERDATA_URL).replace(
       queryParameters: <String, String>{
@@ -56,7 +56,6 @@ class DatabaseServices {
       var respes = await http.put(
         uri.toString(),
         headers: {'x-api-key': userToken},
-        body: body,
       );
       final data = json.decode(respes.body);
       if (data['success'] == false) {}

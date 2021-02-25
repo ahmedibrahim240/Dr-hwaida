@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../CustomBottomNavigationBar.dart';
-import 'dart:convert';
 
 class Cart extends StatefulWidget {
-  static var consultProdect = List<SaveProduct>();
+  static List<SaveProduct> consultProdect = [];
+
   static SharedPreferences sharedPreferences;
 
   @override
@@ -22,20 +22,12 @@ class _CartState extends State<Cart> {
   var items = List<SaveProduct>();
 
   double totalPrice = 0.0;
-  getDate() async {
-    Cart.consultProdect = await MySharedPreferences.getDataOfConsulPro()
-        .map(
-          (itmes) => SaveProduct.formMap(
-            jsonDecode(itmes),
-          ),
-        )
-        .toList();
-  }
 
   @override
-  void initState() {
+  void initState() async {
     culcTotalPrice();
-    getDate();
+    // Cart.consultProdect = await MySharedPreferences.getDataOfConsulPro();
+
     setState(() {
       items = Cart.consultProdect;
     });

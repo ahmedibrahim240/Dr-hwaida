@@ -99,7 +99,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                         action: SnackBarAction(
                           label: 'Undo',
                           onPressed: () {
-                            productConsualtList.remove(_prondet);
+                            Cart.consultProdect.remove(_prondet);
                             MySharedPreferences.saveDataOfConsulPro();
                           },
                         ),
@@ -109,12 +109,6 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                     _scaffoldKey.currentState.showSnackBar(
                       new SnackBar(
                         content: new Text('you shoud choses  date and time'),
-                        // action: SnackBarAction(
-                        //   label: 'Undo',
-                        //   onPressed: () {
-                        //     productConsualtList.remove(_prondet);
-                        //   },
-                        // ),
                       ),
                     );
                   }

@@ -25,11 +25,13 @@ class _HomeState extends State<Home> {
     User.userPhoneNum = await MySharedPreferences.getUserUserPhoneNumber();
     User.userSkipLogIn = await MySharedPreferences.getUserSkipLogIn();
     User.userPassword = await MySharedPreferences.getUserUserPassword();
+    // Cart.consultProdect = await MySharedPreferences.getDataOfConsulPro();
   }
 
   @override
   void initState() {
     getDateOfUser();
+    // MySharedPreferences.getDataOfConsulPro();
     super.initState();
   }
 
