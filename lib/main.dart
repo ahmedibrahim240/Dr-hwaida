@@ -1,6 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -10,6 +10,12 @@ class User {
   static bool userSkipLogIn;
 }
 
+class UserToken {
+  final String userTohen;
+
+  UserToken({this.userTohen});
+}
+
 class Users {
   final String userToken;
   final String phoneNumber;

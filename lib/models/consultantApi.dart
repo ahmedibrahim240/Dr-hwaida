@@ -49,6 +49,7 @@ class ConsultantApi {
             availableIn: itmes['available_in'],
             mapLink: itmes['map_link'],
             badges: itmes['badges'],
+            question: itmes['question'],
           );
 
           listOfConsultant.add(consultant);

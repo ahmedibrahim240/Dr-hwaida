@@ -11,6 +11,7 @@ class Consultant {
   String image;
   String mapLink;
   String experince;
+  String question;
   var availableIn;
   var rates;
   List<dynamic> badges;
@@ -35,6 +36,7 @@ class Consultant {
     this.availableIn,
     this.badges,
     this.rates,
+    this.question,
   });
 }
 
