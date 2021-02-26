@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:DrHwaida/models/utils.dart';
@@ -16,177 +17,211 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   String error = '';
   final _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   bool obscurePassword = true;
   bool obscureconPassword = true;
   String newPassword = '';
   String oldPassPassword = '';
   String confirmPassword = '';
+  bool loading = false;
+  bool showChangePas = true;
+
   @override
   Widget build(BuildContext context) {
-    print('pssword:' + User.userPassword);
     return Scaffold(
       appBar: customAppBar(title: 'settings'),
-      body: Container(
-        padding: EdgeInsets.only(left: 16, right: 16, top: 30),
-        child: ListView(
-          children: [
-            Form(
-              key: _formKey,
-              child: Column(
+      key: _scaffoldKey,
+      body: (loading)
+          ? Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : Container(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 30),
+              child: ListView(
                 children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.person,
-                        color: customColor,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        'account',
-                        style: AppTheme.heading,
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    height: 15,
-                    thickness: 2,
-                  ),
-                  SizedBox(height: 20),
-                  acountBody(title: 'Change password', onTap: () {}),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
+                  Form(
+                    key: _formKey,
                     child: Column(
                       children: [
-                        SizedBox(height: 10),
-                        TextFormField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: textFormInputDecorationForPassword(
-                            Icons.visibility_off,
-                            'Old Password',
-                            () {
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: customColor,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              'account',
+                              style: AppTheme.heading,
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
+                        ),
+                        SizedBox(height: 20),
+                        acountBody(
+                            title: 'Change password',
+                            onTap: () {
                               setState(() {
-                                obscurePassword = !obscurePassword;
+                                showChangePas = !showChangePas;
                               });
-                            },
-                            obscurePassword,
-                          ),
-                          validator: (val) =>
-                              validateOldPassord(val, oldPassPassword),
-                          obscureText: obscurePassword,
-                          onChanged: (val) {
-                            setState(() {
-                              oldPassPassword = val;
-                            });
-                          },
+                            }),
+                        (showChangePas)
+                            ? Container()
+                            : Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 10),
+                                    TextFormField(
+                                      style: TextStyle(color: Colors.black),
+                                      decoration:
+                                          textFormInputDecorationForPassword(
+                                        Icons.visibility_off,
+                                        'Old Password',
+                                        () {
+                                          setState(() {
+                                            obscurePassword = !obscurePassword;
+                                          });
+                                        },
+                                        obscurePassword,
+                                      ),
+                                      validator: (val) => validateOldPassord(
+                                          val, oldPassPassword),
+                                      obscureText: obscurePassword,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          oldPassPassword = val;
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(height: 10),
+                                    SizedBox(height: 10),
+                                    TextFormField(
+                                      style: TextStyle(color: Colors.black),
+                                      decoration:
+                                          textFormInputDecorationForPassword(
+                                        Icons.visibility_off,
+                                        'New Password',
+                                        () {
+                                          setState(() {
+                                            obscurePassword = !obscurePassword;
+                                          });
+                                        },
+                                        obscurePassword,
+                                      ),
+                                      validator: (val) => validatePassord(val),
+                                      obscureText: obscurePassword,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          newPassword = val;
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(height: 10),
+                                    TextFormField(
+                                      style: TextStyle(color: Colors.black),
+                                      decoration:
+                                          textFormInputDecorationForPassword(
+                                        Icons.visibility_off,
+                                        "Confirm the new password",
+                                        () {
+                                          setState(() {
+                                            obscureconPassword =
+                                                !obscureconPassword;
+                                          });
+                                        },
+                                        obscureconPassword,
+                                      ),
+                                      validator: (val) =>
+                                          validateConfrimPassord(
+                                        val,
+                                        newPassword,
+                                        confirmPassword,
+                                      ),
+                                      obscureText: obscureconPassword,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          confirmPassword = val;
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(height: 10),
+                                    RaisedButton(
+                                      color: customColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(35),
+                                      ),
+                                      child: Text(
+                                        'Change',
+                                        style: AppTheme.heading.copyWith(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      onPressed: () async {
+                                        if (_formKey.currentState.validate()) {
+                                          setState(() {
+                                            loading = !loading;
+                                          });
+                                          chagePassword(
+                                            newPasswrod: newPassword,
+                                            oldPassword: oldPassPassword,
+                                          );
+                                        }
+                                      },
+                                    ),
+                                    Text(
+                                      error,
+                                      style: AppTheme.heading,
+                                    ),
+                                    SizedBox(height: 10),
+                                  ],
+                                ),
+                              ),
+                        SizedBox(height: 20),
+                        acountBody(title: 'Change Phone Number', onTap: () {}),
+                        SizedBox(height: 20),
+                        acountBody(title: 'Add Email', onTap: () {}),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
                         ),
-                        SizedBox(height: 10),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: textFormInputDecorationForPassword(
-                            Icons.visibility_off,
-                            'New Password',
-                            () {
-                              setState(() {
-                                obscurePassword = !obscurePassword;
-                              });
-                            },
-                            obscurePassword,
-                          ),
-                          validator: (val) => validatePassord(val),
-                          obscureText: obscurePassword,
-                          onChanged: (val) {
-                            setState(() {
-                              newPassword = val;
-                            });
-                          },
+                        SizedBox(height: 20),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.app_settings_alt,
+                              color: customColor,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              'App Settings',
+                              style: AppTheme.heading,
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          style: TextStyle(color: Colors.black),
-                          decoration: textFormInputDecorationForPassword(
-                            Icons.visibility_off,
-                            "Confirm the new password",
-                            () {
-                              setState(() {
-                                obscureconPassword = !obscureconPassword;
-                              });
-                            },
-                            obscureconPassword,
-                          ),
-                          validator: (val) => validateConfrimPassord(
-                            val,
-                            newPassword,
-                            confirmPassword,
-                          ),
-                          obscureText: obscureconPassword,
-                          onChanged: (val) {
-                            setState(() {
-                              confirmPassword = val;
-                            });
-                          },
+                        Divider(
+                          height: 15,
+                          thickness: 2,
                         ),
-                        SizedBox(height: 10),
-                        RaisedButton(
-                          color: customColor,
-                          child: Text('Change'),
-                          onPressed: () async {
-                            if (_formKey.currentState.validate()) {
-                              chagePassword(
-                                newPasswrod: newPassword,
-                                oldPassword: oldPassPassword,
-                              );
-                            }
-                          },
+                        SizedBox(height: 20),
+                        lan(),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
                         ),
-                        Text(
-                          error,
-                          style: AppTheme.heading,
-                        ),
-                        SizedBox(height: 10),
                       ],
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  acountBody(title: 'Change Phone Number', onTap: () {}),
-                  SizedBox(height: 20),
-                  acountBody(title: 'Add Email', onTap: () {}),
-                  Divider(
-                    height: 15,
-                    thickness: 2,
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.app_settings_alt,
-                        color: customColor,
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        'App Settings',
-                        style: AppTheme.heading,
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    height: 15,
-                    thickness: 2,
-                  ),
-                  SizedBox(height: 20),
-                  lan(),
-                  Divider(
-                    height: 15,
-                    thickness: 2,
                   ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -300,18 +335,39 @@ class _SettingsState extends State<Settings> {
         'old_password': oldPassword,
       });
 
-      final map = json.decode(response.body);
-      setState(() async {
-        if (map['success'] == true) {
+      Map<String, dynamic> map = json.decode(response.body);
+
+      if (map['success'] == true) {
+        setState(() {
+          loading = !loading;
           MySharedPreferences.saveUserUserPassword(newPasswrod);
-          print(jsonDecode(response.body));
-        } else {
-          setState(() {
-            error = map['message'];
-          });
-        }
-      });
+        });
+        _scaffoldKey.currentState.showSnackBar(
+          new SnackBar(
+            content: new Text('password was changed'),
+          ),
+        );
+
+        MySharedPreferences.saveUserUserPassword(newPasswrod);
+      } else {
+        print('seroro Massege:' + map['message']);
+        print(response.statusCode.toString());
+        setState(() {
+          loading = false;
+          error = map['message'];
+        });
+        _scaffoldKey.currentState.showSnackBar(
+          new SnackBar(
+            content: new Text(' password was not changed,please try again'),
+          ),
+        );
+      }
     } catch (e) {
+      setState(() {
+        setState(() {
+          loading = false;
+        });
+      });
       print(e.toString());
     }
   }

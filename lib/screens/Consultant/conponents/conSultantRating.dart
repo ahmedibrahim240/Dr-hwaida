@@ -184,8 +184,6 @@ class _ConsultantRatingState extends State<ConsultantRating> {
       Map<String, dynamic> map = json.decode(response.body);
 
       if (map['success'] == true) {
-        print(map['data']);
-        print(map['message']);
         _scaffoldKey.currentState.showSnackBar(
           new SnackBar(
             content: new Text('thank you for rating'),
