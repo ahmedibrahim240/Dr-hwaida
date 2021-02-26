@@ -83,11 +83,9 @@ class ConsultantRateApi {
             created_at: itmes['created_at'],
           );
           listOfConsultantRating.add(consulRateing);
-          print('coment:::::' + itmes['comment']);
         }
       } else {
         print(response.statusCode.toString());
-        print('eroooorerer');
       }
     } catch (e) {
       print(e.toString());

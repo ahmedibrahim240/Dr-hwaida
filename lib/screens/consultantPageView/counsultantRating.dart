@@ -30,14 +30,13 @@ class _CounsultantRatingState extends State<CounsultantRating> {
                     primary: false,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
-                      print('COOOOOOOMENT' + snapshot.data[index].comment);
                       return Container(
                         padding: EdgeInsets.all(8),
                         child: Row(
                           children: [
                             CircleAvatar(
                               minRadius: 30,
-                              backgroundImage: (snapshot.data[index].image ==
+                              backgroundImage: (snapshot.data[index].image !=
                                       null)
                                   ? NetworkImage(snapshot.data[index].image)
                                   : AssetImage(
@@ -75,7 +74,7 @@ class _CounsultantRatingState extends State<CounsultantRating> {
                                 ),
                                 SizedBox(height: 5),
                                 Text(
-                                  snapshot.data[index].comment,
+                                  (snapshot.data[index].comment) ?? "",
                                   style: AppTheme.subHeading,
                                 ),
                               ],

@@ -45,18 +45,18 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
       ),
       body: Stack(
         children: [
-          ListView(
-            shrinkWrap: true,
-            primary: true,
-            children: [
-              consultantData(context),
-              Container(
-                height: 1100,
-                child: CounsultantRating(
+          Container(
+            height: MediaQuery.of(context).size.height - 100,
+            child: ListView(
+              shrinkWrap: true,
+              primary: true,
+              children: [
+                consultantData(context),
+                CounsultantRating(
                   id: widget.consultant.id,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -67,9 +67,9 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
     );
   }
 
-  Container consultantData(BuildContext context) {
+  consultantData(BuildContext context) {
     return Container(
-      height: 530,
+      height: 550,
       child: Stack(
         children: [
           Container(
@@ -189,11 +189,13 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                             child: CustomButtonWithchild(
                               color: customColor,
                               onPress: () {
-                                if (User.userSkipLogIn == true) {
+                                if (User.userSkipLogIn != true) {
                                   flitter(
                                     context: context,
                                     child: ConsultantRating(
                                       title: widget.consultant.name,
+                                      question: widget.consultant.question,
+                                      consultant_id: widget.consultant.id,
                                     ),
                                   );
                                 } else {
