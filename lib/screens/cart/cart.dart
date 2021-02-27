@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/prodact.dart';
+
 import 'package:DrHwaida/screens/checkOut/checkOut.dart';
 import 'package:DrHwaida/services/dbhelper.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,7 +20,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  // var items = List<ConsultantProdect>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   double totalPrice = 0.0;
   DbHehper helper;
@@ -28,9 +29,6 @@ class _CartState extends State<Cart> {
   void initState() {
     helper = DbHehper();
 
-    // setState(() {
-    //   items = Cart.consultProdect;
-    // });
     super.initState();
   }
 
@@ -41,6 +39,7 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         toolbarHeight: 80,
         title: (Text(
@@ -232,7 +231,15 @@ class _CartState extends State<Cart> {
                                       ),
                                     ),
                                     (index == snapshot.data.length - 1)
-                                        ? totalPrieCard(context)
+                                        ? totalPrieCard(
+                                            context: context,
+                                            consualtId: snapshot.data[index]
+                                                ['consultantId'],
+                                            availableId: snapshot.data[index]
+                                                ['dateId'],
+                                            prodectId: snapshot.data[index]
+                                                ['id'],
+                                          )
                                         : Container(),
                                   ],
                                 );
@@ -253,7 +260,8 @@ class _CartState extends State<Cart> {
     );
   }
 
-  Container totalPrieCard(BuildContext context) {
+  Container totalPrieCard(
+      {BuildContext context, int consualtId, int availableId, int prodectId}) {
     return Container(
       height: 60,
       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -299,6 +307,9 @@ class _CartState extends State<Cart> {
                       MaterialPageRoute(
                         builder: (_) => CheckOut(
                           totalPrice: totalPrice.toString(),
+                          consultantid: consualtId,
+                          avilableId: availableId,
+                          productId: prodectId,
                         ),
                       ),
                     );

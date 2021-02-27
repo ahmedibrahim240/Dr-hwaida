@@ -225,13 +225,8 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               _scaffoldKey.currentState.showSnackBar(
                                 new SnackBar(
                                   content: new Text(
-                                      'This Consultant don\'t have map address'),
-                                  // action: SnackBarAction(
-                                  //   label: 'Undo',
-                                  //   onPressed: () {
-                                  //     productConsualtList.remove(_prondet);
-                                  //   },
-                                  // ),
+                                    'This Consultant don\'t have map address',
+                                  ),
                                 ),
                               );
                             }

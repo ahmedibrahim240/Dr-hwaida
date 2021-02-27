@@ -51,4 +51,6 @@ class Utils {
   static final UPDATEUSERDATA_URL = BASE_URL + "/clients/update";
   // ignore: non_constant_identifier_names
   static final CHANGEPASSWORD_URL = BASE_URL + "/clients/change_password";
+  // ignore: non_constant_identifier_names
+  static final CHECKOUT_URL = BASE_URL + "/visits";
 }

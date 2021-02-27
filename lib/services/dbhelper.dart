@@ -48,7 +48,7 @@ class DbHehper {
     return db.delete(tableName, where: 'id=?', whereArgs: [id]);
   }
 
-  deleteAllProduct(int id) async {
+  deleteAllProduct() async {
     Database db = await createDataBase();
     return db.delete(tableName);
   }
