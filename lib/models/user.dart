@@ -23,11 +23,13 @@ class Users {
   final String email;
   final String userImageUrl;
   final String userAge;
+  final String userBrDate;
   final String userStutes;
   final String userGender;
 
   Users({
     this.userAge,
+    this.userBrDate,
     this.userStutes,
     this.userGender,
     this.name,

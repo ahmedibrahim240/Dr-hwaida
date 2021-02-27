@@ -50,7 +50,7 @@ class _GenderState extends State<Gender> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _gender = 'Male';
+                              _gender = 'male';
                               Gender.resGender = _gender;
                             });
                             Navigator.of(context).pop();
@@ -80,7 +80,7 @@ class _GenderState extends State<Gender> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _gender = 'Female';
+                              _gender = 'female';
                               Gender.resGender = _gender;
                             });
                             Navigator.of(context).pop();

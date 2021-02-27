@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +24,23 @@ class _PaymentHistoryState extends State<PaymentHistory> {
       body: ListView(
         shrinkWrap: true,
         primary: true,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         children: [
+          Text(
+            'Consultant',
+            style: AppTheme.heading.copyWith(
+              color: customColor,
+              fontSize: 20,
+            ),
+          ),
+          Divider(
+            color: customColorDivider,
+            thickness: 2,
+          ),
+          SizedBox(height: 20),
           ListView.builder(
             shrinkWrap: true,
             primary: false,
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             itemCount: 10,
             itemBuilder: (context, index) {
               return VisaCard(

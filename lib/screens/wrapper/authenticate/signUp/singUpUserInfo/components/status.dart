@@ -45,7 +45,7 @@ class _StatusState extends State<Status> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          _stauts = 'Single';
+                          _stauts = 'single';
                           Status.resStautes = _stauts;
                         });
                         Navigator.of(context).pop();
@@ -76,7 +76,7 @@ class _StatusState extends State<Status> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _stauts = 'Engaged';
+                              _stauts = 'engaged';
                               Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();
@@ -111,7 +111,7 @@ class _StatusState extends State<Status> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _stauts = 'Married';
+                              _stauts = 'married';
                               Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();
@@ -141,7 +141,7 @@ class _StatusState extends State<Status> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _stauts = 'Detached';
+                              _stauts = 'detached';
                               Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();

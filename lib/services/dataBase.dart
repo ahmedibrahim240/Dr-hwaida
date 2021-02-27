@@ -57,8 +57,11 @@ class DatabaseServices {
         uri.toString(),
         headers: {'x-api-key': userToken},
       );
+      print(respes.statusCode.toString());
       final data = json.decode(respes.body);
-      if (data['success'] == false) {}
+      if (data['success'] == true) {
+        print('succeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeess');
+      }
     } catch (e) {
       print('errrrroe');
 
@@ -71,6 +74,7 @@ class DatabaseServices {
     return user != null
         ? Users(
             name: user['data']['name'].toString(),
+            userBrDate: user['data']['dob'].toString(),
             phoneNumber: user['data']['mobile'].toString(),
             userGender: user['data']['gender'].toString(),
             userAge: user['data']['age'].toString(),

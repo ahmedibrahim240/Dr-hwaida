@@ -178,7 +178,7 @@ class _UserProfileState extends State<UserProfile> {
                                 Expanded(
                                   flex: 1,
                                   child: Age(
-                                    age: userData.userAge,
+                                    age: userData.userBrDate,
                                   ),
                                 ),
                               ],
@@ -194,7 +194,7 @@ class _UserProfileState extends State<UserProfile> {
                                 print(userData.userGender);
                                 DatabaseServices(userToken: User.userToken)
                                     .upDateUserData(
-                                  age: (Age.resAge) ?? userData.userAge,
+                                  age: (Age.resAge) ?? userData.userBrDate,
                                   name: (name) ?? userData.name,
                                   status: (Status.resStautes) ??
                                       userData.userStutes,
