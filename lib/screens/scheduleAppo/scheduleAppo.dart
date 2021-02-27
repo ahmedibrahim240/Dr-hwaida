@@ -1,6 +1,8 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
+import 'package:DrHwaida/models/prodact.dart';
+import 'package:DrHwaida/services/dbhelper.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,7 +26,13 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
   List<AvailableTimes> listTimes = [];
   String _date;
   String _time;
-  String _timeID;
+  int _timeID;
+  DbHehper helper;
+  @override
+  void initState() {
+    super.initState();
+    helper = DbHehper();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,28 +86,25 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                 color: customColor,
                 onPress: () async {
                   if (_date != null && _time != null) {
-                    // var _prondet = SaveProduct(
-                    //   date: _date,
-                    //   time: _time,
-                    //   dateId: _timeID,
-                    //   consulId: widget.consultant.id.toString(),
-                    //   title: widget.consultant.name.toString(),
-                    //   price: widget.consultant.total_coust.toString(),
-                    //   proImageUrl: widget.consultant.image.toString(),
-                    // );
-                    // Cart.consultProdect.add(_prondet);
-                    // MySharedPreferences.saveDataOfConsulPro(
-                    //     Cart.consultProdect);
+                    ConsultantProdect prodect = ConsultantProdect({
+                      'consultantId': widget.consultant.id,
+                      'dateId': _timeID,
+                      'title': widget.consultant.name,
+                      'price': widget.consultant.total_coust,
+                      'proImageUrl': widget.consultant.image,
+                      'date': _date,
+                      'time': _time,
+                    });
+                    int id = await helper.createProduct(prodect);
+                    print(id);
 
                     _scaffoldKey.currentState.showSnackBar(
                       new SnackBar(
                         content: new Text('Items Was added'),
                         action: SnackBarAction(
                           label: 'Undo',
-                          onPressed: () {
-                            // Cart.consultProdect.remove(_prondet);
-                            // MySharedPreferences.saveDataOfConsulPro(
-                            //     Cart.consultProdect);
+                          onPressed: () async {
+                            await helper.deleteProduct(id);
                           },
                         ),
                       ),
@@ -138,7 +143,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
             return timeCard(
               time: listTimes[index].time,
               index: index,
-              timeID: listTimes[index].time.toString(),
+              timeID: listTimes[index].id,
             );
           } else {
             return Container();
@@ -201,7 +206,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
     );
   }
 
-  timeCard({int index, String time, String timeID}) {
+  timeCard({int index, String time, int timeID}) {
     return InkWell(
       onTap: () {
         setState(() {
