@@ -34,12 +34,8 @@ class _CartState extends State<Cart> {
     super.initState();
   }
 
-  culcTotalPrice(var list) {
-    for (int i = 0; i < list.length; i++) {
-      setState(() {
-        totalPrice = totalPrice + double.parse('${list[i].price}');
-      });
-    }
+  culcTotalPrice(double price) {
+    totalPrice = totalPrice + price;
   }
 
   @override
@@ -57,8 +53,6 @@ class _CartState extends State<Cart> {
       body: FutureBuilder(
         future: helper.allProduct(),
         builder: (context, snapshot) {
-          culcTotalPrice(snapshot.data);
-
           if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
@@ -73,163 +67,177 @@ class _CartState extends State<Cart> {
                     primary: true,
                     children: [
                       SizedBox(height: 20),
-                      totalPrieCard(context),
                       ListView.builder(
-                          shrinkWrap: true,
-                          primary: false,
-                          itemCount: snapshot.data.length,
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                          itemBuilder: (context, index) {
-                            return (snapshot.data.isEmpty)
-                                ? Center(
-                                    child: Text(
-                                      'is empty',
-                                      style: AppTheme.heading.copyWith(
-                                        color: customColor,
-                                        fontSize: 25,
+                        shrinkWrap: true,
+                        primary: false,
+                        itemCount: snapshot.data.length,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                        itemBuilder: (context, index) {
+                          culcTotalPrice(
+                            snapshot.data[index]['price'],
+                          );
+                          return (snapshot.data.isEmpty)
+                              ? Center(
+                                  child: Text(
+                                    'is empty',
+                                    style: AppTheme.heading.copyWith(
+                                      color: customColor,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                )
+                              : Column(
+                                  children: [
+                                    Card(
+                                      elevation: 3,
+                                      child: Column(
+                                        children: [
+                                          ListTile(
+                                            title: Row(
+                                              children: [
+                                                Text(
+                                                  'title: ',
+                                                  style:
+                                                      AppTheme.heading.copyWith(
+                                                    color: customColor,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  snapshot.data[index]['title'],
+                                                  style: AppTheme.subHeading
+                                                      .copyWith(
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            subtitle: Row(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      'Price: ',
+                                                      style: AppTheme.heading
+                                                          .copyWith(
+                                                        color: customColor,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      snapshot.data[index]
+                                                              ['price']
+                                                          .toString(),
+                                                      style: AppTheme.subHeading
+                                                          .copyWith(
+                                                        fontSize: 12,
+                                                      ),
+                                                    ),
+                                                    Icon(
+                                                      FontAwesomeIcons
+                                                          .poundSign,
+                                                      color: Colors.black,
+                                                      size: 10,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            trailing: IconButton(
+                                              icon: Icon(
+                                                Icons.delete,
+                                                size: 30,
+                                                color: Colors.red,
+                                              ),
+                                              onPressed: () async {
+                                                setState(() {
+                                                  totalPrice = totalPrice -
+                                                      snapshot.data[index]
+                                                          ['price'];
+                                                });
+
+                                                await helper.deleteProduct(
+                                                    snapshot.data[index]['id']);
+                                              },
+                                            ),
+                                            leading: CircleAvatar(
+                                              maxRadius: 30,
+                                              backgroundImage: NetworkImage(
+                                                snapshot.data[index]
+                                                    ["proImageUrl"],
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 20, vertical: 20),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          'Date: ',
+                                                          style: AppTheme
+                                                              .heading
+                                                              .copyWith(
+                                                            color: customColor,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          snapshot.data[index]
+                                                              ['date'],
+                                                          style: AppTheme
+                                                              .subHeading
+                                                              .copyWith(
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          'Time: ',
+                                                          style: AppTheme
+                                                              .heading
+                                                              .copyWith(
+                                                            color: customColor,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          snapshot.data[index]
+                                                              ['time'],
+                                                          style: AppTheme
+                                                              .subHeading
+                                                              .copyWith(
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  )
-                                : Card(
-                                    elevation: 3,
-                                    child: Column(
-                                      children: [
-                                        ListTile(
-                                          title: Row(
-                                            children: [
-                                              Text(
-                                                'title: ',
-                                                style:
-                                                    AppTheme.heading.copyWith(
-                                                  color: customColor,
-                                                ),
-                                              ),
-                                              Text(
-                                                snapshot.data[index].title,
-                                                style: AppTheme.subHeading
-                                                    .copyWith(
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          subtitle: Row(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    'Price: ',
-                                                    style: AppTheme.heading
-                                                        .copyWith(
-                                                      color: customColor,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    snapshot.data[index].price,
-                                                    style: AppTheme.subHeading
-                                                        .copyWith(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  Icon(
-                                                    FontAwesomeIcons.poundSign,
-                                                    color: Colors.black,
-                                                    size: 10,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          trailing: IconButton(
-                                            icon: Icon(
-                                              Icons.delete,
-                                              size: 30,
-                                              color: Colors.red,
-                                            ),
-                                            onPressed: () async {
-                                              // setState(() {
-                                              //   totalPrice = totalPrice -
-                                              //       double.parse(
-                                              //           '${Cart.consultProdect[index].price}');
-                                              //   Cart.consultProdect.remove(
-                                              //       Cart.consultProdect[index]);
-                                              //   MySharedPreferences
-                                              //       .saveDataOfConsulPro(
-                                              //     Cart.consultProdect,
-                                              //   );
-                                              // });
-                                            },
-                                          ),
-                                          leading: CircleAvatar(
-                                            maxRadius: 30,
-                                            backgroundImage: NetworkImage(
-                                              snapshot.data[index].proImageUrl,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20, vertical: 20),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        'Date: ',
-                                                        style: AppTheme.heading
-                                                            .copyWith(
-                                                          color: customColor,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        snapshot
-                                                            .data[index].date,
-                                                        style: AppTheme
-                                                            .subHeading
-                                                            .copyWith(
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        'Time: ',
-                                                        style: AppTheme.heading
-                                                            .copyWith(
-                                                          color: customColor,
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        snapshot
-                                                            .data[index].time,
-                                                        style: AppTheme
-                                                            .subHeading
-                                                            .copyWith(
-                                                          fontSize: 12,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                          }),
+                                    (index == snapshot.data.length - 1)
+                                        ? totalPrieCard(context)
+                                        : Container(),
+                                  ],
+                                );
+                        },
+                      ),
                     ],
                   ),
                 ),

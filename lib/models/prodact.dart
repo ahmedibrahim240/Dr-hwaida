@@ -28,7 +28,7 @@ class ProductConsualt {
 
 class ConsultantProdect {
   String title;
-  String price;
+  double price;
   String proImageUrl;
   String date;
   String time;
