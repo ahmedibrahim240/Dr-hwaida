@@ -5,12 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/gitAllvisits.dart';
 
-class PaymentHistory extends StatefulWidget {
+class VisitsHistory extends StatefulWidget {
   @override
-  _PaymentHistoryState createState() => _PaymentHistoryState();
+  _VisitsHistoryState createState() => _VisitsHistoryState();
 }
 
-class _PaymentHistoryState extends State<PaymentHistory> {
+class _VisitsHistoryState extends State<VisitsHistory> {
   String visaName = 'Visa';
   String visaNumber = '25555555555555555555555555';
   String date = '2May202';

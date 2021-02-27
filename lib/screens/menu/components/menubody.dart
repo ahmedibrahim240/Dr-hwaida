@@ -5,9 +5,9 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
-import 'package:DrHwaida/screens/paymenthistory/paymentHistory.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
+import 'package:DrHwaida/screens/visitshistory/visitsHistory.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/registerAsConsultant/registerAsConsultant.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/material.dart';
@@ -105,12 +105,12 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'Payment History',
+                      title: 'Visits History',
                       icon: FontAwesomeIcons.history,
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => PaymentHistory(),
+                            builder: (_) => VisitsHistory(),
                           ),
                         );
                       },
