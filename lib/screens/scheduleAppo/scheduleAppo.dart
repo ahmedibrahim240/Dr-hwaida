@@ -91,7 +91,8 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                       proImageUrl: widget.consultant.image.toString(),
                     );
                     Cart.consultProdect.add(_prondet);
-                    MySharedPreferences.saveDataOfConsulPro();
+                    MySharedPreferences.saveDataOfConsulPro(
+                        Cart.consultProdect);
 
                     _scaffoldKey.currentState.showSnackBar(
                       new SnackBar(
@@ -100,7 +101,8 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                           label: 'Undo',
                           onPressed: () {
                             Cart.consultProdect.remove(_prondet);
-                            MySharedPreferences.saveDataOfConsulPro();
+                            MySharedPreferences.saveDataOfConsulPro(
+                                Cart.consultProdect);
                           },
                         ),
                       ),

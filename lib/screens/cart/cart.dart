@@ -157,7 +157,9 @@ class _CartState extends State<Cart> {
                                           Cart.consultProdect.remove(
                                               Cart.consultProdect[index]);
                                           MySharedPreferences
-                                              .saveDataOfConsulPro();
+                                              .saveDataOfConsulPro(
+                                            Cart.consultProdect,
+                                          );
                                         });
                                       },
                                     ),

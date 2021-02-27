@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:DrHwaida/screens/cart/cart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'models/prodact.dart';
 
@@ -167,9 +166,9 @@ class MySharedPreferences {
     return phoneNamber;
   }
 
-  static saveDataOfConsulPro() async {
+  static saveDataOfConsulPro(value) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    List<String> listConsulPro = Cart.consultProdect
+    var listConsulPro = value
         .map(
           (items) => jsonEncode(
             items.toMap(),
@@ -184,9 +183,8 @@ class MySharedPreferences {
 
     var listConsulPro = preferences.getStringList(sharedPrefCartConslProdect);
 
-    List<SaveProduct> list = listConsulPro
+    return listConsulPro
         .map((itmes) => SaveProduct.formMap(jsonDecode(itmes)))
         .toList();
-    return list;
   }
 }
