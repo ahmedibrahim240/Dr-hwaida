@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visitApi.dart';
 import 'package:DrHwaida/models/visits.dart';
+import 'package:DrHwaida/screens/visitshistory/updateVisite.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -10,7 +11,9 @@ FutureBuilder<List<Visits>> gitAllVisist() {
     future: VisitsApi.fetchAllVisit(),
     builder: (contant, snapshot) {
       return (snapshot.data == null)
-          ? Container()
+          ? Container(
+              child: Center(child: CircularProgressIndicator()),
+            )
           : ListView.builder(
               shrinkWrap: true,
               primary: false,
@@ -118,7 +121,15 @@ FutureBuilder<List<Visits>> gitAllVisist() {
                           ),
                           CustomButtonWithchild(
                             color: customColor,
-                            onPress: () {},
+                            onPress: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => UpdateVisits(
+                                    id: snapshot.data[index].consultantId,
+                                  ),
+                                ),
+                              );
+                            },
                             child: Center(
                               child: Text(
                                 'Update Schedule date',

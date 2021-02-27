@@ -19,7 +19,7 @@ class _VisitsHistoryState extends State<VisitsHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: 'Payment History'),
+      appBar: customAppBar(title: 'Visits History'),
       bottomNavigationBar: CustomBottomNavigationBar(),
       body: ListView(
         shrinkWrap: true,

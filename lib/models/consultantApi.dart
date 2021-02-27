@@ -1,4 +1,5 @@
 import 'package:DrHwaida/models/consultant.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -10,8 +11,8 @@ class ConsultantApi {
     List<Consultant> listOfConsultant = [];
     List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
-    var response = await http
-        .get(Utils.Consultant_URL, headers: {'Accept': 'application/json'});
+    var response = await http.get(Utils.Consultant_URL,
+        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
     var jsonData = json.decode(response.body);
     try {
       if (response.statusCode == 200) {
@@ -57,6 +58,66 @@ class ConsultantApi {
       }
     } catch (e) {
       print(e.toString());
+    }
+    return listOfConsultant;
+  }
+
+  static Future<List<Consultant>> fetchConsultantById(int id) async {
+    List<Consultant> listOfConsultant = [];
+    List<AvailableTimes> listOfTime = [];
+    List<ConsulAvailable> listOfConsulAvailable = [];
+    Consultant consultant;
+    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+    var response = await http.get(
+        "http://technomasrsystems.com/Demos/Others/ShyBeLbn/public/api/consultants/2",
+        headers: {'Accept': 'application/json'});
+    Map<String, dynamic> jsonData = json.decode(response.body);
+
+    try {
+      if (response.statusCode == 200) {
+        print('done');
+
+        listOfConsulAvailable = [];
+        listOfTime = [];
+        if (jsonData['data']['available_in'] != null) {
+          for (var item in jsonData['data']['available_in']) {
+            for (var i in item['times']) {
+              AvailableTimes times = AvailableTimes(
+                id: i['id'],
+                date: i['date'],
+                time: i['time'],
+              );
+              listOfTime.add(times);
+            }
+            ConsulAvailable consulAvailable =
+                ConsulAvailable(availableTimes: listOfTime, date: item['date']);
+            listOfConsulAvailable.add(consulAvailable);
+          }
+        }
+
+        consultant = Consultant(
+          id: jsonData['data']['id'],
+          name: jsonData['data']['name'],
+          bio: jsonData['data']['bio'],
+          address: jsonData['data']['address'],
+          image: jsonData['data']['image'],
+          experince: jsonData['data']['experince'],
+          coust: jsonData['data']['cost'],
+          discount: jsonData['data']['discount'],
+          total_coust: double.parse(jsonData['data']['total_cost'].toString()),
+          rate: jsonData['data']['rate'],
+          available_in: listOfConsulAvailable,
+          availableIn: jsonData['data']['available_in'],
+          mapLink: jsonData['data']['map_link'],
+          badges: jsonData['data']['badges'],
+          question: jsonData['data']['question'],
+        );
+
+        listOfConsultant.add(consultant);
+      }
+    } catch (e) {
+      print('catch Error:' + e.toString());
+      print('filed:' + response.statusCode.toString());
     }
     return listOfConsultant;
   }

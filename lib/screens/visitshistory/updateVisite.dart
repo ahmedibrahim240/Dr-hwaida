@@ -1,7 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
-import 'package:DrHwaida/models/prodact.dart';
+import 'package:DrHwaida/models/consultantApi.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dbhelper.dart';
 
@@ -11,8 +11,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class UpdateVisits extends StatefulWidget {
-  final Consultant consultant;
-  const UpdateVisits({Key key, @required this.consultant}) : super(key: key);
+  final int id;
+  const UpdateVisits({Key key, @required this.id}) : super(key: key);
   @override
   _UpdateVisitsState createState() => _UpdateVisitsState();
 }
@@ -37,7 +37,7 @@ class _UpdateVisitsState extends State<UpdateVisits> {
 
   @override
   Widget build(BuildContext context) {
-    List<ConsulAvailable> consulAvailable = widget.consultant.available_in;
+    // List<ConsulAvailable> consulAvailable = widget.consultant.available_in;
 
     return Scaffold(
       appBar: customAppBar(title: 'Schedule Appointment'),
@@ -47,76 +47,84 @@ class _UpdateVisitsState extends State<UpdateVisits> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Stack(
-          children: [
-            (widget.consultant.available_in.isEmpty)
+        child: FutureBuilder(
+          future: ConsultantApi.fetchConsultantById(widget.id),
+          builder: (contaxt, snapshot) {
+            return (snapshot.data == null)
                 ? Container()
-                : Align(
-                    alignment: Alignment.topCenter,
-                    child: Column(
-                      children: [
-                        rowTitle(
-                          title: 'date',
-                        ),
-                        (widget.consultant.available_in.isEmpty)
-                            ? Container()
-                            : dateListView(date: consulAvailable),
-                        SizedBox(height: 20),
-                        (listTimes.isEmpty)
-                            ? Container()
-                            : Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    rowTitle(
-                                      title: 'Time',
+                : Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: Column(
+                          children: [
+                            rowTitle(
+                              title: 'date',
+                            ),
+                            (snapshot.data.available_in.isEmpty)
+                                ? Container()
+                                : dateListView(
+                                    date: snapshot.data.consulAvailable),
+                            SizedBox(height: 20),
+                            (listTimes.isEmpty)
+                                ? Container()
+                                : Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        rowTitle(
+                                          title: 'Time',
+                                        ),
+                                        timeListView(),
+                                      ],
                                     ),
-                                    timeListView(),
-                                  ],
-                                ),
-                              ),
-                        (_date == null) ? Container() : Text(_date),
-                        (_time == null) ? Container() : Text(_time),
-                      ],
-                    ),
-                  ),
-            SizedBox(height: 20),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: CustomButtonWithchild(
-                color: customColor,
-                onPress: () async {
-                  if (_date != null && _time != null) {
-                    ConsultantProdect prodect = ConsultantProdect({
-                      'consultantId': widget.consultant.id,
-                      'dateId': _timeID,
-                      'title': widget.consultant.name,
-                      'price': widget.consultant.total_coust,
-                      'proImageUrl': widget.consultant.image,
-                      'date': _date,
-                      'time': _time,
-                    });
-                    int id = await helper.createProduct(prodect);
-                    print(id);
-
-                    showmyDialog(context: context);
-                  } else {
-                    _scaffoldKey.currentState.showSnackBar(
-                      new SnackBar(
-                        content: new Text('you shoud choses  date and time'),
+                                  ),
+                            (_date == null) ? Container() : Text(_date),
+                            (_time == null) ? Container() : Text(_time),
+                          ],
+                        ),
                       ),
-                    );
-                  }
-                },
-                child: Text(
-                  'Add to Cart',
-                  style: AppTheme.heading.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ],
+                      SizedBox(height: 20),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: CustomButtonWithchild(
+                          color: customColor,
+                          onPress: () async {
+                            // if (_date != null && _time != null) {
+                            //   ConsultantProdect prodect = ConsultantProdect({
+                            //     'consultantId': widget.consultant.id,
+                            //     'dateId': _timeID,
+                            //     'title': widget.consultant.name,
+                            //     'price': widget.consultant.total_coust,
+                            //     'proImageUrl': widget.consultant.image,
+                            //     'date': _date,
+                            //     'time': _time,
+                            //   });
+                            //   int id = await helper.createProduct(prodect);
+                            //   print(id);
+
+                            //   showmyDialog(context: context);
+                            // } else {
+                            //   _scaffoldKey.currentState.showSnackBar(
+                            //     new SnackBar(
+                            //       content: new Text(
+                            //           'you shoud choses  date and time'),
+                            //     ),
+                            //   );
+                            // }
+                          },
+                          child: Text(
+                            'Add to Cart',
+                            style: AppTheme.heading.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+          },
         ),
       ),
     );
