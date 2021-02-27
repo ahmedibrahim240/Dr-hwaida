@@ -26,33 +26,29 @@ class ProductConsualt {
   });
 }
 
-class SaveProduct {
-  var title;
-  var price;
-  var proImageUrl;
-  var date;
-  var time;
-  var consulId;
-  var dateId;
-  // SaveProduct(dynamic obj) {
-  //   consulId = obj['consulId'];
-  //   dateId = obj['dateId'];
-  //   title = obj['title'];
-  //   price = obj['price'];
-  //   proImageUrl = obj['proImageUrl'];
-  //   date = obj['date'];
-  //   time = obj['time'];
-  // }
-  SaveProduct(
-      {this.consulId,
-      this.date,
-      this.dateId,
-      this.price,
-      this.proImageUrl,
-      this.time,
-      this.title});
-  SaveProduct.formMap(Map<String, dynamic> data) {
-    consulId = data['consulId'];
+class ConsultantProdect {
+  String title;
+  String price;
+  String proImageUrl;
+  String date;
+  String time;
+  int _id;
+  int dateId;
+  int prodectID;
+
+  ConsultantProdect(dynamic obj) {
+    _id = obj['id'];
+    prodectID = obj['prodectID'];
+    dateId = obj['dateId'];
+    title = obj['title'];
+    price = obj['price'];
+    proImageUrl = obj['proImageUrl'];
+    date = obj['date'];
+    time = obj['time'];
+  }
+  ConsultantProdect.formMap(Map<String, dynamic> data) {
+    _id = data['id'];
+    prodectID = data['prodectID'];
     dateId = data['dateId'];
     title = data['title'];
     price = data['price'];
@@ -61,7 +57,8 @@ class SaveProduct {
     time = data['time'];
   }
   Map<String, dynamic> toMap() => {
-        'consulId': consulId,
+        'id': _id,
+        'prodectID': prodectID,
         'dateId': dateId,
         'title': title,
         'price': price,

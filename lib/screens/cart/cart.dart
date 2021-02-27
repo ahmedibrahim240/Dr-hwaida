@@ -2,7 +2,6 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/prodact.dart';
 import 'package:DrHwaida/screens/checkOut/checkOut.dart';
-import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class Cart extends StatefulWidget {
-  static List<SaveProduct> consultProdect = [];
+  static List<ConsultantProdect> consultProdect = [];
 
   static SharedPreferences sharedPreferences;
 
@@ -19,7 +18,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  var items = List<SaveProduct>();
+  var items = List<ConsultantProdect>();
 
   double totalPrice = 0.0;
 
@@ -150,17 +149,17 @@ class _CartState extends State<Cart> {
                                         color: Colors.red,
                                       ),
                                       onPressed: () async {
-                                        setState(() {
-                                          totalPrice = totalPrice -
-                                              double.parse(
-                                                  '${Cart.consultProdect[index].price}');
-                                          Cart.consultProdect.remove(
-                                              Cart.consultProdect[index]);
-                                          MySharedPreferences
-                                              .saveDataOfConsulPro(
-                                            Cart.consultProdect,
-                                          );
-                                        });
+                                        // setState(() {
+                                        //   totalPrice = totalPrice -
+                                        //       double.parse(
+                                        //           '${Cart.consultProdect[index].price}');
+                                        //   Cart.consultProdect.remove(
+                                        //       Cart.consultProdect[index]);
+                                        //   MySharedPreferences
+                                        //       .saveDataOfConsulPro(
+                                        //     Cart.consultProdect,
+                                        //   );
+                                        // });
                                       },
                                     ),
                                     leading: CircleAvatar(

@@ -1,13 +1,10 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
-import 'package:DrHwaida/models/prodact.dart';
-import 'package:DrHwaida/screens/cart/cart.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../sharedPreferences.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class ScheduleAppo extends StatefulWidget {
@@ -81,18 +78,18 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                 color: customColor,
                 onPress: () async {
                   if (_date != null && _time != null) {
-                    var _prondet = SaveProduct(
-                      date: _date,
-                      time: _time,
-                      dateId: _timeID,
-                      consulId: widget.consultant.id.toString(),
-                      title: widget.consultant.name.toString(),
-                      price: widget.consultant.total_coust.toString(),
-                      proImageUrl: widget.consultant.image.toString(),
-                    );
-                    Cart.consultProdect.add(_prondet);
-                    MySharedPreferences.saveDataOfConsulPro(
-                        Cart.consultProdect);
+                    // var _prondet = SaveProduct(
+                    //   date: _date,
+                    //   time: _time,
+                    //   dateId: _timeID,
+                    //   consulId: widget.consultant.id.toString(),
+                    //   title: widget.consultant.name.toString(),
+                    //   price: widget.consultant.total_coust.toString(),
+                    //   proImageUrl: widget.consultant.image.toString(),
+                    // );
+                    // Cart.consultProdect.add(_prondet);
+                    // MySharedPreferences.saveDataOfConsulPro(
+                    //     Cart.consultProdect);
 
                     _scaffoldKey.currentState.showSnackBar(
                       new SnackBar(
@@ -100,9 +97,9 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                         action: SnackBarAction(
                           label: 'Undo',
                           onPressed: () {
-                            Cart.consultProdect.remove(_prondet);
-                            MySharedPreferences.saveDataOfConsulPro(
-                                Cart.consultProdect);
+                            // Cart.consultProdect.remove(_prondet);
+                            // MySharedPreferences.saveDataOfConsulPro(
+                            //     Cart.consultProdect);
                           },
                         ),
                       ),

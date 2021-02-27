@@ -1,6 +1,4 @@
-import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'models/prodact.dart';
 
 class MySharedPreferences {
   static String sharedPrefUserSinginKey = 'IsSingIn';
@@ -166,25 +164,25 @@ class MySharedPreferences {
     return phoneNamber;
   }
 
-  static saveDataOfConsulPro(value) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var listConsulPro = value
-        .map(
-          (items) => jsonEncode(
-            items.toMap(),
-          ),
-        )
-        .toList();
-    await preferences.setStringList(sharedPrefCartConslProdect, listConsulPro);
-  }
+  // static saveDataOfConsulPro(value) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   var listConsulPro = value
+  //       .map(
+  //         (items) => jsonEncode(
+  //           items.toMap(),
+  //         ),
+  //       )
+  //       .toList();
+  //   await preferences.setStringList(sharedPrefCartConslProdect, listConsulPro);
+  // }
 
-  static getDataOfConsulPro() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+  // static getDataOfConsulPro() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
 
-    var listConsulPro = preferences.getStringList(sharedPrefCartConslProdect);
+  //   var listConsulPro = preferences.getStringList(sharedPrefCartConslProdect);
 
-    return listConsulPro
-        .map((itmes) => SaveProduct.formMap(jsonDecode(itmes)))
-        .toList();
-  }
+  //   return listConsulPro
+  //       .map((itmes) => SaveProduct.formMap(jsonDecode(itmes)))
+  //       .toList();
+  // }
 }
