@@ -3,7 +3,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'components/visaCard.dart';
+import 'components/gitAllvisits.dart';
 
 class PaymentHistory extends StatefulWidget {
   @override
@@ -38,20 +38,21 @@ class _PaymentHistoryState extends State<PaymentHistory> {
             thickness: 2,
           ),
           SizedBox(height: 20),
-          ListView.builder(
-            shrinkWrap: true,
-            primary: false,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return VisaCard(
-                visaName: visaName,
-                visaNumber: visaNumber,
-                date: date,
-                price: price,
-                userName: userName,
-              );
-            },
-          ),
+          gitAllVisist(),
+          // ListView.builder(
+          //   shrinkWrap: true,
+          //   primary: false,
+          //   itemCount: 10,
+          //   itemBuilder: (context, index) {
+          //     return VisaCard(
+          //       visaName: visaName,
+          //       visaNumber: visaNumber,
+          //       date: date,
+          //       price: price,
+          //       userName: userName,
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
