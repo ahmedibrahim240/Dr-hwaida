@@ -3,6 +3,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/visaCard.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
+import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dbhelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -48,6 +49,17 @@ class _CheckOutState extends State<CheckOut> {
       key: _scaffoldKey,
       appBar: AppBar(
         toolbarHeight: 80,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (BuildContext context) => Home()),
+            );
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),

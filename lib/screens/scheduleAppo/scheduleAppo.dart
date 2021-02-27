@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/prodact.dart';
+import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dbhelper.dart';
 
 import 'package:flutter/material.dart';
@@ -98,17 +99,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                     int id = await helper.createProduct(prodect);
                     print(id);
 
-                    _scaffoldKey.currentState.showSnackBar(
-                      new SnackBar(
-                        content: new Text('Items Was added'),
-                        action: SnackBarAction(
-                          label: 'Undo',
-                          onPressed: () async {
-                            await helper.deleteProduct(id);
-                          },
-                        ),
-                      ),
-                    );
+                    showmyDialog(context: context);
                   } else {
                     _scaffoldKey.currentState.showSnackBar(
                       new SnackBar(
@@ -128,6 +119,44 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> showmyDialog({BuildContext context}) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  'Items Was added',
+                  style: AppTheme.heading.copyWith(
+                    color: customColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                'Oki',
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (BuildContext context) => Home()),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 

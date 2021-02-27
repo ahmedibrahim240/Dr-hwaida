@@ -11,6 +11,7 @@ import 'components/homeAppBer.dart';
 import 'components/homeFunctions.dart';
 
 class Home extends StatefulWidget {
+  static final route = '/';
   @override
   _HomeState createState() => _HomeState();
 }

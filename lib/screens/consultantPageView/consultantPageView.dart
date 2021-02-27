@@ -16,8 +16,8 @@ class ConsultantPageView extends StatefulWidget {
   final int consulId;
   const ConsultantPageView({
     Key key,
-    @required this.consultant,
-    @required this.consulId,
+    this.consultant,
+    this.consulId,
   }) : super(key: key);
 
   @override
