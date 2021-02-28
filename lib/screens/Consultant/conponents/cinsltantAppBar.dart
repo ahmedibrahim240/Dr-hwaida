@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/screens/Consultant/conponents/consultantsearch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,7 +27,12 @@ Container consultantAppBer(BuildContext context) {
               icon: Icon(Icons.arrow_back),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: ConusltantSearch(),
+                );
+              },
               icon: Icon(Icons.search),
             ),
           ],

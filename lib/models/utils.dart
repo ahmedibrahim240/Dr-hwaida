@@ -55,4 +55,8 @@ class Utils {
   static final CHECKOUT_URL = BASE_URL + "/visits";
   // ignore: non_constant_identifier_names
   static final VISITS_URL = BASE_URL + "/visits";
+  // ignore: non_constant_identifier_names
+  static final SEARCHBYNAME_URL = BASE_URL + "/search?search=";
+  // ignore: non_constant_identifier_names
+  static final CONSULTFILLTER_URL = BASE_URL + "/filter?type=";
 }
