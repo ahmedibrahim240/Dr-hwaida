@@ -34,7 +34,7 @@ FutureBuilder<List<Consultant>> getAllConsultant() {
                         },
                         child: Card(
                           elevation: 2,
-                          child: Row(
+                          child: Column(
                             children: [
                               consImage(
                                   imgUrl: snapshot.data[index].image,
@@ -193,7 +193,7 @@ listOfBadges({List badges}) {
           return Row(
             children: [
               consulCardBotom(
-                title: 'DD Certificated',
+                title: 'HD \n Certificated',
                 color: customColor,
               ),
               SizedBox(width: 2),
@@ -209,8 +209,8 @@ listOfBadges({List badges}) {
 
 Container consulCardBotom({String title, Color color}) {
   return Container(
-    height: 30,
-    width: 60,
+    height: 40,
+    width: 70,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       color: color,
@@ -218,6 +218,7 @@ Container consulCardBotom({String title, Color color}) {
     child: Center(
       child: Text(
         title,
+        textAlign: TextAlign.center,
         style: AppTheme.subHeading.copyWith(
           color: Colors.white,
         ),
@@ -229,7 +230,7 @@ Container consulCardBotom({String title, Color color}) {
 Container consImage({String imgUrl, double rate}) {
   return Container(
     height: 120,
-    width: 130,
+    // width: 130,
     decoration: BoxDecoration(
       image: DecorationImage(
         image: NetworkImage(imgUrl),
