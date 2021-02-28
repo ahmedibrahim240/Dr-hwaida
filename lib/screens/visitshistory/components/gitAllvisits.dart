@@ -125,14 +125,16 @@ FutureBuilder<List<Visits>> gitAllVisist() {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (_) => UpdateVisits(
-                                    id: snapshot.data[index].consultantId,
+                                    consultantId:
+                                        snapshot.data[index].consultantId,
+                                    visitsId: snapshot.data[index].id,
                                   ),
                                 ),
                               );
                             },
                             child: Center(
                               child: Text(
-                                'Update Schedule date',
+                                'Update Appointment',
                                 style: AppTheme.heading.copyWith(
                                   color: Colors.white,
                                 ),

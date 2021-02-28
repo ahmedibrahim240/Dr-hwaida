@@ -18,15 +18,8 @@ class _TestingState extends State<Testing> {
               ? Container(
                   child: Center(child: CircularProgressIndicator()),
                 )
-              : ListView.builder(
-                  shrinkWrap: true,
-                  primary: false,
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      child: Text(snapshot.data[index].name),
-                    );
-                  },
+              : Container(
+                  child: Text(snapshot.data.name),
                 );
         },
       ),

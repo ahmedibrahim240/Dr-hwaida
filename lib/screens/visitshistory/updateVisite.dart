@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
+import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dbhelper.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,8 +16,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class UpdateVisits extends StatefulWidget {
-  final int id;
-  const UpdateVisits({Key key, @required this.id}) : super(key: key);
+  final int consultantId;
+  final int visitsId;
+  const UpdateVisits(
+      {Key key, @required this.consultantId, @required this.visitsId})
+      : super(key: key);
   @override
   _UpdateVisitsState createState() => _UpdateVisitsState();
 }
@@ -48,86 +56,120 @@ class _UpdateVisitsState extends State<UpdateVisits> {
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: FutureBuilder(
-          future: ConsultantApi.fetchConsultantById(widget.id),
+          future: ConsultantApi.fetchConsultantById(widget.consultantId),
           builder: (contaxt, snapshot) {
-            return (snapshot.data == null)
-                ? Container()
-                : Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Column(
-                          children: [
-                            rowTitle(
-                              title: 'date',
-                            ),
-                            (snapshot.data.available_in.isEmpty)
-                                ? Container()
-                                : dateListView(
-                                    date: snapshot.data.consulAvailable),
-                            SizedBox(height: 20),
-                            (listTimes.isEmpty)
-                                ? Container()
-                                : Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        rowTitle(
-                                          title: 'Time',
-                                        ),
-                                        timeListView(),
-                                      ],
-                                    ),
-                                  ),
-                            (_date == null) ? Container() : Text(_date),
-                            (_time == null) ? Container() : Text(_time),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: CustomButtonWithchild(
-                          color: customColor,
-                          onPress: () async {
-                            // if (_date != null && _time != null) {
-                            //   ConsultantProdect prodect = ConsultantProdect({
-                            //     'consultantId': widget.consultant.id,
-                            //     'dateId': _timeID,
-                            //     'title': widget.consultant.name,
-                            //     'price': widget.consultant.total_coust,
-                            //     'proImageUrl': widget.consultant.image,
-                            //     'date': _date,
-                            //     'time': _time,
-                            //   });
-                            //   int id = await helper.createProduct(prodect);
-                            //   print(id);
+            if (snapshot.data == null) {
+              return Container(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            } else {
+              List<ConsulAvailable> consulAvailable =
+                  snapshot.data.available_in;
 
-                            //   showmyDialog(context: context);
-                            // } else {
-                            //   _scaffoldKey.currentState.showSnackBar(
-                            //     new SnackBar(
-                            //       content: new Text(
-                            //           'you shoud choses  date and time'),
-                            //     ),
-                            //   );
-                            // }
-                          },
-                          child: Text(
-                            'Add to Cart',
-                            style: AppTheme.heading.copyWith(
-                              color: Colors.white,
+              return Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Column(
+                      children: [
+                        rowTitle(
+                          title: 'date',
+                        ),
+                        (snapshot.data.availableIn.isEmpty)
+                            ? Container()
+                            : dateListView(date: consulAvailable),
+                        SizedBox(height: 20),
+                        (listTimes.isEmpty)
+                            ? Container()
+                            : Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    rowTitle(
+                                      title: 'Time',
+                                    ),
+                                    timeListView(),
+                                  ],
+                                ),
+                              ),
+                        (_date == null) ? Container() : Text(_date),
+                        (_time == null) ? Container() : Text(_time),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: CustomButtonWithchild(
+                      color: customColor,
+                      onPress: () async {
+                        if (_date != null && _time != null) {
+                          updateAppointment(
+                            id: widget.visitsId,
+                            availableId: _timeID,
+                          );
+                        } else {
+                          _scaffoldKey.currentState.showSnackBar(
+                            new SnackBar(
+                              content:
+                                  new Text('you shoud choses  date and time'),
                             ),
-                          ),
+                          );
+                        }
+                      },
+                      child: Text(
+                        'Update Appointment',
+                        style: AppTheme.heading.copyWith(
+                          color: Colors.white,
                         ),
                       ),
-                    ],
-                  );
+                    ),
+                  ),
+                ],
+              );
+            }
           },
         ),
       ),
     );
+  }
+
+  updateAppointment({int id, int availableId}) async {
+    final uri = Uri.parse(Utils.VISITS_URL + "/$id").replace(
+      queryParameters: <String, String>{
+        "available_id": "$availableId",
+      },
+    );
+    print(uri.toString());
+    try {
+      var respes = await http.put(
+        uri.toString(),
+        headers: {'x-api-key': User.userToken},
+      );
+      print(respes.statusCode.toString());
+      final data = json.decode(respes.body);
+      if (data['success'] != true) {
+        _scaffoldKey.currentState.showSnackBar(
+          new SnackBar(
+            content: new Text(
+                'Update failed,(We have a server error${data['message']}), Please try again later'),
+          ),
+        );
+      } else {
+        showmyDialog(context: context);
+      }
+    } catch (e) {
+      _scaffoldKey.currentState.showSnackBar(
+        new SnackBar(
+          content: new Text(
+              'Update failed(We have a server error ${e.toString()}), Please try again  later '),
+        ),
+      );
+
+      print('catch Error is:' + e.toString());
+    }
   }
 
   Future<void> showmyDialog({BuildContext context}) async {
@@ -140,7 +182,7 @@ class _UpdateVisitsState extends State<UpdateVisits> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                  'Items Was added',
+                  'Appointment was Update',
                   style: AppTheme.heading.copyWith(
                     color: customColor,
                   ),

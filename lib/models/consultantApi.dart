@@ -62,14 +62,13 @@ class ConsultantApi {
     return listOfConsultant;
   }
 
-  static Future<List<Consultant>> fetchConsultantById(int id) async {
+  static Future<Consultant> fetchConsultantById(int id) async {
     List<Consultant> listOfConsultant = [];
     List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
     Consultant consultant;
     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-    var response = await http.get(
-        "http://technomasrsystems.com/Demos/Others/ShyBeLbn/public/api/consultants/2",
+    var response = await http.get(Utils.Consultant_URL + "/$id",
         headers: {'Accept': 'application/json'});
     Map<String, dynamic> jsonData = json.decode(response.body);
 
@@ -119,7 +118,7 @@ class ConsultantApi {
       print('catch Error:' + e.toString());
       print('filed:' + response.statusCode.toString());
     }
-    return listOfConsultant;
+    return consultant;
   }
 }
 
