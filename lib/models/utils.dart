@@ -61,4 +61,6 @@ class Utils {
   static final CONSULTFILLTER_URL = BASE_URL + "/filter?type=";
   // ignore: non_constant_identifier_names
   static final CONTACTUS_URL = BASE_URL + "/send_message";
+  // ignore: non_constant_identifier_names
+  static final SETTINGES_URL = BASE_URL + "/settings";
 }

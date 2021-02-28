@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:DrHwaida/models/sttingesApi.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:http/http.dart' as http;
 import 'package:DrHwaida/constants/constans.dart';
@@ -28,159 +29,181 @@ class _ContatactUsState extends State<ContatactUs> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: customAppBar(title: 'contact Us'),
-      body: (loading)
-          ? Container(
+      body: FutureBuilder(
+        future: CoutactUSApi.gitContactUS(),
+        builder: (context, snapshot) {
+          if (snapshot.data == null) {
+            return Container(
               child: Center(
                 child: CircularProgressIndicator(),
               ),
-            )
-          : Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height - 160,
-                  child: ListView(
-                    shrinkWrap: true,
-                    primary: true,
+            );
+          } else {
+            return (loading)
+                ? Container(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Stack(
                     children: [
                       Container(
-                        height: 150,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              'lib/images/aboutus.jpg',
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      Form(
-                        key: _formKey,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 20),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextFormField(
-                                validator: (val) => val.isEmpty
-                                    ? 'please enter your name'
-                                    : null,
-                                onChanged: (val) {
-                                  setState(() {
-                                    name = val;
-                                  });
-                                },
-                                decoration:
-                                    conectedTextFormStyle(lableText: 'Name'),
-                              ),
-                              SizedBox(height: 12),
-                              TextFormField(
-                                validator: (val) => val.isEmpty
-                                    ? 'please enter your email'
-                                    : null,
-                                onChanged: (val) {
-                                  setState(() {
-                                    email = val;
-                                  });
-                                },
-                                decoration:
-                                    conectedTextFormStyle(lableText: 'Email'),
-                              ),
-                              SizedBox(height: 12),
-                              TextFormField(
-                                validator: (val) => val.isEmpty
-                                    ? 'please enter your massege'
-                                    : null,
-                                maxLines: null,
-                                onChanged: (val) {
-                                  setState(() {
-                                    messges = val;
-                                  });
-                                },
-                                decoration:
-                                    conectedTextFormStyle(lableText: 'Massage'),
-                              ),
-                              SizedBox(height: 15),
-                              Text(
-                                'Contact Us ',
-                                style: AppTheme.heading.copyWith(
-                                  color: customColor,
-                                  fontSize: 16,
+                        height: MediaQuery.of(context).size.height - 160,
+                        child: ListView(
+                          shrinkWrap: true,
+                          primary: true,
+                          children: [
+                            Container(
+                              height: 150,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image:
+                                      NetworkImage(snapshot.data.contact_image),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              SizedBox(height: 20),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 50),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                            ),
+                            Form(
+                              key: _formKey,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    customSocialMdiaBottom(
-                                      onTap: () {},
-                                      icon: FontAwesomeIcons.facebook,
-                                      color: Colors.blue,
+                                    TextFormField(
+                                      validator: (val) => val.isEmpty
+                                          ? 'please enter your name'
+                                          : null,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          name = val;
+                                        });
+                                      },
+                                      decoration: conectedTextFormStyle(
+                                          lableText: 'Name'),
                                     ),
-                                    customSocialMdiaBottom(
-                                      onTap: () {},
-                                      icon: FontAwesomeIcons.whatsapp,
-                                      color: Colors.greenAccent,
+                                    SizedBox(height: 12),
+                                    TextFormField(
+                                      validator: (val) => val.isEmpty
+                                          ? 'please enter your email'
+                                          : null,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          email = val;
+                                        });
+                                      },
+                                      decoration: conectedTextFormStyle(
+                                          lableText: 'Email'),
                                     ),
-                                    customSocialMdiaBottom(
-                                      onTap: () {},
-                                      icon: FontAwesomeIcons.twitter,
-                                      color: Colors.lightBlueAccent,
+                                    SizedBox(height: 12),
+                                    TextFormField(
+                                      validator: (val) => val.isEmpty
+                                          ? 'please enter your massege'
+                                          : null,
+                                      maxLines: null,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          messges = val;
+                                        });
+                                      },
+                                      decoration: conectedTextFormStyle(
+                                          lableText: 'Massage'),
+                                    ),
+                                    SizedBox(height: 15),
+                                    Text(
+                                      'Contact Us ',
+                                      style: AppTheme.heading.copyWith(
+                                        color: customColor,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 50),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          customSocialMdiaBottom(
+                                            onTap: () {
+                                              launchInBrowser(
+                                                  snapshot.data.facebookurl);
+                                            },
+                                            icon: FontAwesomeIcons.facebook,
+                                            color: Colors.blue,
+                                          ),
+                                          customSocialMdiaBottom(
+                                            onTap: () {
+                                              launchInBrowser(
+                                                  snapshot.data.whatsappUrl);
+                                            },
+                                            icon: FontAwesomeIcons.whatsapp,
+                                            color: Colors.greenAccent,
+                                          ),
+                                          customSocialMdiaBottom(
+                                            onTap: () {
+                                              launchInBrowser(
+                                                  snapshot.data.twitterurl);
+                                            },
+                                            icon: FontAwesomeIcons.twitter,
+                                            color: Colors.lightBlueAccent,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(height: 25),
+                                    CustomButtonWithchild(
+                                      color: customColor,
+                                      child: Text(
+                                        'Submit',
+                                        style: AppTheme.heading.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      onPress: () {
+                                        if (_formKey.currentState.validate()) {
+                                          setState(() {
+                                            loading = !loading;
+                                          });
+                                          sentContactusDate(
+                                              email: email,
+                                              name: name,
+                                              message: messges);
+                                        }
+                                      },
+                                    ),
+                                    SizedBox(height: 15),
+                                    Center(
+                                      child: Text(
+                                        'Thanh You! ',
+                                        style: AppTheme.heading.copyWith(
+                                          color: Colors.black38,
+                                          fontSize: 16,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 25),
-                              CustomButtonWithchild(
-                                color: customColor,
-                                child: Text(
-                                  'Submit',
-                                  style: AppTheme.heading.copyWith(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                onPress: () {
-                                  if (_formKey.currentState.validate()) {
-                                    setState(() {
-                                      loading = !loading;
-                                    });
-                                    sentContactusDate(
-                                        email: email,
-                                        name: name,
-                                        message: messges);
-                                  }
-                                },
-                              ),
-                              SizedBox(height: 15),
-                              Center(
-                                child: Text(
-                                  'Thanh You! ',
-                                  style: AppTheme.heading.copyWith(
-                                    color: Colors.black38,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: CustomBottomNavigationBar(),
+                      ),
                     ],
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomBottomNavigationBar(),
-                ),
-              ],
-            ),
+                  );
+          }
+        },
+      ),
     );
   }
 
