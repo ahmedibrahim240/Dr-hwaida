@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/models/user.dart';
 
 import 'package:flutter/material.dart';
 import '../CustomBottomNavigationBar.dart';
@@ -7,11 +8,19 @@ import 'conponents/cinsltantAppBar.dart';
 import 'conponents/getConsultant.dart';
 
 class ConsultantPage extends StatefulWidget {
+  static String fillter = 'recent';
   @override
   _ConsultantPageState createState() => _ConsultantPageState();
 }
 
 class _ConsultantPageState extends State<ConsultantPage> {
+  @override
+  void initState() {
+    print('UserLAt:' + User.userlat.toString());
+    print('UserLong:' + User.userlong.toString());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +40,7 @@ class _ConsultantPageState extends State<ConsultantPage> {
               primary: false,
               children: [
                 consultantAppBer(context),
-                getAllConsultant(),
+                getAllConsultant(fillter: ConsultantPage.fillter),
               ],
             ),
           ),

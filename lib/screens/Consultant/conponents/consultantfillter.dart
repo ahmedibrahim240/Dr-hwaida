@@ -16,6 +16,11 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
     'HD Certified',
     'Rate',
   ];
+  List<String> fillterApi = [
+    'recent',
+    'certificated',
+    'rate',
+  ];
   int filtterTapped;
   @override
   Widget build(BuildContext context) {
@@ -27,18 +32,6 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.search, color: Colors.grey[500]),
-                  onPressed: () {},
-                ),
-                Text(
-                  'Seach by',
-                  style: AppTheme.heading.copyWith(color: Colors.grey[500]),
-                ),
-              ],
-            ),
             Transform.rotate(
               angle: 180 * 3.14 / 365,
               child: SvgPicture.asset(
@@ -62,7 +55,14 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
                   onTap: () {
                     setState(() {
                       filtterTapped = index;
+                      ConsultantPage.fillter = fillterApi[index];
                     });
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (_) => ConsultantPage(),
+                      ),
+                      ModalRoute.withName('/'),
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

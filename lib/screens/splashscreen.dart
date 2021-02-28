@@ -3,7 +3,6 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:flutter/material.dart';
-
 import '../sharedPreferences.dart';
 import 'onboarding/onboarding.dart';
 
@@ -26,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     getDateOfUser();
+
     super.initState();
     Timer(
       Duration(seconds: 5),
@@ -37,6 +37,11 @@ class _SplashScreenState extends State<SplashScreen> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override

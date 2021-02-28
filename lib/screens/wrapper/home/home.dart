@@ -26,7 +26,8 @@ class _HomeState extends State<Home> {
     User.userPhoneNum = await MySharedPreferences.getUserUserPhoneNumber();
     User.userSkipLogIn = await MySharedPreferences.getUserSkipLogIn();
     User.userPassword = await MySharedPreferences.getUserUserPassword();
-    // Cart.consultProdect = await MySharedPreferences.getDataOfConsulPro();
+    User.userlat = await MySharedPreferences.getUserLat();
+    User.userlong = await MySharedPreferences.getUserlong();
   }
 
   @override
@@ -61,6 +62,8 @@ class _HomeState extends State<Home> {
                 sctionTitle(
                     title: 'Consultants',
                     onTap: () {
+                      // print('UserLAt:' + User.userlat.toString());
+                      // print('UserLong:' + User.userlong.toString());
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (_) => ConsultantPage(),

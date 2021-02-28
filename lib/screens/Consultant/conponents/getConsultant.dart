@@ -6,9 +6,9 @@ import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-FutureBuilder<List<Consultant>> getAllConsultant() {
+FutureBuilder<List<Consultant>> getAllConsultant({String fillter}) {
   return FutureBuilder(
-    future: ConsultantApi.fetchAllConsultant(),
+    future: FiltterConsultantApi.fetchAllConsultant(fillter),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         return (snapshot.data == null)

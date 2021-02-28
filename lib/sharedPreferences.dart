@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class MySharedPreferences {
   static String sharedPrefUserSinginKey = 'IsSingIn';
   static String sharedPrefUserSkipLogIn = 'SkipLogIn';
+  static String sharedPrefUserLat = 'Lat';
+  static String sharedPrefUserLong = 'Long';
   static String sharedPrefUserselectedProImage = 'IsSelected';
   static String sharedPrefAppLang = 'AppLan';
   static String sharedPrefUserName = 'UserName';
@@ -35,6 +37,16 @@ class MySharedPreferences {
   static Future<bool> saveUserUserName(String userName) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.setString(sharedPrefUserName, userName);
+  }
+
+  static Future<bool> saveUserlat(String lat) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString(sharedPrefUserLat, lat);
+  }
+
+  static Future<bool> saveUserlong(String long) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString(sharedPrefUserLong, long);
   }
 
   static Future<bool> saveUserUserPassword(String userPasswrod) async {
@@ -108,6 +120,18 @@ class MySharedPreferences {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String name = preferences.getString(sharedPrefUserName);
     return name;
+  }
+
+  static getUserLat() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String lat = preferences.getString(sharedPrefUserLat);
+    return lat;
+  }
+
+  static getUserlong() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String long = preferences.getString(sharedPrefUserLong);
+    return long;
   }
 
   static getUserUserPassword() async {

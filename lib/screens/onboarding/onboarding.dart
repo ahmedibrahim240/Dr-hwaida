@@ -4,8 +4,35 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/onboarding/slider.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
-class OnBoard extends StatelessWidget {
+import '../../sharedPreferences.dart';
+
+class OnBoard extends StatefulWidget {
+  @override
+  _OnBoardState createState() => _OnBoardState();
+}
+
+class _OnBoardState extends State<OnBoard> {
+  gitCurrentLocations() async {
+    try {
+      final geoposition = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      setState(() {
+        MySharedPreferences.saveUserlong('${geoposition.longitude}');
+        MySharedPreferences.saveUserlat('${geoposition.latitude}');
+      });
+    } catch (e) {
+      print('geoposition Erorr:' + e.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    gitCurrentLocations();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (User.userLogIn == true) {
