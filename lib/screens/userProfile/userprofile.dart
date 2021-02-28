@@ -32,8 +32,8 @@ class _UserProfileState extends State<UserProfile> {
   String name;
   String userPhone;
   String userEmail;
-  String userImage = '';
-  String initialValueEmail;
+  String userIamge = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,8 +77,7 @@ class _UserProfileState extends State<UserProfile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Users userData = snapshot.data;
-
-            initialValueEmail = (userData.email) ?? 'add email';
+            print('Email:' + userData.email);
             return Stack(
               children: [
                 Container(
@@ -94,7 +93,6 @@ class _UserProfileState extends State<UserProfile> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           UserPorfileImage(
-                            // onTap: () {},
                             userimgUrl: userData.userImageUrl,
                             gender: userData.userGender,
                           ),
@@ -145,12 +143,11 @@ class _UserProfileState extends State<UserProfile> {
                             SizedBox(height: 20),
                             TextFormField(
                               initialValue: userData.phoneNumber,
-                              readOnly: true,
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (_) => Settings(),
-                                  ),
+                              onChanged: (val) {
+                                setState(
+                                  () {
+                                    userPhone = val;
+                                  },
                                 );
                               },
                               decoration: InputDecoration(
@@ -176,13 +173,12 @@ class _UserProfileState extends State<UserProfile> {
                             ),
                             SizedBox(height: 20),
                             TextFormField(
-                              initialValue: initialValueEmail,
-                              readOnly: true,
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (_) => Settings(),
-                                  ),
+                              initialValue: userData.email,
+                              onChanged: (val) {
+                                setState(
+                                  () {
+                                    userEmail = val;
+                                  },
                                 );
                               },
                               decoration: InputDecoration(
@@ -232,22 +228,37 @@ class _UserProfileState extends State<UserProfile> {
                             RaisedButton(
                               color: customColor,
                               onPressed: () {
-                                print(userData.userGender);
+                                if (UserPorfileImage._imageFile != null) {
+                                  setState(() {
+                                    userIamge =
+                                        UserPorfileImage._imageFile.toString();
+                                  });
+                                } else if (userData.userImageUrl != null) {
+                                  setState(() {
+                                    userIamge = userData.userImageUrl;
+                                  });
+                                } else {
+                                  setState(() {
+                                    userIamge = '';
+                                  });
+                                }
+                                print(userIamge);
                                 DatabaseServices(userToken: User.userToken)
                                     .upDateUserData(
                                   age: (Age.resAge) ?? userData.userBrDate,
+                                  userEmail: (userEmail) ?? userData.email,
                                   name: (name) ?? userData.name,
                                   status: (Status.resStautes) ??
                                       userData.userStutes,
                                   gender:
                                       (Gender.resGender) ?? userData.userGender,
-                                  phoneNummber: userData.phoneNumber,
-                                  userImage: (UserPorfileImage._imageFile !=
-                                          null)
-                                      ? UserPorfileImage._imageFile.toString()
-                                      : (userData.userImageUrl != null)
-                                          ? userData.userImageUrl
-                                          : '',
+                                  phoneNummber:
+                                      (userPhone) ?? userData.phoneNumber,
+                                  userImage: userIamge,
+                                  //  userIamge,
+                                  // (UserPorfileImage._imageFile) ??
+                                  //     (userData.userImageUrl) ??
+                                  //     userIamge,
                                 );
                               },
                               child: Text(
@@ -280,6 +291,18 @@ class _UserProfileState extends State<UserProfile> {
         },
       ),
     );
+  }
+
+  String userImages({String fileImage, String userDateimg}) {
+    String imageUrl;
+    if (fileImage != null) {
+      imageUrl = fileImage;
+    } else if (userDateimg != null) {
+      imageUrl = userDateimg;
+    } else {
+      imageUrl = '';
+    }
+    return imageUrl;
   }
 }
 

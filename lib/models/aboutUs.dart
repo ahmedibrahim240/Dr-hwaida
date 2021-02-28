@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 
 class AboutUS {
@@ -13,17 +12,23 @@ class AboutUS {
 class AboutUSApi {
   static Future<AboutUS> gitAboutUSApi() async {
     AboutUS aboutUS;
-    var response = await http.get(Utils.AboutUS_URL,
-        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+    var response = await http.get(
+      Utils.AboutUS_URL,
+    );
     var jsonData = json.decode(response.body);
+    print(jsonData);
+    print(response.statusCode.toString());
     try {
       if (response.statusCode == 200) {
+        print('succ:' + response.statusCode.toString());
+
         aboutUS = AboutUS(
-          imageUrl: jsonData['data']['rate_question'],
-          contant: jsonData['data']['whatsapp'],
+          imageUrl: jsonData['data']['image'],
+          contant: jsonData['data']['about'],
         );
       }
     } catch (e) {
+      print('cath:' + response.statusCode.toString());
       print(e.toString());
     }
     return aboutUS;

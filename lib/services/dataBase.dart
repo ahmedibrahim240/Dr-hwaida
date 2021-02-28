@@ -30,6 +30,7 @@ class DatabaseServices {
     String gender,
     String status,
     String userImage,
+    String userEmail,
   }) async {
     // var body = jsonEncode({
     //   'name': name,
@@ -48,6 +49,7 @@ class DatabaseServices {
         'status': "$status",
         'mobile': "$phoneNummber",
         'image': "$userImage",
+        'email': "$userEmail",
       },
     );
     print(uri.toString());
@@ -80,7 +82,9 @@ class DatabaseServices {
             userAge: user['data']['age'].toString(),
             userStutes: user['data']['status'].toString(),
             userImageUrl: user['data']['image'].toString(),
-            email: user['data']['email'].toString(),
+            email: (user['data']['email'] != null)
+                ? user['data']['email'].toString()
+                : 'Add Email',
           )
         : null;
   }

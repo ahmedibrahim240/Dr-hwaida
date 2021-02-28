@@ -48,7 +48,7 @@ class _AboutUSState extends State<AboutUS> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(
-                              _parseHtmlString(snapshot.data.imageUrl),
+                              snapshot.data.imageUrl,
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -59,7 +59,7 @@ class _AboutUSState extends State<AboutUS> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                         child: Text(
-                          snapshot.data.contant,
+                          _parseHtmlString(snapshot.data.contant),
                           style: AppTheme.subHeading.copyWith(
                             height: 1.5,
                             letterSpacing: .07,
