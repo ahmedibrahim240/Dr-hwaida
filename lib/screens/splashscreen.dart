@@ -7,6 +7,8 @@ import '../sharedPreferences.dart';
 import 'onboarding/onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
+  static final route = '/splashScreen';
+
   static bool slider = true;
   static void isSlider() {
     slider = !slider;

@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/routes.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,8 @@ class _MyAppState extends State<MyApp> {
         primaryColor: customColor,
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      home: SplashScreen(),
+      initialRoute: SplashScreen.route,
+      routes: routes,
     );
 
     //  StreamProvider<User>.value(
