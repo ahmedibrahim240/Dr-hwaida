@@ -11,11 +11,14 @@ import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dataBase.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'dart:io';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class UserProfile extends StatefulWidget {
   final String userName;
+
   final String userimgUrl;
 
   UserProfile({@required this.userName, @required this.userimgUrl});
@@ -27,6 +30,9 @@ class _UserProfileState extends State<UserProfile> {
   // final _formKey = GlobalKey<FormState>();
 
   String name;
+  String userPhone;
+  String userEmail;
+  String initialValueEmail;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +76,8 @@ class _UserProfileState extends State<UserProfile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Users userData = snapshot.data;
+
+            initialValueEmail = (userData.email) ?? 'add email';
             return Stack(
               children: [
                 Container(
@@ -85,7 +93,7 @@ class _UserProfileState extends State<UserProfile> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           UserPorfileImage(
-                            onTap: () {},
+                            // onTap: () {},
                             userimgUrl: userData.userImageUrl,
                             gender: userData.userGender,
                           ),
@@ -166,6 +174,38 @@ class _UserProfileState extends State<UserProfile> {
                               ),
                             ),
                             SizedBox(height: 20),
+                            TextFormField(
+                              initialValue: initialValueEmail,
+                              readOnly: true,
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => Settings(),
+                                  ),
+                                );
+                              },
+                              decoration: InputDecoration(
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                ),
+                                prefixIcon: Container(
+                                  margin: EdgeInsets.all(8),
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    gradient: AppTheme.containerBackground,
+                                  ),
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.email,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
                             Row(
                               children: [
                                 Expanded(
@@ -236,32 +276,39 @@ class _UserProfileState extends State<UserProfile> {
   }
 }
 
-class UserPorfileImage extends StatelessWidget {
+class UserPorfileImage extends StatefulWidget {
   const UserPorfileImage({
     Key key,
-    @required this.onTap,
+    // @required this.onTap,
     @required this.userimgUrl,
     @required this.gender,
   }) : super(key: key);
 
-  final Function onTap;
+  // final Function onTap;
   final String userimgUrl;
   final String gender;
 
+  @override
+  _UserPorfileImageState createState() => _UserPorfileImageState();
+}
+
+class _UserPorfileImageState extends State<UserPorfileImage> {
+  final picker = ImagePicker();
+  File _imageFile;
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
       angle: 190 * 3.14 / 97,
       child: Hero(
-        tag: 'userImg$userimgUrl',
+        tag: 'userImg${widget.userimgUrl}',
         child: Center(
           child: Stack(
             children: [
               Container(
-                height: 100,
-                width: 100,
+                height: 150,
+                width: 150,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
+                  shape: BoxShape.circle,
                   border: Border.all(
                     color: customColor,
                     width: 1,
@@ -273,13 +320,27 @@ class UserPorfileImage extends StatelessWidget {
                   width: 100,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                      image: (userimgUrl == null)
-                          ? NetworkImage(userimgUrl)
-                          : AssetImage(
-                              Utils.userImageURL(gender: gender),
-                            ),
-                      fit: BoxFit.cover,
+                  ),
+                  child: ClipOval(
+                    child: SizedBox(
+                      height: 200,
+                      width: 200,
+                      child: (_imageFile != null)
+                          ? Image.file(
+                              _imageFile,
+                              fit: BoxFit.cover,
+                            )
+                          : (widget.userimgUrl == null)
+                              ? Image(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(widget.userimgUrl),
+                                )
+                              : Image(
+                                  image: AssetImage(
+                                    Utils.userImageURL(gender: widget.gender),
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
                     ),
                   ),
                 ),
@@ -288,10 +349,12 @@ class UserPorfileImage extends StatelessWidget {
                 bottom: 0,
                 right: 0,
                 child: GestureDetector(
-                  onTap: onTap,
+                  onTap: () {
+                    _showPickOptionsDialog(context);
+                  },
                   child: Container(
-                    height: 30,
-                    width: 30,
+                    height: 45,
+                    width: 45,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.white, width: 2),
                       shape: BoxShape.circle,
@@ -301,7 +364,7 @@ class UserPorfileImage extends StatelessWidget {
                       child: Icon(
                         FontAwesomeIcons.edit,
                         color: Colors.white,
-                        size: 15,
+                        size: 20,
                       ),
                     ),
                   ),
@@ -309,6 +372,69 @@ class UserPorfileImage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  _loadPicker(ImageSource source, BuildContext context) async {
+    // ignore: deprecated_member_use
+    File picked = await ImagePicker.pickImage(source: source);
+    if (picked != null) {
+      _cropImage(picked, context);
+    }
+    Navigator.of(context).pop();
+  }
+
+  _cropImage(File picked, BuildContext context) async {
+    try {
+      File cropped = await ImageCropper.cropImage(
+        androidUiSettings: AndroidUiSettings(
+          statusBarColor: Colors.red,
+          toolbarColor: Colors.red,
+          toolbarTitle: "Crop Image",
+          toolbarWidgetColor: Colors.white,
+        ),
+        sourcePath: picked.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.original,
+          CropAspectRatioPreset.ratio16x9,
+          CropAspectRatioPreset.ratio4x3,
+        ],
+        maxWidth: 800,
+      );
+      if (cropped != null) {
+        setState(() {
+          _imageFile = cropped;
+        });
+        print(_imageFile.path);
+        // await uploadImage(context);
+      }
+    } catch (e) {
+      print('piker error:' + e.toString());
+    }
+  }
+
+  void _showPickOptionsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              title: Text("Pick from Gallery"),
+              onTap: () {
+                _loadPicker(ImageSource.gallery, context);
+              },
+            ),
+            ListTile(
+              title: Text("Take a pictuer"),
+              onTap: () {
+                _loadPicker(ImageSource.camera, context);
+              },
+            )
+          ],
         ),
       ),
     );
