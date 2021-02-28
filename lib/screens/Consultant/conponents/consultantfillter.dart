@@ -21,7 +21,7 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
     'certificated',
     'rate',
   ];
-  int filtterTapped;
+  int filtterTapped = 0;
   @override
   Widget build(BuildContext context) {
     return ListView(

@@ -183,10 +183,7 @@ class _SettingsState extends State<Settings> {
                                   ],
                                 ),
                               ),
-                        SizedBox(height: 20),
-                        acountBody(title: 'Change Phone Number', onTap: () {}),
-                        SizedBox(height: 20),
-                        acountBody(title: 'Add Email', onTap: () {}),
+                        SizedBox(height: 10),
                         Divider(
                           height: 15,
                           thickness: 2,
