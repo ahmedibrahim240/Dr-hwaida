@@ -32,6 +32,7 @@ class _UserProfileState extends State<UserProfile> {
   String name;
   String userPhone;
   String userEmail;
+  String userImage = '';
   String initialValueEmail;
   @override
   Widget build(BuildContext context) {
@@ -241,6 +242,12 @@ class _UserProfileState extends State<UserProfile> {
                                   gender:
                                       (Gender.resGender) ?? userData.userGender,
                                   phoneNummber: userData.phoneNumber,
+                                  userImage: (UserPorfileImage._imageFile !=
+                                          null)
+                                      ? UserPorfileImage._imageFile.toString()
+                                      : (userData.userImageUrl != null)
+                                          ? userData.userImageUrl
+                                          : '',
                                 );
                               },
                               child: Text(
@@ -277,6 +284,7 @@ class _UserProfileState extends State<UserProfile> {
 }
 
 class UserPorfileImage extends StatefulWidget {
+  static File _imageFile;
   const UserPorfileImage({
     Key key,
     // @required this.onTap,
@@ -294,7 +302,7 @@ class UserPorfileImage extends StatefulWidget {
 
 class _UserPorfileImageState extends State<UserPorfileImage> {
   final picker = ImagePicker();
-  File _imageFile;
+
   @override
   Widget build(BuildContext context) {
     return Transform.rotate(
@@ -325,9 +333,9 @@ class _UserPorfileImageState extends State<UserPorfileImage> {
                     child: SizedBox(
                       height: 200,
                       width: 200,
-                      child: (_imageFile != null)
+                      child: (UserPorfileImage._imageFile != null)
                           ? Image.file(
-                              _imageFile,
+                              UserPorfileImage._imageFile,
                               fit: BoxFit.cover,
                             )
                           : (widget.userimgUrl == null)
@@ -405,9 +413,9 @@ class _UserPorfileImageState extends State<UserPorfileImage> {
       );
       if (cropped != null) {
         setState(() {
-          _imageFile = cropped;
+          UserPorfileImage._imageFile = cropped;
         });
-        print(_imageFile.path);
+        print(UserPorfileImage._imageFile.path);
         // await uploadImage(context);
       }
     } catch (e) {
