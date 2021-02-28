@@ -11,14 +11,12 @@ class VisitsHistory extends StatefulWidget {
 }
 
 class _VisitsHistoryState extends State<VisitsHistory> {
-  String visaName = 'Visa';
-  String visaNumber = '25555555555555555555555555';
-  String date = '2May202';
-  String price = '555';
-  String userName = 'Ahmed Ibrahim';
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: customAppBar(title: 'Visits History'),
       bottomNavigationBar: CustomBottomNavigationBar(),
       body: ListView(
@@ -38,21 +36,7 @@ class _VisitsHistoryState extends State<VisitsHistory> {
             thickness: 2,
           ),
           SizedBox(height: 20),
-          gitAllVisist(),
-          // ListView.builder(
-          //   shrinkWrap: true,
-          //   primary: false,
-          //   itemCount: 10,
-          //   itemBuilder: (context, index) {
-          //     return VisaCard(
-          //       visaName: visaName,
-          //       visaNumber: visaNumber,
-          //       date: date,
-          //       price: price,
-          //       userName: userName,
-          //     );
-          //   },
-          // ),
+          gitAllVisist(context: context),
         ],
       ),
     );

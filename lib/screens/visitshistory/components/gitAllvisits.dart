@@ -1,12 +1,19 @@
+import 'dart:convert';
+
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/models/utils.dart';
+
 import 'package:DrHwaida/models/visitApi.dart';
 import 'package:DrHwaida/models/visits.dart';
 import 'package:DrHwaida/screens/visitshistory/updateVisite.dart';
+import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
 
-FutureBuilder<List<Visits>> gitAllVisist() {
+FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
   return FutureBuilder(
     future: VisitsApi.fetchAllVisit(),
     builder: (contant, snapshot) {
@@ -119,27 +126,57 @@ FutureBuilder<List<Visits>> gitAllVisist() {
                               ),
                             ],
                           ),
-                          CustomButtonWithchild(
-                            color: customColor,
-                            onPress: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => UpdateVisits(
-                                    consultantId:
-                                        snapshot.data[index].consultantId,
-                                    visitsId: snapshot.data[index].id,
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: CustomButtonWithchild(
+                                  color: customColor,
+                                  onPress: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => UpdateVisits(
+                                          consultantId:
+                                              snapshot.data[index].consultantId,
+                                          visitsId: snapshot.data[index].id,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'Update\n Appointment',
+                                      textAlign: TextAlign.center,
+                                      style: AppTheme.heading.copyWith(
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              );
-                            },
-                            child: Center(
-                              child: Text(
-                                'Update Appointment',
-                                style: AppTheme.heading.copyWith(
-                                  color: Colors.white,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: CustomButtonWithchild(
+                                  color: Colors.red,
+                                  onPress: () {
+                                    delateVisit(
+                                      context: context,
+                                      id: snapshot.data[index].id,
+                                    );
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'Cancel \n Visits',
+                                      textAlign: TextAlign.center,
+                                      style: AppTheme.heading.copyWith(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
                           )
                         ],
                       ),
@@ -149,6 +186,71 @@ FutureBuilder<List<Visits>> gitAllVisist() {
                 );
               },
             );
+    },
+  );
+}
+
+delateVisit({
+  int id,
+  BuildContext context,
+}) async {
+  try {
+    var respes = await http.delete(
+      Utils.VISITS_URL + "/$id",
+      headers: {'x-api-key': User.userToken},
+    );
+    print(respes.statusCode.toString());
+    final data = json.decode(respes.body);
+    String sucesseror =
+        ' failed to cancel,(We have a server error${data['message']}), Please try again later';
+    if (data['success'] != true) {
+      showmyDialog(context: context, mass: sucesseror);
+    } else {
+      showmyDialog(context: context, mass: 'Visit was canceld');
+    }
+  } catch (e) {
+    String catchEroro =
+        ' failed to cancel,(We have a server error${e.toString()}), Please try again later';
+    showmyDialog(context: context, mass: catchEroro);
+
+    print('catch Error is:' + e.toString());
+  }
+}
+
+Future<void> showmyDialog({BuildContext context, String mass}) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(
+                mass,
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              'Oki',
+              style: AppTheme.heading.copyWith(
+                color: customColor,
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (BuildContext context) => Home()),
+              );
+            },
+          ),
+        ],
+      );
     },
   );
 }
