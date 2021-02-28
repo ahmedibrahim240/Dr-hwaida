@@ -150,6 +150,7 @@ listOfBadges({List badges}) {
   String selected = 'selected_badge';
   String recent = 'recent_badge';
   String ourstars = 'our_stars_badge';
+  String certificated = 'certificated';
   return Container(
     height: 100,
     child: ListView.builder(
@@ -173,7 +174,7 @@ listOfBadges({List badges}) {
             children: [
               consulCardBotom(
                 title: 'Recent',
-                color: customColor,
+                color: Colors.greenAccent,
               ),
               SizedBox(width: 2),
             ],
@@ -184,6 +185,16 @@ listOfBadges({List badges}) {
               consulCardBotom(
                 title: 'Our Stars',
                 color: Colors.gold,
+              ),
+              SizedBox(width: 2),
+            ],
+          );
+        } else if (badges[index] == certificated) {
+          return Row(
+            children: [
+              consulCardBotom(
+                title: 'DD Certificated',
+                color: customColor,
               ),
               SizedBox(width: 2),
             ],
