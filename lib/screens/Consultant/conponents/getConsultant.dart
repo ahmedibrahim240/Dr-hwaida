@@ -6,9 +6,11 @@ import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-FutureBuilder<List<Consultant>> getAllConsultant({String fillter}) {
+FutureBuilder<List<Consultant>> getAllConsultant(
+    {String type, String lat, String lng}) {
   return FutureBuilder(
-    future: FiltterConsultantApi.fetchAllConsultant(fillter),
+    future:
+        FiltterConsultantApi.fetchAllConsultant(type: type, lat: lat, lng: lng),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         return (snapshot.data == null)
@@ -17,7 +19,7 @@ FutureBuilder<List<Consultant>> getAllConsultant({String fillter}) {
                 shrinkWrap: true,
                 primary: false,
                 itemCount: snapshot.data.length,
-                padding: EdgeInsets.symmetric(horizontal: 5),
+                padding: EdgeInsets.symmetric(horizontal: 2),
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
@@ -121,6 +123,7 @@ FutureBuilder<List<Consultant>> getAllConsultant({String fillter}) {
                                         ? Container()
                                         : listOfBadges(
                                             badges: snapshot.data[index].badges,
+                                            context: context,
                                           ),
                                   ],
                                 ),
@@ -146,13 +149,14 @@ FutureBuilder<List<Consultant>> getAllConsultant({String fillter}) {
   );
 }
 
-listOfBadges({List badges}) {
+listOfBadges({List badges, BuildContext context}) {
   String selected = 'selected_badge';
   String recent = 'recent_badge';
   String ourstars = 'our_stars_badge';
   String certificated = 'certificated';
   return Container(
     height: 100,
+    width: MediaQuery.of(context).size.width - 162,
     child: ListView.builder(
       shrinkWrap: true,
       primary: false,
@@ -166,7 +170,7 @@ listOfBadges({List badges}) {
                 title: 'Selected',
                 color: Colors.lightBlue,
               ),
-              SizedBox(width: 2),
+              SizedBox(width: 1),
             ],
           );
         } else if (badges[index] == recent) {
@@ -176,7 +180,7 @@ listOfBadges({List badges}) {
                 title: 'Recent',
                 color: Colors.greenAccent,
               ),
-              SizedBox(width: 2),
+              SizedBox(width: 1),
             ],
           );
         } else if (badges[index] == ourstars) {
@@ -186,17 +190,17 @@ listOfBadges({List badges}) {
                 title: 'Our Stars',
                 color: Colors.gold,
               ),
-              SizedBox(width: 2),
+              SizedBox(width: 1),
             ],
           );
         } else if (badges[index] == certificated) {
           return Row(
             children: [
               consulCardBotom(
-                title: 'HD \n Certificated',
+                title: 'Certificated',
                 color: customColor,
               ),
-              SizedBox(width: 2),
+              SizedBox(width: 1),
             ],
           );
         } else {
@@ -209,8 +213,8 @@ listOfBadges({List badges}) {
 
 Container consulCardBotom({String title, Color color}) {
   return Container(
-    height: 30,
-    width: 45,
+    height: 32,
+    width: 48,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       color: color,
@@ -220,7 +224,7 @@ Container consulCardBotom({String title, Color color}) {
         title,
         textAlign: TextAlign.center,
         style: AppTheme.subHeading.copyWith(
-          fontSize: 8,
+          fontSize: 7,
           color: Colors.white,
         ),
       ),

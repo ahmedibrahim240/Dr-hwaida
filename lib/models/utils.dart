@@ -58,7 +58,7 @@ class Utils {
   // ignore: non_constant_identifier_names
   static final SEARCHBYNAME_URL = BASE_URL + "/search?search=";
   // ignore: non_constant_identifier_names
-  static final CONSULTFILLTER_URL = BASE_URL + "/filter?type=";
+  static final CONSULTFILLTER_URL = BASE_URL + "/filter";
   // ignore: non_constant_identifier_names
   static final CONTACTUS_URL = BASE_URL + "/send_message";
   // ignore: non_constant_identifier_names

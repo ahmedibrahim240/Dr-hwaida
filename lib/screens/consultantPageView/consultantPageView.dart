@@ -190,11 +190,14 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               color: customColor,
                               onPress: () {
                                 if (User.userSkipLogIn != true) {
+                                  print(widget.consultant.question);
+                                  print(widget.consultant.id);
+
                                   flitter(
                                     context: context,
                                     child: ConsultantRating(
                                       title: widget.consultant.name,
-                                      question: widget.consultant.question,
+                                      question: "widget.consultant.question",
                                       consultant_id: widget.consultant.id,
                                     ),
                                   );

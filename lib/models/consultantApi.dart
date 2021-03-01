@@ -210,11 +210,18 @@ class ConsultantRateApi {
 }
 
 class FiltterConsultantApi {
-  static Future<List<Consultant>> fetchAllConsultant(String fillter) async {
+  static Future<List<Consultant>> fetchAllConsultant(
+      {String type, String lat, String lng}) async {
     List<Consultant> listOfConsultant = [];
     List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
-    var response = await http.get(Utils.CONSULTFILLTER_URL + "$fillter",
+    final uri = Uri.parse(Utils.CONSULTFILLTER_URL)
+        .replace(queryParameters: <String, String>{
+      "type": "$type",
+      "lat": "$lat",
+      "lng": "$lng",
+    });
+    var response = await http.get(uri.toString(),
         headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
     var jsonData = json.decode(response.body);
     try {

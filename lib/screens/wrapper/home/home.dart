@@ -30,10 +30,23 @@ class _HomeState extends State<Home> {
     User.userlong = await MySharedPreferences.getUserlong();
   }
 
+  gitFillterType() {
+    if (User.userlat != null && User.userlong != null) {
+      setState(() {
+        ConsultantPage.fillter = 'location';
+      });
+    } else {
+      setState(() {
+        ConsultantPage.fillter = 'recent';
+      });
+    }
+  }
+
   @override
   void initState() {
     getDateOfUser();
-    // MySharedPreferences.getDataOfConsulPro();
+    gitFillterType();
+
     super.initState();
   }
 

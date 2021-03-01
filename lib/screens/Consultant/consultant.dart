@@ -2,22 +2,29 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/models/user.dart';
 
 import 'package:flutter/material.dart';
+import '../../sharedPreferences.dart';
 import '../CustomBottomNavigationBar.dart';
 import 'conponents/cinsltantAppBar.dart';
 
 import 'conponents/getConsultant.dart';
 
 class ConsultantPage extends StatefulWidget {
-  static String fillter = 'recent';
+  static String fillter;
   @override
   _ConsultantPageState createState() => _ConsultantPageState();
 }
 
 class _ConsultantPageState extends State<ConsultantPage> {
+  gitfillter() async {
+    User.userlat = await MySharedPreferences.getUserLat();
+    User.userlong = await MySharedPreferences.getUserlong();
+  }
+
   @override
   void initState() {
-    print('UserLAt:' + User.userlat.toString());
-    print('UserLong:' + User.userlong.toString());
+    gitfillter();
+    print('fillter:' + ConsultantPage.fillter);
+
     super.initState();
   }
 
@@ -40,7 +47,11 @@ class _ConsultantPageState extends State<ConsultantPage> {
               primary: false,
               children: [
                 consultantAppBer(context),
-                getAllConsultant(fillter: ConsultantPage.fillter),
+                getAllConsultant(
+                  type: ConsultantPage.fillter,
+                  lat: User.userlat,
+                  lng: User.userlong,
+                ),
               ],
             ),
           ),
