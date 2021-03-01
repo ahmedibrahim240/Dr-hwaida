@@ -13,11 +13,19 @@ class DatabaseServices {
     try {
       var response = await http
           .get(Utils.GITUSERDATA_URL, headers: {'x-api-key': userToken});
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        print(response.statusCode.toString());
+        final user = _userFromDatabaseUser(data);
+        controller.add(user);
+      } else if (response.statusCode == 201) {
+        final data = json.decode(response.body);
 
-      final data = json.decode(response.body);
-
-      final user = _userFromDatabaseUser(data);
-      controller.add(user);
+        final user = _userFromDatabaseUser(data);
+        controller.add(user);
+      } else {
+        print(response.statusCode.toString());
+      }
     } catch (e) {
       print(e.toString());
     }
@@ -32,15 +40,6 @@ class DatabaseServices {
     String userImage,
     String userEmail,
   }) async {
-    // var body = jsonEncode({
-    //   'name': name,
-    //   'mobile': phoneNummber,
-    //   'image': userImage,
-    //   'age': age,
-    //   'gender': gender,
-    //   'status': status,
-    // });
-
     final uri = Uri.parse(Utils.UPDATEUSERDATA_URL).replace(
       queryParameters: <String, String>{
         'name': "$name",
@@ -59,10 +58,22 @@ class DatabaseServices {
         uri.toString(),
         headers: {'x-api-key': userToken},
       );
-      print(respes.statusCode.toString());
-      final data = json.decode(respes.body);
-      if (data['success'] == true) {
-        print('succeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeess');
+      if (respes.statusCode == 200) {
+        final data = json.decode(respes.body);
+        if (data['success'] != true) {
+          print('EROOOOOOOOOOOOOOOOOOOOOOOOOR');
+        } else {
+          print('succeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeess');
+        }
+      } else if (respes.statusCode == 201) {
+        final data = json.decode(respes.body);
+        if (data['success'] != true) {
+          print('EROOOOOOOOOOOOOR');
+        } else {
+          print('succeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeess');
+        }
+      } else {
+        print('ServerErooor');
       }
     } catch (e) {
       print('errrrroe');
@@ -72,7 +83,6 @@ class DatabaseServices {
   }
 
   Users _userFromDatabaseUser(Map user) {
-    print(user['data']['name'].toString());
     return user != null
         ? Users(
             name: user['data']['name'].toString(),
@@ -81,7 +91,7 @@ class DatabaseServices {
             userGender: user['data']['gender'].toString(),
             userAge: user['data']['age'].toString(),
             userStutes: user['data']['status'].toString(),
-            userImageUrl: user['data']['image'].toString(),
+            userImageUrl: user['data']['image'],
             email: (user['data']['email'] != null)
                 ? user['data']['email'].toString()
                 : 'Add Email',

@@ -83,13 +83,15 @@ class MenuAppBer extends StatelessWidget {
                                         height: 150,
                                         width: 150,
                                         child: Image(
-                                          image: (userData.userImageUrl == null)
+                                          image: (userData.userImageUrl ==
+                                                      null ||
+                                                  userData.userImageUrl == '')
                                               ? NetworkImage(
                                                   userData.userImageUrl)
                                               : AssetImage(
                                                   Utils.userImageURL(
-                                                      gender:
-                                                          userData.userGender),
+                                                    gender: userData.userGender,
+                                                  ),
                                                 ),
                                         ),
                                       ),
