@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/aboutUs.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 
@@ -45,14 +46,22 @@ class _AboutUSState extends State<AboutUS> {
                       Container(
                         height: 200,
                         width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              snapshot.data.imageUrl,
-                            ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        child: (snapshot.data.imageUrl == null)
+                            ? Container(
+                                child: Icon(
+                                  Icons.image,
+                                  color: Colors.lightBlueAccent,
+                                ),
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: snapshot.data.imageUrl,
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width,

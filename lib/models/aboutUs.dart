@@ -21,11 +21,18 @@ class AboutUSApi {
     try {
       if (response.statusCode == 200) {
         print('succ:' + response.statusCode.toString());
-
         aboutUS = AboutUS(
           imageUrl: jsonData['data']['image'],
           contant: jsonData['data']['about'],
         );
+      } else if (response.statusCode == 201) {
+        print('succ1:' + response.statusCode.toString());
+        aboutUS = AboutUS(
+          imageUrl: jsonData['data']['image'],
+          contant: jsonData['data']['about'],
+        );
+      } else {
+        print('error');
       }
     } catch (e) {
       print('cath:' + response.statusCode.toString());
