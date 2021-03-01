@@ -197,7 +197,6 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                     context: context,
                                     child: ConsultantRating(
                                       title: widget.consultant.name,
-                                      question: "widget.consultant.question",
                                       consultant_id: widget.consultant.id,
                                     ),
                                   );

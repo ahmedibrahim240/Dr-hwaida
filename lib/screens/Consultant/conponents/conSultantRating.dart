@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:DrHwaida/models/sttingesApi.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:DrHwaida/constants/constans.dart';
@@ -11,14 +12,13 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class ConsultantRating extends StatefulWidget {
   final String title;
-  final String question;
+
   // ignore: non_constant_identifier_names
   final int consultant_id;
 
   const ConsultantRating({
     Key key,
     @required this.title,
-    @required this.question,
 
     // ignore: non_constant_identifier_names
     @required this.consultant_id,
@@ -40,128 +40,148 @@ class _ConsultantRatingState extends State<ConsultantRating> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      body: ListView(
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-          vertical: 20,
-        ),
-        children: [
-          Container(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        'Add your rate',
-                        style: AppTheme.heading.copyWith(
-                          color: customColor,
-                        ),
-                      ),
+      body: FutureBuilder(
+        future: CoutactUSApi.gitContactUS(),
+        builder: (context, snapshot) {
+          if (snapshot.data == null) {
+            return Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          } else {
+            return (loading)
+                ? Container(
+                    child: Center(
+                      child: CircularProgressIndicator(),
                     ),
-                    SizedBox(height: 20),
-                    Text(
-                      widget.title,
-                      style: AppTheme.heading.copyWith(),
+                  )
+                : ListView(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 20,
                     ),
-                    SizedBox(height: 10),
-                    Center(
-                      child: SmoothStarRating(
-                        rating: 0,
-                        size: 25,
-                        onRated: (val) {
-                          setState(() {
-                            rate = val;
-                          });
-                        },
-                        filledIconData: Icons.star,
-                        color: Colors.yellow[700],
-                        halfFilledIconData: Icons.star_half,
-                        borderColor: Colors.yellow[900],
-                        defaultIconData: Icons.star_border,
-                        starCount: 5,
-                        allowHalfRating: true,
-                        spacing: 2.0,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      onChanged: (val) {
-                        setState(() {
-                          coment = val;
-                        });
-                      },
-                      decoration: conectedTextFormStyle(
-                        lableText: 'Add comment',
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Center(
-                      child: Text(
-                        widget.question,
-                        textDirection: TextDirection.ltr,
-                        style: AppTheme.heading.copyWith(),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    TextFormField(
-                      onChanged: (val) {
-                        setState(() {
-                          anwser = val;
-                        });
-                      },
-                      validator: (val) =>
-                          val.isEmpty ? 'please add your answer' : null,
-                      decoration: conectedTextFormStyle(
-                        lableText: 'Answer',
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(error),
-                    SizedBox(height: 10),
-                    CustomButtonWithchild(
-                      color: customColor,
-                      onPress: () {
-                        setState(() {
-                          loading = !loading;
-                        });
-                        if (rate != null) {
-                          if (_formKey.currentState.validate()) {
-                            addRating(
-                              answer: anwser,
-                              coment: coment,
-                              rate: rate,
-                              id: widget.consultant_id,
-                            );
-                          }
-                        } else {
-                          setState(() {
-                            error = 'plesse add your rate';
-                          });
-                        }
-                      },
-                      child: Center(
-                        child: Text(
-                          'Rating',
-                          style: AppTheme.heading.copyWith(
-                            color: Colors.white,
+                    children: [
+                      Container(
+                        child: Form(
+                          key: _formKey,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    'Add your rate',
+                                    style: AppTheme.heading.copyWith(
+                                      color: customColor,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                  widget.title,
+                                  style: AppTheme.heading.copyWith(),
+                                ),
+                                SizedBox(height: 10),
+                                Center(
+                                  child: SmoothStarRating(
+                                    rating: 0,
+                                    size: 25,
+                                    onRated: (val) {
+                                      setState(() {
+                                        rate = val;
+                                      });
+                                    },
+                                    filledIconData: Icons.star,
+                                    color: Colors.yellow[700],
+                                    halfFilledIconData: Icons.star_half,
+                                    borderColor: Colors.yellow[900],
+                                    defaultIconData: Icons.star_border,
+                                    starCount: 5,
+                                    allowHalfRating: true,
+                                    spacing: 2.0,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                TextFormField(
+                                  onChanged: (val) {
+                                    setState(() {
+                                      coment = val;
+                                    });
+                                  },
+                                  decoration: conectedTextFormStyle(
+                                    lableText: 'Add comment',
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Center(
+                                  child: Text(
+                                    snapshot.data.rate_question,
+                                    textDirection: TextDirection.ltr,
+                                    style: AppTheme.heading.copyWith(),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                TextFormField(
+                                  onChanged: (val) {
+                                    setState(() {
+                                      anwser = val;
+                                    });
+                                  },
+                                  validator: (val) => val.isEmpty
+                                      ? 'please add your answer'
+                                      : null,
+                                  decoration: conectedTextFormStyle(
+                                    lableText: 'Answer',
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Text(error),
+                                SizedBox(height: 10),
+                                CustomButtonWithchild(
+                                  color: customColor,
+                                  onPress: () {
+                                    setState(() {
+                                      loading = !loading;
+                                    });
+                                    if (rate != null) {
+                                      if (_formKey.currentState.validate()) {
+                                        addRating(
+                                          answer: anwser,
+                                          coment: coment,
+                                          rate: rate,
+                                          id: widget.consultant_id,
+                                        );
+                                      }
+                                    } else {
+                                      setState(() {
+                                        error = 'plesse add your rate';
+                                      });
+                                    }
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      'Rating',
+                                      style: AppTheme.heading.copyWith(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+                    ],
+                  );
+          }
+        },
       ),
     );
   }
