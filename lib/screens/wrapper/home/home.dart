@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/screens/Consultant/conponents/consultantfillter.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
@@ -34,19 +35,31 @@ class _HomeState extends State<Home> {
     if (User.userlat != null && User.userlong != null) {
       setState(() {
         ConsultantPage.fillter = 'location';
+        MySharedPreferences.saveFilltterType('location');
+
+        MySharedPreferences.saveFilltterIndex(0);
       });
     } else {
       setState(() {
         ConsultantPage.fillter = 'recent';
+        MySharedPreferences.saveFilltterType('location');
+
+        MySharedPreferences.saveFilltterIndex(1);
       });
     }
+  }
+
+  gitFillterIndex() async {
+    ConsultantFillter.filtterTapped =
+        await MySharedPreferences.getFiltterIndex();
+    ConsultantPage.fillter = await MySharedPreferences.getFiltterType();
   }
 
   @override
   void initState() {
     getDateOfUser();
     gitFillterType();
-
+    gitFillterIndex();
     super.initState();
   }
 

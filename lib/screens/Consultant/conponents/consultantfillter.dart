@@ -11,6 +11,7 @@ import 'package:geolocator/geolocator.dart';
 import '../../../sharedPreferences.dart';
 
 class ConsultantFillter extends StatefulWidget {
+  static int filtterTapped;
   @override
   _ConsultantFillterState createState() => _ConsultantFillterState();
 }
@@ -28,7 +29,18 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
     'certificated',
     'rate',
   ];
-  int filtterTapped = 0;
+  gitFillterIndex() async {
+    ConsultantFillter.filtterTapped =
+        await MySharedPreferences.getFiltterIndex();
+    ConsultantPage.fillter = await MySharedPreferences.getFiltterType();
+  }
+
+  @override
+  void initState() {
+    gitFillterIndex();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -64,18 +76,38 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
                     if (index == 0) {
                       if (User.userlat == null && User.userlong == null) {
                         showmyDialog(context: context);
-                      }
-                    } else {
-                      setState(() {
-                        filtterTapped = index;
-                        ConsultantPage.fillter = fillterApi[index];
+                        setState(() {
+                          MySharedPreferences.saveFilltterIndex(index);
+                          ConsultantFillter.filtterTapped = index;
+                        });
+                      } else {
+                        setState(() {
+                          ConsultantFillter.filtterTapped = index;
+                          ConsultantPage.fillter = fillterApi[index];
+                          MySharedPreferences.saveFilltterIndex(index);
+                          MySharedPreferences.saveFilltterType(
+                              fillterApi[index]);
+                        });
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (_) => ConsultantPage(),
                           ),
                           ModalRoute.withName('/'),
                         );
+                      }
+                    } else {
+                      setState(() {
+                        ConsultantFillter.filtterTapped = index;
+                        ConsultantPage.fillter = fillterApi[index];
+                        MySharedPreferences.saveFilltterIndex(index);
+                        MySharedPreferences.saveFilltterType(fillterApi[index]);
                       });
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (_) => ConsultantPage(),
+                        ),
+                        ModalRoute.withName('/'),
+                      );
                     }
                   },
                   child: Row(
@@ -84,7 +116,7 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
                       Text(
                         fillterList[index],
                         style: AppTheme.heading.copyWith(
-                          color: (filtterTapped == index)
+                          color: (ConsultantFillter.filtterTapped == index)
                               ? Colors.black
                               : Colors.grey[500],
                         ),
@@ -94,14 +126,14 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
                         width: 20,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: (filtterTapped == index)
+                          color: (ConsultantFillter.filtterTapped == index)
                               ? customColor
                               : Colors.transparent,
                         ),
                         child: Center(
                           child: Icon(
                             FontAwesomeIcons.check,
-                            color: (filtterTapped == index)
+                            color: (ConsultantFillter.filtterTapped == index)
                                 ? Colors.white
                                 : Colors.transparent,
                             size: 10,

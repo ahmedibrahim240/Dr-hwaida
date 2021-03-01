@@ -17,6 +17,8 @@ class MySharedPreferences {
   static String sharedPrefUserImageUrl = 'userImageUrl';
   static String sharedPrefUserToken = 'userToken';
   static String sharedPrefCartConslProdect = 'cartConsulPro';
+  static String sharedPrefCounsultFillterIndex = 'FillterIndex';
+  static String sharedPrefCounsultFillterType = 'FillterType';
   //save data
   static Future<bool> saveUserSingIn(bool isSingin) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -37,6 +39,16 @@ class MySharedPreferences {
   static Future<bool> saveUserUserName(String userName) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.setString(sharedPrefUserName, userName);
+  }
+
+  static Future<bool> saveFilltterIndex(int index) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setInt(sharedPrefCounsultFillterIndex, index);
+  }
+
+  static Future<bool> saveFilltterType(String type) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString(sharedPrefCounsultFillterType, type);
   }
 
   static Future<bool> saveUserlat(String lat) async {
@@ -120,6 +132,18 @@ class MySharedPreferences {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String name = preferences.getString(sharedPrefUserName);
     return name;
+  }
+
+  static getFiltterIndex() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    int index = preferences.getInt(sharedPrefCounsultFillterIndex);
+    return index;
+  }
+
+  static getFiltterType() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String type = preferences.getString(sharedPrefCounsultFillterType);
+    return type;
   }
 
   static getUserLat() async {

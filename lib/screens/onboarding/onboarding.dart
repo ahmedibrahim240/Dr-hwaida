@@ -1,10 +1,12 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/screens/Consultant/conponents/consultantfillter.dart';
 import 'package:DrHwaida/screens/onboarding/slider.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:DrHwaida/screens/Consultant/consultant.dart';
 
 import '../../sharedPreferences.dart';
 
@@ -27,9 +29,29 @@ class _OnBoardState extends State<OnBoard> {
     }
   }
 
+  saveFillterIndex() async {
+    User.userlat = await MySharedPreferences.getUserLat();
+    User.userlong = await MySharedPreferences.getUserlong();
+    if (User.userlat != null && User.userlong != null) {
+      MySharedPreferences.saveFilltterIndex(0);
+      MySharedPreferences.saveFilltterType('location');
+    } else {
+      MySharedPreferences.saveFilltterIndex(1);
+      MySharedPreferences.saveFilltterType('recent');
+    }
+  }
+
+  gitFillterIndex() async {
+    ConsultantFillter.filtterTapped =
+        await MySharedPreferences.getFiltterIndex();
+    ConsultantPage.fillter = await MySharedPreferences.getFiltterType();
+  }
+
   @override
   void initState() {
     gitCurrentLocations();
+    saveFillterIndex();
+    gitFillterIndex();
     super.initState();
   }
 
