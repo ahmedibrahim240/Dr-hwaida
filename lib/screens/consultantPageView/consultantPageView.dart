@@ -36,7 +36,6 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.consultant.availableIn.toString());
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -315,7 +314,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               ),
                             ],
                           ),
-                          (widget.consultant.availableIn == null)
+                          (widget.consultant.availableIn.isEmpty)
                               ? Container()
                               : Expanded(
                                   flex: 2,

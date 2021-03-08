@@ -239,6 +239,8 @@ class _CartState extends State<Cart> {
                                                 ['dateId'],
                                             prodectId: snapshot.data[index]
                                                 ['id'],
+                                            availableDate: snapshot.data[index]
+                                                ['date'],
                                           )
                                         : Container(),
                                   ],
@@ -261,7 +263,11 @@ class _CartState extends State<Cart> {
   }
 
   Container totalPrieCard(
-      {BuildContext context, int consualtId, int availableId, int prodectId}) {
+      {BuildContext context,
+      int consualtId,
+      int availableId,
+      int prodectId,
+      String availableDate}) {
     return Container(
       height: 60,
       padding: EdgeInsets.symmetric(horizontal: 10),
@@ -310,6 +316,7 @@ class _CartState extends State<Cart> {
                           consultantid: consualtId,
                           avilableId: availableId,
                           productId: prodectId,
+                          avilableDate: availableDate,
                         ),
                       ),
                     );

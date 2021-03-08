@@ -17,6 +17,7 @@ class CheckOut extends StatefulWidget {
   final String totalPrice;
   final int consultantid;
   final int avilableId;
+  final String avilableDate;
   final int productId;
 
   const CheckOut({
@@ -25,6 +26,7 @@ class CheckOut extends StatefulWidget {
     @required this.consultantid,
     @required this.avilableId,
     @required this.productId,
+    @required this.avilableDate,
   }) : super(key: key);
   @override
   _CheckOutState createState() => _CheckOutState();
@@ -157,6 +159,7 @@ class _CheckOutState extends State<CheckOut> {
                                       checkOut(
                                         consultId: widget.consultantid,
                                         availableId: widget.avilableId,
+                                        availabeDate: widget.avilableDate,
                                       );
                                     },
                                     icon: Icon(
@@ -293,13 +296,14 @@ class _CheckOutState extends State<CheckOut> {
     );
   }
 
-  checkOut({int consultId, int availableId}) async {
+  checkOut({int consultId, int availableId, String availabeDate}) async {
     try {
       var response = await http.post(
         Utils.CHECKOUT_URL,
         body: {
           'consultant_id': consultId.toString(),
           'available_id': availableId.toString(),
+          'visit_date': availabeDate,
         },
         headers: {
           'x-api-key': User.userToken,
@@ -328,7 +332,8 @@ class _CheckOutState extends State<CheckOut> {
         print(map['message']);
         _scaffoldKey.currentState.showSnackBar(
           new SnackBar(
-            content: new Text('Your reservation failed,please try again'),
+            content: new Text(
+                'Your reservation failed,please try again${map['message']}'),
           ),
         );
       }

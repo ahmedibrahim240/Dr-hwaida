@@ -19,8 +19,8 @@ class ConsultantApi {
         for (var itmes in jsonData['data']) {
           listOfConsulAvailable = [];
           listOfTime = [];
-          if (itmes['available_in'] != null) {
-            for (var item in itmes['available_in']) {
+          if (itmes['days'] != null) {
+            for (var item in itmes['days']) {
               for (var i in item['times']) {
                 AvailableTimes times = AvailableTimes(
                   id: i['id'],
@@ -33,6 +33,7 @@ class ConsultantApi {
                   availableTimes: listOfTime, date: item['date']);
               listOfConsulAvailable.add(consulAvailable);
             }
+            // print('this times is: ${listOfConsulAvailable}');
           }
 
           Consultant consultant = Consultant(
@@ -47,7 +48,7 @@ class ConsultantApi {
             total_coust: double.parse(itmes['total_cost'].toString()),
             rate: itmes['rate'],
             available_in: listOfConsulAvailable,
-            availableIn: itmes['available_in'],
+            availableIn: itmes['days'],
             mapLink: itmes['map_link'],
             badges: itmes['badges'],
             question: itmes['question'],
@@ -67,7 +68,6 @@ class ConsultantApi {
     List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
     Consultant consultant;
-    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
     var response = await http.get(Utils.Consultant_URL + "/$id",
         headers: {'Accept': 'application/json'});
     Map<String, dynamic> jsonData = json.decode(response.body);
@@ -106,7 +106,7 @@ class ConsultantApi {
           total_coust: double.parse(jsonData['data']['total_cost'].toString()),
           rate: jsonData['data']['rate'],
           available_in: listOfConsulAvailable,
-          availableIn: jsonData['data']['available_in'],
+          availableIn: jsonData['data']['days'],
           mapLink: jsonData['data']['map_link'],
           badges: jsonData['data']['badges'],
           question: jsonData['data']['question'],
@@ -161,7 +161,7 @@ class ConsultantApi {
             total_coust: double.parse(itmes['total_cost'].toString()),
             rate: itmes['rate'],
             available_in: listOfConsulAvailable,
-            availableIn: itmes['available_in'],
+            availableIn: itmes['days'],
             mapLink: itmes['map_link'],
             badges: itmes['badges'],
             question: itmes['question'],
@@ -229,8 +229,8 @@ class FiltterConsultantApi {
         for (var itmes in jsonData['data']) {
           listOfConsulAvailable = [];
           listOfTime = [];
-          if (itmes['available_in'] != null) {
-            for (var item in itmes['available_in']) {
+          if (itmes['days'] != null) {
+            for (var item in itmes['days']) {
               for (var i in item['times']) {
                 AvailableTimes times = AvailableTimes(
                   id: i['id'],
@@ -257,7 +257,7 @@ class FiltterConsultantApi {
             total_coust: double.parse(itmes['total_cost'].toString()),
             rate: itmes['rate'],
             available_in: listOfConsulAvailable,
-            availableIn: itmes['available_in'],
+            availableIn: itmes['days'],
             mapLink: itmes['map_link'],
             badges: itmes['badges'],
             question: itmes['question'],

@@ -22,9 +22,10 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
   bool showDate = false;
   bool showTime = false;
   bool showEvenig = false;
+  bool iscelcted = false;
   int tappedDate;
   int tappedTime;
-  List<AvailableTimes> listTimes = [];
+  var listTimes = [];
   String _date;
   String _time;
   int _timeID;
@@ -37,7 +38,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
 
   @override
   Widget build(BuildContext context) {
-    List<ConsulAvailable> consulAvailable = widget.consultant.available_in;
+    // List<ConsulAvailable> consulAvailable = widget.consultant.available_in;
 
     return Scaffold(
       appBar: customAppBar(title: 'Schedule Appointment'),
@@ -58,9 +59,9 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                         rowTitle(
                           title: 'date',
                         ),
-                        (widget.consultant.available_in.isEmpty)
+                        (widget.consultant.availableIn.isEmpty)
                             ? Container()
-                            : dateListView(date: consulAvailable),
+                            : dateListView(),
                         SizedBox(height: 20),
                         (listTimes.isEmpty)
                             ? Container()
@@ -75,12 +76,12 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                                   ],
                                 ),
                               ),
-                        (_date == null) ? Container() : Text(_date),
-                        (_time == null) ? Container() : Text(_time),
+                        // (_date == null) ? Container() : Text(_date),
+                        // (_time == null) ? Container() : Text(_time),
                       ],
                     ),
                   ),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             Align(
               alignment: Alignment.bottomCenter,
               child: CustomButtonWithchild(
@@ -168,34 +169,36 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
         itemCount: listTimes.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          if (listTimes[index].date == _date) {
-            return timeCard(
-              time: listTimes[index].time,
-              index: index,
-              timeID: listTimes[index].id,
-            );
-          } else {
+          if (listTimes[index].isEmpty) {
             return Container();
+          } else {
+            return timeCard(
+              time: listTimes[index]["time"],
+              index: index,
+              timeID: listTimes[index]["id"],
+            );
           }
         },
       ),
     );
   }
 
-  Container dateListView({List<ConsulAvailable> date}) {
+  Container dateListView() {
     return Container(
       height: 110,
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: date.length,
+        itemCount: widget.consultant.availableIn.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
               setState(() {
                 tappedDate = index;
-                listTimes = date[index].availableTimes;
-                _date = date[index].date;
+
+                listTimes = widget.consultant.availableIn[index]['times'];
+                print(listTimes.toString());
+                _date = widget.consultant.availableIn[index]['date'];
               });
             },
             child: Card(
@@ -211,7 +214,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Date',
+                      widget.consultant.availableIn[index]["day"],
                       style: AppTheme.heading.copyWith(
                         color:
                             tappedDate == index ? Colors.white : Colors.black,
@@ -219,7 +222,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      date[index].date,
+                      widget.consultant.availableIn[index]["date"],
                       style: AppTheme.subHeading.copyWith(
                         color:
                             tappedDate == index ? Colors.white : Colors.black,
