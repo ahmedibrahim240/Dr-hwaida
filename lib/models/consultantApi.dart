@@ -182,8 +182,7 @@ class ConsultantRateApi {
     List<ConsulRateing> listOfConsultantRating = [];
     // List<RatingUser> listOfUsers = [];
 
-    var response = await http.get(
-        "http://technomasrsystems.com/Demos/Others/ShyBeLbn/public/api/consultants/$id/rates",
+    var response = await http.get(Utils.Consultant_URL + "/$id/rates",
         headers: {'Accept': 'application/json'});
     var jsonData = json.decode(response.body);
     try {
@@ -200,7 +199,7 @@ class ConsultantRateApi {
           listOfConsultantRating.add(consulRateing);
         }
       } else {
-        print(response.statusCode.toString());
+        print('Rating SutausCode:' + response.statusCode.toString());
       }
     } catch (e) {
       print(e.toString());

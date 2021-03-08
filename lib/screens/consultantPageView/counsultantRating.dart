@@ -20,11 +20,7 @@ class _CounsultantRatingState extends State<CounsultantRating> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return (snapshot.data == null)
-                ? Container(
-                    child: Text(
-                      'EMPATY',
-                    ),
-                  )
+                ? Container()
                 : ListView.builder(
                     shrinkWrap: true,
                     primary: false,
