@@ -17,7 +17,7 @@ import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../CustomBottomNavigationBar.dart';
-import 'package:path/path.dart' as p;
+// import 'package:path/path.dart' as p;
 
 class UserProfile extends StatefulWidget {
   final String userName;
@@ -241,8 +241,8 @@ class _UserProfileState extends State<UserProfile> {
                                       (Gender.resGender) ?? userData.userGender,
                                   phoneNummber:
                                       (userPhone) ?? userData.phoneNumber,
-                                  userImage: (UserPorfileImage.base64Iamge) ??
-                                      userData.userImageUrl,
+                                  userImage:
+                                      (UserPorfileImage.base64Iamge) ?? '',
                                 );
                               },
                               child: Text(
@@ -291,7 +291,7 @@ class _UserProfileState extends State<UserProfile> {
 }
 
 class UserPorfileImage extends StatefulWidget {
-  static String base64Iamge;
+  static File base64Iamge;
   const UserPorfileImage({
     Key key,
     // @required this.onTap,
@@ -423,13 +423,14 @@ class _UserPorfileImageState extends State<UserPorfileImage> {
       if (cropped != null) {
         setState(() {
           _imageFile = cropped;
-          List<int> imageBytes = _imageFile.readAsBytesSync();
-          print('imageBytes' + imageBytes.toString());
-          String base64Image = base64UrlEncode(imageBytes);
-          var path = p.extension(_imageFile.path);
-          UserPorfileImage.base64Iamge =
-              'data:image/${path.substring(1)};base64,$base64Image';
-          print(UserPorfileImage.base64Iamge);
+          // List<int> imageBytes = _imageFile.readAsBytesSync();
+          // print('imageBytes' + imageBytes.toString());
+          // String base64Image = base64UrlEncode(imageBytes);
+          // var path = p.extension(_imageFile.path);
+          UserPorfileImage.base64Iamge = _imageFile;
+          // print(UserPorfileImage.base64Iamge);
+          // print('file:' + _imageFile.path);
+          // print('file:' + _imageFile.toString());
         });
       }
     } catch (e) {

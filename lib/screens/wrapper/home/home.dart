@@ -77,7 +77,7 @@ class _HomeState extends State<Home> {
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height - 80,
+            height: MediaQuery.of(context).size.height - 110,
             child: ListView(
               shrinkWrap: true,
               primary: true,

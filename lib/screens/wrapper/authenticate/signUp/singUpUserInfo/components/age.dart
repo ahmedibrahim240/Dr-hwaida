@@ -31,7 +31,7 @@ class _AgeState extends State<Age> {
           },
           onConfirm: (date) {
             setState(() {
-              _chossenDate = "${date.day}-${date.month}-${date.year}";
+              _chossenDate = "${date.year}-${date.month}-${date.day}";
               Age.resAge = _chossenDate;
             });
             print('confirm $date');

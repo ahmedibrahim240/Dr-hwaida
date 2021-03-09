@@ -56,9 +56,12 @@ class ConsultantApi {
 
           listOfConsultant.add(consultant);
         }
+      } else {
+        print('StatusCodeeRRROE:' + response.statusCode.toString());
       }
     } catch (e) {
       print(e.toString());
+      print('eroooooooooooor');
     }
     return listOfConsultant;
   }

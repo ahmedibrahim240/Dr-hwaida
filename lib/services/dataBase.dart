@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
@@ -37,29 +38,45 @@ class DatabaseServices {
     String name,
     String gender,
     String status,
-    String userImage,
+    var userImage,
     String userEmail,
   }) async {
-    final uri = Uri.parse(Utils.UPDATEUSERDATA_URL).replace(
-      queryParameters: <String, String>{
+    // final uri = Uri.parse(Utils.UPDATEUSERDATA_URL).replace(
+    //   queryParameters: <String, String>{
+    //     'name': "$name",
+    //     'age': "$age",
+    //     'gender': "$gender",
+    //     'status': "$status",
+    //     'mobile': "$phoneNummber",
+    //     'image': "$userImage",
+    //     'email': "$userEmail",
+    //   },
+    // );
+    // print(uri.toString());
+    var body = {
+      'name': "$name",
+      'age': "$age",
+      'gender': "$gender",
+      'status': "$status",
+      'mobile': "$phoneNummber",
+      'image': "$userImage",
+      'email': "$userEmail",
+    };
+    print(body);
+    try {
+      var respes = await http.post(Utils.UPDATEUSERDATA_URL, headers: {
+        'x-api-key': userToken
+      }, body: {
         'name': "$name",
         'age': "$age",
         'gender': "$gender",
         'status': "$status",
         'mobile': "$phoneNummber",
-        'image': "$userImage",
+        // 'image': "$userImage",
         'email': "$userEmail",
-      },
-    );
-    print(uri.toString());
-
-    try {
-      var respes = await http.put(
-        uri.toString(),
-        headers: {'x-api-key': userToken},
-      );
+      });
+      final data = json.decode(respes.body);
       if (respes.statusCode == 200) {
-        final data = json.decode(respes.body);
         if (data['success'] != true) {
           print('EROOOOOOOOOOOOOOOOOOOOOOOOOR');
         } else {
@@ -74,6 +91,7 @@ class DatabaseServices {
         }
       } else {
         print('ServerErooor');
+        print(data['message']);
       }
     } catch (e) {
       print('errrrroe');
