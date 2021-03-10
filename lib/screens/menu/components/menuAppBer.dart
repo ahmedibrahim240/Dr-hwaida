@@ -83,9 +83,7 @@ class MenuAppBer extends StatelessWidget {
                                         height: 150,
                                         width: 150,
                                         child: Image(
-                                          image: (userData.userImageUrl ==
-                                                      null ||
-                                                  userData.userImageUrl == '')
+                                          image: (userData.userImageUrl != '')
                                               ? NetworkImage(
                                                   userData.userImageUrl)
                                               : AssetImage(

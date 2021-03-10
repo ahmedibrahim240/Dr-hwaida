@@ -4,6 +4,7 @@ class Visits {
   final int id;
   final int consultantId;
   final String date;
+  final String day;
   final String time;
   final String name;
   final Consultant consultant;
@@ -21,6 +22,7 @@ class Visits {
     this.id,
     this.consultantId,
     this.date,
+    this.day,
     this.time,
     this.name,
   });

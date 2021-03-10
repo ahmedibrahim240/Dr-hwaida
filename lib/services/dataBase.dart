@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
@@ -38,7 +37,7 @@ class DatabaseServices {
     String name,
     String gender,
     String status,
-    var userImage,
+    String userImage,
     String userEmail,
   }) async {
     // final uri = Uri.parse(Utils.UPDATEUSERDATA_URL).replace(
@@ -59,8 +58,8 @@ class DatabaseServices {
       'gender': "$gender",
       'status': "$status",
       'mobile': "$phoneNummber",
-      'image': "$userImage",
       'email': "$userEmail",
+      'image': "$userImage",
     };
     print(body);
     try {
@@ -72,10 +71,11 @@ class DatabaseServices {
         'gender': "$gender",
         'status': "$status",
         'mobile': "$phoneNummber",
-        // 'image': "$userImage",
         'email': "$userEmail",
+        'image': "$userImage",
       });
       final data = json.decode(respes.body);
+      print(respes.statusCode);
       if (respes.statusCode == 200) {
         if (data['success'] != true) {
           print('EROOOOOOOOOOOOOOOOOOOOOOOOOR');
@@ -96,7 +96,7 @@ class DatabaseServices {
     } catch (e) {
       print('errrrroe');
 
-      print('catch Error is:' + e.toString());
+      print(e);
     }
   }
 

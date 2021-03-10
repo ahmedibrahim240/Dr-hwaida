@@ -18,8 +18,12 @@ import '../CustomBottomNavigationBar.dart';
 class UpdateVisits extends StatefulWidget {
   final int consultantId;
   final int visitsId;
+  final Consultant consultant;
   const UpdateVisits(
-      {Key key, @required this.consultantId, @required this.visitsId})
+      {Key key,
+      @required this.consultantId,
+      @required this.visitsId,
+      @required this.consultant})
       : super(key: key);
   @override
   _UpdateVisitsState createState() => _UpdateVisitsState();
@@ -32,7 +36,7 @@ class _UpdateVisitsState extends State<UpdateVisits> {
   bool showEvenig = false;
   int tappedDate;
   int tappedTime;
-  List<AvailableTimes> listTimes = [];
+  var listTimes = [];
   String _date;
   String _time;
   int _timeID;
@@ -65,9 +69,6 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                 ),
               );
             } else {
-              List<ConsulAvailable> consulAvailable =
-                  snapshot.data.available_in;
-
               return Stack(
                 children: [
                   Align(
@@ -79,7 +80,7 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                         ),
                         (snapshot.data.availableIn.isEmpty)
                             ? Container()
-                            : dateListView(date: consulAvailable),
+                            : dateListView(),
                         SizedBox(height: 20),
                         (listTimes.isEmpty)
                             ? Container()
@@ -94,8 +95,6 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                                   ],
                                 ),
                               ),
-                        (_date == null) ? Container() : Text(_date),
-                        (_time == null) ? Container() : Text(_time),
                       ],
                     ),
                   ),
@@ -107,9 +106,9 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                       onPress: () async {
                         if (_date != null && _time != null) {
                           updateAppointment(
-                            id: widget.visitsId,
-                            availableId: _timeID,
-                          );
+                              id: widget.visitsId,
+                              availableId: _timeID,
+                              date: _date);
                         } else {
                           _scaffoldKey.currentState.showSnackBar(
                             new SnackBar(
@@ -136,10 +135,11 @@ class _UpdateVisitsState extends State<UpdateVisits> {
     );
   }
 
-  updateAppointment({int id, int availableId}) async {
+  updateAppointment({int id, int availableId, String date}) async {
     final uri = Uri.parse(Utils.VISITS_URL + "/$id").replace(
       queryParameters: <String, String>{
         "available_id": "$availableId",
+        "visit_date": "$date",
       },
     );
     print(uri.toString());
@@ -218,34 +218,36 @@ class _UpdateVisitsState extends State<UpdateVisits> {
         itemCount: listTimes.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          if (listTimes[index].date == _date) {
-            return timeCard(
-              time: listTimes[index].time,
-              index: index,
-              timeID: listTimes[index].id,
-            );
-          } else {
+          if (listTimes[index].isEmpty) {
             return Container();
+          } else {
+            return timeCard(
+              time: listTimes[index]["time"],
+              index: index,
+              timeID: listTimes[index]["id"],
+            );
           }
         },
       ),
     );
   }
 
-  Container dateListView({List<ConsulAvailable> date}) {
+  Container dateListView() {
     return Container(
       height: 110,
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: date.length,
+        itemCount: widget.consultant.availableIn.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
               setState(() {
                 tappedDate = index;
-                listTimes = date[index].availableTimes;
-                _date = date[index].date;
+
+                listTimes = widget.consultant.availableIn[index]['times'];
+                print(listTimes.toString());
+                _date = widget.consultant.availableIn[index]['date'];
               });
             },
             child: Card(
@@ -261,7 +263,7 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Date',
+                      widget.consultant.availableIn[index]["day"],
                       style: AppTheme.heading.copyWith(
                         color:
                             tappedDate == index ? Colors.white : Colors.black,
@@ -269,7 +271,7 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      date[index].date,
+                      widget.consultant.availableIn[index]["date"],
                       style: AppTheme.subHeading.copyWith(
                         color:
                             tappedDate == index ? Colors.white : Colors.black,

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
@@ -17,7 +15,7 @@ import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../CustomBottomNavigationBar.dart';
-// import 'package:path/path.dart' as p;
+import 'dart:convert';
 
 class UserProfile extends StatefulWidget {
   final String userName;
@@ -291,7 +289,7 @@ class _UserProfileState extends State<UserProfile> {
 }
 
 class UserPorfileImage extends StatefulWidget {
-  static File base64Iamge;
+  static String base64Iamge;
   const UserPorfileImage({
     Key key,
     // @required this.onTap,
@@ -346,8 +344,7 @@ class _UserPorfileImageState extends State<UserPorfileImage> {
                               _imageFile,
                               fit: BoxFit.cover,
                             )
-                          : (widget.userimgUrl == null ||
-                                  widget.userimgUrl != '')
+                          : (widget.userimgUrl != '')
                               ? Image(
                                   fit: BoxFit.cover,
                                   image: NetworkImage(widget.userimgUrl),
@@ -423,11 +420,12 @@ class _UserPorfileImageState extends State<UserPorfileImage> {
       if (cropped != null) {
         setState(() {
           _imageFile = cropped;
-          // List<int> imageBytes = _imageFile.readAsBytesSync();
-          // print('imageBytes' + imageBytes.toString());
-          // String base64Image = base64UrlEncode(imageBytes);
+          List<int> imageBytes = _imageFile.readAsBytesSync();
+
+          String base64Image = base64UrlEncode(imageBytes);
+          print('Base64IMage:' + base64Image);
           // var path = p.extension(_imageFile.path);
-          UserPorfileImage.base64Iamge = _imageFile;
+          UserPorfileImage.base64Iamge = base64Image;
           // print(UserPorfileImage.base64Iamge);
           // print('file:' + _imageFile.path);
           // print('file:' + _imageFile.toString());

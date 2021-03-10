@@ -88,18 +88,38 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                                   ),
                                 ],
                               ),
-                              Row(
+                              Column(
                                 children: [
-                                  Text(
-                                    'Time: ',
-                                    style: AppTheme.heading.copyWith(
-                                      color: customColor,
-                                      fontSize: 14,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Time: ',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      Text(
+                                        snapshot.data[index].time,
+                                        style: AppTheme.subHeading,
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    snapshot.data[index].time,
-                                    style: AppTheme.subHeading,
+                                  SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        'Day: ',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      Text(
+                                        snapshot.data[index].day,
+                                        style: AppTheme.subHeading,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -139,6 +159,8 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                                           consultantId:
                                               snapshot.data[index].consultantId,
                                           visitsId: snapshot.data[index].id,
+                                          consultant:
+                                              snapshot.data[index].consultant,
                                         ),
                                       ),
                                     );
