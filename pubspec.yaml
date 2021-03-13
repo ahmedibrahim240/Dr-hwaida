@@ -81,6 +81,8 @@ flutter:
   assets:
     - lib/images/
     - assets/icons/
+    - lib/lang/ar.json
+    - lib/lang/en.json
     
     
     # - lib/lang/ar.json

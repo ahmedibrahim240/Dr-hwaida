@@ -1,5 +1,8 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
+import 'package:DrHwaida/main.dart';
+import 'package:DrHwaida/models/language.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:DrHwaida/models/utils.dart';
@@ -100,7 +103,6 @@ class _SettingsState extends State<Settings> {
                                         });
                                       },
                                     ),
-                                    SizedBox(height: 10),
                                     SizedBox(height: 10),
                                     TextFormField(
                                       style: TextStyle(color: Colors.black),
@@ -283,43 +285,48 @@ class _SettingsState extends State<Settings> {
   }
 
   Widget lan() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          'language',
-          style: AppTheme.heading,
-        ),
-        // DropdownButton<Language>(
-        //   dropdownColor: Colors.white,
-        //   underline: SizedBox(),
-        //   icon: Icon(
-        //     Icons.language,
-        //     color: Colors.lightBlueAccent,
-        //   ),
-        //   onChanged: (Language language) {
-        //     _changeLanguage(language);
-        //   },
-        //   items: Language.languageList()
-        //       .map<DropdownMenuItem<Language>>(
-        //         (e) => DropdownMenuItem<Language>(
-        //           value: e,
-        //           child: Row(
-        //             mainAxisAlignment: MainAxisAlignment.spaceAround,
-        //             children: <Widget>[
-        //               Text(
-        //                 e.flag,
-        //                 style: TextStyle(fontSize: 30),
-        //               ),
-        //               Text(e.name)
-        //             ],
-        //           ),
-        //         ),
-        //       )
-        //       .toList(),
-        // ),
-      ],
+    return DropdownButton<Language>(
+      dropdownColor: Colors.white,
+      underline: SizedBox(),
+      hint: Text(
+        getTranslated(context, 'language'),
+        style: AppTheme.heading,
+      ),
+      isExpanded: true,
+      elevation: 0,
+      icon: Icon(
+        Icons.language,
+        color: Colors.lightBlueAccent,
+      ),
+      onChanged: (Language language) {
+        _changeLanguage(language);
+      },
+      items: Language.languageList()
+          .map<DropdownMenuItem<Language>>(
+            (e) => DropdownMenuItem<Language>(
+              value: e,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Text(
+                    e.flag,
+                    style: TextStyle(fontSize: 30),
+                  ),
+                  Text(e.name)
+                ],
+              ),
+            ),
+          )
+          .toList(),
     );
+  }
+
+  void _changeLanguage(Language language) async {
+    Locale _locale = await setLocale(language.languageCode);
+    MyApp.setLocale(context, _locale);
+    // DBHelper.saveAppLang(_locale.toString());
+    // UserData.appLang = await DBHelper.getAppLang();
+    print('_lacal:' + _locale.toString());
   }
 
   chagePassword({String oldPassword, String newPasswrod}) async {
