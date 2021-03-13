@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,7 +30,7 @@ class _GenderState extends State<Gender> {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  "Gender",
+                  getTranslated(context, "gender"),
                   style: AppTheme.heading.copyWith(
                     color: Colors.white,
                     fontSize: 16,
@@ -50,7 +51,7 @@ class _GenderState extends State<Gender> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _gender = 'male';
+                              _gender = getTranslated(context, "male");
                               Gender.resGender = _gender;
                             });
                             Navigator.of(context).pop();
@@ -70,7 +71,7 @@ class _GenderState extends State<Gender> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Male',
+                          getTranslated(context, "male"),
                           style: AppTheme.heading.copyWith(),
                         ),
                       ],
@@ -80,7 +81,7 @@ class _GenderState extends State<Gender> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _gender = 'female';
+                              _gender = getTranslated(context, "female");
                               Gender.resGender = _gender;
                             });
                             Navigator.of(context).pop();
@@ -98,7 +99,7 @@ class _GenderState extends State<Gender> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Female',
+                          getTranslated(context, "female"),
                           style: AppTheme.heading.copyWith(),
                         ),
                       ],
@@ -135,7 +136,7 @@ class _GenderState extends State<Gender> {
                         ? _gender
                         : (widget.gender != null)
                             ? widget.gender
-                            : 'Gender',
+                            : getTranslated(context, "gender"),
                     style: AppTheme.heading.copyWith(
                       color: customColor,
                     ),

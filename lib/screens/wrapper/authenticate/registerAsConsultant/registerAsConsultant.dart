@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:http/http.dart' as http;
@@ -41,10 +42,11 @@ class _RegisterAsConsultantState extends State<RegisterAsConsultant> {
                   child: Column(
                     children: [
                       TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'please enter your name' : null,
+                        validator: (val) => val.isEmpty
+                            ? getTranslated(context, "valid_name")
+                            : null,
                         decoration: conectedTextFormStyle(
-                          lableText: 'Name',
+                          lableText: getTranslated(context, "name"),
                         ),
                         onChanged: (val) {
                           setState(
@@ -56,11 +58,12 @@ class _RegisterAsConsultantState extends State<RegisterAsConsultant> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'please enter your email' : null,
+                        validator: (val) => val.isEmpty
+                            ? getTranslated(context, "valid_email")
+                            : null,
                         keyboardType: TextInputType.emailAddress,
                         decoration: conectedTextFormStyle(
-                          lableText: 'Email',
+                          lableText: getTranslated(context, "email"),
                         ),
                         onChanged: (val) {
                           setState(
@@ -73,11 +76,11 @@ class _RegisterAsConsultantState extends State<RegisterAsConsultant> {
                       SizedBox(height: 20),
                       TextFormField(
                         validator: (val) => val.isEmpty
-                            ? 'please enter your Phone Number'
+                            ? getTranslated(context, "valid_email_phone")
                             : null,
                         keyboardType: TextInputType.number,
                         decoration: conectedTextFormStyle(
-                          lableText: 'Phone',
+                          lableText: getTranslated(context, "phone_num"),
                         ),
                         onChanged: (val) {
                           setState(
@@ -89,10 +92,11 @@ class _RegisterAsConsultantState extends State<RegisterAsConsultant> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'please enter your address' : null,
+                        validator: (val) => val.isEmpty
+                            ? getTranslated(context, "valid_address")
+                            : null,
                         decoration: conectedTextFormStyle(
-                          lableText: 'Address',
+                          lableText: getTranslated(context, "address"),
                         ),
                         onChanged: (val) {
                           setState(
@@ -104,11 +108,12 @@ class _RegisterAsConsultantState extends State<RegisterAsConsultant> {
                       ),
                       SizedBox(height: 20),
                       TextFormField(
-                        validator: (val) =>
-                            val.isEmpty ? 'please enter your Bio' : null,
+                        validator: (val) => val.isEmpty
+                            ? getTranslated(context, "valid_bio")
+                            : null,
                         maxLines: null,
                         decoration: conectedTextFormStyle(
-                          lableText: 'About yourself',
+                          lableText: getTranslated(context, "bio"),
                         ),
                         onChanged: (val) {
                           setState(
@@ -154,7 +159,7 @@ class _RegisterAsConsultantState extends State<RegisterAsConsultant> {
                   },
                   child: Center(
                     child: Text(
-                      'Register',
+                      getTranslated(context, "Register"),
                       style: AppTheme.heading.copyWith(
                         color: Colors.white,
                       ),

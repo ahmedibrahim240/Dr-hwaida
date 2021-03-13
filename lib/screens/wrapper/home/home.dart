@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/consultantfillter.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
@@ -86,10 +87,9 @@ class _HomeState extends State<Home> {
                 rowofHmeTaps(context),
                 paner(context),
                 sctionTitle(
-                    title: 'Consultants',
+                    title: getTranslated(context, "consultants"),
+                    context: context,
                     onTap: () {
-                      // print('UserLAt:' + User.userlat.toString());
-                      // print('UserLong:' + User.userlong.toString());
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (_) => ConsultantPage(),

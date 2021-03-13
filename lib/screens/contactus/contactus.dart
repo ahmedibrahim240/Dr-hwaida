@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/sttingesApi.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +29,7 @@ class _ContatactUsState extends State<ContatactUs> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: customAppBar(title: 'contact Us'),
+      appBar: customAppBar(title: getTranslated(context, "contact_support")),
       body: FutureBuilder(
         future: CoutactUSApi.gitContactUS(),
         builder: (context, snapshot) {
@@ -74,7 +75,7 @@ class _ContatactUsState extends State<ContatactUs> {
                                   children: [
                                     TextFormField(
                                       validator: (val) => val.isEmpty
-                                          ? 'please enter your name'
+                                          ? getTranslated(context, "valid_name")
                                           : null,
                                       onChanged: (val) {
                                         setState(() {
@@ -82,12 +83,14 @@ class _ContatactUsState extends State<ContatactUs> {
                                         });
                                       },
                                       decoration: conectedTextFormStyle(
-                                          lableText: 'Name'),
+                                          lableText:
+                                              getTranslated(context, "name")),
                                     ),
                                     SizedBox(height: 12),
                                     TextFormField(
                                       validator: (val) => val.isEmpty
-                                          ? 'please enter your email'
+                                          ? getTranslated(
+                                              context, "valid_email")
                                           : null,
                                       onChanged: (val) {
                                         setState(() {
@@ -95,12 +98,14 @@ class _ContatactUsState extends State<ContatactUs> {
                                         });
                                       },
                                       decoration: conectedTextFormStyle(
-                                          lableText: 'Email'),
+                                          lableText:
+                                              getTranslated(context, "email")),
                                     ),
                                     SizedBox(height: 12),
                                     TextFormField(
                                       validator: (val) => val.isEmpty
-                                          ? 'please enter your massege'
+                                          ? getTranslated(
+                                              context, "valid_massege")
                                           : null,
                                       maxLines: null,
                                       onChanged: (val) {
@@ -109,11 +114,12 @@ class _ContatactUsState extends State<ContatactUs> {
                                         });
                                       },
                                       decoration: conectedTextFormStyle(
-                                          lableText: 'Massage'),
+                                          lableText: getTranslated(
+                                              context, "Massage")),
                                     ),
                                     SizedBox(height: 15),
                                     Text(
-                                      'Contact Us ',
+                                      getTranslated(context, "contact_support"),
                                       style: AppTheme.heading.copyWith(
                                         color: customColor,
                                         fontSize: 16,
@@ -160,7 +166,7 @@ class _ContatactUsState extends State<ContatactUs> {
                                     CustomButtonWithchild(
                                       color: customColor,
                                       child: Text(
-                                        'Submit',
+                                        getTranslated(context, "Submit"),
                                         style: AppTheme.heading.copyWith(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -181,7 +187,7 @@ class _ContatactUsState extends State<ContatactUs> {
                                     SizedBox(height: 15),
                                     Center(
                                       child: Text(
-                                        'Thanh You! ',
+                                        getTranslated(context, "thank_you"),
                                         style: AppTheme.heading.copyWith(
                                           color: Colors.black38,
                                           fontSize: 16,

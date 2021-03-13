@@ -1,6 +1,7 @@
 import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
@@ -49,7 +50,7 @@ class _MenuBodyState extends State<MenuBody> {
                   children: [
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'Notifcations',
+                      title: getTranslated(context, "notifications"),
                       icon: Icons.notifications,
                       onTap: () {
                         if (User.userSkipLogIn == false) {
@@ -65,7 +66,7 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'Settings',
+                      title: getTranslated(context, "settings"),
                       icon: Icons.settings,
                       onTap: () {
                         if (User.userSkipLogIn == false) {
@@ -81,7 +82,7 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'My Payment',
+                      title: getTranslated(context, "my_payment"),
                       icon: FontAwesomeIcons.idCardAlt,
                       onTap: () {
                         Navigator.of(context).push(
@@ -93,7 +94,7 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'My Courses',
+                      title: getTranslated(context, "My_Courses"),
                       icon: FontAwesomeIcons.bookOpen,
                       onTap: () {
                         Navigator.of(context).push(
@@ -105,7 +106,7 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'Visits History',
+                      title: getTranslated(context, "Visits_History"),
                       icon: FontAwesomeIcons.history,
                       onTap: () {
                         Navigator.of(context).push(
@@ -129,7 +130,7 @@ class _MenuBodyState extends State<MenuBody> {
                     // ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'Register as consultant',
+                      title: getTranslated(context, "Register_as_consultant"),
                       icon: FontAwesomeIcons.registered,
                       onTap: () {
                         Navigator.of(context).push(
@@ -141,7 +142,7 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'Contact Us',
+                      title: getTranslated(context, "contact_support"),
                       icon: Icons.phone,
                       onTap: () {
                         Navigator.of(context).push(
@@ -153,7 +154,7 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: 'About Us',
+                      title: getTranslated(context, "About_app"),
                       icon: Icons.info_outlined,
                       onTap: () {
                         Navigator.of(context).push(
@@ -193,7 +194,9 @@ class _MenuBodyState extends State<MenuBody> {
                         ),
                       ),
                       label: Text(
-                        (User.userSkipLogIn == true) ? 'LogIn' : 'Log Out',
+                        (User.userSkipLogIn == true)
+                            ? getTranslated(context, "Entry")
+                            : getTranslated(context, "sign_out"),
                         style: AppTheme.heading.copyWith(
                           color: customColor,
                         ),

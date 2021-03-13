@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/passwordRecovery.dart';
@@ -82,7 +83,7 @@ class _LogInState extends State<LogIn> {
             );
           } else {
             setState(() {
-              error = 'invalid phone number or password';
+              error = getTranslated(context, "login_error");
 
               loading = false;
             });
@@ -127,7 +128,7 @@ class _LogInState extends State<LogIn> {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              'welcome',
+                              getTranslated(context, "welcome"),
                               style: AppTheme.heading.copyWith(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -158,10 +159,11 @@ class _LogInState extends State<LogIn> {
                                     keyboardType: TextInputType.phone,
                                     decoration: textFormInputDecoration(
                                       Icons.phone,
-                                      'Phome Number',
+                                      getTranslated(context, "phone_num"),
                                     ),
                                     validator: (val) => val.isEmpty
-                                        ? 'please enter an phoneNamber'
+                                        ? getTranslated(
+                                            context, "valid_email_phone")
                                         : null,
                                     onChanged: (val) {
                                       setState(() {
@@ -175,7 +177,7 @@ class _LogInState extends State<LogIn> {
                                     decoration:
                                         textFormInputDecorationForPassword(
                                       Icons.visibility_off,
-                                      'password',
+                                      getTranslated(context, "password"),
                                       () {
                                         setState(() {
                                           obscurePassword = !obscurePassword;
@@ -184,7 +186,8 @@ class _LogInState extends State<LogIn> {
                                       obscurePassword,
                                     ),
                                     validator: (val) => val.isEmpty
-                                        ? 'please enter a password'
+                                        ? getTranslated(
+                                            context, "valid_password")
                                         : null,
                                     obscureText: obscurePassword,
                                     onChanged: (val) {
@@ -211,7 +214,7 @@ class _LogInState extends State<LogIn> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'skip',
+                                          getTranslated(context, "skip"),
                                           style: AppTheme.heading
                                               .copyWith(color: customColor),
                                         ),
@@ -246,7 +249,7 @@ class _LogInState extends State<LogIn> {
                                         );
                                       }
                                     },
-                                    text: 'Log In',
+                                    text: getTranslated(context, "Entry"),
                                   ),
                                   SizedBox(height: 12),
                                   Row(
@@ -255,7 +258,7 @@ class _LogInState extends State<LogIn> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'forget ',
+                                        getTranslated(context, "forget"),
                                         style: AppTheme.heading.copyWith(),
                                       ),
                                       InkWell(
@@ -268,7 +271,7 @@ class _LogInState extends State<LogIn> {
                                           );
                                         },
                                         child: Text(
-                                          'password?',
+                                          getTranslated(context, "password?"),
                                           style: AppTheme.heading.copyWith(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 16,
@@ -291,7 +294,7 @@ class _LogInState extends State<LogIn> {
                                       ),
                                       SizedBox(width: 5),
                                       Text(
-                                        'or',
+                                        getTranslated(context, "or"),
                                         style: AppTheme.heading.copyWith(
                                           fontWeight: FontWeight.w900,
                                           fontSize: 16,
@@ -316,7 +319,8 @@ class _LogInState extends State<LogIn> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            "I dont have an account!",
+                                            getTranslated(
+                                                context, "havent_account"),
                                             style: AppTheme.heading.copyWith(
                                               fontSize: 12,
                                             ),
@@ -324,7 +328,8 @@ class _LogInState extends State<LogIn> {
                                           InkWell(
                                             onTap: () => widget.toggleView(),
                                             child: Text(
-                                              "Sign Up?",
+                                              getTranslated(
+                                                  context, "create_account"),
                                               style: AppTheme.heading.copyWith(
                                                 fontWeight: FontWeight.w900,
                                                 fontSize: 16,
@@ -340,7 +345,7 @@ class _LogInState extends State<LogIn> {
                                   Row(
                                     children: [
                                       Expanded(
-                                        flex: 1,
+                                        flex: 2,
                                         child: CustomButtonWithchild(
                                           onPress: () {},
                                           child: Row(
@@ -351,33 +356,13 @@ class _LogInState extends State<LogIn> {
                                                 FontAwesomeIcons.google,
                                                 color: Colors.white,
                                               ),
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    'Sign in with',
-                                                    style: AppTheme.heading
-                                                        .copyWith(
-                                                      color: Colors.white,
-                                                      fontSize: 8,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    ' Google',
-                                                    style: AppTheme.heading
-                                                        .copyWith(
-                                                      color: Colors.white,
-                                                      fontSize: 8,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
                                             ],
                                           ),
                                           color: Colors.redAccent,
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 1,
+                                        flex: 2,
                                         child: CustomButtonWithchild(
                                           onPress: () {},
                                           child: Row(
@@ -387,26 +372,6 @@ class _LogInState extends State<LogIn> {
                                               Icon(
                                                 FontAwesomeIcons.facebookF,
                                                 color: Colors.white,
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    'Sign in with',
-                                                    style: AppTheme.heading
-                                                        .copyWith(
-                                                      color: Colors.white,
-                                                      fontSize: 8,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    'FaceBook',
-                                                    style: AppTheme.heading
-                                                        .copyWith(
-                                                      color: Colors.white,
-                                                      fontSize: 8,
-                                                    ),
-                                                  ),
-                                                ],
                                               ),
                                             ],
                                           ),

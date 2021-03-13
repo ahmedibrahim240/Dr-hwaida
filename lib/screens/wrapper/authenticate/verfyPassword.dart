@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/chagePassword.dart';
 // import 'package:DrHwaida/screens/wrapper/authenticate/chagePassword.dart';
 import 'package:flutter/material.dart';
@@ -70,14 +71,14 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Please enter the sent code",
+                        getTranslated(context, "enter_code"),
                         style: AppTheme.heading.copyWith(
                           color: customColor,
                           fontSize: 20,
                         ),
                       ),
                       Text(
-                        "A code has been sent to a number" + ' 0102412151',
+                        getTranslated(context, "sent_code_to") + ' 0102412151',
                         style: AppTheme.subHeading.copyWith(),
                       ),
                       SizedBox(height: 40),
@@ -113,7 +114,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Text(
-                            "Not sent",
+                            getTranslated(context, "not_send"),
                             style: AppTheme.heading.copyWith(
                               color: Colors.white,
                             ),
@@ -121,9 +122,9 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                           InkWell(
                             onTap: () {},
                             child: Text(
-                              "Resend!",
+                              getTranslated(context, "resend"),
                               style: AppTheme.heading.copyWith(
-                                color: Colors.white,
+                                color: customColor,
                                 decoration: TextDecoration.underline,
                               ),
                             ),
@@ -132,7 +133,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                       ),
                       SizedBox(height: 20),
                       CustomButton(
-                        text: 'send',
+                        text: getTranslated(context, "send"),
                         onPress: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(

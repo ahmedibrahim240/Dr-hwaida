@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/age.dart';
@@ -89,7 +90,7 @@ class _RegisterState extends State<Register> {
           );
         } else {
           setState(() {
-            error = 'please supply a valid phone';
+            error = getTranslated(context, "register_error");
             loading = false;
           });
         }
@@ -132,7 +133,7 @@ class _RegisterState extends State<Register> {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          'Join Us',
+                          getTranslated(context, "Join_family"),
                           style: AppTheme.heading.copyWith(
                             color: Colors.white,
                             fontSize: 16,
@@ -176,7 +177,8 @@ class _RegisterState extends State<Register> {
                                 keyboardType: TextInputType.number,
                                 style: TextStyle(color: Colors.black),
                                 validator: (val) => val.isEmpty
-                                    ? 'please enter your phone number'
+                                    ? getTranslated(
+                                        context, "valid_email_phone")
                                     : null,
                                 onChanged: (val) {
                                   setState(() {
@@ -185,7 +187,7 @@ class _RegisterState extends State<Register> {
                                 },
                                 decoration: textFormInputDecoration(
                                   Icons.phone,
-                                  "Phone number",
+                                  getTranslated(context, "phone_num"),
                                 ),
                               ),
                               SizedBox(height: 10),
@@ -193,7 +195,7 @@ class _RegisterState extends State<Register> {
                                 style: TextStyle(color: Colors.black),
                                 decoration: textFormInputDecorationForPassword(
                                   Icons.visibility_off,
-                                  'password',
+                                  getTranslated(context, "password"),
                                   () {
                                     setState(() {
                                       obscurePassword = !obscurePassword;
@@ -214,7 +216,7 @@ class _RegisterState extends State<Register> {
                                 style: TextStyle(color: Colors.black),
                                 decoration: textFormInputDecorationForPassword(
                                   Icons.visibility_off,
-                                  "Confirm the password",
+                                  getTranslated(context, "Confirm_password"),
                                   () {
                                     setState(() {
                                       obscureconPassword = !obscureconPassword;
@@ -257,7 +259,7 @@ class _RegisterState extends State<Register> {
                                     );
                                   }
                                 },
-                                text: 'Sign Up',
+                                text: getTranslated(context, "Sing_up"),
                               ),
                               SizedBox(height: 10),
                             ],
@@ -274,9 +276,9 @@ class _RegisterState extends State<Register> {
 
   String validatePassord(String val) {
     if (val.isEmpty) {
-      return 'please enter a password';
+      return getTranslated(context, "valid_password");
     } else if (val.length < 6) {
-      return 'the password should be at least 6 character';
+      return getTranslated(context, "valid_password_len");
     } else {
       return null;
     }
@@ -288,9 +290,9 @@ class _RegisterState extends State<Register> {
     String confrimPassord,
   ) {
     if (val.isEmpty) {
-      return 'please enter a password';
+      return getTranslated(context, "valid_password");
     } else if (password != confirmPassword) {
-      return 'password not matching';
+      return getTranslated(context, "password_not_mat");
     } else {
       return null;
     }

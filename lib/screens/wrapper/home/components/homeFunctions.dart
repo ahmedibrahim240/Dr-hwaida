@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
 
@@ -65,7 +66,7 @@ Container rowofHmeTaps(BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         homeTabs(
-          title: 'Consultants',
+          title: getTranslated(context, "consultants"),
           iconImage: 'lib/images/consulantent.png',
           onTap: () {
             Navigator.of(context).push(
@@ -76,7 +77,7 @@ Container rowofHmeTaps(BuildContext context) {
           },
         ),
         homeTabs(
-          title: 'Courses',
+          title: getTranslated(context, "Courses"),
           iconImage: 'lib/images/courses.png',
           onTap: () {
             Navigator.of(context).push(
@@ -87,7 +88,7 @@ Container rowofHmeTaps(BuildContext context) {
           },
         ),
         homeTabs(
-          title: 'Events',
+          title: getTranslated(context, "Events"),
           iconImage: 'lib/images/eventicons.png',
           onTap: () {
             Navigator.of(context).push(
@@ -254,7 +255,7 @@ consulHomeCard({
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 
-sctionTitle({String title, Function onTap}) {
+sctionTitle({String title, Function onTap, BuildContext context}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
     child: Row(
@@ -270,7 +271,7 @@ sctionTitle({String title, Function onTap}) {
         InkWell(
           onTap: onTap,
           child: Text(
-            'View All',
+            getTranslated(context, "more"),
             style: AppTheme.subHeading,
           ),
         ),

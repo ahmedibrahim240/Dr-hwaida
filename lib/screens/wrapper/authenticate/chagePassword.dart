@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +48,7 @@ class _ChagePassrowdState extends State<ChagePassrowd> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Create a new password",
+                        getTranslated(context, "new_password"),
                         style: AppTheme.heading.copyWith(
                           color: customColor,
                           fontSize: 25,
@@ -59,7 +60,7 @@ class _ChagePassrowdState extends State<ChagePassrowd> {
                         obscureText: obscurePassword,
                         decoration: textFormInputDecorationForPassword(
                           Icons.visibility_off,
-                          'password',
+                          getTranslated(context, "password"),
                           () {
                             setState(() {
                               obscurePassword = !obscurePassword;
@@ -74,7 +75,7 @@ class _ChagePassrowdState extends State<ChagePassrowd> {
                         obscureText: obscureconPassword,
                         decoration: textFormInputDecorationForPassword(
                           Icons.visibility_off,
-                          'Confirm the password',
+                          getTranslated(context, "Confirm_password"),
                           () {
                             setState(() {
                               obscureconPassword = !obscureconPassword;
@@ -85,7 +86,7 @@ class _ChagePassrowdState extends State<ChagePassrowd> {
                       ),
                       SizedBox(height: 20),
                       CustomButton(
-                        text: 'send',
+                        text: getTranslated(context, "send"),
                         onPress: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(

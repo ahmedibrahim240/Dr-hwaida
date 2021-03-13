@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _VisitsHistoryState extends State<VisitsHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: customAppBar(title: 'Visits History'),
+      appBar: customAppBar(title: getTranslated(context, "Visits_History")),
       bottomNavigationBar: CustomBottomNavigationBar(),
       body: ListView(
         shrinkWrap: true,
@@ -25,7 +26,7 @@ class _VisitsHistoryState extends State<VisitsHistory> {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         children: [
           Text(
-            'Consultant',
+            getTranslated(context, "consultants"),
             style: AppTheme.heading.copyWith(
               color: customColor,
               fontSize: 20,

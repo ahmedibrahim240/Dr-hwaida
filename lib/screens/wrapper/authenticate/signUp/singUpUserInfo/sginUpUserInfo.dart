@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/gender.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/status.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,7 +53,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                   ),
                   SizedBox(height: 5),
                   Text(
-                    'Join Us',
+                    getTranslated(context, "Join_family"),
                     style: AppTheme.heading.copyWith(
                       color: Colors.white,
                       fontSize: 16,
@@ -82,8 +83,9 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                           ),
                           child: TextFormField(
                             style: TextStyle(color: Colors.black),
-                            validator: (val) =>
-                                val.isEmpty ? 'please enter your name' : null,
+                            validator: (val) => val.isEmpty
+                                ? getTranslated(context, "valid_name")
+                                : null,
                             onChanged: (val) {
                               setState(() {
                                 SginUpUserInfo.name = val;
@@ -91,7 +93,7 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                             },
                             decoration: textFormInputDecoration(
                               Icons.person,
-                              'name',
+                              getTranslated(context, "name"),
                             ),
                           ),
                         ),
@@ -114,32 +116,26 @@ class _SginUpUserInfoState extends State<SginUpUserInfo> {
                               _scaffoldKey.currentState.showSnackBar(
                                 new SnackBar(
                                   content: new Text(
-                                    'you shoud input your data',
+                                    getTranslated(context, "valid_data"),
                                   ),
-                                  // action: SnackBarAction(
-                                  //   label: 'Undo',
-                                  //   onPressed: () {
-                                  //     productConsualtList.remove(_prondet);
-                                  //   },
-                                  // ),
                                 ),
                               );
                             }
                           },
-                          text: 'Next',
+                          text: getTranslated(context, "next_one"),
                         ),
                         SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "have an account!",
+                              getTranslated(context, "have_account"),
                               style: AppTheme.heading.copyWith(),
                             ),
                             InkWell(
                               onTap: () => widget.toggleView(),
                               child: Text(
-                                'Login?',
+                                getTranslated(context, "Entry"),
                                 style: AppTheme.heading.copyWith(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 16,

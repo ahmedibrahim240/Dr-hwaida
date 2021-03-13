@@ -32,7 +32,7 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: 'settings'),
+      appBar: customAppBar(title: getTranslated(context, "settings")),
       key: _scaffoldKey,
       body: (loading)
           ? Container(
@@ -56,7 +56,7 @@ class _SettingsState extends State<Settings> {
                             ),
                             SizedBox(width: 5),
                             Text(
-                              'account',
+                              getTranslated(context, "account"),
                               style: AppTheme.heading,
                             ),
                           ],
@@ -67,7 +67,7 @@ class _SettingsState extends State<Settings> {
                         ),
                         SizedBox(height: 20),
                         acountBody(
-                            title: 'Change password',
+                            title: getTranslated(context, "Change_password"),
                             onTap: () {
                               setState(() {
                                 showChangePas = !showChangePas;
@@ -86,7 +86,7 @@ class _SettingsState extends State<Settings> {
                                       decoration:
                                           textFormInputDecorationForPassword(
                                         Icons.visibility_off,
-                                        'Old Password',
+                                        getTranslated(context, "old_password"),
                                         () {
                                           setState(() {
                                             obscurePassword = !obscurePassword;
@@ -109,7 +109,7 @@ class _SettingsState extends State<Settings> {
                                       decoration:
                                           textFormInputDecorationForPassword(
                                         Icons.visibility_off,
-                                        'New Password',
+                                        getTranslated(context, "new_password"),
                                         () {
                                           setState(() {
                                             obscurePassword = !obscurePassword;
@@ -131,7 +131,8 @@ class _SettingsState extends State<Settings> {
                                       decoration:
                                           textFormInputDecorationForPassword(
                                         Icons.visibility_off,
-                                        "Confirm the new password",
+                                        getTranslated(
+                                            context, "Confirm_password"),
                                         () {
                                           setState(() {
                                             obscureconPassword =
@@ -160,7 +161,7 @@ class _SettingsState extends State<Settings> {
                                         borderRadius: BorderRadius.circular(35),
                                       ),
                                       child: Text(
-                                        'Change',
+                                        getTranslated(context, "Change"),
                                         style: AppTheme.heading.copyWith(
                                           color: Colors.white,
                                         ),
@@ -199,7 +200,7 @@ class _SettingsState extends State<Settings> {
                             ),
                             SizedBox(width: 5),
                             Text(
-                              'App Settings',
+                              getTranslated(context, "app_settings"),
                               style: AppTheme.heading,
                             ),
                           ],
@@ -247,24 +248,9 @@ class _SettingsState extends State<Settings> {
 
   String validatePassord(String val) {
     if (val.isEmpty) {
-      return 'please enter a password';
+      return getTranslated(context, "valid_password");
     } else if (val.length < 6) {
-      return 'the password should be at least 6 character';
-    } else {
-      return null;
-    }
-  }
-
-  String validateOldPassord(
-    String val,
-    String oldPassword,
-  ) {
-    if (val.isEmpty) {
-      return 'please enter a password';
-    } else if (val.length < 6) {
-      return 'the password should be at least 6 character';
-    } else if (oldPassword != User.userPassword) {
-      return 'Old Password not correct';
+      return getTranslated(context, "valid_password_len");
     } else {
       return null;
     }
@@ -276,9 +262,24 @@ class _SettingsState extends State<Settings> {
     String confrimPassord,
   ) {
     if (val.isEmpty) {
-      return 'please enter a password';
+      return getTranslated(context, "valid_password");
     } else if (password != confirmPassword) {
-      return 'password not matching';
+      return getTranslated(context, "password_not_mat");
+    } else {
+      return null;
+    }
+  }
+
+  String validateOldPassord(
+    String val,
+    String oldPassword,
+  ) {
+    if (val.isEmpty) {
+      return getTranslated(context, "valid_password");
+    } else if (val.length < 6) {
+      return getTranslated(context, "valid_password_len");
+    } else if (oldPassword != User.userPassword) {
+      return getTranslated(context, "valid_old_password");
     } else {
       return null;
     }
@@ -385,7 +386,7 @@ class _SettingsState extends State<Settings> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                  'Your Password was Changed',
+                  getTranslated(context, "password_Changed"),
                   style: AppTheme.heading.copyWith(
                     color: customColor,
                   ),

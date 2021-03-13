@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:flutter/material.dart';
 
 class Status extends StatefulWidget {
@@ -27,7 +28,7 @@ class _StatusState extends State<Status> {
               child: Align(
                 alignment: Alignment.center,
                 child: Text(
-                  "Status",
+                  getTranslated(context, "stauts"),
                   style: AppTheme.heading.copyWith(
                     color: Colors.white,
                     fontSize: 16,
@@ -45,7 +46,7 @@ class _StatusState extends State<Status> {
                     InkWell(
                       onTap: () {
                         setState(() {
-                          _stauts = 'single';
+                          _stauts = getTranslated(context, "single");
                           Status.resStautes = _stauts;
                         });
                         Navigator.of(context).pop();
@@ -64,7 +65,7 @@ class _StatusState extends State<Status> {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            'Single',
+                            getTranslated(context, "single"),
                             style: AppTheme.heading.copyWith(),
                           ),
                         ],
@@ -76,7 +77,7 @@ class _StatusState extends State<Status> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _stauts = 'engaged';
+                              _stauts = getTranslated(context, "engaged");
                               Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();
@@ -94,7 +95,7 @@ class _StatusState extends State<Status> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Engaged',
+                          getTranslated(context, "engaged"),
                           style: AppTheme.heading.copyWith(),
                         ),
                       ],
@@ -111,7 +112,7 @@ class _StatusState extends State<Status> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _stauts = 'married';
+                              _stauts = getTranslated(context, "married");
                               Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();
@@ -129,7 +130,7 @@ class _StatusState extends State<Status> {
                         ),
                         // SizedBox(height: 5),
                         Text(
-                          'Married',
+                          getTranslated(context, "married"),
                           style: AppTheme.heading.copyWith(),
                         ),
                       ],
@@ -141,7 +142,7 @@ class _StatusState extends State<Status> {
                         InkWell(
                           onTap: () {
                             setState(() {
-                              _stauts = 'detached';
+                              _stauts = getTranslated(context, "detached");
                               Status.resStautes = _stauts;
                             });
                             Navigator.of(context).pop();
@@ -159,7 +160,7 @@ class _StatusState extends State<Status> {
                         ),
                         SizedBox(height: 5),
                         Text(
-                          'Divorced',
+                          getTranslated(context, "detached"),
                           style: AppTheme.heading.copyWith(),
                         ),
                       ],
@@ -203,7 +204,7 @@ class _StatusState extends State<Status> {
                         ? _stauts
                         : (widget.stauts != null)
                             ? widget.stauts
-                            : 'Stauts',
+                            : getTranslated(context, "stauts"),
                     style: AppTheme.heading.copyWith(
                       color: customColor,
                     ),

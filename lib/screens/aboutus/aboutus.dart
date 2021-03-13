@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/aboutUs.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class _AboutUSState extends State<AboutUS> {
     }
 
     return Scaffold(
-      appBar: customAppBar(title: 'About Us'),
+      appBar: customAppBar(title: getTranslated(context, "About_app")),
       body: FutureBuilder(
         future: AboutUSApi.gitAboutUSApi(),
         builder: (context, snapshot) {

@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/verfyPassword.dart';
 import 'package:flutter/material.dart';
 
@@ -46,14 +47,14 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Password Recovery',
+                        getTranslated(context, "password_recovery"),
                         style: AppTheme.heading.copyWith(
                           fontSize: 25,
                           color: customColor,
                         ),
                       ),
                       Text(
-                        "Please enter a valid phone",
+                        getTranslated(context, "valid_email_phone"),
                         style: AppTheme.subHeading.copyWith(),
                       ),
                       SizedBox(height: 40),
@@ -80,7 +81,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                       ),
                       SizedBox(height: 20),
                       CustomButton(
-                        text: 'send',
+                        text: getTranslated(context, "send"),
                         onPress: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(

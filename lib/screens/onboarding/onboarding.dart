@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/consultantfillter.dart';
 import 'package:DrHwaida/screens/onboarding/slider.dart';
@@ -203,7 +204,7 @@ class SliderContoler extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      'skip',
+                      getTranslated(context, "skip"),
                       style: AppTheme.heading.copyWith(color: customColor),
                     ),
                     Transform.rotate(
