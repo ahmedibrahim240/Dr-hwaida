@@ -37,16 +37,14 @@ FutureBuilder<List<Consultant>> getAllConsultant(
                         child: Card(
                           elevation: 2,
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               consImage(
-                                  imgUrl: snapshot.data[index].image,
-                                  rate:
-                                      double.parse(snapshot.data[index].rate)),
+                                imgUrl: snapshot.data[index].image,
+                                rate: double.parse(snapshot.data[index].rate),
+                              ),
                               Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +70,7 @@ FutureBuilder<List<Consultant>> getAllConsultant(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Column(
+                                        Row(
                                           children: [
                                             (snapshot.data[index].discount !=
                                                     '0')
@@ -100,6 +98,7 @@ FutureBuilder<List<Consultant>> getAllConsultant(
                                                     ],
                                                   )
                                                 : Container(),
+                                            SizedBox(width: 10),
                                             Row(
                                               children: [
                                                 Text(
@@ -132,7 +131,6 @@ FutureBuilder<List<Consultant>> getAllConsultant(
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
                     ],
                   );
                 },
@@ -155,8 +153,9 @@ listOfBadges({List badges, BuildContext context}) {
   String ourstars = 'our_stars_badge';
   String certificated = 'certificated';
   return Container(
-    height: 100,
-    width: MediaQuery.of(context).size.width - 162,
+    height: 30,
+    width: MediaQuery.of(context).size.width - 152,
+    padding: EdgeInsets.only(bottom: 5),
     child: ListView.builder(
       shrinkWrap: true,
       primary: false,
@@ -170,7 +169,7 @@ listOfBadges({List badges, BuildContext context}) {
                 title: 'Selected',
                 color: Colors.lightBlue,
               ),
-              SizedBox(width: 1),
+              SizedBox(width: 5),
             ],
           );
         } else if (badges[index] == recent) {
@@ -180,7 +179,7 @@ listOfBadges({List badges, BuildContext context}) {
                 title: 'Recent',
                 color: Colors.greenAccent,
               ),
-              SizedBox(width: 1),
+              SizedBox(width: 5),
             ],
           );
         } else if (badges[index] == ourstars) {
@@ -190,7 +189,7 @@ listOfBadges({List badges, BuildContext context}) {
                 title: 'Our Stars',
                 color: Colors.gold,
               ),
-              SizedBox(width: 1),
+              SizedBox(width: 5),
             ],
           );
         } else if (badges[index] == certificated) {
@@ -200,7 +199,12 @@ listOfBadges({List badges, BuildContext context}) {
                 title: 'Certificated',
                 color: customColor,
               ),
-              SizedBox(width: 1),
+              SizedBox(width: 5),
+              consulCardBotom(
+                title: 'Selected',
+                color: Colors.lightBlue,
+              ),
+              SizedBox(width: 5),
             ],
           );
         } else {
@@ -213,8 +217,8 @@ listOfBadges({List badges, BuildContext context}) {
 
 Container consulCardBotom({String title, Color color}) {
   return Container(
-    height: 32,
-    width: 48,
+    // width: 48,
+    padding: EdgeInsets.symmetric(horizontal: 5),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       color: color,
@@ -224,7 +228,7 @@ Container consulCardBotom({String title, Color color}) {
         title,
         textAlign: TextAlign.center,
         style: AppTheme.subHeading.copyWith(
-          fontSize: 7,
+          fontSize: 10,
           color: Colors.white,
         ),
       ),
@@ -235,7 +239,7 @@ Container consulCardBotom({String title, Color color}) {
 Container consImage({String imgUrl, double rate}) {
   return Container(
     height: 120,
-    width: 130,
+    width: 120,
     decoration: BoxDecoration(
       image: DecorationImage(
         image: NetworkImage(imgUrl),

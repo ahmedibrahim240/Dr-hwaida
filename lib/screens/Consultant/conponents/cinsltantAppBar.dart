@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/consultantsearch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ Container consultantAppBer(BuildContext context) {
           ],
         ),
         Text(
-          'Consultant',
+          getTranslated(context, "consultants"),
           style: AppTheme.heading.copyWith(
             color: Colors.white,
           ),

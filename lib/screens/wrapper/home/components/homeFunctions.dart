@@ -61,42 +61,52 @@ FutureBuilder<List<Consultant>> getConsultant() {
 
 Container rowofHmeTaps(BuildContext context) {
   return Container(
+    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
     height: 130,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        homeTabs(
-          title: getTranslated(context, "consultants"),
-          iconImage: 'lib/images/consulantent.png',
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => ConsultantPage(),
-              ),
-            );
-          },
+        Expanded(
+          flex: 1,
+          child: homeTabs(
+            title: getTranslated(context, "consultants"),
+            iconImage: 'lib/images/consulantent.png',
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ConsultantPage(),
+                ),
+              );
+            },
+          ),
         ),
-        homeTabs(
-          title: getTranslated(context, "Courses"),
-          iconImage: 'lib/images/courses.png',
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => ComingSoon(),
-              ),
-            );
-          },
+        Expanded(
+          flex: 1,
+          child: homeTabs(
+            title: getTranslated(context, "Courses"),
+            iconImage: 'lib/images/courses.png',
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ComingSoon(),
+                ),
+              );
+            },
+          ),
         ),
-        homeTabs(
-          title: getTranslated(context, "Events"),
-          iconImage: 'lib/images/eventicons.png',
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => ComingSoon(),
-              ),
-            );
-          },
+        Expanded(
+          flex: 1,
+          child: homeTabs(
+            title: getTranslated(context, "Events"),
+            iconImage: 'lib/images/eventicons.png',
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => ComingSoon(),
+                ),
+              );
+            },
+          ),
         ),
       ],
     ),
@@ -107,6 +117,7 @@ Container rowofHmeTaps(BuildContext context) {
 Container homeTabs({String title, String iconImage, Function onTap}) {
   return Container(
     width: 120,
+    // padding: EdgeInsets.symmetric(horizontal: 5),
     child: InkWell(
       onTap: onTap,
       child: Card(
@@ -131,6 +142,7 @@ Container homeTabs({String title, String iconImage, Function onTap}) {
                 title,
                 style: AppTheme.heading.copyWith(
                   color: customColor,
+                  fontSize: 12,
                 ),
               ),
             ],

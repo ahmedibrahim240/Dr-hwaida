@@ -131,15 +131,14 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 5),
                         Text(
                           getTranslated(context, "Join_family"),
                           style: AppTheme.heading.copyWith(
                             color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900,
+                            fontSize: 12,
                           ),
                         ),
+                        SizedBox(height: 10),
                       ],
                     ),
                   ),

@@ -109,6 +109,11 @@
     
     "other_lang" : "اللغة العربية",
     "other_lang_code" : "ar",
-    "this_lang_code" : "en"
+    "this_lang_code" : "en",
+    "Closest":"Closest",
+    "Recent":"Recent",
+    "HD_Certified":"HD Certified",
+    "Rate":"Rating"
+    
     
 }

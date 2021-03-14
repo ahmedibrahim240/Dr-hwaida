@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
@@ -17,12 +18,6 @@ class ConsultantFillter extends StatefulWidget {
 }
 
 class _ConsultantFillterState extends State<ConsultantFillter> {
-  List<String> fillterList = [
-    'Closest',
-    'Recent',
-    'HD Certified',
-    'Rate',
-  ];
   List<String> fillterApi = [
     'location',
     'recent',
@@ -43,6 +38,12 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> fillterList = [
+      getTranslated(context, "Closest"),
+      getTranslated(context, "Recent"),
+      getTranslated(context, "HD_Certified"),
+      getTranslated(context, "Rate"),
+    ];
     return ListView(
       shrinkWrap: true,
       primary: true,
@@ -72,7 +73,6 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
               children: [
                 InkWell(
                   onTap: () async {
-                    print(index);
                     if (index == 0) {
                       if (User.userlat == null && User.userlong == null) {
                         showmyDialog(context: context);

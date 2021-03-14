@@ -126,12 +126,11 @@ class _LogInState extends State<LogIn> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 5),
                             Text(
                               getTranslated(context, "welcome"),
                               style: AppTheme.heading.copyWith(
                                 color: Colors.white,
-                                fontSize: 16,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w900,
                               ),
                             ),

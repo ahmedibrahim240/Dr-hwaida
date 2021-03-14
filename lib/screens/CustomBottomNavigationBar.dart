@@ -62,7 +62,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                                 ? customColor
                                 : customColorGray,
                           ),
-                          SizedBox(height: 5),
                           Text(
                             'Profile',
                             style: AppTheme.heading.copyWith(
@@ -98,7 +97,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                                 ? customColor
                                 : customColorGray,
                           ),
-                          SizedBox(height: 5),
                           Text(
                             'Home',
                             style: AppTheme.heading.copyWith(
