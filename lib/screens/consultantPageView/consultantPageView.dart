@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/conSultantRating.dart';
@@ -68,7 +69,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   consultantData(BuildContext context) {
     return Container(
-      height: 550,
+      height: 600,
       child: Stack(
         children: [
           Container(
@@ -130,7 +131,8 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                             style: AppTheme.heading,
                           ),
                           Text(
-                            widget.consultant.experince + ' Exp Yry',
+                            widget.consultant.experince +
+                                getTranslated(context, "experience"),
                             style: AppTheme.heading,
                           ),
                         ],
@@ -205,7 +207,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               },
                               child: Center(
                                 child: Text(
-                                  'Review',
+                                  getTranslated(context, "Review"),
                                   style: AppTheme.heading.copyWith(
                                     fontSize: 10,
                                     color: Colors.white,
@@ -244,7 +246,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                           ),
                           child: Center(
                             child: Text(
-                              'Open Map',
+                              getTranslated(context, "Open_Map"),
                               style: AppTheme.heading.copyWith(
                                 fontSize: 8,
                                 color: Colors.white,
@@ -255,7 +257,9 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'About ' + widget.consultant.name,
+                        getTranslated(context, "About") +
+                            ' ' +
+                            widget.consultant.name,
                         style: AppTheme.heading,
                       ),
                       SizedBox(height: 10),
@@ -286,7 +290,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                   ),
                                   SizedBox(width: 10),
                                   Text(
-                                    'Price',
+                                    getTranslated(context, "Price"),
                                     style: AppTheme.heading
                                         .copyWith(color: customColor),
                                   ),
@@ -334,7 +338,8 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                     },
                                     child: Center(
                                       child: Text(
-                                        'Schedule \n Appointment',
+                                        getTranslated(
+                                            context, "schedule_appoint"),
                                         textAlign: TextAlign.center,
                                         style: AppTheme.heading.copyWith(
                                           color: Colors.white,

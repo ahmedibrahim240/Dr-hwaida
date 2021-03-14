@@ -55,7 +55,7 @@ class _SucessfullyBookedState extends State<SucessfullyBooked> {
             style: AppTheme.subHeading,
           ),
           Text(
-            getTranslated(context, "confirm"),
+            getTranslated(context, "doc_confirm"),
             style: AppTheme.subHeading,
           ),
           SizedBox(height: 10),

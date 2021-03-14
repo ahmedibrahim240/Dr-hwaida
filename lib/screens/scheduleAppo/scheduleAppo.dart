@@ -1,7 +1,9 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/prodact.dart';
+import 'package:DrHwaida/screens/cart/cart.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dbhelper.dart';
 
@@ -41,7 +43,9 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
     // List<ConsulAvailable> consulAvailable = widget.consultant.available_in;
 
     return Scaffold(
-      appBar: customAppBar(title: 'Schedule Appointment'),
+      appBar: customAppBar(
+        title: getTranslated(context, "schedule_appoint"),
+      ),
       key: _scaffoldKey,
       bottomNavigationBar: CustomBottomNavigationBar(),
       body: Container(
@@ -57,7 +61,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                     child: Column(
                       children: [
                         rowTitle(
-                          title: 'date',
+                          title: getTranslated(context, "Date"),
                         ),
                         (widget.consultant.availableIn.isEmpty)
                             ? Container()
@@ -70,7 +74,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     rowTitle(
-                                      title: 'Time',
+                                      title: getTranslated(context, "Time"),
                                     ),
                                     timeListView(),
                                   ],
@@ -104,13 +108,13 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                   } else {
                     _scaffoldKey.currentState.showSnackBar(
                       new SnackBar(
-                        content: new Text('you shoud choses  date and time'),
+                        content: new Text(getTranslated(context, "chooseDate")),
                       ),
                     );
                   }
                 },
                 child: Text(
-                  'Add to Cart',
+                  getTranslated(context, "Add_to_Cart"),
                   style: AppTheme.heading.copyWith(
                     color: Colors.white,
                   ),
@@ -132,10 +136,10 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(
-                  'Items Was added',
-                  style: AppTheme.heading.copyWith(
-                    color: customColor,
+                Center(
+                  child: Text(
+                    getTranslated(context, "Items_Was_added"),
+                    style: AppTheme.heading.copyWith(),
                   ),
                 ),
               ],
@@ -144,7 +148,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
           actions: <Widget>[
             TextButton(
               child: Text(
-                'Oki',
+                getTranslated(context, "home_page"),
                 style: AppTheme.heading.copyWith(
                   color: customColor,
                 ),
@@ -152,6 +156,22 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (BuildContext context) => Home()),
+                );
+              },
+            ),
+            TextButton(
+              child: Text(
+                getTranslated(context, "Go_to_Cart"),
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => Cart(),
+                  ),
+                  ModalRoute.withName('/'),
                 );
               },
             ),

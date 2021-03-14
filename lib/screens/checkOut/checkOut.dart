@@ -87,7 +87,7 @@ class _CheckOutState extends State<CheckOut> {
                 size: 20,
               ),
               label: Text(
-                'Add Card',
+                getTranslated(context, "addCard"),
                 style: AppTheme.subHeading.copyWith(
                   color: Colors.white,
                 ),
@@ -131,7 +131,8 @@ class _CheckOutState extends State<CheckOut> {
                                 Row(
                                   children: [
                                     Text(
-                                      'Total Price: ',
+                                      getTranslated(context, "Total_Price") +
+                                          ' : ',
                                       style: AppTheme.subHeading.copyWith(),
                                     ),
                                     Text(
@@ -170,7 +171,7 @@ class _CheckOutState extends State<CheckOut> {
                                       size: 20,
                                     ),
                                     label: Text(
-                                      'Confirm',
+                                      getTranslated(context, "confirm"),
                                       style: AppTheme.subHeading.copyWith(
                                         color: Colors.white,
                                       ),
@@ -197,15 +198,13 @@ class _CheckOutState extends State<CheckOut> {
                                   color: customColor,
                                 ),
                                 SizedBox(width: 10),
-                                Text('Cash'),
+                                Text(getTranslated(context, "Cash")),
                               ],
                             ),
                           ),
                         ),
                         onChanged: (val) {
                           setState(() {
-                            print('Val:: $val');
-
                             id = val;
                           });
                         },
