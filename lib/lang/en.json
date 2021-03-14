@@ -121,6 +121,8 @@
     "my_payment":"My Payment",
     "My_Courses":"My Courses",
     "Visits_History":"Visits History",
+    "update_appoint": "Edit appointment",
+    "delate":"Cancel Visits",
     "Register_as_consultant":"Register as consultant",
     "Register":"Register",
     "Sucessfully":"Successfully Booked !",
@@ -133,7 +135,8 @@
     "Closest":"Closest",
     "Recent":"Recent",
     "HD_Certified":"HD Certified",
-    "Rate":"Rating"
+    "Rate":"Rating",
+    "Day":"Day"
     
     
 }

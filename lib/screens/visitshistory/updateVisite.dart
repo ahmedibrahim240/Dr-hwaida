@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
 import 'package:DrHwaida/models/user.dart';
@@ -76,7 +77,7 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                     child: Column(
                       children: [
                         rowTitle(
-                          title: 'date',
+                          title: getTranslated(context, "Date"),
                         ),
                         (snapshot.data.availableIn.isEmpty)
                             ? Container()
@@ -89,7 +90,7 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     rowTitle(
-                                      title: 'Time',
+                                      title: getTranslated(context, "Time"),
                                     ),
                                     timeListView(),
                                   ],
@@ -112,14 +113,14 @@ class _UpdateVisitsState extends State<UpdateVisits> {
                         } else {
                           _scaffoldKey.currentState.showSnackBar(
                             new SnackBar(
-                              content:
-                                  new Text('you shoud choses  date and time'),
+                              content: new Text(
+                                  getTranslated(context, "chooseDate")),
                             ),
                           );
                         }
                       },
                       child: Text(
-                        'Update Appointment',
+                        getTranslated(context, "update_appoint"),
                         style: AppTheme.heading.copyWith(
                           color: Colors.white,
                         ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 
@@ -58,7 +59,7 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                           Row(
                             children: [
                               Text(
-                                'Consultant Name: ',
+                                getTranslated(context, "title") + ' : ',
                                 style: AppTheme.heading.copyWith(
                                   color: customColor,
                                 ),
@@ -76,7 +77,7 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                               Row(
                                 children: [
                                   Text(
-                                    'Date: ',
+                                    getTranslated(context, "Date") + ' : ',
                                     style: AppTheme.heading.copyWith(
                                       color: customColor,
                                       fontSize: 14,
@@ -93,7 +94,7 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                                   Row(
                                     children: [
                                       Text(
-                                        'Time: ',
+                                        getTranslated(context, "Time") + ' : ',
                                         style: AppTheme.heading.copyWith(
                                           color: customColor,
                                           fontSize: 14,
@@ -109,7 +110,7 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                                   Row(
                                     children: [
                                       Text(
-                                        'Day: ',
+                                        getTranslated(context, "Day") + ' : ',
                                         style: AppTheme.heading.copyWith(
                                           color: customColor,
                                           fontSize: 14,
@@ -129,7 +130,7 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                           Row(
                             children: [
                               Text(
-                                'Price: ',
+                                getTranslated(context, "Price") + ' : ',
                                 style: AppTheme.heading.copyWith(
                                   color: customColor,
                                   fontSize: 14,
@@ -167,7 +168,7 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                                   },
                                   child: Center(
                                     child: Text(
-                                      'Update\n Appointment',
+                                      getTranslated(context, "update_appoint"),
                                       textAlign: TextAlign.center,
                                       style: AppTheme.heading.copyWith(
                                         fontSize: 10,
@@ -189,7 +190,7 @@ FutureBuilder<List<Visits>> gitAllVisist({BuildContext context}) {
                                   },
                                   child: Center(
                                     child: Text(
-                                      'Cancel \n Visits',
+                                      getTranslated(context, "delate"),
                                       textAlign: TextAlign.center,
                                       style: AppTheme.heading.copyWith(
                                         color: Colors.white,

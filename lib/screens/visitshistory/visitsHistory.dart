@@ -29,7 +29,7 @@ class _VisitsHistoryState extends State<VisitsHistory> {
             getTranslated(context, "consultants"),
             style: AppTheme.heading.copyWith(
               color: customColor,
-              fontSize: 20,
+              fontSize: 14,
             ),
           ),
           Divider(
