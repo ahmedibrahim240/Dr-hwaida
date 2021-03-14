@@ -5,13 +5,13 @@ class AppTheme {
   static final TextStyle heading = TextStyle(
     fontFamily: 'Cairo',
     fontWeight: FontWeight.w700,
-    fontSize: 14,
+    fontSize: 12,
     letterSpacing: 1.2,
     color: Colors.black,
   );
   static final TextStyle subHeading = TextStyle(
     fontFamily: 'Cairo',
-    fontSize: 12,
+    fontSize: 10,
     color: Colors.black,
   );
   static final containerBackground = LinearGradient(

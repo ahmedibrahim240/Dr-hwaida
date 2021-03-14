@@ -100,9 +100,11 @@
     "other_lang" : "English",
     "other_lang_code" : "en",
     "this_lang_code" : "ar",
-    "payment":"Payment",
+    "payment":"الدفع",
     "app_settings": "إعدادات التطبيقات",
-    
+    "Sucessfully":"تم الحجز بنجاح !",
+    "confirm":"التأكيد",
+    "Sucessfully_book_mess":"سوف تتلقى إخطارًا بمجرد أن يقوم الطبيب ",
     "Submit":"ارسال",
     "My_Courses":"دوراتي",
     "Visits_History":"سجل الزيارات",

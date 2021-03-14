@@ -35,7 +35,7 @@ class _MenuBodyState extends State<MenuBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.height - 272,
+      height: widget.height - 290,
       child: Stack(
         children: [
           ListView(

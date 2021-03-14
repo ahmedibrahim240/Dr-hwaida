@@ -106,7 +106,9 @@
     "Visits_History":"Visits History",
     "Register_as_consultant":"Register as consultant",
     "Register":"Register",
-    
+    "Sucessfully":"Successfully Booked !",
+    "confirm":"Confirm",
+    "Sucessfully_book_mess":"You will receive a notification as soon as the doctor",
     "other_lang" : "اللغة العربية",
     "other_lang_code" : "ar",
     "this_lang_code" : "en",

@@ -1,8 +1,10 @@
 import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/visaCard.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
+import 'package:DrHwaida/screens/sucessfullyBooked/sucessfullyBooked.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dbhelper.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +96,7 @@ class _CheckOutState extends State<CheckOut> {
           ),
         ],
         title: Text(
-          'Payment',
+          getTranslated(context, "payment"),
           style: AppTheme.heading.copyWith(color: Colors.white),
         ),
       ),
@@ -317,19 +319,17 @@ class _CheckOutState extends State<CheckOut> {
           loading = !loading;
           _totalPrice = '';
         });
-        print('dooooooooooooooooooooooooooone');
-        _scaffoldKey.currentState.showSnackBar(
-          new SnackBar(
-            content: new Text('thank you, The reservation has been sent'),
+        await helper.deleteProduct(widget.productId);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) => SucessfullyBooked(),
           ),
         );
-        await helper.deleteProduct(widget.productId);
       } else {
         setState(() {
           loading = !loading;
         });
-        print(response.statusCode.toString());
-        print(map['message']);
+
         _scaffoldKey.currentState.showSnackBar(
           new SnackBar(
             content: new Text(
