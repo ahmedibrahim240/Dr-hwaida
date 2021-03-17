@@ -30,12 +30,12 @@ Container consultantAppBer(BuildContext context, String title) {
             ),
           ],
         ),
-        // Text(
-        //   'Courses',
-        //   style: AppTheme.heading.copyWith(
-        //     color: Colors.white,
-        //   ),
-        // ),
+        Text(
+          title,
+          style: AppTheme.heading.copyWith(
+            color: Colors.white,
+          ),
+        ),
         IconButton(
           onPressed: () {
             flitter(

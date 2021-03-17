@@ -5,6 +5,7 @@ import 'package:DrHwaida/models/consultant.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
 
 import 'package:DrHwaida/models/courses.dart';
+import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
@@ -58,6 +59,42 @@ FutureBuilder<List<Consultant>> getConsultant() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
+FutureBuilder<List<Courses>> getCourses() {
+  return FutureBuilder(
+    future: CoursesApi.fetchAllCourses(),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        return (snapshot.data == null)
+            ? Container()
+            : ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: snapshot.data.length,
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                itemBuilder: (context, index) {
+                  return homeCoursesCard(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => CoursesDetails(
+                            courses: snapshot.data[index],
+                          ),
+                        ),
+                      );
+                    },
+                    courses: snapshot.data[index],
+                    context: context,
+                  );
+                },
+              );
+      } else {
+        return Center(child: CircularProgressIndicator());
+      }
+    },
+  );
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 Container rowofHmeTaps(BuildContext context) {
   return Container(
@@ -351,7 +388,7 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                image: AssetImage(courses.courseImageUrl),
+                image: NetworkImage(courses.courseImageUrl),
                 fit: BoxFit.cover,
               )),
             ),
@@ -367,21 +404,21 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
-                              width: 200,
-                              child: Text(
-                                courses.contant.substring(0, 100),
-                                style: AppTheme.subHeading.copyWith(
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
                             Text(
                               courses.title,
                               style: AppTheme.heading.copyWith(
                                 color: customColor,
                                 fontSize: 10,
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            SizedBox(
+                              width: 200,
+                              child: Text(
+                                parseHtmlString(courses.contant),
+                                style: AppTheme.subHeading.copyWith(
+                                  fontSize: 10,
+                                ),
                               ),
                             ),
                             SizedBox(height: 10),
@@ -400,26 +437,31 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         RatingStar(
-                          rating: courses.rating,
+                          rating: double.parse(courses.rating),
                           isReadOnly: true,
                         ),
                         Row(
                           children: [
-                            Text(
-                              courses.oldPrice + '\$',
-                              style: AppTheme.heading.copyWith(
-                                color: Colors.grey[500],
-                                fontSize: 8,
-                                decoration: TextDecoration.lineThrough,
-                              ),
-                            ),
+                            (courses.discount != '0')
+                                ? Text(
+                                    gitOldPrice(
+                                      newPrice: courses.newPrice,
+                                      descaound: courses.discount,
+                                    ),
+                                    style: AppTheme.heading.copyWith(
+                                      color: Colors.grey[500],
+                                      fontSize: 8,
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  )
+                                : Container(),
                             SizedBox(width: 5),
                             Text(
                               courses.newPrice + '\$',
                               style: AppTheme.heading.copyWith(
                                 fontSize: 10,
                               ),
-                            ),
+                            )
                           ],
                         ),
                       ],
@@ -433,4 +475,10 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
       ),
     ),
   );
+}
+
+String gitOldPrice({String descaound, String newPrice}) {
+  double oldPrice;
+  oldPrice = double.parse(descaound) + double.parse(newPrice);
+  return oldPrice.toString();
 }

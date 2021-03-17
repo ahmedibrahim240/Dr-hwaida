@@ -1,6 +1,8 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/courses.dart';
+import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,17 +31,6 @@ class _CoursesPageState extends State<CoursesPage> {
               primary: true,
               children: [
                 consultantAppBer(context, widget.title),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                  child: Text(
-                    widget.title,
-                    style: AppTheme.heading.copyWith(
-                      color: customColor,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
                 coursesgraidView(),
                 SizedBox(height: 20),
               ],
@@ -55,29 +46,42 @@ class _CoursesPageState extends State<CoursesPage> {
   }
 
   coursesgraidView() {
-    return ListView.builder(
-      primary: false,
-      itemCount: listCourses.length,
-      shrinkWrap: true,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => CoursesDetails(
-                  courses: listCourses[index],
-                ),
-              ),
-            );
-          },
-          child: corsesCard(index),
-        );
+    return FutureBuilder(
+      future: CoursesApi.fetchAllCourses(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return (snapshot.data == null)
+              ? Container()
+              : ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: snapshot.data.length,
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => CoursesDetails(
+                              courses: snapshot.data[index],
+                            ),
+                          ),
+                        );
+                      },
+                      child: corsesCard(
+                        courses: snapshot.data[index],
+                      ),
+                    );
+                  },
+                );
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
       },
     );
   }
 
-  corsesCard(int index) {
+  corsesCard({Courses courses}) {
     return Card(
       elevation: 4,
       child: Column(
@@ -89,7 +93,7 @@ class _CoursesPageState extends State<CoursesPage> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage(listCourses[index].courseImageUrl),
+              image: NetworkImage(courses.courseImageUrl),
               fit: BoxFit.cover,
             )),
           ),
@@ -105,38 +109,46 @@ class _CoursesPageState extends State<CoursesPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width - 50,
-                            // height: 20,
-                            child: Text(
-                              listCourses[index].contant +
-                                  listCourses[index].contant +
-                                  listCourses[index].contant,
-                              style: AppTheme.subHeading.copyWith(
-                                fontSize: 10,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
                           Text(
-                            listCourses[index].title,
+                            courses.title,
                             style: AppTheme.heading.copyWith(
                               color: customColor,
                               fontSize: 10,
                             ),
                           ),
-                          SizedBox(height: 10),
-                          Text(
-                            date,
-                            style: AppTheme.heading.copyWith(
-                              fontSize: 10,
+                          SizedBox(height: 5),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width - 50,
+                            child: Text(
+                              parseHtmlString(courses.contant),
+                              style: AppTheme.heading.copyWith(
+                                fontSize: 10,
+                              ),
                             ),
+                          ),
+                          SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Text(
+                                "total hours : ",
+                                style: AppTheme.heading.copyWith(
+                                  color: customColor,
+                                  fontSize: 10,
+                                ),
+                              ),
+                              Text(
+                                courses.total_time,
+                                style: AppTheme.heading.copyWith(
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 5),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -145,25 +157,42 @@ class _CoursesPageState extends State<CoursesPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            listCourses[index].oldPrice + '\$',
-                            style: AppTheme.heading.copyWith(
-                              color: Colors.grey[500],
-                              fontSize: 8,
-                              decoration: TextDecoration.lineThrough,
-                            ),
-                          ),
+                          (courses.discount != '0')
+                              ? Text(
+                                  gitOldPrice(
+                                    newPrice: courses.newPrice,
+                                    descaound: courses.discount,
+                                  ),
+                                  style: AppTheme.heading.copyWith(
+                                    color: Colors.grey[500],
+                                    fontSize: 8,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                )
+                              : Container(),
                           SizedBox(width: 5),
-                          Text(
-                            listCourses[index].newPrice + '\$',
-                            style: AppTheme.heading.copyWith(
-                              fontSize: 10,
-                            ),
-                          ),
+                          Row(
+                            children: [
+                              Text(
+                                getTranslated(context, "Price") + " : ",
+                                style: AppTheme.heading.copyWith(
+                                  color: customColor,
+                                  fontSize: 10,
+                                ),
+                              ),
+                              Text(
+                                courses.newPrice + '\$',
+                                style: AppTheme.heading.copyWith(
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
+                      SizedBox(height: 5),
                       RatingStar(
-                        rating: listCourses[index].rating,
+                        rating: double.parse(courses.rating),
                         isReadOnly: true,
                       ),
                     ],

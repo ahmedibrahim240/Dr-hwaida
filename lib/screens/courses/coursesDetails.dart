@@ -2,7 +2,6 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/courses.dart';
-import 'package:DrHwaida/models/coursesquestion.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -30,30 +29,36 @@ class _CoursesDetailsState extends State<CoursesDetails> {
   @override
   void initState() {
     super.initState();
-    id = YoutubePlayer.convertUrlToId(url);
-    _controller = YoutubePlayerController(
-      initialVideoId: id,
-      flags: const YoutubePlayerFlags(
-        mute: false,
-        autoPlay: false,
-        disableDragSeek: false,
-        loop: false,
-        isLive: false,
-        forceHD: true,
-        enableCaption: true,
-      ),
-    );
+    if (widget.courses.courseVideoUrl != null) {
+      id = YoutubePlayer.convertUrlToId(widget.courses.courseVideoUrl);
+      _controller = YoutubePlayerController(
+        initialVideoId: id,
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: true,
+          enableCaption: true,
+        ),
+      );
+    }
   }
 
   @override
   void deactivate() {
-    _controller.pause();
+    if (widget.courses.courseVideoUrl != null) {
+      _controller.pause();
+    }
     super.deactivate();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (widget.courses.courseVideoUrl != null) {
+      _controller.dispose();
+    }
 
     super.dispose();
   }
@@ -89,7 +94,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                 courseCard(),
                 SizedBox(height: 4),
                 aboutThisCourse(context),
-                qAs(),
+                (widget.courses.features != null) ? qAs() : Container(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CustomButtonWithchild(
@@ -123,12 +128,12 @@ class _CoursesDetailsState extends State<CoursesDetails> {
     );
   }
 
-  ListView qAs() {
+  qAs() {
     return ListView.builder(
       shrinkWrap: true,
       primary: false,
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      itemCount: questionList.length,
+      itemCount: widget.courses.features.length,
       itemBuilder: (context, index) {
         return Column(
           children: [
@@ -150,7 +155,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      questionList[index].question,
+                      widget.courses.features[index]['name'],
                       textDirection: TextDirection.ltr,
                       style: AppTheme.heading.copyWith(color: Colors.white),
                     ),
@@ -173,12 +178,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width - 20,
                         child: Text(
-                          questionList[index].answer +
-                              questionList[index].answer +
-                              questionList[index].answer +
-                              questionList[index].answer +
-                              questionList[index].answer +
-                              questionList[index].answer,
+                          widget.courses.features[index]['description'],
                           textDirection: TextDirection.ltr,
                           style: AppTheme.subHeading,
                         ),
@@ -213,7 +213,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    widget.courses.contant,
+                    parseHtmlString(widget.courses.contant),
                     style: AppTheme.heading.copyWith(
                       color: Colors.grey[500],
                     ),
@@ -235,7 +235,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Instuctor:' + widget.courses.title,
+                      'Instuctor:' + widget.courses.couslNmae,
                       style: AppTheme.heading.copyWith(
                         fontSize: 12,
                       ),
@@ -250,7 +250,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                           ),
                         ),
                         Text(
-                          widget.courses.date,
+                          widget.courses.total_time,
                           style: AppTheme.heading.copyWith(
                             color: Colors.grey[400],
                             fontSize: 8,
@@ -275,7 +275,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Flexible deadline',
+                      widget.courses.type,
                       style: AppTheme.heading.copyWith(
                         fontSize: 12,
                       ),
@@ -296,7 +296,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width - 90,
                   child: Text(
-                    'Approx. 55 hours to complete and 22 video',
+                    widget.courses.total_time,
                     style: AppTheme.heading.copyWith(
                       fontSize: 12,
                     ),
@@ -365,11 +365,17 @@ class _CoursesDetailsState extends State<CoursesDetails> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 200,
-              child: youtubePlayer(_controller),
-            ),
+            (widget.courses.courseVideoUrl != null)
+                ? Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    child: youtubePlayer(_controller),
+                  )
+                : Container(
+                    child: Center(
+                      child: Text('no Video'),
+                    ),
+                  ),
             courseDetail(),
           ],
         ),
@@ -392,7 +398,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'solving problem with your son',
+                  widget.courses.title,
                   style: AppTheme.heading,
                 ),
               ),
@@ -429,7 +435,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
       height: 150,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(widget.courses.courseImageUrl),
+          image: NetworkImage(widget.courses.courseImageUrl),
           fit: BoxFit.cover,
         ),
       ),

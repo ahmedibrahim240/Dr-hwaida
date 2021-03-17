@@ -8,15 +8,33 @@ String courseImageUrl = 'lib/images/aboutus.jpg';
 double rating = 4;
 
 class Courses {
+  final int id;
   final String courseImageUrl;
+  final String courseVideoUrl;
   final String contant;
   final String title;
+  final String couslNmae;
   final String date;
+  final String type;
   final String oldPrice;
-  final double rating;
+  final String discount;
+  // ignore: non_constant_identifier_names
+  final String total_time;
+  var lessons;
+  var features;
+  final String rating;
   final String newPrice;
 
   Courses({
+    this.couslNmae,
+    this.id,
+    this.courseVideoUrl,
+    this.type,
+    this.discount,
+    // ignore: non_constant_identifier_names
+    this.total_time,
+    this.lessons,
+    this.features,
     this.courseImageUrl,
     this.contant,
     this.title,
@@ -27,86 +45,4 @@ class Courses {
   });
 }
 
-List<Courses> listCourses = [
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-  Courses(
-    contant: contant,
-    title: title,
-    date: date,
-    oldPrice: oldPrice,
-    newPrice: newPrice,
-    courseImageUrl: courseImageUrl,
-    rating: rating,
-  ),
-];
+List<Courses> listCourses = [];

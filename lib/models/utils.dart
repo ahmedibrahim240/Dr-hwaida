@@ -38,6 +38,10 @@ class Utils {
   // ignore: non_constant_identifier_names
   static final Consultant_URL = BASE_URL + "/consultants";
   // ignore: non_constant_identifier_names
+  static final EVENTS_URL = BASE_URL + "/events";
+  // ignore: non_constant_identifier_names
+  static final COURSES_URL = BASE_URL + "/courses";
+  // ignore: non_constant_identifier_names
   static final RATE_URL = BASE_URL + "/rates/consultant";
   // ignore: non_constant_identifier_names
   static final REGISTER_URL = BASE_URL + "/clients/register";

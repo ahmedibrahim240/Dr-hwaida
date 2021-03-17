@@ -111,7 +111,10 @@ class _HomeState extends State<Home> {
                         ),
                       );
                     }),
-                homecoursesList(context),
+                Container(
+                  height: 250,
+                  child: getCourses(),
+                ),
               ],
             ),
           ),

@@ -8,7 +8,6 @@ import 'package:DrHwaida/screens/consultantPageView/counsultantRating.dart';
 import 'package:DrHwaida/screens/scheduleAppo/scheduleAppo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:html/parser.dart';
 
 import '../CustomBottomNavigationBar.dart';
 
@@ -27,13 +26,6 @@ class ConsultantPageView extends StatefulWidget {
 
 class _ConsultantPageViewState extends State<ConsultantPageView> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  String _parseHtmlString(String htmlString) {
-    final document = parse(htmlString);
-    final String parsedString = parse(document.body.text).documentElement.text;
-
-    return parsedString;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -269,7 +261,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                         child: ListView(
                           children: [
                             Text(
-                              _parseHtmlString(widget.consultant.bio),
+                              parseHtmlString(widget.consultant.bio),
                               style: AppTheme.subHeading,
                             ),
                           ],
