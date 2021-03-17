@@ -5,6 +5,7 @@ import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
+import 'package:DrHwaida/screens/courses/mycourses.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
@@ -99,7 +100,7 @@ class _MenuBodyState extends State<MenuBody> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (_) => ComingSoon(),
+                            builder: (_) => MyCourses(),
                           ),
                         );
                       },

@@ -6,13 +6,13 @@ import 'package:DrHwaida/models/consultantApi.dart';
 
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
+import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
+import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../../../comingSoon.dart';
 
 FutureBuilder<List<Consultant>> getConsultant() {
   return FutureBuilder(
@@ -88,7 +88,7 @@ Container rowofHmeTaps(BuildContext context) {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => ComingSoon(),
+                  builder: (_) => CoursesPage(title: 'All Courses'),
                 ),
               );
             },
@@ -102,7 +102,7 @@ Container rowofHmeTaps(BuildContext context) {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => ComingSoon(),
+                  builder: (_) => EventsPage(),
                 ),
               );
             },

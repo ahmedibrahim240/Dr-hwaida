@@ -4,6 +4,7 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/consultantfillter.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
+import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
@@ -136,16 +137,17 @@ class _HomeState extends State<Home> {
                 //       );
                 //     }),
 
-                // sctionTitle(
-                //     title: 'Courses',
-                //     onTap: () {
-                //       Navigator.of(context).push(
-                //         MaterialPageRoute(
-                //           builder: (_) => CoursesPage(title: 'All Courses'),
-                //         ),
-                //       );
-                //     }),
-                // homecoursesList(context),
+                sctionTitle(
+                    title: 'Courses',
+                    context: context,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => CoursesPage(title: 'All Courses'),
+                        ),
+                      );
+                    }),
+                homecoursesList(context),
               ],
             ),
           ),

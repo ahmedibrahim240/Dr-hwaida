@@ -1,3 +1,4 @@
+import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
@@ -123,7 +124,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 });
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => HormonyGame(),
+                    builder: (_) => ComingSoon(),
                   ),
                 );
               },
