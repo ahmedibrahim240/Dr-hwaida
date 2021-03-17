@@ -1,6 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/models/eventApi.dart';
-import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
 import 'package:flutter/cupertino.dart';
