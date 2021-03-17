@@ -8,7 +8,6 @@ import 'package:DrHwaida/screens/consultantPageView/counsultantRating.dart';
 import 'package:DrHwaida/screens/scheduleAppo/scheduleAppo.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../CustomBottomNavigationBar.dart';
 
 class ConsultantPageView extends StatefulWidget {

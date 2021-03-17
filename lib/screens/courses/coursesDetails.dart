@@ -2,10 +2,14 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/courses.dart';
+import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/models/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'dart:convert';
 
+import 'package:http/http.dart' as http;
 import '../CustomBottomNavigationBar.dart';
 // import 'components/videoscreens.dart';
 
@@ -43,6 +47,40 @@ class _CoursesDetailsState extends State<CoursesDetails> {
           enableCaption: true,
         ),
       );
+    }
+  }
+
+  addRating({double rate, String coment, String answer, int id}) async {
+    try {
+      var response = await http.post(
+        Utils.COURSESRATE_URL,
+        body: {},
+        headers: {
+          'x-api-key': User.userToken,
+        },
+      );
+
+      Map<String, dynamic> map = json.decode(response.body);
+
+      if (map['success'] == true) {
+        _scaffoldKey.currentState.showSnackBar(
+          new SnackBar(
+            content: new Text('thank you for rating'),
+          ),
+        );
+      } else {
+        print(response.statusCode.toString());
+        print(map['message']);
+        _scaffoldKey.currentState.showSnackBar(
+          new SnackBar(
+            content: new Text('Your rating failed,please try again'),
+          ),
+        );
+      }
+
+      // Navigator.pop(context);
+    } catch (e) {
+      print(e);
     }
   }
 

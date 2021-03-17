@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/events.dart';
 import 'package:flutter/material.dart';
 import '../CustomBottomNavigationBar.dart';
@@ -65,20 +66,120 @@ class _EventsPageViewState extends State<EventsPageView> {
                         ),
                       ),
                       SizedBox(height: 20),
-                      Text(
-                        widget.events.contant +
-                            widget.events.contant +
-                            widget.events.contant +
-                            widget.events.contant +
-                            widget.events.contant +
-                            widget.events.contant +
-                            widget.events.contant +
-                            widget.events.contant,
-                        textAlign: TextAlign.start,
-                        style: AppTheme.subHeading.copyWith(
-                          height: 1.5,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Start date: ',
+                                style: AppTheme.heading.copyWith(
+                                  color: customColor,
+                                ),
+                              ),
+                              Text(
+                                widget.events.start_date,
+                                style: AppTheme.subHeading,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'End date: ',
+                                style: AppTheme.heading.copyWith(
+                                  color: customColor,
+                                ),
+                              ),
+                              Text(
+                                widget.events.start_date,
+                                style: AppTheme.subHeading,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Start time: ',
+                                style: AppTheme.heading.copyWith(
+                                  color: customColor,
+                                ),
+                              ),
+                              Text(
+                                widget.events.start_time,
+                                style: AppTheme.subHeading,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'End time: ',
+                                style: AppTheme.heading.copyWith(
+                                  color: customColor,
+                                ),
+                              ),
+                              Text(
+                                widget.events.start_time,
+                                style: AppTheme.subHeading,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            getTranslated(context, "Price") + ': ',
+                            style: AppTheme.heading.copyWith(
+                              color: customColor,
+                            ),
+                          ),
+                          Text(
+                            widget.events.price,
+                            style: AppTheme.subHeading,
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 5),
+                        child: Divider(
+                          thickness: 2,
+                          color: customColorDivider,
                         ),
                       ),
+                      Row(
+                        children: [
+                          Text(
+                            getTranslated(context, "About") + ': ',
+                            style: AppTheme.heading.copyWith(
+                              color: customColor,
+                            ),
+                          ),
+                          Text(
+                            widget.events.title,
+                            style: AppTheme.subHeading,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      (widget.events.contant != null)
+                          ? Text(
+                              parseHtmlString(widget.events.contant),
+                              textAlign: TextAlign.justify,
+                              style: AppTheme.subHeading.copyWith(
+                                height: 1.5,
+                              ),
+                            )
+                          : Container(),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 40,

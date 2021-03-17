@@ -44,6 +44,8 @@ class Utils {
   // ignore: non_constant_identifier_names
   static final RATE_URL = BASE_URL + "/rates/consultant";
   // ignore: non_constant_identifier_names
+  static final COURSESRATE_URL = BASE_URL + "/rates/course";
+  // ignore: non_constant_identifier_names
   static final REGISTER_URL = BASE_URL + "/clients/register";
   // ignore: non_constant_identifier_names
   static final REGISTERASCONSUL_URL = BASE_URL + "/requests";
