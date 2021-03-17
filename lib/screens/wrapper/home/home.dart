@@ -86,7 +86,6 @@ class _HomeState extends State<Home> {
               children: [
                 CustomHomeAppBer(scaffoldKey: scaffoldKey),
                 rowofHmeTaps(context),
-
                 paner(context),
                 sctionTitle(
                     title: getTranslated(context, "consultants"),
@@ -102,41 +101,6 @@ class _HomeState extends State<Home> {
                   height: 200,
                   child: getConsultant(),
                 ),
-                // sctionTitle(
-                //     title: 'Consultants',
-                //     onTap: () {
-                //       Navigator.of(context).push(
-                //         MaterialPageRoute(
-                //           builder: (_) => ConsultantPage(),
-                //         ),
-                //       );
-                //     }),
-
-                // ListView.builder(
-                //     // scrollDirection: Axis.horizontal,
-                //     shrinkWrap: true,
-                //     primary: false,
-                //     itemCount: consultantList.length,
-                //     padding: EdgeInsets.symmetric(horizontal: 5),
-                //     itemBuilder: (context, index) {
-                //       return consulHomeCard(
-                //         imageUrl: consultantList[index].image,
-                //         oldPrie: consultantList[index].coust,
-                //         newPrie: consultantList[index].coust,
-                //         consulName: consultantList[index].name,
-                //         rate: double.parse(consultantList[index].rate),
-                //         onTap: () {
-                //           Navigator.of(context).push(
-                //             MaterialPageRoute(
-                //               builder: (_) => ConsultantPageView(
-                //                 consultant: consultantList[index],
-                //               ),
-                //             ),
-                //           );
-                //         },
-                //       );
-                //     }),
-
                 sctionTitle(
                     title: 'Courses',
                     context: context,

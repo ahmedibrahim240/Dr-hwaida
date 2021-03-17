@@ -117,6 +117,7 @@ Container rowofHmeTaps(BuildContext context) {
 Container homeTabs({String title, String iconImage, Function onTap}) {
   return Container(
     width: 120,
+    height: 100,
     // padding: EdgeInsets.symmetric(horizontal: 5),
     child: InkWell(
       onTap: onTap,
@@ -126,9 +127,10 @@ Container homeTabs({String title, String iconImage, Function onTap}) {
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 60,
+                height: 40,
                 width: 60,
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -137,13 +139,10 @@ Container homeTabs({String title, String iconImage, Function onTap}) {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 5),
               Text(
                 title,
-                style: AppTheme.heading.copyWith(
-                  color: customColor,
-                  fontSize: 12,
-                ),
+                style: AppTheme.subHeading,
               ),
             ],
           ),
@@ -314,7 +313,7 @@ paner(BuildContext context) {
 ///////////////////////////////////////////////////////////////
 Container homecoursesList(context) {
   return Container(
-    height: 250,
+    height: 300,
     child: ListView.builder(
       itemCount: listCourses.length,
       scrollDirection: Axis.horizontal,
