@@ -4,8 +4,8 @@ import 'package:DrHwaida/models/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../CustomBottomNavigationBar.dart';
-import 'components/videoscreens.dart';
 
 class MyCoursesDetails extends StatefulWidget {
   final Courses courses;
@@ -17,29 +17,97 @@ class MyCoursesDetails extends StatefulWidget {
 
 class _MyCoursesDetailsState extends State<MyCoursesDetails> {
   int lecTapped = 0;
+  YoutubePlayerController _controller;
+
+  String url;
+  String id;
+  List<String> videoList = [
+    "https://www.youtube.com/watch?v=H9154xIoYTA",
+    "https://www.youtube.com/watch?v=BBvod49uySQ",
+    "https://www.youtube.com/watch?v=H9154xIoYTA",
+    "https://www.youtube.com/watch?v=BBvod49uySQ",
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    url = videoList[0];
+    id = YoutubePlayer.convertUrlToId(url);
+
+    _controller = YoutubePlayerController(
+      initialVideoId: id,
+      flags: const YoutubePlayerFlags(
+        mute: false,
+        autoPlay: false,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: true,
+        enableCaption: true,
+      ),
+    );
+  }
+
+  @override
+  void deactivate() {
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
+  }
+
+  youtubePlayers(YoutubePlayerController controller) {
+    return YoutubePlayerBuilder(
+      player: YoutubePlayer(
+        controller: controller,
+        aspectRatio: 16 / 9,
+      ),
+      builder: (context, player) {
+        return Column(
+          children: [
+            player,
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    return OrientationBuilder(
+      builder: (context, orien) {
+        if (orien == Orientation.landscape) {
+          return Scaffold(
+            body: youtubePlayers(_controller),
+          );
+        } else {
+          return scafoldWthisAppBar(context);
+        }
+      },
+    );
+  }
+
+  Scaffold scafoldWthisAppBar(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height - 160,
+            height: MediaQuery.of(context).size.height - 170,
             child: ListView(
               shrinkWrap: true,
               primary: true,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               children: [
                 Card(
                   elevation: 4,
                   child: Column(
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 200,
-                        child: ChewieVideo(),
-                      ),
-                      courseDetail(),
+                      youtubePlayers(_controller),
                     ],
                   ),
                 ),
@@ -91,6 +159,7 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
                     ? lectureBody()
                     : (lecTapped == 1)
                         ? Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
                             child: Center(
                               child: Text(
                                 widget.courses.contant,
@@ -225,16 +294,6 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
           ),
         ),
         lectureDetaile(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            'Section 2 -SetUp',
-            style: AppTheme.subHeading.copyWith(
-              color: Colors.grey[400],
-            ),
-          ),
-        ),
-        lectureDetaile(),
       ],
     );
   }
@@ -244,108 +303,81 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
       shrinkWrap: true,
       primary: false,
       itemCount: 4,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       itemBuilder: (context, index) {
-        return Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  '${index + 1}',
-                  style: AppTheme.heading.copyWith(
-                    fontSize: 25,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: customColor,
-                          ),
-                          child: Center(
-                            child: Icon(
-                              FontAwesomeIcons.check,
-                              color: Colors.white,
-                              size: 10,
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          'Welcom to 2 course',
-                          style: AppTheme.heading,
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Video -10.22 mins-Resources (1)',
-                      style: AppTheme.subHeading.copyWith(
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Divider(
-              color: customColorDivider,
-              thickness: 2,
-            ),
-          ],
-        );
+        return lecture(
+            index: index,
+            onTap: () {
+              setState(
+                () {
+                  url = videoList[index];
+                  id = YoutubePlayer.convertUrlToId(url);
+
+                  _controller.load(id);
+
+                  print("VideoID: " + id);
+                },
+              );
+            });
       },
     );
   }
 
-  courseDetail() {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 10,
-        vertical: 10,
-      ),
+  lecture({int index, Function onTap}) {
+    return InkWell(
+      onTap: onTap,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                flex: 2,
-                child: Text(
-                  'solving problem with your son',
-                  style: AppTheme.heading,
+              Text(
+                '${index + 1}',
+                style: AppTheme.heading.copyWith(
+                  fontSize: 15,
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Row(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.starHalfAlt,
-                      color: Colors.yellow[900],
+              SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 20,
+                        width: 20,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: customColor,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            FontAwesomeIcons.check,
+                            color: Colors.white,
+                            size: 10,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        'Welcom to 2 course',
+                        style: AppTheme.heading,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Video -10.22 mins-Resources (1)',
+                    style: AppTheme.subHeading.copyWith(
+                      color: Colors.grey[400],
                     ),
-                    SizedBox(width: 5),
-                    Text(
-                      '(${widget.courses.rating}K)',
-                      style: AppTheme.heading,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
-          SizedBox(height: 10),
-          Text(
-            widget.courses.newPrice + '\$',
-            style: AppTheme.heading,
+          Divider(
+            color: customColorDivider,
+            thickness: 2,
           ),
         ],
       ),

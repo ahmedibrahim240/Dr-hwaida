@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/screens/courses/mycoursesdetails.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,24 +27,12 @@ class _MyCoursesState extends State<MyCourses> {
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height - 80,
+            height: MediaQuery.of(context).size.height - 150,
             child: ListView(
               shrinkWrap: true,
               primary: true,
               padding: EdgeInsets.symmetric(vertical: 20),
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Courses',
-                    style: AppTheme.heading.copyWith(
-                      color: customColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
                 coursesgraidView(),
               ],
             ),
@@ -62,7 +51,9 @@ class _MyCoursesState extends State<MyCourses> {
       primary: false,
       itemCount: listCourses.length,
       shrinkWrap: true,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
@@ -99,76 +90,26 @@ class _MyCoursesState extends State<MyCourses> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width - 50,
-                            // height: 20,
-                            child: Text(
-                              listCourses[index].contant +
-                                  listCourses[index].contant +
-                                  listCourses[index].contant,
-                              style: AppTheme.subHeading.copyWith(
-                                fontSize: 10,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            listCourses[index].title,
-                            style: AppTheme.heading.copyWith(
-                              color: customColor,
-                              fontSize: 10,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            date,
-                            style: AppTheme.heading.copyWith(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        getTranslated(context, "title") + ' : ',
+                        style: AppTheme.heading.copyWith(color: customColor),
                       ),
+                      Text('Course Name', style: AppTheme.subHeading),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Row(
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            listCourses[index].oldPrice + '\$',
-                            style: AppTheme.heading.copyWith(
-                              color: Colors.grey[500],
-                              fontSize: 8,
-                              decoration: TextDecoration.lineThrough,
-                            ),
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            listCourses[index].newPrice + '\$',
-                            style: AppTheme.heading.copyWith(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
+                      Text(
+                        getTranslated(context, "lecturer") + ' : ',
+                        style: AppTheme.heading.copyWith(color: customColor),
                       ),
-                      RatingStar(
-                        rating: listCourses[index].rating,
-                        isReadOnly: true,
-                      ),
+                      Text('lecturer Name', style: AppTheme.subHeading),
                     ],
                   ),
                 ],

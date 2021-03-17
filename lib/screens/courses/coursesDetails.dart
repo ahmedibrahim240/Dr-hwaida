@@ -67,55 +67,59 @@ class _CoursesDetailsState extends State<CoursesDetails> {
             body: youtubePlayer(_controller),
           );
         } else {
-          return Scaffold(
-            key: _scaffoldKey,
-            appBar: AppBar(),
-            body: Stack(
+          return scafofoldWithappBar(context);
+        }
+      },
+    );
+  }
+
+  Scaffold scafofoldWithappBar(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      appBar: AppBar(),
+      body: Stack(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height - 150,
+            child: ListView(
+              shrinkWrap: true,
+              primary: true,
+              padding: EdgeInsets.symmetric(vertical: 10),
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.height - 150,
-                  child: ListView(
-                    shrinkWrap: true,
-                    primary: true,
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    children: [
-                      courseCard(),
-                      SizedBox(height: 4),
-                      aboutThisCourse(context),
-                      qAs(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: CustomButtonWithchild(
-                          color: customColor,
-                          onPress: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (_) => CheckOut(),
-                            //   ),
-                            // );
-                          },
-                          child: Center(
-                            child: Text(
-                              getTranslated(context, "Add_to_Cart"),
-                              style: AppTheme.heading.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                courseCard(),
+                SizedBox(height: 4),
+                aboutThisCourse(context),
+                qAs(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: CustomButtonWithchild(
+                    color: customColor,
+                    onPress: () {
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (_) => CheckOut(),
+                      //   ),
+                      // );
+                    },
+                    child: Center(
+                      child: Text(
+                        getTranslated(context, "Add_to_Cart"),
+                        style: AppTheme.heading.copyWith(
+                          color: Colors.white,
                         ),
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomBottomNavigationBar(),
                 ),
               ],
             ),
-          );
-        }
-      },
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: CustomBottomNavigationBar(),
+          ),
+        ],
+      ),
     );
   }
 
