@@ -22,9 +22,9 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
   String url;
   String id;
   List<String> videoList = [
+    "https://www.youtube.com/watch?v=RM-DwdTfB4s",
     "https://www.youtube.com/watch?v=H9154xIoYTA",
-    "https://www.youtube.com/watch?v=BBvod49uySQ",
-    "https://www.youtube.com/watch?v=H9154xIoYTA",
+    "https://www.youtube.com/watch?v=RM-DwdTfB4s",
     "https://www.youtube.com/watch?v=BBvod49uySQ",
   ];
 
