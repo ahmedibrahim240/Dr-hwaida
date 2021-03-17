@@ -33,6 +33,7 @@ dependencies:
   flutter_svg:
   flutter_spinkit: "^4.1.2"
   intl_phone_field: ^1.4.2
+  youtube_player_flutter: 7.0.0+7
   http:
   html:
   path:
