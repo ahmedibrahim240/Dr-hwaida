@@ -3,19 +3,12 @@ import 'package:DrHwaida/routes.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'localization/app_localization.dart';
 import 'localization/localization_constants.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.blueAccent,
-    ),
-  );
   runApp(MyApp());
 }
 

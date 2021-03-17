@@ -1,12 +1,14 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/models/coursesquestion.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../CustomBottomNavigationBar.dart';
-import 'components/videoscreens.dart';
+// import 'components/videoscreens.dart';
 
 class CoursesDetails extends StatefulWidget {
   final Courses courses;
@@ -19,53 +21,101 @@ class CoursesDetails extends StatefulWidget {
 class _CoursesDetailsState extends State<CoursesDetails> {
   int qTapped;
   bool showAnwser = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  YoutubePlayerController _controller;
+
+  String url = "https://www.youtube.com/watch?v=H9154xIoYTA";
+  String id;
+
+  @override
+  void initState() {
+    super.initState();
+    id = YoutubePlayer.convertUrlToId(url);
+    _controller = YoutubePlayerController(
+      initialVideoId: id,
+      flags: const YoutubePlayerFlags(
+        mute: false,
+        autoPlay: false,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: true,
+        enableCaption: true,
+      ),
+    );
+  }
+
+  @override
+  void deactivate() {
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height - 150,
-            child: ListView(
-              shrinkWrap: true,
-              primary: true,
-              padding: EdgeInsets.symmetric(vertical: 10),
+    return OrientationBuilder(
+      builder: (context, orien) {
+        if (orien == Orientation.landscape) {
+          return Scaffold(
+            body: youtubePlayer(_controller),
+          );
+        } else {
+          return Scaffold(
+            key: _scaffoldKey,
+            appBar: AppBar(),
+            body: Stack(
               children: [
-                courseCard(),
-                SizedBox(height: 4),
-                aboutThisCourse(context),
-                qAs(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: CustomButtonWithchild(
-                    color: customColor,
-                    onPress: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (_) => CheckOut(),
-                      //   ),
-                      // );
-                    },
-                    child: Center(
-                      child: Text(
-                        'Add to Cart',
-                        style: AppTheme.heading.copyWith(
-                          color: Colors.white,
+                Container(
+                  height: MediaQuery.of(context).size.height - 150,
+                  child: ListView(
+                    shrinkWrap: true,
+                    primary: true,
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    children: [
+                      courseCard(),
+                      SizedBox(height: 4),
+                      aboutThisCourse(context),
+                      qAs(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: CustomButtonWithchild(
+                          color: customColor,
+                          onPress: () {
+                            // Navigator.of(context).push(
+                            //   MaterialPageRoute(
+                            //     builder: (_) => CheckOut(),
+                            //   ),
+                            // );
+                          },
+                          child: Center(
+                            child: Text(
+                              getTranslated(context, "Add_to_Cart"),
+                              style: AppTheme.heading.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: CustomBottomNavigationBar(),
                 ),
               ],
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 
@@ -314,7 +364,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 200,
-              child: ChewieVideo(),
+              child: youtubePlayer(_controller),
             ),
             courseDetail(),
           ],
