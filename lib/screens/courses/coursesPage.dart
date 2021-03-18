@@ -30,7 +30,9 @@ class _CoursesPageState extends State<CoursesPage> {
               shrinkWrap: true,
               primary: true,
               children: [
-                consultantAppBer(context, widget.title),
+                consultantAppBer(
+                  context,
+                ),
                 coursesgraidView(),
                 SizedBox(height: 20),
               ],
@@ -127,23 +129,6 @@ class _CoursesPageState extends State<CoursesPage> {
                             ),
                           ),
                           SizedBox(height: 5),
-                          Row(
-                            children: [
-                              Text(
-                                "total hours : ",
-                                style: AppTheme.heading.copyWith(
-                                  color: customColor,
-                                  fontSize: 10,
-                                ),
-                              ),
-                              Text(
-                                courses.total_time,
-                                style: AppTheme.heading.copyWith(
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ],

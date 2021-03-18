@@ -152,27 +152,6 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
             );
           },
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: CustomButtonWithchild(
-            color: customColor,
-            onPress: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                    builder: (BuildContext context) => ConsultantPage()),
-                ModalRoute.withName('/'),
-              );
-            },
-            child: Center(
-              child: Text(
-                'Search',
-                style: AppTheme.heading.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        )
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,7 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CoursesFillter extends StatefulWidget {
   final String title;
 
-  const CoursesFillter({Key key, @required this.title}) : super(key: key);
+  const CoursesFillter({Key key, this.title}) : super(key: key);
   @override
   _CoursesFillterState createState() => _CoursesFillterState();
 }
@@ -24,6 +25,14 @@ class _CoursesFillterState extends State<CoursesFillter> {
   int filtterTapped;
   @override
   Widget build(BuildContext context) {
+    List<String> fillterList = [
+      getTranslated(context, "Closest"),
+      getTranslated(context, "Recent"),
+      getTranslated(context, "HD_Certified"),
+      getTranslated(context, "priceLow"),
+      getTranslated(context, "priceHigh"),
+      getTranslated(context, "Rate"),
+    ];
     return ListView(
       shrinkWrap: true,
       primary: true,
@@ -111,29 +120,6 @@ class _CoursesFillterState extends State<CoursesFillter> {
             );
           },
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50),
-          child: CustomButtonWithchild(
-            color: customColor,
-            onPress: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                    builder: (BuildContext context) => CoursesPage(
-                          title: widget.title,
-                        )),
-                ModalRoute.withName('/'),
-              );
-            },
-            child: Center(
-              child: Text(
-                'Search',
-                style: AppTheme.heading.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        )
       ],
     );
   }

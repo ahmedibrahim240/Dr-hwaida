@@ -136,6 +136,16 @@
     "Recent":"Recent",
     "HD_Certified":"HD Certified",
     "Rate":"Rating",
+    "instructor":"Instructor",
+    "priceLow":"Price High to low",
+    "priceHigh":"Price High to low",
+    "start_date":"Start date",
+    "start_time":"Start time",
+    "end_date":"End date",
+    "videos":"Videos",
+    "end_time":"End time",
+    "total_time":"Total hours",
+    
     "Day":"Day"
     
     

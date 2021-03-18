@@ -16,16 +16,33 @@ class Courses {
   final String couslNmae;
   final String date;
   final String type;
-  final String oldPrice;
+  // ignore: non_constant_identifier_names
+  final int videos_count;
   final String discount;
   // ignore: non_constant_identifier_names
+  final String start_date;
+  // ignore: non_constant_identifier_names
   final String total_time;
+  // ignore: non_constant_identifier_names
+  final String end_date;
+  // ignore: non_constant_identifier_names
+  final String end_time;
+  // ignore: non_constant_identifier_names
+  final String start_time;
   var lessons;
   var features;
   final String rating;
   final String newPrice;
 
   Courses({
+    // ignore: non_constant_identifier_names
+    this.start_date,
+    // ignore: non_constant_identifier_names
+    this.end_date,
+    // ignore: non_constant_identifier_names
+    this.end_time,
+    // ignore: non_constant_identifier_names
+    this.start_time,
     this.couslNmae,
     this.id,
     this.courseVideoUrl,
@@ -39,7 +56,8 @@ class Courses {
     this.contant,
     this.title,
     this.date,
-    this.oldPrice,
+    // ignore: non_constant_identifier_names
+    this.videos_count,
     this.newPrice,
     this.rating,
   });

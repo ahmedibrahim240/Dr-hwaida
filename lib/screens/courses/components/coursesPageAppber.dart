@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-Container consultantAppBer(BuildContext context, String title) {
+Container consultantAppBer(BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 60,
@@ -30,19 +30,11 @@ Container consultantAppBer(BuildContext context, String title) {
             ),
           ],
         ),
-        Text(
-          title,
-          style: AppTheme.heading.copyWith(
-            color: Colors.white,
-          ),
-        ),
         IconButton(
           onPressed: () {
             flitter(
               context: context,
-              child: CoursesFillter(
-                title: title,
-              ),
+              child: CoursesFillter(),
             );
           },
           icon: Transform.rotate(

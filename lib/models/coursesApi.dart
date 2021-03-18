@@ -27,6 +27,11 @@ class CoursesApi {
             features: items['features'],
             courseVideoUrl: items['video'],
             lessons: items['lessons'],
+            videos_count: items['videos_count'],
+            start_date: items['start_date'],
+            start_time: items['start_time'],
+            end_date: items['end_date'],
+            end_time: items['end_time'],
           );
           listOfCourses.add(courses);
         }

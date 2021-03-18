@@ -242,11 +242,21 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'About this course',
-                    style: AppTheme.heading.copyWith(
-                      color: Colors.grey[500],
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        getTranslated(context, "About") + ':',
+                        style: AppTheme.heading.copyWith(
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                      Text(
+                        widget.courses.title,
+                        style: AppTheme.heading.copyWith(
+                          color: Colors.grey[500],
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 10),
                   Text(
@@ -272,7 +282,9 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Instuctor:' + widget.courses.couslNmae,
+                      getTranslated(context, "instructor") +
+                          ':' +
+                          widget.courses.couslNmae,
                       style: AppTheme.heading.copyWith(
                         fontSize: 12,
                       ),
@@ -306,40 +318,172 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                 ),
               ),
               SizedBox(height: 10),
-              rowOfCorseDetaile(
-                icon: FontAwesomeIcons.calendar,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.courses.type,
-                      style: AppTheme.heading.copyWith(
-                        fontSize: 12,
+              (widget.courses.type == "offline")
+                  ? rowOfCorseDetaile(
+                      icon: FontAwesomeIcons.calendar,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.courses.type,
+                            style: AppTheme.heading.copyWith(
+                              fontSize: 12,
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        getTranslated(context, "start_date") +
+                                            ': ',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                          fontSize: 9,
+                                        ),
+                                      ),
+                                      Text(
+                                        widget.courses.start_date,
+                                        style: AppTheme.heading.copyWith(
+                                          color: Colors.grey.withOpacity(.9),
+                                          fontSize: 9,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 10),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        getTranslated(context, "end_date") +
+                                            ': ',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                          fontSize: 9,
+                                        ),
+                                      ),
+                                      Text(
+                                        widget.courses.end_date,
+                                        style: AppTheme.heading.copyWith(
+                                          color: Colors.grey.withOpacity(.9),
+                                          fontSize: 9,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        getTranslated(context, "start_time") +
+                                            ': ',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                          fontSize: 9,
+                                        ),
+                                      ),
+                                      Text(
+                                        widget.courses.start_time,
+                                        style: AppTheme.heading.copyWith(
+                                          color: Colors.grey.withOpacity(.9),
+                                          fontSize: 9,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(width: 10),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        getTranslated(context, "start_time") +
+                                            ': ',
+                                        style: AppTheme.heading.copyWith(
+                                          color: customColor,
+                                          fontSize: 9,
+                                        ),
+                                      ),
+                                      Text(
+                                        widget.courses.end_time,
+                                        style: AppTheme.heading.copyWith(
+                                          color: Colors.grey.withOpacity(.9),
+                                          fontSize: 9,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  : rowOfCorseDetaile(
+                      icon: FontAwesomeIcons.clock,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.courses.type,
+                            style: AppTheme.heading.copyWith(
+                              fontSize: 12,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    getTranslated(context, "videos") + ': ',
+                                    style: AppTheme.heading.copyWith(
+                                      color: customColor,
+                                      fontSize: 9,
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.courses.videos_count.toString(),
+                                    style: AppTheme.heading.copyWith(
+                                      color: Colors.grey.withOpacity(.9),
+                                      fontSize: 9,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(width: 100),
+                              Row(
+                                children: [
+                                  Text(
+                                    getTranslated(context, "total_time") + ': ',
+                                    style: AppTheme.heading.copyWith(
+                                      color: customColor,
+                                      fontSize: 9,
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.courses.total_time,
+                                    style: AppTheme.heading.copyWith(
+                                      color: Colors.grey.withOpacity(.9),
+                                      fontSize: 9,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      'start instantly and learn at own schedule',
-                      style: AppTheme.heading.copyWith(
-                        color: Colors.grey.withOpacity(.9),
-                        fontSize: 10,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 10),
-              rowOfCorseDetaile(
-                icon: FontAwesomeIcons.clock,
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width - 90,
-                  child: Text(
-                    widget.courses.total_time,
-                    style: AppTheme.heading.copyWith(
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -484,85 +628,6 @@ class _CoursesDetailsState extends State<CoursesDetails> {
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  cousrsImage() {
-    return Container(
-      height: 150,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(widget.courses.courseImageUrl),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        color: Colors.black.withOpacity(.5),
-        child: Stack(
-          children: [
-            Positioned(
-              left: 0,
-              bottom: 10,
-              child: Container(
-                color: Colors.grey.withOpacity(.6),
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                child: Row(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.play,
-                      color: customColor,
-                      size: 10,
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      '150 min',
-                      style: AppTheme.subHeading.copyWith(
-                        color: Colors.white,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Icon(
-                    FontAwesomeIcons.play,
-                    color: customColor,
-                  ),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 100,
-                    child: Divider(
-                      thickness: 3,
-                      color: Colors.red,
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      thickness: 3,
-                      color: Colors.grey.withOpacity(.5),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

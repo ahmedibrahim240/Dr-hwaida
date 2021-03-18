@@ -129,7 +129,7 @@ class _EventsPageViewState extends State<EventsPageView> {
                           Row(
                             children: [
                               Text(
-                                'Start date: ',
+                                getTranslated(context, "start_date") + ': ',
                                 style: AppTheme.heading.copyWith(
                                   color: customColor,
                                 ),
@@ -143,7 +143,7 @@ class _EventsPageViewState extends State<EventsPageView> {
                           Row(
                             children: [
                               Text(
-                                'End date: ',
+                                getTranslated(context, "end_date") + ': ',
                                 style: AppTheme.heading.copyWith(
                                   color: customColor,
                                 ),
@@ -163,7 +163,7 @@ class _EventsPageViewState extends State<EventsPageView> {
                           Row(
                             children: [
                               Text(
-                                'Start time: ',
+                                getTranslated(context, "start_time") + ': ',
                                 style: AppTheme.heading.copyWith(
                                   color: customColor,
                                 ),
@@ -177,7 +177,7 @@ class _EventsPageViewState extends State<EventsPageView> {
                           Row(
                             children: [
                               Text(
-                                'End time: ',
+                                getTranslated(context, "end_time") + ': ',
                                 style: AppTheme.heading.copyWith(
                                   color: customColor,
                                 ),
@@ -283,7 +283,7 @@ class _EventsPageViewState extends State<EventsPageView> {
                             // );
                           },
                           child: Text(
-                            'Booking Naw',
+                            getTranslated(context, "Add_to_Cart"),
                             style:
                                 AppTheme.heading.copyWith(color: Colors.white),
                           ),

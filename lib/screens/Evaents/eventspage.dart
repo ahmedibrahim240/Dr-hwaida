@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/eventApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
@@ -14,7 +15,7 @@ class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title: 'Events'),
+      appBar: customAppBar(title:getTranslated(context, "Events"),),
       body: Stack(
         children: [
           Container(

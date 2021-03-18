@@ -3,7 +3,8 @@
     "skip":"تخطي",
     "account":"الحساب",
     "lecturer":"المحاضر",
-
+    "priceLow":"السعر من الارخص للاعلى",
+    "priceHigh":"السعر من الاعلي الى الادنى",
     "Change_password": "تغير كلمة السر",
     "Change": "حفظ التغير",
     "deleting_done": "تم الحذف",
@@ -130,6 +131,7 @@
     "Sucessfully_book_mess":"سوف تتلقى إخطارًا بمجرد أن يقوم الطبيب ",
     "Submit":"ارسال",
     "My_Courses":"دوراتي",
+    
     "Visits_History":"سجل الزيارات",
     "Register_as_consultant":"التسجيل كمستشار",
     "my_payment":"مدفوعاتى",
@@ -137,6 +139,13 @@
     "Recent":"الاحدث",
     "HD_Certified":"HD معتمد",
     "Rate":"التقييم",
+    "instructor":"المدرب",
+    "start_date":"تاريخ البدء",
+    "start_time":"وقت البدء",
+    "end_date":"تاريخ الانتهاء",
+    "videos":"عدد الدورات ",
+    "end_time":"وقت النهاية",
+    "total_time":"عدد السعات",
     "Day":"اليوم"
 
 
