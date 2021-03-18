@@ -49,8 +49,9 @@ class _EventsPageState extends State<EventsPage> {
                                       height: 150,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image: AssetImage(
-                                              snapshot.data[index].imageUl),
+                                          image: NetworkImage(
+                                            snapshot.data[index].imageUl,
+                                          ),
                                           fit: BoxFit.cover,
                                         ),
                                       ),

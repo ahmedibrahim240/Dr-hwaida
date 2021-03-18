@@ -29,17 +29,18 @@ Widget youtubePlayer(YoutubePlayerController controller) {
 }
 
 ////////////////////////////////////////////////////////////
-String gitOldPrice({String descaound, String newPrice}) {
-  double oldPrice;
-  oldPrice = double.parse(descaound) + double.parse(newPrice);
-  return oldPrice.toString();
-}
 
 String parseHtmlString(String htmlString) {
   final document = parse(htmlString);
   final String parsedString = parse(document.body.text).documentElement.text;
 
   return parsedString;
+}
+
+String gitnewPrice({String descaound, String price}) {
+  double oldPrice;
+  oldPrice = double.parse(price) - double.parse(descaound);
+  return oldPrice.toString();
 }
 
 /////////////////////////////////////

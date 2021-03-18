@@ -157,37 +157,42 @@ class _CoursesPageState extends State<CoursesPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          (courses.discount != '0')
-                              ? Text(
-                                  gitOldPrice(
-                                    newPrice: courses.newPrice,
-                                    descaound: courses.discount,
-                                  ),
-                                  style: AppTheme.heading.copyWith(
-                                    color: Colors.grey[500],
-                                    fontSize: 8,
-                                    decoration: TextDecoration.lineThrough,
-                                  ),
-                                )
-                              : Container(),
-                          SizedBox(width: 5),
                           Row(
                             children: [
                               Text(
-                                getTranslated(context, "Price") + " : ",
+                                getTranslated(context, "Price") + ' : ',
                                 style: AppTheme.heading.copyWith(
                                   color: customColor,
-                                  fontSize: 10,
                                 ),
                               ),
-                              Text(
-                                courses.newPrice + '\$',
-                                style: AppTheme.heading.copyWith(
-                                  fontSize: 10,
-                                ),
+                              Row(
+                                children: [
+                                  (courses.discount != '0')
+                                      ? Text(
+                                          courses.newPrice,
+                                          style: AppTheme.heading.copyWith(
+                                            color: Colors.grey[500],
+                                            fontSize: 8,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                          ),
+                                        )
+                                      : Container(),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    gitnewPrice(
+                                          price: courses.newPrice,
+                                          descaound: courses.discount,
+                                        ) +
+                                        '\$',
+                                    style: AppTheme.heading.copyWith(
+                                      fontSize: 10,
+                                    ),
+                                  )
+                                ],
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                       SizedBox(height: 5),

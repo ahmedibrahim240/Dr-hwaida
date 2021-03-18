@@ -27,7 +27,6 @@ class _CoursesDetailsState extends State<CoursesDetails> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   YoutubePlayerController _controller;
 
-  String url = "https://www.youtube.com/watch?v=H9154xIoYTA";
   String id;
 
   @override
@@ -459,9 +458,30 @@ class _CoursesDetailsState extends State<CoursesDetails> {
             ],
           ),
           SizedBox(height: 10),
-          Text(
-            widget.courses.newPrice + '\$',
-            style: AppTheme.heading,
+          Row(
+            children: [
+              (widget.courses.discount != '0')
+                  ? Text(
+                      widget.courses.newPrice,
+                      style: AppTheme.heading.copyWith(
+                        color: Colors.grey[500],
+                        fontSize: 8,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    )
+                  : Container(),
+              SizedBox(width: 5),
+              Text(
+                gitnewPrice(
+                      price: widget.courses.newPrice,
+                      descaound: widget.courses.discount,
+                    ) +
+                    '\$',
+                style: AppTheme.heading.copyWith(
+                  fontSize: 10,
+                ),
+              )
+            ],
           ),
         ],
       ),

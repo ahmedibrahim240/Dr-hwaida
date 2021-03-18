@@ -26,7 +26,7 @@ class EventsApi {
             features: items['features'],
             title: items['name'],
             contant: items['details'],
-            imageUl: 'lib/images/event.jpg',
+            imageUl: items['image_path'],
           );
           listOfEvent.add(event);
         }

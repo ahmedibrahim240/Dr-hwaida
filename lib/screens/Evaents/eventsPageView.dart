@@ -3,6 +3,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/events.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../CustomBottomNavigationBar.dart';
 
 class EventsPageView extends StatefulWidget {
@@ -14,8 +15,63 @@ class EventsPageView extends StatefulWidget {
 }
 
 class _EventsPageViewState extends State<EventsPageView> {
+  YoutubePlayerController _controller;
+
+  String id;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.events.video != null) {
+      id = YoutubePlayer.convertUrlToId(widget.events.video);
+      _controller = YoutubePlayerController(
+        initialVideoId: id,
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: true,
+          enableCaption: true,
+        ),
+      );
+    }
+  }
+
+  @override
+  void deactivate() {
+    if (widget.events.video != null) {
+      _controller.pause();
+    }
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    if (widget.events.video != null) {
+      _controller.dispose();
+    }
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return OrientationBuilder(
+      builder: (context, orien) {
+        if (orien == Orientation.landscape) {
+          return Scaffold(
+            body: youtubePlayer(_controller),
+          );
+        } else {
+          return scaffoldWtihVideo(context);
+        }
+      },
+    );
+  }
+
+  Scaffold scaffoldWtihVideo(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
@@ -32,7 +88,7 @@ class _EventsPageViewState extends State<EventsPageView> {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(widget.events.imageUl),
+                      image: NetworkImage(widget.events.imageUl),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -142,9 +198,30 @@ class _EventsPageViewState extends State<EventsPageView> {
                               color: customColor,
                             ),
                           ),
-                          Text(
-                            widget.events.price,
-                            style: AppTheme.subHeading,
+                          Row(
+                            children: [
+                              (widget.events.discount != '0')
+                                  ? Text(
+                                      widget.events.price,
+                                      style: AppTheme.heading.copyWith(
+                                        color: Colors.grey[500],
+                                        fontSize: 8,
+                                        decoration: TextDecoration.lineThrough,
+                                      ),
+                                    )
+                                  : Container(),
+                              SizedBox(width: 5),
+                              Text(
+                                gitnewPrice(
+                                      price: widget.events.price,
+                                      descaound: widget.events.discount,
+                                    ) +
+                                    '\$',
+                                style: AppTheme.heading.copyWith(
+                                  fontSize: 10,
+                                ),
+                              )
+                            ],
                           ),
                         ],
                       ),
@@ -179,6 +256,17 @@ class _EventsPageViewState extends State<EventsPageView> {
                                 height: 1.5,
                               ),
                             )
+                          : Container(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 50, vertical: 5),
+                        child: Divider(
+                          thickness: 2,
+                          color: customColorDivider,
+                        ),
+                      ),
+                      (widget.events.video != null)
+                          ? youtubePlayer(_controller)
                           : Container(),
                       Padding(
                         padding: const EdgeInsets.symmetric(

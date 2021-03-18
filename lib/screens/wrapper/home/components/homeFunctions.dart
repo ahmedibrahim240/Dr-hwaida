@@ -444,10 +444,7 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                           children: [
                             (courses.discount != '0')
                                 ? Text(
-                                    gitOldPrice(
-                                      newPrice: courses.newPrice,
-                                      descaound: courses.discount,
-                                    ),
+                                    courses.newPrice,
                                     style: AppTheme.heading.copyWith(
                                       color: Colors.grey[500],
                                       fontSize: 8,
@@ -457,7 +454,11 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                                 : Container(),
                             SizedBox(width: 5),
                             Text(
-                              courses.newPrice + '\$',
+                              gitnewPrice(
+                                    price: courses.newPrice,
+                                    descaound: courses.discount,
+                                  ) +
+                                  '\$',
                               style: AppTheme.heading.copyWith(
                                 fontSize: 10,
                               ),
@@ -475,10 +476,4 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
       ),
     ),
   );
-}
-
-String gitOldPrice({String descaound, String newPrice}) {
-  double oldPrice;
-  oldPrice = double.parse(descaound) + double.parse(newPrice);
-  return oldPrice.toString();
 }
