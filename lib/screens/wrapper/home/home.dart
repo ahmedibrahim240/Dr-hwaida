@@ -31,6 +31,7 @@ class _HomeState extends State<Home> {
     User.userPassword = await MySharedPreferences.getUserUserPassword();
     User.userlat = await MySharedPreferences.getUserLat();
     User.userlong = await MySharedPreferences.getUserlong();
+    User.appLang = await MySharedPreferences.getAppLang();
   }
 
   gitFillterType() {

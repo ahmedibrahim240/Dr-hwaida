@@ -6,6 +6,7 @@ class User {
   static String userStutes;
   static String userGender;
   static String userPassword;
+  static var appLang;
   static String userlat;
   static String userlong;
   static bool userLogIn;

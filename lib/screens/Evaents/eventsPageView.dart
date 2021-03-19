@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/events.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../CustomBottomNavigationBar.dart';
@@ -97,7 +98,9 @@ class _EventsPageViewState extends State<EventsPageView> {
                         ),
                       ),
                       Align(
-                        alignment: Alignment.topLeft,
+                        alignment: (User.appLang == "ar_EG")
+                            ? Alignment.topRight
+                            : Alignment.topLeft,
                         child: IconButton(
                           icon: Icon(Icons.arrow_back),
                           onPressed: () {

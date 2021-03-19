@@ -325,9 +325,8 @@ class _SettingsState extends State<Settings> {
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
     MyApp.setLocale(context, _locale);
-    // DBHelper.saveAppLang(_locale.toString());
-    // UserData.appLang = await DBHelper.getAppLang();
-    print('_lacal:' + _locale.toString());
+    MySharedPreferences.saveAppLang(_locale.toString());
+    User.appLang = await MySharedPreferences.getAppLang();
   }
 
   chagePassword({String oldPassword, String newPasswrod}) async {
