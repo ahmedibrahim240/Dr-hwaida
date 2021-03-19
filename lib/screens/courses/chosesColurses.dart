@@ -4,6 +4,7 @@ import 'package:DrHwaida/models/categories.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
+import 'package:DrHwaida/screens/courses/categoriesCourse.dart';
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -77,13 +78,13 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                       padding: const EdgeInsets.all(0.0),
                                       child: InkWell(
                                         onTap: () {
-                                          // Navigator.of(context).push(
-                                          //   MaterialPageRoute(
-                                          //     builder: (_) => CategoriesCoursesPage(
-                                          //       categories: categoriesList[index],
-                                          //     ),
-                                          //   ),
-                                          // );
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (_) => CategoriesCourse(
+                                                cateId: snapshot.data[index].id,
+                                              ),
+                                            ),
+                                          );
                                         },
                                         child: Column(
                                           children: [
