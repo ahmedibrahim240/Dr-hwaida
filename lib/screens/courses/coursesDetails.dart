@@ -460,7 +460,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                                   ),
                                 ],
                               ),
-                              SizedBox(width: 100),
+                              SizedBox(width: 50),
                               Row(
                                 children: [
                                   Text(

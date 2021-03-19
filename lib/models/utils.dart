@@ -42,6 +42,8 @@ class Utils {
   // ignore: non_constant_identifier_names
   static final COURSES_URL = BASE_URL + "/courses";
   // ignore: non_constant_identifier_names
+  static final CATEGORIES_URL = BASE_URL + "/categories";
+  // ignore: non_constant_identifier_names
   static final RATE_URL = BASE_URL + "/rates/consultant";
   // ignore: non_constant_identifier_names
   static final COURSESRATE_URL = BASE_URL + "/rates/course";

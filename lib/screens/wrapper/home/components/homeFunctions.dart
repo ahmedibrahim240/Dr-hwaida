@@ -9,9 +9,9 @@ import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
+import 'package:DrHwaida/screens/courses/chosesColurses.dart';
 
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
-import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -125,7 +125,7 @@ Container rowofHmeTaps(BuildContext context) {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => CoursesPage(title: 'All Courses'),
+                  builder: (_) => ChosesCourses(),
                 ),
               );
             },
