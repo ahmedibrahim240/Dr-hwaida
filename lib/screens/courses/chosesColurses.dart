@@ -1,12 +1,12 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/models/categories.dart';
 import 'package:DrHwaida/models/courses.dart';
+import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
-import 'package:DrHwaida/screens/courses/mycoursesdetails.dart';
+import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
-import 'coursesPage.dart';
 
 class ChosesCourses extends StatefulWidget {
   @override
@@ -26,67 +26,121 @@ class _ChosesCoursesState extends State<ChosesCourses> {
               shrinkWrap: true,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               children: [
-                coursesSilder(context: context, coursesList: listCourses),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    statusConrainer(
-                      imgUrl: 'lib/images/engaged.png',
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                CoursesPage(title: 'Courses Of Couples'),
-                          ),
-                        );
-                      },
-                      title: 'Couples',
-                    ),
-                    SizedBox(width: 10),
-                    statusConrainer(
-                      imgUrl: 'lib/images/single.png',
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                CoursesPage(title: 'Courses Of Single'),
-                          ),
-                        );
-                      },
-                      title: 'Single',
-                    ),
-                  ],
+                FutureBuilder(
+                  future: CoursesApi.fetchAllCourses(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return (snapshot.data == null)
+                          ? Container()
+                          : coursesSilder(
+                              context: context, coursesList: snapshot.data);
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
                 ),
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    statusConrainer(
-                      imgUrl: 'lib/images/married.png',
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                CoursesPage(title: 'Courses Of Marrige'),
-                          ),
-                        );
-                      },
-                      title: 'Marrige',
-                    ),
-                    SizedBox(width: 10),
-                    statusConrainer(
-                      imgUrl: 'lib/images/family.png',
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) =>
-                                CoursesPage(title: 'Courses Of Family'),
-                          ),
-                        );
-                      },
-                      title: 'Father / Mother',
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  child: Divider(
+                    color: customColorDivider,
+                    thickness: 2,
+                  ),
+                ),
+                Text(
+                  'sections',
+                  style: AppTheme.heading.copyWith(
+                    color: customColor,
+                    fontSize: 15,
+                  ),
+                ),
+                SizedBox(height: 10),
+                FutureBuilder(
+                  future: CategoriesApi.fetchAllCategories(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return (snapshot.data == null)
+                          ? Container()
+                          : Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: GridView.count(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 20),
+                                primary: false,
+                                shrinkWrap: true,
+                                children: List.generate(
+                                  snapshot.data.length,
+                                  (index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.all(0.0),
+                                      child: InkWell(
+                                        onTap: () {
+                                          // Navigator.of(context).push(
+                                          //   MaterialPageRoute(
+                                          //     builder: (_) => CategoriesCoursesPage(
+                                          //       categories: categoriesList[index],
+                                          //     ),
+                                          //   ),
+                                          // );
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 100,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(10),
+                                                  topRight: Radius.circular(10),
+                                                ),
+                                                image: DecorationImage(
+                                                  image: NetworkImage(snapshot
+                                                      .data[index].image_path),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color.fromARGB(
+                                                        200, 0, 0, 0),
+                                                    Color.fromARGB(
+                                                        200, 0, 0, 0),
+                                                  ],
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(10),
+                                                  bottomRight:
+                                                      Radius.circular(10),
+                                                ),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  snapshot.data[index].name,
+                                                  style:
+                                                      AppTheme.heading.copyWith(
+                                                    color: Colors.white,
+                                                    fontSize: 10,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
                 ),
               ],
             ),
@@ -144,7 +198,7 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => MyCoursesDetails(
+                          builder: (_) => CoursesDetails(
                             courses: items,
                           ),
                         ),
@@ -165,7 +219,7 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20.0)),
                                     image: DecorationImage(
-                                      image: AssetImage(items.courseImageUrl),
+                                      image: NetworkImage(items.courseImageUrl),
                                       //  NetworkImage(
                                       //   items,
                                       // ),
@@ -202,7 +256,7 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                           ),
                                         ),
                                         Text(
-                                          items.contant.substring(0, 25),
+                                          parseHtmlString(items.contant),
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ],
