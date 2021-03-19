@@ -102,7 +102,7 @@ class _HomeState extends State<Home> {
                   child: getConsultant(),
                 ),
                 sctionTitle(
-                    title: 'Courses',
+                    title: getTranslated(context, 'Courses'),
                     context: context,
                     onTap: () {
                       Navigator.of(context).push(

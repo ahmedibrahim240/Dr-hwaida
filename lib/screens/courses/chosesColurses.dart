@@ -1,11 +1,14 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/categories.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/categoriesCourse.dart';
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
+import 'package:DrHwaida/screens/courses/coursesPage.dart';
+import 'package:DrHwaida/screens/wrapper/home/components/homeFunctions.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +30,16 @@ class _ChosesCoursesState extends State<ChosesCourses> {
               shrinkWrap: true,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               children: [
+                sctionTitle(
+                    title: getTranslated(context, 'Courses'),
+                    context: context,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => CoursesPage(title: 'All Courses'),
+                        ),
+                      );
+                    }),
                 FutureBuilder(
                   future: CoursesApi.fetchAllCourses(),
                   builder: (context, snapshot) {
@@ -48,7 +61,7 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                   ),
                 ),
                 Text(
-                  'sections',
+                  getTranslated(context, 'sections'),
                   style: AppTheme.heading.copyWith(
                     color: customColor,
                     fontSize: 15,
