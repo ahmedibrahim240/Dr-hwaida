@@ -93,11 +93,10 @@ class _CoursesPageState extends State<CoursesPage> {
           Container(
             height: 100,
             width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: NetworkImage(courses.courseImageUrl),
-              fit: BoxFit.cover,
-            )),
+            child: customCachedNetworkImage(
+              context: context,
+              url: courses.courseImageUrl,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

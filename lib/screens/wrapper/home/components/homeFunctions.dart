@@ -30,6 +30,7 @@ FutureBuilder<List<Consultant>> getConsultant() {
                 itemBuilder: (context, index) {
                   print(snapshot.data[index].badges);
                   return consulHomeCard(
+                    context: context,
                     imageUrl: snapshot.data[index].image,
                     oldPrie: snapshot.data[index].coust,
                     newPrie: snapshot.data[index].total_coust,
@@ -198,6 +199,7 @@ consulHomeCard({
   double rate,
   String discount,
   Function onTap,
+  BuildContext context,
 }) {
   return InkWell(
     onTap: onTap,
@@ -215,7 +217,18 @@ consulHomeCard({
                   children: [
                     CircleAvatar(
                       maxRadius: 65,
-                      backgroundImage: NetworkImage(imageUrl),
+                      // backgroundImage: NetworkImage(imageUrl),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height,
+                          decoration: BoxDecoration(shape: BoxShape.circle),
+                          child: customCachedNetworkImage(
+                            context: context,
+                            url: imageUrl,
+                          ),
+                        ),
+                      ),
                     ),
                     Positioned(
                       bottom: 0,
@@ -386,11 +399,10 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
             Container(
               height: 100,
               width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                image: NetworkImage(courses.courseImageUrl),
-                fit: BoxFit.cover,
-              )),
+              child: customCachedNetworkImage(
+                context: context,
+                url: courses.courseImageUrl,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

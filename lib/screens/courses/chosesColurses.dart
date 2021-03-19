@@ -103,16 +103,10 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                           children: [
                                             Container(
                                               height: 100,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(10),
-                                                  topRight: Radius.circular(10),
-                                                ),
-                                                image: DecorationImage(
-                                                  image: NetworkImage(snapshot
-                                                      .data[index].image_path),
-                                                  fit: BoxFit.cover,
-                                                ),
+                                              child: customCachedNetworkImage(
+                                                context: context,
+                                                url: snapshot
+                                                    .data[index].image_path,
                                               ),
                                             ),
                                             Container(
@@ -124,12 +118,6 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                                     Color.fromARGB(
                                                         200, 0, 0, 0),
                                                   ],
-                                                ),
-                                                borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(10),
-                                                  bottomRight:
-                                                      Radius.circular(10),
                                                 ),
                                               ),
                                               child: Center(
@@ -226,19 +214,28 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                 BorderRadius.all(Radius.circular(20.0)),
                             child: Stack(
                               children: <Widget>[
+                                ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0)),
+                                  child: Container(
+                                    width: 300,
+                                    height: 140,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(20.0)),
+                                    ),
+                                    child: customCachedNetworkImage(
+                                      context: context,
+                                      url: items.courseImageUrl,
+                                    ),
+                                  ),
+                                ),
                                 Container(
                                   width: 300,
                                   height: 140,
                                   decoration: BoxDecoration(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20.0)),
-                                    image: DecorationImage(
-                                      image: NetworkImage(items.courseImageUrl),
-                                      //  NetworkImage(
-                                      //   items,
-                                      // ),
-                                      fit: BoxFit.cover,
-                                    ),
                                   ),
                                   child: Container(
                                     height: 100,

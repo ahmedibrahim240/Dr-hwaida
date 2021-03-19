@@ -32,12 +32,34 @@ class _CounsultantRatingState extends State<CounsultantRating> {
                           children: [
                             CircleAvatar(
                               minRadius: 30,
-                              backgroundImage: (snapshot.data[index].image !=
-                                      null)
-                                  ? NetworkImage(snapshot.data[index].image)
-                                  : AssetImage(
-                                      Utils.userImageURL(
-                                          gender: snapshot.data[index].gender),
+                              child: (snapshot.data[index].image != null)
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: customCachedNetworkImage(
+                                          context: context,
+                                          url: snapshot.data[index].image,
+                                        ),
+                                      ),
+                                    )
+                                  : ClipRRect(
+                                      borderRadius: BorderRadius.circular(100),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              Utils.userImageURL(
+                                                  gender: snapshot
+                                                      .data[index].gender),
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                             ),
                             SizedBox(

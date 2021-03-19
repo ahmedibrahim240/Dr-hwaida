@@ -15,7 +15,9 @@ class _EventsPageState extends State<EventsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(title:getTranslated(context, "Events"),),
+      appBar: customAppBar(
+        title: getTranslated(context, "Events"),
+      ),
       body: Stack(
         children: [
           Container(
@@ -48,13 +50,9 @@ class _EventsPageState extends State<EventsPage> {
                                     elevation: 3,
                                     child: Container(
                                       height: 150,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                            snapshot.data[index].imageUl,
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
+                                      child: customCachedNetworkImage(
+                                        context: context,
+                                        url: snapshot.data[index].imageUl,
                                       ),
                                     ),
                                   ),

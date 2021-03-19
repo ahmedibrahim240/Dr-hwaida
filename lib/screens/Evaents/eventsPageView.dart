@@ -86,14 +86,16 @@ class _EventsPageViewState extends State<EventsPageView> {
                 Container(
                   height: 200,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(widget.events.imageUl),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Column(
+                  child: Stack(
                     children: [
+                      Container(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width,
+                        child: customCachedNetworkImage(
+                          context: context,
+                          url: widget.events.imageUl,
+                        ),
+                      ),
                       Align(
                         alignment: Alignment.topLeft,
                         child: IconButton(

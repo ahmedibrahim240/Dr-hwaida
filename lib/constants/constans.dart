@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -41,6 +42,29 @@ String gitnewPrice({String descaound, String price}) {
   double oldPrice;
   oldPrice = double.parse(price) - double.parse(descaound);
   return oldPrice.toString();
+}
+
+/////////////////////////////////////
+customCachedNetworkImage({String url, BuildContext context}) {
+  if (url == null || url == '') {
+    return Container(
+      child: Icon(
+        Icons.image,
+        color: Colors.lightBlueAccent,
+      ),
+    );
+  } else {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: CachedNetworkImage(
+        imageUrl: url,
+        fit: BoxFit.cover,
+        placeholder: (context, url) =>
+            Center(child: CircularProgressIndicator()),
+        errorWidget: (context, url, error) => Icon(Icons.error),
+      ),
+    );
+  }
 }
 
 /////////////////////////////////////

@@ -41,6 +41,7 @@ FutureBuilder<List<Consultant>> getAllConsultant(
                             children: [
                               consImage(
                                 imgUrl: snapshot.data[index].image,
+                                context: context,
                                 rate: double.parse(snapshot.data[index].rate),
                               ),
                               Container(
@@ -236,41 +237,44 @@ Container consulCardBotom({String title, Color color}) {
   );
 }
 
-Container consImage({String imgUrl, double rate}) {
+Container consImage({String imgUrl, double rate, BuildContext context}) {
   return Container(
     height: 120,
     width: 120,
-    decoration: BoxDecoration(
-      image: DecorationImage(
-        image: NetworkImage(imgUrl),
-        fit: BoxFit.cover,
-      ),
-    ),
-    child: Align(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        height: 30,
-        decoration: BoxDecoration(
-          gradient: AppTheme.containerBackground,
+    child: Stack(
+      children: [
+        Container(
+          height: 120,
+          width: 120,
+          child: customCachedNetworkImage(context: context, url: imgUrl),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              FontAwesomeIcons.star,
-              color: Colors.yellow,
-              size: 20,
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: 30,
+            decoration: BoxDecoration(
+              gradient: AppTheme.containerBackground,
             ),
-            SizedBox(width: 5),
-            Text(
-              '$rate K ',
-              style: AppTheme.heading.copyWith(
-                color: Colors.white,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  FontAwesomeIcons.star,
+                  color: Colors.yellow,
+                  size: 20,
+                ),
+                SizedBox(width: 5),
+                Text(
+                  '$rate K ',
+                  style: AppTheme.heading.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     ),
   );
 }
