@@ -41,6 +41,15 @@ class _RegisterState extends State<Register> {
     String gender,
     String status,
   }) async {
+    var body = {
+      'name': name,
+      'mobile': phoneNummber,
+      'password': password,
+      'password_confirmation': password,
+      'age': age,
+      'gender': gender,
+      'status': status,
+    };
     try {
       var response = await http.post(
         Utils.REGISTER_URL,
@@ -54,8 +63,11 @@ class _RegisterState extends State<Register> {
           'status': status,
         },
       );
+      print('stuates Code:${response.statusCode}');
+      print(body);
 
       Map<String, dynamic> map = json.decode(response.body);
+      print('stuates Code:${response.statusCode}');
       setState(() async {
         if (map['success'] == true) {
           setState(() {
@@ -90,14 +102,20 @@ class _RegisterState extends State<Register> {
           );
         } else {
           setState(() {
-            error = getTranslated(context, "register_error");
+            print(map);
+            error = map['message'];
             loading = false;
           });
         }
       });
       // Navigator.pop(context);
     } catch (e) {
-      print(e);
+      setState(() {
+        // error = getTranslated(context, "register_error");
+        loading = false;
+      });
+      print("erooooooooooooooooooooooooooooooooooooooooooooooooor");
+      print(e.toString());
     }
   }
 

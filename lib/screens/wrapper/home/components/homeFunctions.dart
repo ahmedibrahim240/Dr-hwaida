@@ -391,7 +391,7 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
   return GestureDetector(
     onTap: onTap,
     child: SizedBox(
-      width: 240,
+      width: 250,
       child: Card(
         elevation: 3,
         child: Column(
@@ -426,6 +426,7 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                             SizedBox(height: 10),
                             SizedBox(
                               width: 200,
+                              height: 40,
                               child: Text(
                                 parseHtmlString(courses.contant),
                                 style: AppTheme.subHeading.copyWith(
@@ -433,7 +434,6 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
                             Text(
                               date,
                               style: AppTheme.heading.copyWith(

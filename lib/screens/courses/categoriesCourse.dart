@@ -8,7 +8,7 @@ import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'components/coursesPageAppber.dart';
+// import 'components/coursesPageAppber.dart';
 
 class CategoriesCourse extends StatefulWidget {
   final int cateId;
@@ -22,6 +22,7 @@ class _CategoriesCourseState extends State<CategoriesCourse> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Stack(
         children: [
           Container(
@@ -30,9 +31,9 @@ class _CategoriesCourseState extends State<CategoriesCourse> {
               shrinkWrap: true,
               primary: true,
               children: [
-                consultantAppBer(
-                  context,
-                ),
+                // consultantAppBer(
+                //   context,
+                // ),
                 coursesgraidView(),
                 SizedBox(height: 20),
               ],

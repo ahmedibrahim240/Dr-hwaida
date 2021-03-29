@@ -52,7 +52,7 @@ class _GenderState extends State<Gender> {
                           onTap: () {
                             setState(() {
                               _gender = getTranslated(context, "male");
-                              Gender.resGender = _gender;
+                              Gender.resGender = 'male';
                             });
                             Navigator.of(context).pop();
                           },
@@ -82,7 +82,7 @@ class _GenderState extends State<Gender> {
                           onTap: () {
                             setState(() {
                               _gender = getTranslated(context, "female");
-                              Gender.resGender = _gender;
+                              Gender.resGender = 'female';
                             });
                             Navigator.of(context).pop();
                           },

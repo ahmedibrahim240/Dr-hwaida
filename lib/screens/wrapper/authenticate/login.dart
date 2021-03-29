@@ -5,7 +5,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
-import 'package:DrHwaida/screens/wrapper/authenticate/passwordRecovery.dart';
+// import 'package:DrHwaida/screens/wrapper/authenticate/passwordRecovery.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -262,12 +262,12 @@ class _LogInState extends State<LogIn> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (_) =>
-                                                  PasswordRecovery(),
-                                            ),
-                                          );
+                                          // Navigator.of(context).push(
+                                          //   MaterialPageRoute(
+                                          //     builder: (_) =>
+                                          //         PasswordRecovery(),
+                                          //   ),
+                                          // );
                                         },
                                         child: Text(
                                           getTranslated(context, "password?"),

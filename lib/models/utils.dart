@@ -33,8 +33,7 @@ class Utils {
   }
 
   // ignore: non_constant_identifier_names
-  static final BASE_URL =
-      "http://technomasrsystems.com/Demos/Others/ShyBeLbn/public/api";
+  static final BASE_URL = "http://shaybhaleb.com/public/api";
   // ignore: non_constant_identifier_names
   static final Consultant_URL = BASE_URL + "/consultants";
   // ignore: non_constant_identifier_names

@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height - 110,
+            height: MediaQuery.of(context).size.height - 130,
             child: ListView(
               shrinkWrap: true,
               primary: true,
@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
                       );
                     }),
                 Container(
-                  height: 250,
+                  height: 260,
                   child: getCourses(),
                 ),
               ],

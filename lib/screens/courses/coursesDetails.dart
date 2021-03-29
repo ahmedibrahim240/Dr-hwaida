@@ -32,7 +32,8 @@ class _CoursesDetailsState extends State<CoursesDetails> {
   @override
   void initState() {
     super.initState();
-    if (widget.courses.courseVideoUrl != null) {
+    if (widget.courses.courseVideoUrl != null &&
+        Uri.parse(widget.courses.courseVideoUrl).isAbsolute) {
       id = YoutubePlayer.convertUrlToId(widget.courses.courseVideoUrl);
       _controller = YoutubePlayerController(
         initialVideoId: id,
@@ -85,7 +86,8 @@ class _CoursesDetailsState extends State<CoursesDetails> {
 
   @override
   void deactivate() {
-    if (widget.courses.courseVideoUrl != null) {
+    if (widget.courses.courseVideoUrl != null &&
+        Uri.parse(widget.courses.courseVideoUrl).isAbsolute) {
       _controller.pause();
     }
     super.deactivate();
@@ -93,7 +95,8 @@ class _CoursesDetailsState extends State<CoursesDetails> {
 
   @override
   void dispose() {
-    if (widget.courses.courseVideoUrl != null) {
+    if (widget.courses.courseVideoUrl != null &&
+        Uri.parse(widget.courses.courseVideoUrl).isAbsolute) {
       _controller.dispose();
     }
 
@@ -251,7 +254,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                         ),
                       ),
                       Text(
-                        widget.courses.title,
+                        (widget.courses.title) ?? '',
                         style: AppTheme.heading.copyWith(
                           color: Colors.grey[500],
                         ),
@@ -260,7 +263,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    parseHtmlString(widget.courses.contant),
+                    parseHtmlString((widget.courses.contant) ?? ''),
                     style: AppTheme.heading.copyWith(
                       color: Colors.grey[500],
                     ),
@@ -283,8 +286,9 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   children: [
                     Text(
                       getTranslated(context, "instructor") +
-                          ':' +
-                          widget.courses.couslNmae,
+                              ':' +
+                              (widget.courses.couslNmae) ??
+                          '',
                       style: AppTheme.heading.copyWith(
                         fontSize: 12,
                       ),
@@ -348,7 +352,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                                         ),
                                       ),
                                       Text(
-                                        widget.courses.start_date,
+                                        (widget.courses.start_date) ?? '',
                                         style: AppTheme.heading.copyWith(
                                           color: Colors.grey.withOpacity(.9),
                                           fontSize: 9,
@@ -368,7 +372,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                                         ),
                                       ),
                                       Text(
-                                        widget.courses.end_date,
+                                        (widget.courses.end_date) ?? '',
                                         style: AppTheme.heading.copyWith(
                                           color: Colors.grey.withOpacity(.9),
                                           fontSize: 9,
@@ -393,7 +397,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                                         ),
                                       ),
                                       Text(
-                                        widget.courses.start_time,
+                                        (widget.courses.start_time) ?? "",
                                         style: AppTheme.heading.copyWith(
                                           color: Colors.grey.withOpacity(.9),
                                           fontSize: 9,
@@ -413,7 +417,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                                         ),
                                       ),
                                       Text(
-                                        widget.courses.end_time,
+                                        (widget.courses.end_time) ?? "",
                                         style: AppTheme.heading.copyWith(
                                           color: Colors.grey.withOpacity(.9),
                                           fontSize: 9,
@@ -546,7 +550,8 @@ class _CoursesDetailsState extends State<CoursesDetails> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            (widget.courses.courseVideoUrl != null)
+            (widget.courses.courseVideoUrl != null &&
+                    Uri.parse(widget.courses.courseVideoUrl).isAbsolute)
                 ? Container(
                     width: MediaQuery.of(context).size.width,
                     height: 200,

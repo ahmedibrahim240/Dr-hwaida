@@ -47,7 +47,7 @@ class _StatusState extends State<Status> {
                       onTap: () {
                         setState(() {
                           _stauts = getTranslated(context, "single");
-                          Status.resStautes = _stauts;
+                          Status.resStautes = 'single';
                         });
                         Navigator.of(context).pop();
                       },
@@ -78,7 +78,7 @@ class _StatusState extends State<Status> {
                           onTap: () {
                             setState(() {
                               _stauts = getTranslated(context, "engaged");
-                              Status.resStautes = _stauts;
+                              Status.resStautes = 'engaged';
                             });
                             Navigator.of(context).pop();
                           },
@@ -113,7 +113,7 @@ class _StatusState extends State<Status> {
                           onTap: () {
                             setState(() {
                               _stauts = getTranslated(context, "married");
-                              Status.resStautes = _stauts;
+                              Status.resStautes = 'married';
                             });
                             Navigator.of(context).pop();
                           },
@@ -143,7 +143,7 @@ class _StatusState extends State<Status> {
                           onTap: () {
                             setState(() {
                               _stauts = getTranslated(context, "detached");
-                              Status.resStautes = _stauts;
+                              Status.resStautes = 'detached';
                             });
                             Navigator.of(context).pop();
                           },
