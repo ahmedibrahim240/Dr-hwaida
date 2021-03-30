@@ -113,76 +113,6 @@ class _CheckOutState extends State<CheckOut> {
                     primary: true,
                     children: [
                       SizedBox(height: 20),
-                      Container(
-                        height: 60,
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            side: BorderSide(color: customColor),
-                          ),
-                          elevation: 3,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      getTranslated(context, "Total_Price") +
-                                          ' : ',
-                                      style: AppTheme.subHeading.copyWith(),
-                                    ),
-                                    Text(
-                                      _totalPrice,
-                                      style: AppTheme.subHeading.copyWith(
-                                        color: customColor,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                  ),
-                                  child: FlatButton.icon(
-                                    color: customColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                      side: BorderSide(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        loading = !loading;
-                                      });
-                                      checkOut(
-                                        consultId: widget.consultantid,
-                                        availableId: widget.avilableId,
-                                        availabeDate: widget.avilableDate,
-                                      );
-                                    },
-                                    icon: Icon(
-                                      FontAwesomeIcons.moneyCheckAlt,
-                                      color: Colors.white,
-                                      size: 20,
-                                    ),
-                                    label: Text(
-                                      getTranslated(context, "confirm"),
-                                      style: AppTheme.subHeading.copyWith(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
                       RadioListTile(
                         groupValue: id,
                         value: 0,
@@ -268,23 +198,62 @@ class _CheckOutState extends State<CheckOut> {
                           );
                         }).toList(),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(
-                      //     horizontal: 20,
-                      //     vertical: 20,
-                      //   ),
-                      //   child: CustomButtonWithchild(
-                      //     color: customColor,
-                      //     onPress: () {},
-                      //     child: Text(
-                      //       'Confirm',
-                      //       style: AppTheme.heading.copyWith(
-                      //         color: Colors.white,
-                      //         fontSize: 16,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
+                      Container(
+                        height: 60,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50),
+                            side: BorderSide(color: customColor),
+                          ),
+                          elevation: 3,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      getTranslated(context, "Total_Price") +
+                                          ' : ',
+                                      style: AppTheme.heading.copyWith(
+                                        color: customColor,
+                                      ),
+                                    ),
+                                    Text(
+                                      _totalPrice,
+                                      style: AppTheme.heading,
+                                    ),
+                                  ],
+                                ),
+                                //
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      CustomButtonWithchild(
+                        color: customColor,
+                        onPress: () {
+                          setState(() {
+                            loading = !loading;
+                          });
+                          checkOut(
+                            consultId: widget.consultantid,
+                            availableId: widget.avilableId,
+                            availabeDate: widget.avilableDate,
+                          );
+                        },
+                        child: Text(
+                          getTranslated(context, "confirm"),
+                          style: AppTheme.heading.copyWith(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

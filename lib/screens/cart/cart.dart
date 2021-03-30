@@ -248,82 +248,69 @@ class _CartState extends State<Cart> {
     );
   }
 
-  Container totalPrieCard(
+  totalPrieCard(
       {BuildContext context,
       int consualtId,
       int availableId,
       int prodectId,
       String availableDate}) {
-    return Container(
-      height: 60,
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-          side: BorderSide(color: customColor),
-        ),
-        elevation: 3,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+              side: BorderSide(color: customColor),
+            ),
+            elevation: 3,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Column(
                 children: [
-                  Text(
-                    getTranslated(context, "Total_Price") + ' : ',
-                    style: AppTheme.subHeading.copyWith(),
-                  ),
-                  Text(
-                    totalPrice.toString(),
-                    style: AppTheme.subHeading.copyWith(
-                      color: customColor,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        getTranslated(context, "Total_Price") + ' : ',
+                        style: AppTheme.heading.copyWith(color: customColor),
+                      ),
+                      Text(
+                        totalPrice.toString(),
+                        style: AppTheme.heading,
+                      ),
+                    ],
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                child: FlatButton.icon(
-                  color: customColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    side: BorderSide(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => CheckOut(
-                          totalPrice: totalPrice.toString(),
-                          consultantid: consualtId,
-                          avilableId: availableId,
-                          productId: prodectId,
-                          avilableDate: availableDate,
-                        ),
-                      ),
-                    );
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.moneyCheckAlt,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                  label: Text(
-                    getTranslated(context, "CheckOut"),
-                    style: AppTheme.subHeading.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+        CustomButtonWithchild(
+          color: customColor,
+          onPress: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => CheckOut(
+                  totalPrice: totalPrice.toString(),
+                  consultantid: consualtId,
+                  avilableId: availableId,
+                  productId: prodectId,
+                  avilableDate: availableDate,
+                ),
+              ),
+            );
+          },
+          child: Text(
+            getTranslated(context, "CheckOut"),
+            style: AppTheme.heading.copyWith(
+              fontSize: 16,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
