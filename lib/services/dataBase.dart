@@ -1,8 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
+import 'dart:io';
+import 'package:dio/dio.dart';
 
 class DatabaseServices {
   final String userToken;
@@ -37,66 +44,46 @@ class DatabaseServices {
     String name,
     String gender,
     String status,
-    String userImage,
+    File userImage,
     String userEmail,
+    BuildContext context,
   }) async {
-    // final uri = Uri.parse(Utils.UPDATEUSERDATA_URL).replace(
-    //   queryParameters: <String, String>{
-    //     'name': "$name",
-    //     'age': "$age",
-    //     'gender': "$gender",
-    //     'status': "$status",
-    //     'mobile': "$phoneNummber",
-    //     'image': "$userImage",
-    //     'email': "$userEmail",
-    //   },
-    // );
-    // print(uri.toString());
-    var body = {
-      'name': "$name",
-      'age': "$age",
-      'gender': "$gender",
-      'status': "$status",
-      'mobile': "$phoneNummber",
-      'email': "$userEmail",
-      'image': "$userImage",
-    };
-    print(body);
     try {
-      var respes = await http.post(Utils.UPDATEUSERDATA_URL, headers: {
-        'x-api-key': userToken
-      }, body: {
+      String image = userImage.path.split('/').last;
+      var data = FormData.fromMap({
+        "image": await MultipartFile.fromFile(
+          userImage.path,
+          filename: image,
+        ),
         'name': "$name",
         'age': "$age",
         'gender': "$gender",
         'status': "$status",
         'mobile': "$phoneNummber",
         'email': "$userEmail",
-        'image': "$userImage",
       });
-      final data = json.decode(respes.body);
-      print(respes.statusCode);
-      if (respes.statusCode == 200) {
-        if (data['success'] != true) {
-          print('EROOOOOOOOOOOOOOOOOOOOOOOOOR');
-        } else {
-          print('succeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeess');
-        }
-      } else if (respes.statusCode == 201) {
-        final data = json.decode(respes.body);
-        if (data['success'] != true) {
-          print('EROOOOOOOOOOOOOR');
-        } else {
-          print('succeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeess');
-        }
+      Dio dio = new Dio();
+      dio.interceptors
+          .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
+        var customHeaders = {
+          'x-api-key': userToken,
+        };
+        options.headers.addAll(customHeaders);
+        return options;
+      }));
+
+      Response response = await dio.post(Utils.UPDATEUSERDATA_URL, data: data);
+      print(response.data.toString());
+      if (response.data['success'] != false) {
+        showMyDialog(
+            context: context, message: getTranslated(context, "savaProChange"));
       } else {
-        print('ServerErooor');
-        print(data['message']);
+        showMyDialog(context: context, message: response.data['message']);
       }
     } catch (e) {
       print('errrrroe');
 
-      print(e);
+      print(e.toString());
     }
   }
 
@@ -121,4 +108,40 @@ class DatabaseServices {
     gituserData();
     return controller.stream;
   }
+}
+
+Future<void> showMyDialog({BuildContext context, var message}) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(
+                message,
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              'Cancel',
+              style: AppTheme.heading.copyWith(
+                color: customColor,
+              ),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

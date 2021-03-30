@@ -64,8 +64,10 @@ customCachedNetworkImage({String url, BuildContext context}) {
       child: CachedNetworkImage(
         imageUrl: url,
         fit: BoxFit.cover,
-        placeholder: (context, url) =>
-            Center(child: CircularProgressIndicator()),
+        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+            child: CircularProgressIndicator(
+          value: downloadProgress.progress,
+        )),
         errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );
