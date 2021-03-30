@@ -2,13 +2,9 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/categories.dart';
-import 'package:DrHwaida/models/courses.dart';
-import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/categoriesCourse.dart';
-import 'package:DrHwaida/screens/courses/coursesDetails.dart';
-import 'package:DrHwaida/screens/courses/coursesPage.dart';
-import 'package:DrHwaida/screens/wrapper/home/components/homeFunctions.dart';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -18,10 +14,18 @@ class ChosesCourses extends StatefulWidget {
 }
 
 class _ChosesCoursesState extends State<ChosesCourses> {
+  List<int> paners = [1, 2, 3, 4, 5, 6, 7];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          getTranslated(context, 'Courses'),
+          style: AppTheme.heading.copyWith(
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: Stack(
         children: [
           Container(
@@ -30,43 +34,23 @@ class _ChosesCoursesState extends State<ChosesCourses> {
               shrinkWrap: true,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               children: [
-                sctionTitle(
-                    title: getTranslated(context, 'Courses'),
-                    context: context,
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => CoursesPage(title: 'All Courses'),
-                        ),
-                      );
-                    }),
-                FutureBuilder(
-                  future: CoursesApi.fetchAllCourses(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return (snapshot.data == null)
-                          ? Container()
-                          : coursesSilder(
-                              context: context, coursesList: snapshot.data);
-                    } else {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  },
+                coursesSilder(
+                  context: context,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Divider(
-                    color: customColorDivider,
-                    thickness: 2,
-                  ),
-                ),
-                Text(
-                  getTranslated(context, 'sections'),
-                  style: AppTheme.heading.copyWith(
-                    color: customColor,
-                    fontSize: 15,
-                  ),
-                ),
+                // FutureBuilder(
+                //   future: CoursesApi.fetchAllCourses(),
+                //   builder: (context, snapshot) {
+                //     if (snapshot.hasData) {
+                //       return (snapshot.data == null)
+                //           ? Container()
+                //           : coursesSilder(
+                //               context: context, );
+                //     } else {
+                //       return Center(child: CircularProgressIndicator());
+                //     }
+                //   },
+                // ),
+
                 SizedBox(height: 10),
                 FutureBuilder(
                   future: CategoriesApi.fetchAllCategories(),
@@ -78,11 +62,12 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                               padding: EdgeInsets.symmetric(horizontal: 20),
                               child: GridView.count(
                                 crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10,
+                                crossAxisSpacing: 5,
+                                mainAxisSpacing: 5,
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 20),
+                                    horizontal: 5, vertical: 10),
                                 primary: false,
+                                childAspectRatio: .9,
                                 shrinkWrap: true,
                                 children: List.generate(
                                   snapshot.data.length,
@@ -99,39 +84,43 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                             ),
                                           );
                                         },
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              height: 100,
-                                              child: customCachedNetworkImage(
-                                                context: context,
-                                                url: snapshot
-                                                    .data[index].image_path,
-                                              ),
+                                        child: Card(
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            side: BorderSide(
+                                              color:
+                                                  customColor.withOpacity(.3),
                                             ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    Color.fromARGB(
-                                                        200, 0, 0, 0),
-                                                    Color.fromARGB(
-                                                        200, 0, 0, 0),
-                                                  ],
-                                                ),
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  snapshot.data[index].name,
-                                                  style:
-                                                      AppTheme.heading.copyWith(
-                                                    color: Colors.white,
-                                                    fontSize: 10,
+                                          ),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 10),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  height: 100,
+                                                  child:
+                                                      customCachedNetworkImage(
+                                                    context: context,
+                                                    url: snapshot
+                                                        .data[index].image_path,
                                                   ),
                                                 ),
-                                              ),
+                                                Container(
+                                                  child: Center(
+                                                    child: Text(
+                                                      snapshot.data[index].name,
+                                                      style: AppTheme.heading
+                                                          .copyWith(
+                                                        color: customColor,
+                                                        fontSize: 10,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     );
@@ -181,7 +170,9 @@ class _ChosesCoursesState extends State<ChosesCourses> {
     );
   }
 
-  Container coursesSilder({BuildContext context, List<Courses> coursesList}) {
+  Container coursesSilder({
+    BuildContext context,
+  }) {
     return Container(
       child: Column(
         children: <Widget>[
@@ -194,17 +185,17 @@ class _ChosesCoursesState extends State<ChosesCourses> {
               enlargeCenterPage: true,
               enlargeStrategy: CenterPageEnlargeStrategy.scale,
             ),
-            items: coursesList
+            items: paners
                 .map(
                   (items) => GestureDetector(
                     onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => CoursesDetails(
-                            courses: items,
-                          ),
-                        ),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     builder: (_) => CoursesDetails(
+                      //       courses: items,
+                      //     ),
+                      //   ),
+                      // );
                     },
                     child: Container(
                       child: Container(
@@ -222,12 +213,18 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                     height: 140,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(20.0)),
+                                        Radius.circular(20.0),
+                                      ),
+                                      image: DecorationImage(
+                                        image:
+                                            AssetImage('lib/images/event.jpg'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    child: customCachedNetworkImage(
-                                      context: context,
-                                      url: items.courseImageUrl,
-                                    ),
+                                    // child: customCachedNetworkImage(
+                                    //   context: context,
+                                    //   url: items.courseImageUrl,
+                                    // ),
                                   ),
                                 ),
                                 Container(
@@ -260,14 +257,14 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                       children: <Widget>[
                                         SizedBox(height: 40),
                                         Text(
-                                          items.title,
+                                          'tessssssssssssssst',
                                           style: TextStyle(
                                             color: Colors.deepOrangeAccent,
                                             fontSize: 25,
                                           ),
                                         ),
                                         Text(
-                                          parseHtmlString(items.contant),
+                                          'tessst',
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ],

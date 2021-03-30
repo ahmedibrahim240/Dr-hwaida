@@ -391,7 +391,7 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
   return GestureDetector(
     onTap: onTap,
     child: SizedBox(
-      width: 250,
+      width: 200,
       child: Card(
         elevation: 3,
         child: Column(
@@ -419,62 +419,56 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                             Text(
                               courses.title,
                               style: AppTheme.heading.copyWith(
-                                color: customColor,
                                 fontSize: 10,
                               ),
                             ),
                             SizedBox(height: 10),
-                            SizedBox(
-                              width: 200,
-                              height: 40,
-                              child: Text(
-                                parseHtmlString(courses.contant),
-                                style: AppTheme.subHeading.copyWith(
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              date,
-                              style: AppTheme.heading.copyWith(
-                                fontSize: 10,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RatingStar(
-                          rating: double.parse(courses.rating),
-                          isReadOnly: true,
-                        ),
-                        Row(
-                          children: [
-                            (courses.discount != '0')
-                                ? Text(
-                                    courses.newPrice,
-                                    style: AppTheme.heading.copyWith(
-                                      color: Colors.grey[500],
-                                      fontSize: 8,
-                                      decoration: TextDecoration.lineThrough,
+                            (courses.couslNmae == '')
+                                ? Container()
+                                : Text(
+                                    courses.couslNmae,
+                                    style: AppTheme.subHeading.copyWith(
+                                      fontSize: 10,
+                                      color: customColor,
                                     ),
-                                  )
-                                : Container(),
-                            SizedBox(width: 5),
-                            Text(
-                              gitnewPrice(
-                                    price: courses.newPrice,
-                                    descaound: courses.discount,
-                                  ) +
-                                  '\$',
-                              style: AppTheme.heading.copyWith(
-                                fontSize: 10,
-                              ),
-                            )
+                                  ),
+                            Row(
+                              children: [
+                                Text(
+                                  courses.type,
+                                  style: AppTheme.heading.copyWith(
+                                    fontSize: 10,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  gitnewPrice(
+                                        price: courses.newPrice,
+                                        descaound: courses.discount,
+                                      ) +
+                                      '\$',
+                                  style: AppTheme.heading.copyWith(
+                                    fontSize: 10,
+                                    color: customColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            (courses.rating == '0')
+                                ? Container()
+                                : Row(
+                                    children: [
+                                      Icon(
+                                        FontAwesomeIcons.starHalfAlt,
+                                        color: Colors.yellow[900],
+                                      ),
+                                      SizedBox(width: 5),
+                                      Text(
+                                        '(${courses.rating} K)',
+                                        style: AppTheme.heading,
+                                      ),
+                                    ],
+                                  ),
                           ],
                         ),
                       ],

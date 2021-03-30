@@ -40,8 +40,13 @@ String parseHtmlString(String htmlString) {
 
 String gitnewPrice({String descaound, String price}) {
   double oldPrice;
-  oldPrice = double.parse(price) - double.parse(descaound);
-  return oldPrice.toString();
+  if (descaound == null) {
+    oldPrice = double.parse(price);
+    return oldPrice.toString();
+  } else {
+    oldPrice = double.parse(price) - double.parse(descaound);
+    return oldPrice.toString();
+  }
 }
 
 /////////////////////////////////////

@@ -1,5 +1,4 @@
 import 'package:DrHwaida/constants/constans.dart';
-import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,19 +24,19 @@ class _VisitsHistoryState extends State<VisitsHistory> {
         primary: true,
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
         children: [
-          Text(
-            getTranslated(context, "consultants"),
-            style: AppTheme.heading.copyWith(
-              color: customColor,
-              fontSize: 14,
-            ),
-          ),
-          Divider(
-            color: customColorDivider,
-            thickness: 2,
-          ),
+          // Text(
+          //   getTranslated(context, "consultants"),
+          //   style: AppTheme.heading.copyWith(
+          //     color: customColor,
+          //     fontSize: 14,
+          //   ),
+          // ),
+          // Divider(
+          //   color: customColorDivider,
+          //   thickness: 2,
+          // ),
           SizedBox(height: 20),
-          gitAllVisist(context: context),
+          GitAllVisist(),
         ],
       ),
     );

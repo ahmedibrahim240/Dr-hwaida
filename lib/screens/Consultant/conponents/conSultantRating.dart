@@ -33,8 +33,19 @@ class _ConsultantRatingState extends State<ConsultantRating> {
   String error = '';
   String coment;
   String anwser;
+  String lang;
   final _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  gitUserLaing() {
+    if (User.appLang == 'ar_EG') {
+      setState(() {
+        lang = 'ar';
+      });
+    } else {
+      lang = 'en';
+    }
+    print(lang);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,10 +167,12 @@ class _ConsultantRatingState extends State<ConsultantRating> {
                                           coment: coment,
                                           rate: rate,
                                           id: widget.consultant_id,
+                                          lang: lang,
                                         );
                                       }
                                     } else {
                                       setState(() {
+                                        loading = !loading;
                                         error = 'plesse add your rate';
                                       });
                                     }
@@ -186,7 +199,8 @@ class _ConsultantRatingState extends State<ConsultantRating> {
     );
   }
 
-  addRating({double rate, String coment, String answer, int id}) async {
+  addRating(
+      {double rate, String coment, String answer, int id, String lang}) async {
     try {
       var response = await http.post(
         Utils.RATE_URL,
@@ -204,6 +218,9 @@ class _ConsultantRatingState extends State<ConsultantRating> {
       Map<String, dynamic> map = json.decode(response.body);
 
       if (map['success'] == true) {
+        setState(() {
+          loading = !loading;
+        });
         _scaffoldKey.currentState.showSnackBar(
           new SnackBar(
             content: new Text('thank you for rating'),
@@ -211,6 +228,9 @@ class _ConsultantRatingState extends State<ConsultantRating> {
         );
       } else {
         print(response.statusCode.toString());
+        setState(() {
+          loading = !loading;
+        });
         print(map['message']);
         _scaffoldKey.currentState.showSnackBar(
           new SnackBar(
@@ -221,7 +241,11 @@ class _ConsultantRatingState extends State<ConsultantRating> {
 
       // Navigator.pop(context);
     } catch (e) {
-      print(e);
+      setState(() {
+        loading = !loading;
+      });
+      print("errorrrrrrrrrrrrrrr");
+      print(e.toString());
     }
   }
 }

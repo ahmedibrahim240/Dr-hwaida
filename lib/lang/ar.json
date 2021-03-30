@@ -16,6 +16,7 @@
     "consultants": "الاستشاريين",
     "Courses": "الدورات",
     "sections": "الاقسام",
+    "delateVisleMess":"تم إلغاء الزيارة",
 
     "Events": "الأحداث",
     "gender":"النوع",
@@ -33,6 +34,7 @@
     "password": "الرقم السري",
     "password?": " كلمة السر؟ ",
     "Entry": "تسجيل الدخول",
+    "harmony": "لعبة الانسجام",
     "or": "او",
     "edit_photo":"تعديل الصورة",
     "forget": " هل نسيت ",

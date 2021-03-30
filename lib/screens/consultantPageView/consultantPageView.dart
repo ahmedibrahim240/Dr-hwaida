@@ -60,11 +60,11 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   consultantData(BuildContext context) {
     return Container(
-      height: 600,
+      height: 690,
       child: Stack(
         children: [
           Container(
-            height: 200,
+            height: 400,
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.symmetric(
               horizontal: 20,
@@ -96,7 +96,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
             ),
           ),
           Positioned(
-            top: 140,
+            top: 260,
             left: 0,
             right: 0,
             child: Padding(

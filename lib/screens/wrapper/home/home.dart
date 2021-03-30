@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
                       );
                     }),
                 Container(
-                  height: 260,
+                  height: 200,
                   child: getCourses(),
                 ),
               ],

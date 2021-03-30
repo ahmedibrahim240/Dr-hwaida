@@ -37,6 +37,8 @@ class VisitsApi {
           );
           Visits visits = Visits(
             id: itmes['id'],
+            status: itmes['status'],
+            rate: itmes['consultant']['rate'],
             payment_method: itmes['payment_method'],
             date: itmes['visit_date'],
             time: itmes['available']['time'],

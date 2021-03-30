@@ -46,177 +46,196 @@ class _SettingsState extends State<Settings> {
                 children: [
                   Form(
                     key: _formKey,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.person,
-                              color: customColor,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              getTranslated(context, "account"),
-                              style: AppTheme.heading,
-                            ),
-                          ],
-                        ),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(height: 20),
-                        acountBody(
-                            title: getTranslated(context, "Change_password"),
-                            onTap: () {
-                              setState(() {
-                                showChangePas = !showChangePas;
-                              });
-                            }),
-                        (showChangePas)
-                            ? Container()
-                            : Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10),
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 10),
-                                    TextFormField(
-                                      style: TextStyle(color: Colors.black),
-                                      decoration:
-                                          textFormInputDecorationForPassword(
-                                        Icons.visibility_off,
-                                        getTranslated(context, "old_password"),
-                                        () {
-                                          setState(() {
-                                            obscurePassword = !obscurePassword;
-                                          });
-                                        },
-                                        obscurePassword,
-                                      ),
-                                      validator: (val) => validateOldPassord(
-                                          val, oldPassPassword),
-                                      obscureText: obscurePassword,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          oldPassPassword = val;
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(height: 10),
-                                    TextFormField(
-                                      style: TextStyle(color: Colors.black),
-                                      decoration:
-                                          textFormInputDecorationForPassword(
-                                        Icons.visibility_off,
-                                        getTranslated(context, "new_password"),
-                                        () {
-                                          setState(() {
-                                            obscurePassword = !obscurePassword;
-                                          });
-                                        },
-                                        obscurePassword,
-                                      ),
-                                      validator: (val) => validatePassord(val),
-                                      obscureText: obscurePassword,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          newPassword = val;
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(height: 10),
-                                    TextFormField(
-                                      style: TextStyle(color: Colors.black),
-                                      decoration:
-                                          textFormInputDecorationForPassword(
-                                        Icons.visibility_off,
-                                        getTranslated(
-                                            context, "Confirm_password"),
-                                        () {
-                                          setState(() {
-                                            obscureconPassword =
-                                                !obscureconPassword;
-                                          });
-                                        },
-                                        obscureconPassword,
-                                      ),
-                                      validator: (val) =>
-                                          validateConfrimPassord(
-                                        val,
-                                        newPassword,
-                                        confirmPassword,
-                                      ),
-                                      obscureText: obscureconPassword,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          confirmPassword = val;
-                                        });
-                                      },
-                                    ),
-                                    SizedBox(height: 10),
-                                    RaisedButton(
-                                      color: customColor,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(35),
-                                      ),
-                                      child: Text(
-                                        getTranslated(context, "Change"),
-                                        style: AppTheme.heading.copyWith(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      onPressed: () async {
-                                        if (_formKey.currentState.validate()) {
-                                          setState(() {
-                                            loading = !loading;
-                                          });
-                                          chagePassword(
-                                            newPasswrod: newPassword,
-                                            oldPassword: oldPassPassword,
-                                          );
-                                        }
-                                      },
-                                    ),
-                                    Text(
-                                      error,
-                                      style: AppTheme.heading,
-                                    ),
-                                    SizedBox(height: 10),
-                                  ],
-                                ),
+                    child: (User.userSkipLogIn == true)
+                        ? Container()
+                        : Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.person,
+                                    color: customColor,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    getTranslated(context, "account"),
+                                    style: AppTheme.heading,
+                                  ),
+                                ],
                               ),
-                        SizedBox(height: 10),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.app_settings_alt,
-                              color: customColor,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              getTranslated(context, "app_settings"),
-                              style: AppTheme.heading,
-                            ),
-                          ],
-                        ),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(height: 20),
-                        lan(),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                      ],
-                    ),
+                              Divider(
+                                height: 15,
+                                thickness: 2,
+                              ),
+                              SizedBox(height: 20),
+                              acountBody(
+                                  title:
+                                      getTranslated(context, "Change_password"),
+                                  onTap: () {
+                                    setState(() {
+                                      showChangePas = !showChangePas;
+                                    });
+                                  }),
+                              (showChangePas)
+                                  ? Container()
+                                  : (User.userSkipLogIn == true)
+                                      ? Container()
+                                      : Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 10),
+                                          child: Column(
+                                            children: [
+                                              SizedBox(height: 10),
+                                              TextFormField(
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                                decoration:
+                                                    textFormInputDecorationForPassword(
+                                                  Icons.visibility_off,
+                                                  getTranslated(
+                                                      context, "old_password"),
+                                                  () {
+                                                    setState(() {
+                                                      obscurePassword =
+                                                          !obscurePassword;
+                                                    });
+                                                  },
+                                                  obscurePassword,
+                                                ),
+                                                validator: (val) =>
+                                                    validateOldPassord(
+                                                        val, oldPassPassword),
+                                                obscureText: obscurePassword,
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    oldPassPassword = val;
+                                                  });
+                                                },
+                                              ),
+                                              SizedBox(height: 10),
+                                              TextFormField(
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                                decoration:
+                                                    textFormInputDecorationForPassword(
+                                                  Icons.visibility_off,
+                                                  getTranslated(
+                                                      context, "new_password"),
+                                                  () {
+                                                    setState(() {
+                                                      obscurePassword =
+                                                          !obscurePassword;
+                                                    });
+                                                  },
+                                                  obscurePassword,
+                                                ),
+                                                validator: (val) =>
+                                                    validatePassord(val),
+                                                obscureText: obscurePassword,
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    newPassword = val;
+                                                  });
+                                                },
+                                              ),
+                                              SizedBox(height: 10),
+                                              TextFormField(
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                                decoration:
+                                                    textFormInputDecorationForPassword(
+                                                  Icons.visibility_off,
+                                                  getTranslated(context,
+                                                      "Confirm_password"),
+                                                  () {
+                                                    setState(() {
+                                                      obscureconPassword =
+                                                          !obscureconPassword;
+                                                    });
+                                                  },
+                                                  obscureconPassword,
+                                                ),
+                                                validator: (val) =>
+                                                    validateConfrimPassord(
+                                                  val,
+                                                  newPassword,
+                                                  confirmPassword,
+                                                ),
+                                                obscureText: obscureconPassword,
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    confirmPassword = val;
+                                                  });
+                                                },
+                                              ),
+                                              SizedBox(height: 10),
+                                              RaisedButton(
+                                                color: customColor,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(35),
+                                                ),
+                                                child: Text(
+                                                  getTranslated(
+                                                      context, "Change"),
+                                                  style:
+                                                      AppTheme.heading.copyWith(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                onPressed: () async {
+                                                  if (_formKey.currentState
+                                                      .validate()) {
+                                                    setState(() {
+                                                      loading = !loading;
+                                                    });
+                                                    chagePassword(
+                                                      newPasswrod: newPassword,
+                                                      oldPassword:
+                                                          oldPassPassword,
+                                                    );
+                                                  }
+                                                },
+                                              ),
+                                              Text(
+                                                error,
+                                                style: AppTheme.heading,
+                                              ),
+                                              SizedBox(height: 10),
+                                            ],
+                                          ),
+                                        ),
+                              SizedBox(height: 10),
+                              Divider(
+                                height: 15,
+                                thickness: 2,
+                              ),
+                              SizedBox(height: 20),
+                            ],
+                          ),
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.app_settings_alt,
+                        color: customColor,
+                      ),
+                      SizedBox(width: 5),
+                      Text(
+                        getTranslated(context, "app_settings"),
+                        style: AppTheme.heading,
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    height: 15,
+                    thickness: 2,
+                  ),
+                  SizedBox(height: 20),
+                  lan(),
+                  Divider(
+                    height: 15,
+                    thickness: 2,
                   ),
                 ],
               ),
@@ -301,6 +320,7 @@ class _SettingsState extends State<Settings> {
       ),
       onChanged: (Language language) {
         _changeLanguage(language);
+        print(language.toString());
       },
       items: Language.languageList()
           .map<DropdownMenuItem<Language>>(
@@ -324,7 +344,9 @@ class _SettingsState extends State<Settings> {
 
   void _changeLanguage(Language language) async {
     Locale _locale = await setLocale(language.languageCode);
+
     MyApp.setLocale(context, _locale);
+
     MySharedPreferences.saveAppLang(_locale.toString());
     User.appLang = await MySharedPreferences.getAppLang();
   }

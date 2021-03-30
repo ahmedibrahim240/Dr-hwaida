@@ -1,14 +1,9 @@
-import 'package:DrHwaida/constants/constans.dart';
-import 'package:DrHwaida/constants/themes.dart';
-import 'package:DrHwaida/localization/localization_constants.dart';
-import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
+import 'package:DrHwaida/screens/wrapper/home/components/homeFunctions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-// import 'components/coursesPageAppber.dart';
 
 class CategoriesCourse extends StatefulWidget {
   final int cateId;
@@ -55,145 +50,37 @@ class _CategoriesCourseState extends State<CategoriesCourse> {
         if (snapshot.hasData) {
           return (snapshot.data == null)
               ? Container()
-              : ListView.builder(
-                  shrinkWrap: true,
+              : GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 5,
+                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                   primary: false,
-                  itemCount: snapshot.data.length,
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => CoursesDetails(
-                              courses: snapshot.data[index],
+                  childAspectRatio: .8,
+                  shrinkWrap: true,
+                  children: List.generate(
+                    snapshot.data.length,
+                    (index) {
+                      return homeCoursesCard(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => CoursesDetails(
+                                courses: snapshot.data[index],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      child: corsesCard(
+                          );
+                        },
                         courses: snapshot.data[index],
-                      ),
-                    );
-                  },
+                        context: context,
+                      );
+                    },
+                  ),
                 );
         } else {
           return Center(child: CircularProgressIndicator());
         }
       },
-    );
-  }
-
-  corsesCard({Courses courses}) {
-    return Card(
-      elevation: 4,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 100,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-              image: NetworkImage(courses.courseImageUrl),
-              fit: BoxFit.cover,
-            )),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            courses.title,
-                            style: AppTheme.heading.copyWith(
-                              color: customColor,
-                              fontSize: 10,
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width - 50,
-                            child: Text(
-                              parseHtmlString(courses.contant),
-                              style: AppTheme.heading.copyWith(
-                                fontSize: 10,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 5),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                getTranslated(context, "Price") + ' : ',
-                                style: AppTheme.heading.copyWith(
-                                  color: customColor,
-                                ),
-                              ),
-                              Row(
-                                children: [
-                                  (courses.discount != '0')
-                                      ? Text(
-                                          courses.newPrice,
-                                          style: AppTheme.heading.copyWith(
-                                            color: Colors.grey[500],
-                                            fontSize: 8,
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                          ),
-                                        )
-                                      : Container(),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    gitnewPrice(
-                                          price: courses.newPrice,
-                                          descaound: courses.discount,
-                                        ) +
-                                        '\$',
-                                    style: AppTheme.heading.copyWith(
-                                      fontSize: 10,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                      RatingStar(
-                        rating: double.parse(courses.rating),
-                        isReadOnly: true,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

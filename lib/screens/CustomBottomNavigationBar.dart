@@ -1,6 +1,7 @@
 import 'package:DrHwaida/comingSoon.dart';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/visaCard.dart';
 // import 'package:DrHwaida/screens/Hermonygame/hormonygame.dart';
@@ -64,7 +65,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                                 : customColorGray,
                           ),
                           Text(
-                            'Profile',
+                            getTranslated(context, 'profile'),
                             style: AppTheme.heading.copyWith(
                               color: (Helper.tappedBottomShet == 1)
                                   ? customColor
@@ -99,7 +100,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                                 : customColorGray,
                           ),
                           Text(
-                            'Home',
+                            getTranslated(context, 'home_page'),
                             style: AppTheme.heading.copyWith(
                               color: (Helper.tappedBottomShet == 0)
                                   ? customColor
@@ -148,7 +149,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: Text(
-                      'Harmony Game',
+                      getTranslated(context, 'harmony'),
                       style: AppTheme.heading.copyWith(
                         color: (Helper.tappedBottomShet == 2)
                             ? customColor

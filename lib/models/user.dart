@@ -9,6 +9,7 @@ class User {
   static var appLang;
   static String userlat;
   static String userlong;
+  static String prefs;
   static bool userLogIn;
   static bool userSkipLogIn;
 }

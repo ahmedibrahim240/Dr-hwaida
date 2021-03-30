@@ -1,4 +1,6 @@
 import 'package:DrHwaida/localization/app_localization.dart';
+import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,6 +16,8 @@ const String LANGUAGE_CODE = 'ar';
 
 Future<Locale> setLocale(String languageCode) async {
   SharedPreferences _prefs = await SharedPreferences.getInstance();
+  MySharedPreferences.saveUserPrfe(_prefs.toString());
+  User.prefs = await MySharedPreferences.getUserPre();
   await _prefs.setString(LANGUAGE_CODE, languageCode);
   return _locale(languageCode);
 }
@@ -35,6 +39,9 @@ Locale _locale(String languageCode) {
 
 Future<Locale> getLocale() async {
   SharedPreferences _prefs = await SharedPreferences.getInstance();
+  MySharedPreferences.saveUserPrfe(_prefs.toString());
+  User.prefs = await MySharedPreferences.getUserPre();
+
   String languageCode = _prefs.getString(LANGUAGE_CODE) ?? 'ar';
   return _locale(languageCode);
 }

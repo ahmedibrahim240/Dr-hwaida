@@ -4,9 +4,11 @@ class Visits {
   final int id;
   final int consultantId;
   final String date;
+  final String status;
   final String day;
   final String time;
   final String name;
+  final String rate;
   final Consultant consultant;
   // ignore: non_constant_identifier_names
   final String payment_method;
@@ -14,6 +16,8 @@ class Visits {
   final int total_cost;
 
   Visits({
+    this.status,
+    this.rate,
     this.consultant,
     // ignore: non_constant_identifier_names
     this.payment_method,

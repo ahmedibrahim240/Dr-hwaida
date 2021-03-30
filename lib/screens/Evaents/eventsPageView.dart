@@ -23,7 +23,8 @@ class _EventsPageViewState extends State<EventsPageView> {
   @override
   void initState() {
     super.initState();
-    if (widget.events.video != null) {
+    if (widget.events.video != null &&
+        Uri.parse(widget.events.video).isAbsolute) {
       id = YoutubePlayer.convertUrlToId(widget.events.video);
       _controller = YoutubePlayerController(
         initialVideoId: id,
@@ -42,7 +43,8 @@ class _EventsPageViewState extends State<EventsPageView> {
 
   @override
   void deactivate() {
-    if (widget.events.video != null) {
+    if (widget.events.video != null &&
+        Uri.parse(widget.events.video).isAbsolute) {
       _controller.pause();
     }
     super.deactivate();
@@ -50,7 +52,8 @@ class _EventsPageViewState extends State<EventsPageView> {
 
   @override
   void dispose() {
-    if (widget.events.video != null) {
+    if (widget.events.video != null &&
+        Uri.parse(widget.events.video).isAbsolute) {
       _controller.dispose();
     }
 
@@ -74,9 +77,7 @@ class _EventsPageViewState extends State<EventsPageView> {
 
   Scaffold scaffoldWtihVideo(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 0,
-      ),
+      appBar: AppBar(),
       body: Stack(
         children: [
           Container(
@@ -205,7 +206,8 @@ class _EventsPageViewState extends State<EventsPageView> {
                           ),
                           Row(
                             children: [
-                              (widget.events.discount != '0')
+                              (widget.events.discount != null &&
+                                      widget.events.discount != '0')
                                   ? Text(
                                       widget.events.price,
                                       style: AppTheme.heading.copyWith(
@@ -270,7 +272,8 @@ class _EventsPageViewState extends State<EventsPageView> {
                           color: customColorDivider,
                         ),
                       ),
-                      (widget.events.video != null)
+                      (widget.events.video != null &&
+                              Uri.parse(widget.events.video).isAbsolute)
                           ? youtubePlayer(_controller)
                           : Container(),
                       Padding(

@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/menuAppBer.dart';
@@ -24,15 +25,19 @@ class _MenuState extends State<Menu> {
       ),
       body: Column(
         children: [
-          MenuAppBer(
-            width: width,
-            userImageurl: userImgUrl,
-            userName: userName,
-          ),
-          Divider(
-            color: Colors.grey[300],
-            thickness: 2,
-          ),
+          (User.userSkipLogIn != false)
+              ? Container()
+              : MenuAppBer(
+                  width: width,
+                  userImageurl: userImgUrl,
+                  userName: userName,
+                ),
+          (User.appLang == true)
+              ? Container()
+              : Divider(
+                  color: Colors.grey[300],
+                  thickness: 2,
+                ),
           MenuBody(
             height: height,
             userImUrl: userImgUrl,

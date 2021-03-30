@@ -67,13 +67,24 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: getTranslated(context, "settings"),
-                      icon: Icons.settings,
+                        title: getTranslated(context, "settings"),
+                        icon: Icons.settings,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => Settings(),
+                            ),
+                          );
+                        }),
+                    SizedBox(height: 20),
+                    MenuContent(
+                      title: getTranslated(context, "my_payment"),
+                      icon: FontAwesomeIcons.idCardAlt,
                       onTap: () {
                         if (User.userSkipLogIn == false) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => Settings(),
+                              builder: (_) => ComingSoon(),
                             ),
                           );
                         } else {
@@ -83,26 +94,18 @@ class _MenuBodyState extends State<MenuBody> {
                     ),
                     SizedBox(height: 20),
                     MenuContent(
-                      title: getTranslated(context, "my_payment"),
-                      icon: FontAwesomeIcons.idCardAlt,
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => ComingSoon(),
-                          ),
-                        );
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    MenuContent(
                       title: getTranslated(context, "My_Courses"),
                       icon: FontAwesomeIcons.bookOpen,
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => MyCourses(),
-                          ),
-                        );
+                        if (User.userSkipLogIn == false) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => MyCourses(),
+                            ),
+                          );
+                        } else {
+                          showMyDialog(context: context);
+                        }
                       },
                     ),
                     SizedBox(height: 20),
@@ -110,11 +113,15 @@ class _MenuBodyState extends State<MenuBody> {
                       title: getTranslated(context, "Visits_History"),
                       icon: FontAwesomeIcons.history,
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => VisitsHistory(),
-                          ),
-                        );
+                        if (User.userSkipLogIn == false) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => VisitsHistory(),
+                            ),
+                          );
+                        } else {
+                          showMyDialog(context: context);
+                        }
                       },
                     ),
                     // SizedBox(height: 20),

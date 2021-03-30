@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/routes.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'localization/app_localization.dart';
 import 'localization/localization_constants.dart';
 
@@ -30,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       _locale = locale;
       // DBHelper.saveAppLang(locale.toString());
     });
-    print('Applan:' + locale.toString());
+    // print('Applan:' + locale.toString());
   }
 
   @override
@@ -68,14 +69,19 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       localeResolutionCallback: (deviceLocale, supportedLocales) {
-        for (var locale in supportedLocales) {
-          if (locale.languageCode == deviceLocale.languageCode &&
-              locale.countryCode == deviceLocale.countryCode) {
-            return deviceLocale;
+        if (_locale == null) {
+          for (var locale in supportedLocales) {
+            if (locale.languageCode == Platform.localeName.split('_')[0] &&
+                locale.countryCode == Platform.localeName.split('_')[1]) {
+              return locale;
+            }
           }
-        }
 
-        return supportedLocales.first;
+          return supportedLocales.first;
+        } else {
+          print("_locale:$_locale");
+          return _locale;
+        }
       },
     );
   }

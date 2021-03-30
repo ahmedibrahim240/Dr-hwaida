@@ -293,31 +293,6 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                         fontSize: 12,
                       ),
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          '100% Online',
-                          style: AppTheme.heading.copyWith(
-                            color: Colors.grey.withOpacity(.9),
-                            fontSize: 10,
-                          ),
-                        ),
-                        Text(
-                          widget.courses.total_time,
-                          style: AppTheme.heading.copyWith(
-                            color: Colors.grey[400],
-                            fontSize: 8,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'start instantly and learn at own schedule',
-                      style: AppTheme.heading.copyWith(
-                        color: Colors.grey.withOpacity(.9),
-                        fontSize: 10,
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -557,11 +532,7 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                     height: 200,
                     child: youtubePlayer(_controller),
                   )
-                : Container(
-                    child: Center(
-                      child: Text('no Video'),
-                    ),
-                  ),
+                : Container(),
             courseDetail(),
           ],
         ),
@@ -588,22 +559,24 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   style: AppTheme.heading,
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Row(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.starHalfAlt,
-                      color: Colors.yellow[900],
+              (widget.courses.rating == '0')
+                  ? Container()
+                  : Expanded(
+                      flex: 1,
+                      child: Row(
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.starHalfAlt,
+                            color: Colors.yellow[900],
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            '(${widget.courses.rating} K)',
+                            style: AppTheme.heading,
+                          ),
+                        ],
+                      ),
                     ),
-                    SizedBox(width: 5),
-                    Text(
-                      '(${widget.courses.rating}K)',
-                      style: AppTheme.heading,
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
           SizedBox(height: 10),

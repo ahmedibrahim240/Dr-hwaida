@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/models/visaCard.dart';
@@ -41,7 +42,7 @@ class _UserProfileState extends State<UserProfile> {
         toolbarHeight: 80,
         centerTitle: true,
         title: (Text(
-          'Profile',
+           getTranslated(context, 'profile'),
           style: AppTheme.heading.copyWith(
             color: Colors.white,
           ),

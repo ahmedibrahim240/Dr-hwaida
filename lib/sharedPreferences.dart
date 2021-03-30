@@ -7,6 +7,7 @@ class MySharedPreferences {
   static String sharedPrefUserLong = 'Long';
   static String sharedPrefUserselectedProImage = 'IsSelected';
   static String sharedPrefAppLang = 'AppLan';
+  static String sharedPrefUserPre = 'pref';
   static String sharedPrefUserName = 'UserName';
   static String sharedPrefUserUserEmail = 'UserEmail';
   static String sharedPrefUserUserAge = 'UserAge';
@@ -75,6 +76,11 @@ class MySharedPreferences {
   static Future<bool> saveAppLang(String appLang) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.setString(sharedPrefAppLang, appLang);
+  }
+
+  static Future<bool> saveUserPrfe(String appLang) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString(sharedPrefUserPre, appLang);
   }
 
   static Future<bool> saveUserUserEmail(String userEmail) async {
@@ -173,6 +179,12 @@ class MySharedPreferences {
   static getAppLang() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     var appLang = preferences.getString(sharedPrefAppLang) ?? 'ar_EG';
+    return appLang;
+  }
+
+  static getUserPre() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    var appLang = preferences.getString(sharedPrefUserPre);
     return appLang;
   }
 

@@ -26,8 +26,12 @@ class _EventsPageState extends State<EventsPage> {
               future: EventsApi.fetchAllEvent(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return (snapshot.data == null)
-                      ? Container()
+                  return (snapshot.data == null || snapshot.data.isEmpty)
+                      ? Container(
+                          child: Center(
+                            child: Text('لا يوجد افينات حاليا'),
+                          ),
+                        )
                       : ListView.builder(
                           shrinkWrap: true,
                           itemCount: snapshot.data.length,
