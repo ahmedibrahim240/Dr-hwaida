@@ -32,6 +32,7 @@ class _CounsultantRatingState extends State<CounsultantRating> {
                           children: [
                             CircleAvatar(
                               minRadius: 30,
+                              maxRadius: 30,
                               child: (snapshot.data[index].image != null)
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(100),

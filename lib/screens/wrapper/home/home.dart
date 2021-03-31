@@ -73,6 +73,7 @@ class _HomeState extends State<Home> {
     getDateOfUser();
     gitFillterType();
     gitFillterIndex();
+    print(User.userToken);
     super.initState();
   }
 
