@@ -11,15 +11,15 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../CustomBottomNavigationBar.dart';
 
-class EventsPageView extends StatefulWidget {
+class MyEventsPageView extends StatefulWidget {
   final CustomEvent events;
 
-  const EventsPageView({Key key, @required this.events}) : super(key: key);
+  const MyEventsPageView({Key key, @required this.events}) : super(key: key);
   @override
-  _EventsPageViewState createState() => _EventsPageViewState();
+  _MyEventsPageViewState createState() => _MyEventsPageViewState();
 }
 
-class _EventsPageViewState extends State<EventsPageView> {
+class _MyEventsPageViewState extends State<MyEventsPageView> {
   YoutubePlayerController _controller;
   DbHehper helper;
   String id;
@@ -308,35 +308,6 @@ class _EventsPageViewState extends State<EventsPageView> {
                               Uri.parse(widget.events.video).isAbsolute)
                           ? youtubePlayer(_controller)
                           : Container(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 10,
-                        ),
-                        child: CustomButtonWithchild(
-                          color: customColor,
-                          onPress: () async {
-                            ConsultantProdect prodect = ConsultantProdect({
-                              'type': 'events',
-                              'consultantId': widget.events.id,
-                              // 'dateId': _timeID,
-                              'title': widget.events.title,
-                              'price': double.parse(widget.events.price),
-                              'proImageUrl': widget.events.imageUl,
-                              // 'date': _date,
-                              // 'time': _time,
-                            });
-                            await helper.createProduct(prodect);
-
-                            showmyDialog(context: context);
-                          },
-                          child: Text(
-                            getTranslated(context, "Add_to_Cart"),
-                            style:
-                                AppTheme.heading.copyWith(color: Colors.white),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ),

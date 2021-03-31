@@ -6,6 +6,7 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/aboutus/aboutus.dart';
 import 'package:DrHwaida/screens/contactus/contactus.dart';
 import 'package:DrHwaida/screens/courses/mycourses.dart';
+import 'package:DrHwaida/screens/myEvents/myEvents.dart';
 import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
@@ -101,6 +102,22 @@ class _MenuBodyState extends State<MenuBody> {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => MyCourses(),
+                            ),
+                          );
+                        } else {
+                          showMyDialog(context: context);
+                        }
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    MenuContent(
+                      title: getTranslated(context, "My_events"),
+                      icon: FontAwesomeIcons.history,
+                      onTap: () {
+                        if (User.userSkipLogIn == false) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => MyEvents(),
                             ),
                           );
                         } else {

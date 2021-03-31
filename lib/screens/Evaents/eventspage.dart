@@ -29,14 +29,14 @@ class _EventsPageState extends State<EventsPage> {
                   return (snapshot.data == null || snapshot.data.isEmpty)
                       ? Container(
                           child: Center(
-                            child: Text('لا يوجد افينات حاليا'),
+                            child: Text('لا يوجد بينات حاليا'),
                           ),
                         )
                       : ListView.builder(
                           shrinkWrap: true,
                           itemCount: snapshot.data.length,
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
@@ -50,14 +50,68 @@ class _EventsPageState extends State<EventsPage> {
                                       ),
                                     );
                                   },
-                                  child: Card(
-                                    elevation: 3,
+                                  child: Container(
                                     child: Container(
-                                      height: 150,
-                                      child: customCachedNetworkImage(
-                                        context: context,
-                                        url: snapshot.data[index].imageUl,
-                                      ),
+                                      child: ClipRRect(
+                                          child: Stack(
+                                        children: <Widget>[
+                                          ClipRRect(
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 140,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(20.0),
+                                                ),
+                                              ),
+                                              child: customCachedNetworkImage(
+                                                context: context,
+                                                url: snapshot
+                                                    .data[index].imageUl,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 140,
+                                            child: Container(
+                                              height: 100,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              decoration: BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color.fromARGB(
+                                                        145, 0, 0, 0),
+                                                    Color.fromARGB(0, 0, 0, 0)
+                                                  ],
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
+                                                ),
+                                              ),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  SizedBox(height: 80),
+                                                  Text(
+                                                    snapshot.data[index].title,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )),
                                     ),
                                   ),
                                 ),
