@@ -21,7 +21,7 @@ class DbHehper {
         db.execute(
           'create table $tableName(id integer primary key autoincrement ,' +
               'title varcher(50) , proImageUrl varcher(255) ,dateId integer,' +
-              'consultantId integer,price double,date varcher(50),time varcher(50))',
+              'consultantId integer,price double,date varcher(50),time varcher(50),type varcher(50))',
         );
       },
     );

@@ -83,7 +83,7 @@ class _LogInState extends State<LogIn> {
             );
           } else {
             setState(() {
-              error = getTranslated(context, "login_error");
+              error = map['message'].toString();
 
               loading = false;
             });
@@ -91,7 +91,11 @@ class _LogInState extends State<LogIn> {
         });
         // Navigator.pop(context);
       } catch (e) {
-        print(e);
+        setState(() {
+          loading = false;
+        });
+
+        print(e.toString());
       }
     }
 

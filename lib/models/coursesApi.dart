@@ -79,3 +79,48 @@ class CoursesApi {
     return listOfCourses;
   }
 }
+
+class FiltterCoursesApi {
+  static Future<List<Courses>> fetchAllCourses({String type}) async {
+    List<Courses> listOfCourses = [];
+
+    final uri = Uri.parse(Utils.CoursesFILLTER_URL)
+        .replace(queryParameters: <String, String>{
+      "type": "$type",
+    });
+    var response = await http.get(uri.toString(),
+        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+    var jsonData = json.decode(response.body);
+    try {
+      if (response.statusCode == 200) {
+        for (var itmes in jsonData['data']) {
+          Courses courses = Courses(
+            id: itmes['id'],
+            title: itmes['name'],
+            contant: itmes['description'],
+            couslNmae: itmes['instructor']['name'],
+            courseImageUrl: itmes['image_path'],
+            type: itmes['type'],
+            rating: itmes['rate'],
+            total_time: itmes['total_time'],
+            newPrice: itmes['price'],
+            discount: itmes['discount'],
+            features: itmes['features'],
+            courseVideoUrl: itmes['video'],
+            lessons: itmes['lessons'],
+            videos_count: itmes['videos_count'],
+            start_date: itmes['start_date'],
+            start_time: itmes['start_time'],
+            end_date: itmes['end_date'],
+            end_time: itmes['end_time'],
+          );
+
+          listOfCourses.add(courses);
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+    return listOfCourses;
+  }
+}

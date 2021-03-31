@@ -49,19 +49,32 @@ class DatabaseServices {
     BuildContext context,
   }) async {
     try {
-      String image = userImage.path.split('/').last;
-      var data = FormData.fromMap({
-        "image": await MultipartFile.fromFile(
-          userImage.path,
-          filename: image,
-        ),
-        'name': "$name",
-        'age': "$age",
-        'gender': "$gender",
-        'status': "$status",
-        'mobile': "$phoneNummber",
-        'email': "$userEmail",
-      });
+      var data;
+      if (userImage != null) {
+        String image = userImage.path.split('/').last;
+        data = FormData.fromMap({
+          "image": await MultipartFile.fromFile(
+            userImage.path,
+            filename: image,
+          ),
+          'name': "$name",
+          'age': "$age",
+          'gender': "$gender",
+          'status': "$status",
+          'mobile': "$phoneNummber",
+          'email': "$userEmail",
+        });
+      } else {
+        data = FormData.fromMap({
+          "image": null,
+          'name': "$name",
+          'age': "$age",
+          'gender': "$gender",
+          'status': "$status",
+          'mobile': "$phoneNummber",
+          'email': "$userEmail",
+        });
+      }
       Dio dio = new Dio();
       dio.interceptors
           .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {

@@ -20,6 +20,8 @@ class MySharedPreferences {
   static String sharedPrefCartConslProdect = 'cartConsulPro';
   static String sharedPrefCounsultFillterIndex = 'FillterIndex';
   static String sharedPrefCounsultFillterType = 'FillterType';
+  static String sharedPrefCoursesFillterIndex = 'FillterIndex';
+  static String sharedPrefCoursesFillterType = 'FillterType';
   //save data
   static Future<bool> saveUserSingIn(bool isSingin) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -50,6 +52,16 @@ class MySharedPreferences {
   static Future<bool> saveFilltterType(String type) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return await preferences.setString(sharedPrefCounsultFillterType, type);
+  }
+
+  static Future<bool> saveCoursesFilltterIndex(int index) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setInt(sharedPrefCoursesFillterIndex, index);
+  }
+
+  static Future<bool> saveCoursesFilltterType(String type) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString(sharedPrefCoursesFillterType, type);
   }
 
   static Future<bool> saveUserlat(String lat) async {
@@ -149,6 +161,18 @@ class MySharedPreferences {
   static getFiltterType() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String type = preferences.getString(sharedPrefCounsultFillterType);
+    return type;
+  }
+
+  static getCoursesFiltterIndex() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    int index = preferences.getInt(sharedPrefCoursesFillterIndex);
+    return index;
+  }
+
+  static getCoursesFiltterType() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String type = preferences.getString(sharedPrefCoursesFillterType);
     return type;
   }
 

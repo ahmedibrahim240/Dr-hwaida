@@ -143,6 +143,7 @@ class _UserProfileState extends State<UserProfile> {
                             SizedBox(height: 20),
                             TextFormField(
                               initialValue: userData.phoneNumber,
+                              keyboardType: TextInputType.phone,
                               onChanged: (val) {
                                 setState(
                                   () {
@@ -239,7 +240,7 @@ class _UserProfileState extends State<UserProfile> {
                                       (Gender.resGender) ?? userData.userGender,
                                   phoneNummber:
                                       (userPhone) ?? userData.phoneNumber,
-                                  userImage: (UserPorfileImage.image) ?? '',
+                                  userImage: (UserPorfileImage.image) ?? null,
                                   context: context,
                                 );
                               },

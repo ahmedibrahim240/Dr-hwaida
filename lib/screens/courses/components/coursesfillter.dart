@@ -1,11 +1,16 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
+import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../sharedPreferences.dart';
+
 class CoursesFillter extends StatefulWidget {
+  static int filtterTapped;
+
   final String title;
 
   const CoursesFillter({Key key, this.title}) : super(key: key);
@@ -14,23 +19,18 @@ class CoursesFillter extends StatefulWidget {
 }
 
 class _CoursesFillterState extends State<CoursesFillter> {
-  List<String> fillterList = [
-    'Recent',
-    'HD Certified',
-    'Price Low to High',
-    'Price High to low',
-    'Rate',
+  List<String> fillterApi = [
+    'latest',
+    'price-high-to-low',
+    'price-low-to-high',
   ];
   int filtterTapped;
   @override
   Widget build(BuildContext context) {
     List<String> fillterList = [
-      getTranslated(context, "Closest"),
       getTranslated(context, "Recent"),
-      getTranslated(context, "HD_Certified"),
       getTranslated(context, "priceLow"),
       getTranslated(context, "priceHigh"),
-      getTranslated(context, "Rate"),
     ];
     return ListView(
       shrinkWrap: true,
@@ -40,18 +40,6 @@ class _CoursesFillterState extends State<CoursesFillter> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.search, color: Colors.grey[500]),
-                  onPressed: () {},
-                ),
-                Text(
-                  'Seach by',
-                  style: AppTheme.heading.copyWith(color: Colors.grey[500]),
-                ),
-              ],
-            ),
             Transform.rotate(
               angle: 180 * 3.14 / 365,
               child: SvgPicture.asset(
@@ -74,8 +62,17 @@ class _CoursesFillterState extends State<CoursesFillter> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      filtterTapped = index;
+                      CoursesFillter.filtterTapped = index;
+                      CoursesPage.fillter = fillterApi[index];
+                      MySharedPreferences.saveFilltterIndex(index);
+                      MySharedPreferences.saveFilltterType(fillterApi[index]);
                     });
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (_) => CoursesPage(),
+                      ),
+                      ModalRoute.withName('/'),
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +80,7 @@ class _CoursesFillterState extends State<CoursesFillter> {
                       Text(
                         fillterList[index],
                         style: AppTheme.heading.copyWith(
-                          color: (filtterTapped == index)
+                          color: (CoursesFillter.filtterTapped == index)
                               ? Colors.black
                               : Colors.grey[500],
                         ),
@@ -93,14 +90,14 @@ class _CoursesFillterState extends State<CoursesFillter> {
                         width: 20,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: (filtterTapped == index)
+                          color: (CoursesFillter.filtterTapped == index)
                               ? customColor
                               : Colors.transparent,
                         ),
                         child: Center(
                           child: Icon(
                             FontAwesomeIcons.check,
-                            color: (filtterTapped == index)
+                            color: (CoursesFillter.filtterTapped == index)
                                 ? Colors.white
                                 : Colors.transparent,
                             size: 10,

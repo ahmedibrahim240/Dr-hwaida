@@ -93,6 +93,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                 onPress: () async {
                   if (_date != null && _time != null) {
                     ConsultantProdect prodect = ConsultantProdect({
+                      'type': 'visit',
                       'consultantId': widget.consultant.id,
                       'dateId': _timeID,
                       'title': widget.consultant.name,
@@ -101,8 +102,7 @@ class _ScheduleAppoState extends State<ScheduleAppo> {
                       'date': _date,
                       'time': _time,
                     });
-                    int id = await helper.createProduct(prodect);
-                    print(id);
+                    await helper.createProduct(prodect);
 
                     showmyDialog(context: context);
                   } else {

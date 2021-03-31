@@ -59,13 +59,15 @@ class Utils {
   // ignore: non_constant_identifier_names
   static final CHANGEPASSWORD_URL = BASE_URL + "/clients/change_password";
   // ignore: non_constant_identifier_names
-  static final CHECKOUT_URL = BASE_URL + "/visits";
+  static final CHECKOUT_URL = BASE_URL + "/make_order";
   // ignore: non_constant_identifier_names
   static final VISITS_URL = BASE_URL + "/visits";
   // ignore: non_constant_identifier_names
   static final SEARCHBYNAME_URL = BASE_URL + "/search?search=";
   // ignore: non_constant_identifier_names
   static final CONSULTFILLTER_URL = BASE_URL + "/filter";
+  // ignore: non_constant_identifier_names
+  static final CoursesFILLTER_URL = BASE_URL + "/courses_filter";
   // ignore: non_constant_identifier_names
   static final CONTACTUS_URL = BASE_URL + "/send_message";
   // ignore: non_constant_identifier_names

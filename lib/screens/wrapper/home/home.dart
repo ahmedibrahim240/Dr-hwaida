@@ -4,6 +4,7 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/consultantfillter.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
+import 'package:DrHwaida/screens/courses/components/coursesfillter.dart';
 import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
@@ -50,12 +51,21 @@ class _HomeState extends State<Home> {
         MySharedPreferences.saveFilltterIndex(1);
       });
     }
+    setState(() {
+      CoursesPage.fillter = 'latest';
+      MySharedPreferences.saveCoursesFilltterType('latest');
+
+      MySharedPreferences.saveCoursesFilltterIndex(0);
+    });
   }
 
   gitFillterIndex() async {
     ConsultantFillter.filtterTapped =
         await MySharedPreferences.getFiltterIndex();
     ConsultantPage.fillter = await MySharedPreferences.getFiltterType();
+    CoursesFillter.filtterTapped =
+        await MySharedPreferences.getCoursesFiltterIndex();
+    CoursesPage.fillter = await MySharedPreferences.getCoursesFiltterType();
   }
 
   @override

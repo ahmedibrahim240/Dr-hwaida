@@ -21,6 +21,7 @@ class CheckOut extends StatefulWidget {
   final int avilableId;
   final String avilableDate;
   final int productId;
+  final AsyncSnapshot data;
 
   const CheckOut({
     Key key,
@@ -29,6 +30,7 @@ class CheckOut extends StatefulWidget {
     @required this.avilableId,
     @required this.productId,
     @required this.avilableDate,
+    this.data,
   }) : super(key: key);
   @override
   _CheckOutState createState() => _CheckOutState();
@@ -244,6 +246,7 @@ class _CheckOutState extends State<CheckOut> {
                             consultId: widget.consultantid,
                             availableId: widget.avilableId,
                             availabeDate: widget.avilableDate,
+                            snapshot: widget.data,
                           );
                         },
                         child: Text(
@@ -266,28 +269,71 @@ class _CheckOutState extends State<CheckOut> {
     );
   }
 
-  checkOut({int consultId, int availableId, String availabeDate}) async {
+  checkOut({
+    int consultId,
+    int availableId,
+    String availabeDate,
+    AsyncSnapshot snapshot,
+  }) async {
+    List<int> coursesID = [];
+    List<int> eventID = [];
+    var visit;
+    for (var items in snapshot.data) {
+      switch (items['type']) {
+        case 'visit':
+          visit = {
+            "visit_date": items['date'],
+            "consultant_id": items['consultantId'],
+            "available_id": items['dateId'],
+          };
+
+          break;
+        case 'courses':
+          print('items:${items['consultantId']}');
+          coursesID.add(items['consultantId']);
+          break;
+        case 'events':
+          print('items:${items['consultantId']}');
+
+          eventID.add(items['consultantId']);
+          break;
+      }
+    }
+    var body = {
+      'visit': visit,
+      'courses': coursesID,
+      'events': eventID,
+    };
+
+    // print(jsonEncode(body));
+    // print(jsonEncode(coursesID));
+    // print(jsonEncode(eventID));
     try {
       var response = await http.post(
         Utils.CHECKOUT_URL,
-        body: {
-          'consultant_id': consultId.toString(),
-          'available_id': availableId.toString(),
-          'visit_date': availabeDate,
-        },
+        body: jsonEncode(body),
+
+        // {
+        //   'visit': visit,
+        //   'courses': jsonEncode(coursesID),
+        //   'events': jsonEncode(eventID),
+        // },
         headers: {
           'x-api-key': User.userToken,
+          'Content-Type': 'application/json'
         },
       );
 
       Map<String, dynamic> map = json.decode(response.body);
+      print(response.body);
 
       if (map['success'] == true) {
         setState(() {
           loading = !loading;
           _totalPrice = '';
         });
-        await helper.deleteProduct(widget.productId);
+        print(map);
+        await helper.deleteAllProduct();
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (_) => SucessfullyBooked(),
@@ -308,7 +354,23 @@ class _CheckOutState extends State<CheckOut> {
 
       // Navigator.pop(context);
     } catch (e) {
-      print(e);
+      setState(() {
+        loading = !loading;
+      });
+      print('erroooooooooooor');
+      print(e.toString());
     }
   }
+}
+
+class Visit {
+  // ignore: non_constant_identifier_names
+  final int consultant_id;
+  // ignore: non_constant_identifier_names
+  final int available_id;
+  // ignore: non_constant_identifier_names
+  final String visit_date;
+
+  // ignore: non_constant_identifier_names
+  Visit({this.consultant_id, this.available_id, this.visit_date});
 }

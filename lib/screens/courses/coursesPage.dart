@@ -9,8 +9,9 @@ import 'components/coursesPageAppber.dart';
 
 class CoursesPage extends StatefulWidget {
   final String title;
+  static String fillter;
 
-  const CoursesPage({Key key, @required this.title}) : super(key: key);
+  const CoursesPage({Key key, this.title}) : super(key: key);
   @override
   _CoursesPageState createState() => _CoursesPageState();
 }
@@ -46,7 +47,7 @@ class _CoursesPageState extends State<CoursesPage> {
 
   coursesgraidView() {
     return FutureBuilder(
-      future: CoursesApi.fetchAllCourses(),
+      future: FiltterCoursesApi.fetchAllCourses(type: CoursesPage.fillter),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return (snapshot.data == null)

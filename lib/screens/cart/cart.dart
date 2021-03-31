@@ -161,56 +161,64 @@ class _CartState extends State<Cart> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Row(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    getTranslated(
-                                                            context, "Date") +
-                                                        ' : ',
-                                                    style: AppTheme.heading
-                                                        .copyWith(
-                                                      color: customColor,
+                                          (snapshot.data[index]['date'] == null)
+                                              ? Container()
+                                              : Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          getTranslated(context,
+                                                                  "Date") +
+                                                              ' : ',
+                                                          style: AppTheme
+                                                              .heading
+                                                              .copyWith(
+                                                            color: customColor,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          snapshot.data[index]
+                                                              ['date'],
+                                                          style: AppTheme
+                                                              .subHeading
+                                                              .copyWith(
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    snapshot.data[index]
-                                                        ['date'],
-                                                    style: AppTheme.subHeading
-                                                        .copyWith(
-                                                      fontSize: 12,
+                                                  ],
+                                                ),
+                                          (snapshot.data[index]['time'] == null)
+                                              ? Container()
+                                              : Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          getTranslated(context,
+                                                                  "Time") +
+                                                              ' : ',
+                                                          style: AppTheme
+                                                              .heading
+                                                              .copyWith(
+                                                            color: customColor,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          snapshot.data[index]
+                                                              ['time'],
+                                                          style: AppTheme
+                                                              .subHeading
+                                                              .copyWith(
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    getTranslated(
-                                                            context, "Time") +
-                                                        ' : ',
-                                                    style: AppTheme.heading
-                                                        .copyWith(
-                                                      color: customColor,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    snapshot.data[index]
-                                                        ['time'],
-                                                    style: AppTheme.subHeading
-                                                        .copyWith(
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                                  ],
+                                                ),
                                         ],
                                       ),
                                     ),
@@ -227,6 +235,7 @@ class _CartState extends State<Cart> {
                                       prodectId: snapshot.data[index]['id'],
                                       availableDate: snapshot.data[index]
                                           ['date'],
+                                      snapshot: snapshot,
                                     )
                                   : Container(),
                             ],
@@ -248,12 +257,14 @@ class _CartState extends State<Cart> {
     );
   }
 
-  totalPrieCard(
-      {BuildContext context,
-      int consualtId,
-      int availableId,
-      int prodectId,
-      String availableDate}) {
+  totalPrieCard({
+    BuildContext context,
+    int consualtId,
+    int availableId,
+    int prodectId,
+    String availableDate,
+    AsyncSnapshot snapshot,
+  }) {
     return Column(
       children: [
         Container(
@@ -298,6 +309,7 @@ class _CartState extends State<Cart> {
                   avilableId: availableId,
                   productId: prodectId,
                   avilableDate: availableDate,
+                  data: snapshot,
                 ),
               ),
             );

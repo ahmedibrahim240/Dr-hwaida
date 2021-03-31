@@ -2,8 +2,12 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/courses.dart';
+import 'package:DrHwaida/models/prodact.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
+import 'package:DrHwaida/screens/cart/cart.dart';
+import 'package:DrHwaida/screens/wrapper/home/home.dart';
+import 'package:DrHwaida/services/dbhelper.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -28,10 +32,12 @@ class _CoursesDetailsState extends State<CoursesDetails> {
   YoutubePlayerController _controller;
 
   String id;
+  DbHehper helper;
 
   @override
   void initState() {
     super.initState();
+    helper = DbHehper();
     if (widget.courses.courseVideoUrl != null &&
         Uri.parse(widget.courses.courseVideoUrl).isAbsolute) {
       id = YoutubePlayer.convertUrlToId(widget.courses.courseVideoUrl);
@@ -139,12 +145,20 @@ class _CoursesDetailsState extends State<CoursesDetails> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: CustomButtonWithchild(
                     color: customColor,
-                    onPress: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (_) => CheckOut(),
-                      //   ),
-                      // );
+                    onPress: () async {
+                      ConsultantProdect prodect = ConsultantProdect({
+                        'type': 'courses',
+                        'consultantId': widget.courses.id,
+                        // 'dateId': _timeID,
+                        'title': widget.courses.title,
+                        'price': double.parse(widget.courses.newPrice),
+                        'proImageUrl': widget.courses.courseImageUrl,
+                        // 'date': _date,
+                        // 'time': _time,
+                      });
+                      await helper.createProduct(prodect);
+
+                      showmyDialog(context: context);
                     },
                     child: Center(
                       child: Text(
@@ -165,6 +179,60 @@ class _CoursesDetailsState extends State<CoursesDetails> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> showmyDialog({BuildContext context}) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Center(
+                  child: Text(
+                    getTranslated(context, "Items_Was_added"),
+                    style: AppTheme.heading.copyWith(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                getTranslated(context, "home_page"),
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (BuildContext context) => Home()),
+                );
+              },
+            ),
+            TextButton(
+              child: Text(
+                getTranslated(context, "Go_to_Cart"),
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => Cart(),
+                  ),
+                  ModalRoute.withName('/'),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 

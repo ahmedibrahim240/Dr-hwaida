@@ -2,7 +2,11 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/events.dart';
+import 'package:DrHwaida/models/prodact.dart';
 import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/screens/cart/cart.dart';
+import 'package:DrHwaida/screens/wrapper/home/home.dart';
+import 'package:DrHwaida/services/dbhelper.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../CustomBottomNavigationBar.dart';
@@ -17,12 +21,14 @@ class EventsPageView extends StatefulWidget {
 
 class _EventsPageViewState extends State<EventsPageView> {
   YoutubePlayerController _controller;
-
+  DbHehper helper;
   String id;
 
   @override
   void initState() {
     super.initState();
+    helper = DbHehper();
+
     if (widget.events.video != null &&
         Uri.parse(widget.events.video).isAbsolute) {
       id = YoutubePlayer.convertUrlToId(widget.events.video);
@@ -81,7 +87,7 @@ class _EventsPageViewState extends State<EventsPageView> {
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height - 80,
+            height: MediaQuery.of(context).size.height - 180,
             child: ListView(
               shrinkWrap: true,
               children: [
@@ -283,12 +289,20 @@ class _EventsPageViewState extends State<EventsPageView> {
                         ),
                         child: CustomButtonWithchild(
                           color: customColor,
-                          onPress: () {
-                            // Navigator.of(context).push(
-                            //   MaterialPageRoute(
-                            //     builder: (_) => CheckOut(),
-                            //   ),
-                            // );
+                          onPress: () async {
+                            ConsultantProdect prodect = ConsultantProdect({
+                              'type': 'events',
+                              'consultantId': widget.events.id,
+                              // 'dateId': _timeID,
+                              'title': widget.events.title,
+                              'price': double.parse(widget.events.price),
+                              'proImageUrl': widget.events.imageUl,
+                              // 'date': _date,
+                              // 'time': _time,
+                            });
+                            await helper.createProduct(prodect);
+
+                            showmyDialog(context: context);
                           },
                           child: Text(
                             getTranslated(context, "Add_to_Cart"),
@@ -309,6 +323,60 @@ class _EventsPageViewState extends State<EventsPageView> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> showmyDialog({BuildContext context}) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Center(
+                  child: Text(
+                    getTranslated(context, "Items_Was_added"),
+                    style: AppTheme.heading.copyWith(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text(
+                getTranslated(context, "home_page"),
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (BuildContext context) => Home()),
+                );
+              },
+            ),
+            TextButton(
+              child: Text(
+                getTranslated(context, "Go_to_Cart"),
+                style: AppTheme.heading.copyWith(
+                  color: customColor,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => Cart(),
+                  ),
+                  ModalRoute.withName('/'),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

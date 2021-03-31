@@ -28,6 +28,7 @@ class ProductConsualt {
 
 class ConsultantProdect {
   String title;
+  String type;
   double price;
   String proImageUrl;
   String date;
@@ -38,6 +39,7 @@ class ConsultantProdect {
 
   ConsultantProdect(dynamic obj) {
     _id = obj['id'];
+    type = obj['type'];
     consultantId = obj['consultantId'];
     dateId = obj['dateId'];
     title = obj['title'];
@@ -48,6 +50,8 @@ class ConsultantProdect {
   }
   ConsultantProdect.formMap(Map<String, dynamic> data) {
     _id = data['id'];
+    type = data['type'];
+
     consultantId = data['consultantId'];
     dateId = data['dateId'];
     title = data['title'];
@@ -64,6 +68,7 @@ class ConsultantProdect {
         'price': price,
         'proImageUrl': proImageUrl,
         'date': date,
+        'type': type,
         'time': time,
       };
 }
