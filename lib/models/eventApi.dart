@@ -7,10 +7,11 @@ import 'dart:convert';
 class EventsApi {
   static Future<List<CustomEvent>> fetchAllEvent() async {
     List<CustomEvent> listOfEvent = [];
-    var response = await http.get(Utils.EVENTS_URL,
-        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
-    var jsonData = json.decode(response.body);
+
     try {
+      var response = await http.get(Utils.EVENTS_URL,
+          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var items in jsonData['data']) {
           CustomEvent event = CustomEvent(
@@ -39,10 +40,11 @@ class EventsApi {
 
   static Future<List<CustomEvent>> fetchMyEvent() async {
     List<CustomEvent> listOfEvent = [];
-    var response = await http.get(Utils.MYEVENTS_URL,
-        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
-    var jsonData = json.decode(response.body);
+
     try {
+      var response = await http.get(Utils.MYEVENTS_URL,
+          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var items in jsonData['data']) {
           CustomEvent event = CustomEvent(

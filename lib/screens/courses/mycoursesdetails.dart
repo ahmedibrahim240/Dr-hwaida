@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,42 +22,66 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
 
   String url;
   String id;
-  List<String> videoList = [
-    "https://www.youtube.com/watch?v=RM-DwdTfB4s",
-    "https://www.youtube.com/watch?v=H9154xIoYTA",
-    "https://www.youtube.com/watch?v=RM-DwdTfB4s",
-    "https://www.youtube.com/watch?v=BBvod49uySQ",
-  ];
+  List<String> videoList = [];
+  // ignore: unused_field
+  bool _isPlayerReady = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    url = videoList[0];
-    id = YoutubePlayer.convertUrlToId(url);
+    print(widget.courses.lessons);
+    print(widget.courses.lessons.isEmpty);
+    if (widget.courses.lessons.length > 0) {
+      getvideos();
+      // url = videoList[0];
+      // id = YoutubePlayer.convertUrlToId(url);
+      _controller = YoutubePlayerController(
+        initialVideoId: videoList.first,
+        flags: const YoutubePlayerFlags(
+          mute: false,
+          autoPlay: false,
+          disableDragSeek: false,
+          loop: false,
+          isLive: false,
+          forceHD: true,
+          enableCaption: true,
+        ),
+      );
+    } else {
+      setState(() {
+        lecTapped = 1;
+      });
+    }
+  }
 
-    _controller = YoutubePlayerController(
-      initialVideoId: id,
-      flags: const YoutubePlayerFlags(
-        mute: false,
-        autoPlay: false,
-        disableDragSeek: false,
-        loop: false,
-        isLive: false,
-        forceHD: true,
-        enableCaption: true,
-      ),
-    );
+  getvideos() {
+    for (var items in widget.courses.lessons) {
+      print(items['url']);
+      setState(() {
+        videoList.add(YoutubePlayer.convertUrlToId(items['url']));
+      });
+    }
   }
 
   @override
   void deactivate() {
-    _controller.pause();
+    if (widget.courses.lessons.length > 0) {
+      _controller.pause();
+    }
+
+    // (!widget.courses.lessons.isEmpty ||
+    //     widget.courses.lessons != null ||
+    //     widget.courses.lessons != [])
+
     super.deactivate();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (widget.courses.lessons.length > 0) {
+      _controller.dispose();
+    }
 
     super.dispose();
   }
@@ -66,6 +91,14 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
       player: YoutubePlayer(
         controller: controller,
         aspectRatio: 16 / 9,
+        onReady: () {
+          _isPlayerReady = true;
+        },
+        onEnded: (data) {
+          _controller.load(videoList[
+              (videoList.indexOf(data.videoId) + 1) % videoList.length]);
+          // _showSnackBar('Next Video Started!');
+        },
       ),
       builder: (context, player) {
         return Column(
@@ -79,6 +112,8 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
 
   @override
   Widget build(BuildContext context) {
+    getvideos();
+
     return OrientationBuilder(
       builder: (context, orien) {
         if (orien == Orientation.landscape) {
@@ -95,6 +130,7 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
   Scaffold scafoldWthisAppBar(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      key: _scaffoldKey,
       body: Stack(
         children: [
           Container(
@@ -103,35 +139,39 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
               shrinkWrap: true,
               primary: true,
               children: [
-                Card(
-                  elevation: 4,
-                  child: Column(
-                    children: [
-                      youtubePlayers(_controller),
-                    ],
-                  ),
-                ),
+                (widget.courses.lessons.length == 0)
+                    ? Container()
+                    : Card(
+                        elevation: 4,
+                        child: Column(
+                          children: [
+                            youtubePlayers(_controller),
+                          ],
+                        ),
+                      ),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      taps(
-                        index: 0,
-                        title: 'Lecture',
-                        onTap: () {
-                          setState(
-                            () {
-                              lecTapped = 0;
-                            },
-                          );
-                        },
-                      ),
+                      (widget.courses.lessons.length == 0)
+                          ? Container()
+                          : taps(
+                              index: 0,
+                              title: getTranslated(context, 'lecture'),
+                              onTap: () {
+                                setState(
+                                  () {
+                                    lecTapped = 0;
+                                  },
+                                );
+                              },
+                            ),
                       SizedBox(width: 20),
                       taps(
                         index: 1,
-                        title: 'More',
+                        title: getTranslated(context, 'more'),
                         onTap: () {
                           setState(
                             () {
@@ -143,7 +183,7 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
                       SizedBox(width: 20),
                       taps(
                         index: 2,
-                        title: 'Review',
+                        title: getTranslated(context, 'Review'),
                         onTap: () {
                           setState(
                             () {
@@ -155,14 +195,14 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
                     ],
                   ),
                 ),
-                (lecTapped == 0)
+                (lecTapped == 0 && (widget.courses.lessons.length > 0))
                     ? lectureBody()
                     : (lecTapped == 1)
                         ? Container(
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: Center(
                               child: Text(
-                                widget.courses.contant,
+                                parseHtmlString(widget.courses.contant),
                                 style: AppTheme.subHeading,
                               ),
                             ),
@@ -284,15 +324,6 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            'Section 2 -Introduction',
-            style: AppTheme.subHeading.copyWith(
-              color: Colors.grey[400],
-            ),
-          ),
-        ),
         lectureDetaile(),
       ],
     );
@@ -302,28 +333,35 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
     return ListView.builder(
       shrinkWrap: true,
       primary: false,
-      itemCount: 4,
+      itemCount: widget.courses.lessons.length,
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       itemBuilder: (context, index) {
         return lecture(
-            index: index,
-            onTap: () {
-              setState(
-                () {
-                  url = videoList[index];
-                  id = YoutubePlayer.convertUrlToId(url);
-
-                  _controller.load(id);
-
-                  print("VideoID: " + id);
-                },
-              );
+          title: widget.courses.lessons[index]['name'],
+          status: widget.courses.lessons[index]['status'],
+          duration: widget.courses.lessons[index]['duration'],
+          index: index,
+          onTap: () {
+            _scaffoldKey.currentState.showSnackBar(
+              new SnackBar(
+                content: new Text("يتم تحميل الفديدو"),
+              ),
+            );
+            setState(() {
+              _controller.load(videoList[index]);
             });
+          },
+        );
       },
     );
   }
 
-  lecture({int index, Function onTap}) {
+  lecture(
+      {int index,
+      Function onTap,
+      String title,
+      String status,
+      String duration}) {
     return InkWell(
       onTap: onTap,
       child: Column(
@@ -359,17 +397,27 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
                       ),
                       SizedBox(width: 5),
                       Text(
-                        'Welcom to 2 course',
+                        title,
                         style: AppTheme.heading,
                       ),
                     ],
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Video -10.22 mins-Resources (1)',
-                    style: AppTheme.subHeading.copyWith(
-                      color: Colors.grey[400],
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        status,
+                        style: AppTheme.subHeading.copyWith(
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                      Text(
+                        duration,
+                        style: AppTheme.subHeading.copyWith(
+                          color: Colors.grey[400],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

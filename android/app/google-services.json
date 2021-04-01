@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "478173901889",
+    "project_id": "shaiblabn",
+    "storage_bucket": "shaiblabn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478173901889:android:6718710554f83e0ffec2c0",
+        "android_client_info": {
+          "package_name": "com.example.DrHwaida"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478173901889-cii9larbdi7m624npb9n9c255hpkojtb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3fl9xhCYJ9abR8hmofRWK4pY9YCOIO5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478173901889-cii9larbdi7m624npb9n9c255hpkojtb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

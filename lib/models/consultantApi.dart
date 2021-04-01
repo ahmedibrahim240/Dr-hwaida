@@ -11,10 +11,11 @@ class ConsultantApi {
     List<Consultant> listOfConsultant = [];
     List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
-    var response = await http.get(Utils.Consultant_URL,
-        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
-    var jsonData = json.decode(response.body);
+
     try {
+      var response = await http.get(Utils.Consultant_URL,
+          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
           listOfConsulAvailable = [];
@@ -71,11 +72,11 @@ class ConsultantApi {
     List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
     Consultant consultant;
-    var response = await http.get(Utils.Consultant_URL + "/$id",
-        headers: {'Accept': 'application/json'});
-    Map<String, dynamic> jsonData = json.decode(response.body);
 
     try {
+      var response = await http.get(Utils.Consultant_URL + "/$id",
+          headers: {'Accept': 'application/json'});
+      Map<String, dynamic> jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         print('done');
 
@@ -119,7 +120,6 @@ class ConsultantApi {
       }
     } catch (e) {
       print('catch Error:' + e.toString());
-      print('filed:' + response.statusCode.toString());
     }
     return consultant;
   }
@@ -128,10 +128,11 @@ class ConsultantApi {
     List<Consultant> listOfConsultant = [];
     List<AvailableTimes> listOfTime = [];
     List<ConsulAvailable> listOfConsulAvailable = [];
-    var response = await http.get(Utils.SEARCHBYNAME_URL + "$name",
-        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
-    var jsonData = json.decode(response.body);
+
     try {
+      var response = await http.get(Utils.SEARCHBYNAME_URL + "$name",
+          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
           listOfConsulAvailable = [];
@@ -185,10 +186,10 @@ class ConsultantRateApi {
     List<ConsulRateing> listOfConsultantRating = [];
     // List<RatingUser> listOfUsers = [];
 
-    var response = await http.get(Utils.Consultant_URL + "/$id/rates",
-        headers: {'Accept': 'application/json'});
-    var jsonData = json.decode(response.body);
     try {
+      var response = await http.get(Utils.Consultant_URL + "/$id/rates",
+          headers: {'Accept': 'application/json'});
+      var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
           ConsulRateing consulRateing = ConsulRateing(
@@ -223,10 +224,11 @@ class FiltterConsultantApi {
       "lat": "$lat",
       "lng": "$lng",
     });
-    var response = await http.get(uri.toString(),
-        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
-    var jsonData = json.decode(response.body);
+
     try {
+      var response = await http.get(uri.toString(),
+          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
           listOfConsulAvailable = [];

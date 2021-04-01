@@ -23,7 +23,7 @@ class _CoursesPageState extends State<CoursesPage> {
       body: Stack(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height - 60,
+            height: MediaQuery.of(context).size.height - 140,
             child: ListView(
               shrinkWrap: true,
               primary: true,
@@ -75,6 +75,7 @@ class _CoursesPageState extends State<CoursesPage> {
                         },
                         courses: snapshot.data[index],
                         context: context,
+                        isMycours: false,
                       );
                     },
                   ),

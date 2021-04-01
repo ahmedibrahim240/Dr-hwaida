@@ -7,10 +7,13 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 // import 'package:DrHwaida/screens/wrapper/authenticate/passwordRecovery.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
+import '../../../facebocktest.dart';
 import '../../../sharedPreferences.dart';
 
 class LogIn extends StatefulWidget {
@@ -98,6 +101,131 @@ class _LogInState extends State<LogIn> {
         print(e.toString());
       }
     }
+
+    _loginWithFB(fbID, name) async {
+      try {
+        var response = await http.post(Utils.FACEBOOK_URL, body: {
+          'facebook_id': fbID,
+          'name': name,
+        });
+
+        Map<String, dynamic> map = json.decode(response.body);
+        print(map);
+        setState(
+          () async {
+            // print('this is the userData data ${userData}');
+            if (map['success'] == true) {
+              setState(() {
+                User.userToken = map['data']['api_token'].toString();
+              });
+              MySharedPreferences.saveUserSingIn(true);
+              MySharedPreferences.saveUserSkipLogIn(false);
+              MySharedPreferences.saveUserUserPassword(password);
+
+              MySharedPreferences.saveUserUserName(
+                map['data']['name'].toString(),
+              );
+              MySharedPreferences.saveUserUserPhoneNumber(
+                map['data']['mobile'].toString(),
+              );
+              MySharedPreferences.saveUserUserGender(
+                map['data']['gender'].toString(),
+              );
+              MySharedPreferences.saveUserUserAge(
+                map['data']['age'].toString(),
+              );
+              MySharedPreferences.saveUserUserStutas(
+                map['data']['status'].toString(),
+              );
+              MySharedPreferences.saveUserUserToken(
+                map['data']['api_token'].toString(),
+              );
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (_) => Home(),
+                ),
+              );
+            } else {
+              setState(() {
+                error = map['message'].toString();
+
+                loading = false;
+              });
+            }
+          },
+        );
+        // Navigator.pop(context);
+      } catch (e) {
+        print(
+            'Catchhhhhhhhhhhhhhhhhhhhhhh errororororrorrorooroeoreoroeroeorero');
+        print(e.toString());
+      }
+    }
+
+    final FacebookLogin facebookSignIn = new FacebookLogin();
+    // Future<Null>
+    _fblogin() async {
+      final FacebookLoginResult result = await facebookSignIn.logIn(['email']);
+      print('resssssssssssssssssssssssssssssssssult');
+      print(result.status);
+
+      switch (result.status) {
+        case FacebookLoginStatus.loggedIn:
+          final FacebookAccessToken accessToken = result.accessToken;
+          final token = result.accessToken.token;
+
+          final graphResponse = await http.get(
+              'https://graph.facebook.com/v2.12/me?fields=name,email&access_token=$token');
+          final profile = json.decode(graphResponse.body);
+          print(
+              'proooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooofile');
+
+          print(profile);
+          _loginWithFB(
+            accessToken.userId,
+            profile['name'],
+          );
+
+          break;
+        case FacebookLoginStatus.cancelledByUser:
+          print('Login cancelled by the user.');
+          break;
+        case FacebookLoginStatus.error:
+          print('Something went wrong with the login process.\n'
+              'Here\'s the error Facebook gave us: ${result.errorMessage}');
+          break;
+      }
+      try {} catch (e) {
+        print('ErrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrroeoroeorrrrrrrrrrrrrrrrrS');
+        print(e.toString());
+      }
+    }
+    // showMessage(String message) {
+    //   setState(() {
+    //     _message = message;
+    //   });
+    // }
+
+    // Future<void> _handleClickMe(message) async {
+    //   return showDialog<void>(
+    //     context: context,
+    //     barrierDismissible: false, // user must tap button!
+    //     builder: (BuildContext context) {
+    //       return CupertinoAlertDialog(
+    //         title: Text(getTranslated(context, 'system-message')),
+    //         content: Text(message),
+    //         actions: <Widget>[
+    //           CupertinoDialogAction(
+    //             child: Text(getTranslated(context, 'dismiss')),
+    //             onPressed: () {
+    //               Navigator.of(context).pop();
+    //             },
+    //           ),
+    //         ],
+    //       );
+    //     },
+    //   );
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -367,7 +495,9 @@ class _LogInState extends State<LogIn> {
                                       Expanded(
                                         flex: 2,
                                         child: CustomButtonWithchild(
-                                          onPress: () {},
+                                          onPress: () {
+                                            _fblogin();
+                                          },
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,

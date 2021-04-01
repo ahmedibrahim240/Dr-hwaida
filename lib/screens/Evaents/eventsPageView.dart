@@ -3,7 +3,6 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/events.dart';
 import 'package:DrHwaida/models/prodact.dart';
-import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/cart/cart.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dbhelper.dart';

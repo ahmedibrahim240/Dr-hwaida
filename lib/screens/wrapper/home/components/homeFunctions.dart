@@ -20,8 +20,15 @@ FutureBuilder<List<Consultant>> getConsultant() {
     future: ConsultantApi.fetchAllConsultant(),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
-        return (snapshot.data == null)
-            ? Container()
+        return (snapshot.data == null || snapshot.data.isEmpty)
+            ? Container(
+                child: Center(
+                  child: Text(
+                    'لا يوجد بينات حاليا \n أو الاتصال بالانتر نت ضعيف',
+                    style: AppTheme.heading,
+                  ),
+                ),
+              )
             : ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -65,8 +72,15 @@ FutureBuilder<List<Courses>> getCourses() {
     future: CoursesApi.fetchAllCourses(),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
-        return (snapshot.data == null)
-            ? Container()
+        return (snapshot.data == null || snapshot.data.isEmpty)
+            ? Container(
+                child: Center(
+                  child: Text(
+                    'لا يوجد بينات حاليا',
+                    style: AppTheme.heading,
+                  ),
+                ),
+              )
             : ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -380,6 +394,7 @@ Container homecoursesList(context) {
           },
           courses: listCourses[index],
           context: context,
+          isMycours: false,
         );
       },
     ),
@@ -387,7 +402,8 @@ Container homecoursesList(context) {
 }
 
 ////////////////////////////////////////////////////////////////
-homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
+homeCoursesCard(
+    {BuildContext context, Function onTap, Courses courses, bool isMycours}) {
   return GestureDetector(
     onTap: onTap,
     child: SizedBox(
@@ -404,79 +420,89 @@ homeCoursesCard({BuildContext context, Function onTap, Courses courses}) {
                 url: courses.courseImageUrl,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              courses.title,
-                              style: AppTheme.heading.copyWith(
-                                fontSize: 10,
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            (courses.couslNmae == '')
-                                ? Container()
-                                : Text(
-                                    courses.couslNmae,
-                                    style: AppTheme.subHeading.copyWith(
+            (isMycours == true)
+                ? Center(
+                    child: Text(
+                      courses.title,
+                      style: AppTheme.heading.copyWith(
+                        fontSize: 10,
+                      ),
+                    ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    courses.title,
+                                    style: AppTheme.heading.copyWith(
                                       fontSize: 10,
-                                      color: customColor,
                                     ),
                                   ),
-                            Row(
-                              children: [
-                                Text(
-                                  courses.type,
-                                  style: AppTheme.heading.copyWith(
-                                    fontSize: 10,
-                                  ),
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  gitnewPrice(
-                                        price: courses.newPrice,
-                                        descaound: courses.discount,
-                                      ) +
-                                      '\$',
-                                  style: AppTheme.heading.copyWith(
-                                    fontSize: 10,
-                                    color: customColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            (courses.rating == '0')
-                                ? Container()
-                                : Row(
+                                  SizedBox(height: 10),
+                                  (courses.couslNmae == '')
+                                      ? Container()
+                                      : Text(
+                                          courses.couslNmae,
+                                          style: AppTheme.subHeading.copyWith(
+                                            fontSize: 10,
+                                            color: customColor,
+                                          ),
+                                        ),
+                                  Row(
                                     children: [
-                                      Icon(
-                                        FontAwesomeIcons.starHalfAlt,
-                                        color: Colors.yellow[900],
-                                      ),
-                                      SizedBox(width: 5),
                                       Text(
-                                        '(${courses.rating} K)',
-                                        style: AppTheme.heading,
+                                        courses.type,
+                                        style: AppTheme.heading.copyWith(
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        gitnewPrice(
+                                              price: courses.newPrice,
+                                              descaound: courses.discount,
+                                            ) +
+                                            '\$',
+                                        style: AppTheme.heading.copyWith(
+                                          fontSize: 10,
+                                          color: customColor,
+                                        ),
                                       ),
                                     ],
                                   ),
-                          ],
-                        ),
-                      ],
+                                  (courses.rating == '0')
+                                      ? Container()
+                                      : Row(
+                                          children: [
+                                            Icon(
+                                              FontAwesomeIcons.starHalfAlt,
+                                              color: Colors.yellow[900],
+                                            ),
+                                            SizedBox(width: 5),
+                                            Text(
+                                              '(${courses.rating} K)',
+                                              style: AppTheme.heading,
+                                            ),
+                                          ],
+                                        ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
           ],
         ),
       ),
