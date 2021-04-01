@@ -134,7 +134,7 @@ class _GenderState extends State<Gender> {
                   Text(
                     (_gender != null)
                         ? _gender
-                        : (widget.gender != null)
+                        : (widget.gender != null && widget.gender != "null")
                             ? widget.gender
                             : getTranslated(context, "gender"),
                     style: AppTheme.heading.copyWith(

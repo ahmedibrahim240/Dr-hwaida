@@ -13,7 +13,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
-import '../../../facebocktest.dart';
 import '../../../sharedPreferences.dart';
 
 class LogIn extends StatefulWidget {

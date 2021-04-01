@@ -63,7 +63,7 @@ class _AgeState extends State<Age> {
                   Text(
                     (_chossenDate != null)
                         ? _chossenDate
-                        : (widget.age != null)
+                        : (widget.age != null && widget.age != "null")
                             ? widget.age
                             : getTranslated(context, "age"),
                     style: AppTheme.heading.copyWith(

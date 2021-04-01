@@ -29,6 +29,9 @@ class Utils {
         imgURl = 'lib/images/female.png';
         return imgURl;
         break;
+      default:
+        imgURl = 'lib/images/man.png';
+        return imgURl;
     }
   }
 

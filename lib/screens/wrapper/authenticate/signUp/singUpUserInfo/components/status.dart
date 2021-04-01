@@ -19,6 +19,7 @@ class _StatusState extends State<Status> {
   String _stauts;
   @override
   Widget build(BuildContext context) {
+    print("widget.stauts:${widget.stauts}");
     return InkWell(
       onTap: () => showSettingsPanel(
         context: context,
@@ -202,7 +203,7 @@ class _StatusState extends State<Status> {
                   Text(
                     (_stauts != null)
                         ? _stauts
-                        : (widget.stauts != null)
+                        : (widget.stauts != null && widget.stauts != "null")
                             ? widget.stauts
                             : getTranslated(context, "stauts"),
                     style: AppTheme.heading.copyWith(
