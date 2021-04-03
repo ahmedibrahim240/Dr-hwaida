@@ -19,7 +19,8 @@ class MenuAppBer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Users>(
-      stream: DatabaseServices(userToken: User.userToken).userData,
+      stream: DatabaseServices(userToken: User.userToken, context: context)
+          .userData,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           Users userData = snapshot.data;

@@ -73,7 +73,8 @@ class _UserProfileState extends State<UserProfile> {
         )),
       ),
       body: StreamBuilder<Users>(
-        stream: DatabaseServices(userToken: User.userToken).userData,
+        stream: DatabaseServices(userToken: User.userToken, context: context)
+            .userData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Users userData = snapshot.data;
@@ -228,8 +229,13 @@ class _UserProfileState extends State<UserProfile> {
                             SizedBox(height: 20),
                             RaisedButton(
                               color: customColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                               onPressed: () {
-                                DatabaseServices(userToken: User.userToken)
+                                DatabaseServices(
+                                        userToken: User.userToken,
+                                        context: context)
                                     .upDateUserData(
                                   age: (Age.resAge) ?? userData.userBrDate,
                                   userEmail: (userEmail) ?? userData.email,
@@ -245,7 +251,7 @@ class _UserProfileState extends State<UserProfile> {
                                 );
                               },
                               child: Text(
-                                'Save Change',
+                                getTranslated(context, 'save'),
                                 style: AppTheme.heading.copyWith(
                                   color: Colors.white,
                                 ),

@@ -35,7 +35,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
               child: Stack(
                 children: [
                   Align(
-                    alignment: Alignment.centerRight,
+                    alignment: (User.appLang == 'ar_EG')
+                        ? Alignment.centerLeft
+                        : Alignment.centerRight,
                     child: InkWell(
                       onTap: () {
                         if (User.userSkipLogIn != true) {
@@ -78,7 +80,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     ),
                   ),
                   Align(
-                    alignment: Alignment.centerLeft,
+                    alignment: (User.appLang == 'ar_EG')
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
                     child: InkWell(
                       onTap: () {
                         setState(() {

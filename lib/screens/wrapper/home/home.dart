@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
               children: [
                 CustomHomeAppBer(scaffoldKey: scaffoldKey),
                 rowofHmeTaps(context),
-                // paner(context),
+                paner(context),
                 sctionTitle(
                     title: getTranslated(context, "consultants"),
                     context: context,

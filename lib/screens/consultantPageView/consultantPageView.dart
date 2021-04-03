@@ -60,8 +60,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
 
   consultantData(BuildContext context) {
     return Container(
-      height: 690,
-      child: Stack(
+      child: Column(
         children: [
           Container(
             height: 400,
@@ -77,7 +76,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
               ),
               image: DecorationImage(
                 image: NetworkImage(widget.consultant.image),
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fitHeight,
               ),
             ),
             child: Align(
@@ -155,25 +154,47 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                   ],
                                 ),
                                 SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.location_pin,
-                                      color: Colors.black38,
-                                      size: 20,
-                                    ),
-                                    SizedBox(width: 10),
-                                    SizedBox(
-                                      width: 150,
-                                      child: Text(
-                                        widget.consultant.address,
-                                        style: AppTheme.heading.copyWith(
-                                          fontSize: 10,
-                                          color: customColor,
+                                InkWell(
+                                  onTap: () {
+                                    if (User.userSkipLogIn == false) {
+                                      if (widget.consultant.mapLink != null) {
+                                        launchInBrowser(
+                                            widget.consultant.mapLink);
+                                      } else {
+                                        _scaffoldKey.currentState.showSnackBar(
+                                          new SnackBar(
+                                            content: new Text(
+                                              'This Consultant don\'t have map address',
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    } else {
+                                      showMyDialog(context: context);
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.location_pin,
+                                        color: Colors.black38,
+                                        size: 20,
+                                      ),
+                                      SizedBox(width: 10),
+                                      SizedBox(
+                                        width: 150,
+                                        child: Text(
+                                          widget.consultant.address,
+                                          style: AppTheme.heading.copyWith(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            fontSize: 10,
+                                            color: customColor,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
@@ -212,42 +233,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                         ],
                       ),
                       // SizedBox(height: 10),
-                      InkWell(
-                        onTap: () {
-                          if (User.userSkipLogIn == false) {
-                            if (widget.consultant.mapLink != null) {
-                              launchInBrowser(widget.consultant.mapLink);
-                            } else {
-                              _scaffoldKey.currentState.showSnackBar(
-                                new SnackBar(
-                                  content: new Text(
-                                    'This Consultant don\'t have map address',
-                                  ),
-                                ),
-                              );
-                            }
-                          } else {
-                            showMyDialog(context: context);
-                          }
-                        },
-                        child: Container(
-                          height: 30,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(35),
-                            gradient: AppTheme.containerBackground,
-                          ),
-                          child: Center(
-                            child: Text(
-                              getTranslated(context, "Open_Map"),
-                              style: AppTheme.heading.copyWith(
-                                fontSize: 8,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+
                       SizedBox(height: 10),
                       Text(
                         getTranslated(context, "About") +
@@ -256,16 +242,11 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                         style: AppTheme.heading,
                       ),
                       SizedBox(height: 10),
-                      SizedBox(
+                      Container(
                         width: MediaQuery.of(context).size.width,
-                        height: 125,
-                        child: ListView(
-                          children: [
-                            Text(
-                              parseHtmlString(widget.consultant.bio),
-                              style: AppTheme.subHeading,
-                            ),
-                          ],
+                        child: Text(
+                          parseHtmlString(widget.consultant.bio),
+                          style: AppTheme.subHeading,
                         ),
                       ),
                       SizedBox(height: 10),
@@ -276,15 +257,18 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                             children: [
                               Row(
                                 children: [
-                                  Icon(
-                                    FontAwesomeIcons.poundSign,
-                                    color: Colors.black38,
-                                    size: 20,
-                                  ),
+                                  // Icon(
+                                  //   FontAwesomeIcons.poundSign,
+                                  //   color: Colors.black38,
+                                  //   size: 20,
+                                  // ),
                                   SizedBox(width: 10),
                                   Text(
                                     getTranslated(context, "Price"),
                                     style: AppTheme.heading
+                                        .copyWith(
+                                          fontSize: 15,
+                                        )
                                         .copyWith(color: customColor),
                                   ),
                                 ],
@@ -304,7 +288,8 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                                       : Container(),
                                   SizedBox(width: 10),
                                   Text(
-                                    widget.consultant.total_coust.toString(),
+                                    widget.consultant.total_coust.toString() +
+                                        ' EPG',
                                     style: AppTheme.heading.copyWith(),
                                   ),
                                 ],

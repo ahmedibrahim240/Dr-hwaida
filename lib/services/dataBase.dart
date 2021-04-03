@@ -13,8 +13,9 @@ import 'package:dio/dio.dart';
 
 class DatabaseServices {
   final String userToken;
+  final BuildContext context;
   final controller = StreamController<Users>();
-  DatabaseServices({this.userToken});
+  DatabaseServices({@required this.context, this.userToken});
   Map<String, dynamic> map;
   gituserData() async {
     try {
@@ -23,12 +24,12 @@ class DatabaseServices {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         print(response.statusCode.toString());
-        final user = _userFromDatabaseUser(data);
+        final user = _userFromDatabaseUser(data, context);
         controller.add(user);
       } else if (response.statusCode == 201) {
         final data = json.decode(response.body);
 
-        final user = _userFromDatabaseUser(data);
+        final user = _userFromDatabaseUser(data, context);
         controller.add(user);
       } else {
         print(response.statusCode.toString());
@@ -100,19 +101,21 @@ class DatabaseServices {
     }
   }
 
-  Users _userFromDatabaseUser(Map user) {
+  Users _userFromDatabaseUser(Map user, BuildContext context) {
     return user != null
         ? Users(
             name: user['data']['name'].toString(),
             userBrDate: user['data']['dob'].toString(),
-            phoneNumber: user['data']['mobile'].toString(),
+            phoneNumber: (user['data']['mobile'] != null)
+                ? user['data']['mobile'].toString()
+                : getTranslated(context, 'addPhone'),
             userGender: user['data']['gender'].toString(),
             userAge: user['data']['age'].toString(),
             userStutes: user['data']['status'].toString(),
             userImageUrl: user['data']['image'],
             email: (user['data']['email'] != null)
                 ? user['data']['email'].toString()
-                : 'Add Email',
+                : getTranslated(context, 'addEmail'),
           )
         : null;
   }

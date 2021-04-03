@@ -107,6 +107,7 @@ class _LogInState extends State<LogIn> {
           'facebook_id': fbID,
           'name': name,
         });
+        print(response.statusCode);
 
         Map<String, dynamic> map = json.decode(response.body);
         print(map);
@@ -155,6 +156,9 @@ class _LogInState extends State<LogIn> {
         );
         // Navigator.pop(context);
       } catch (e) {
+        setState(() {
+          loading = !loading;
+        });
         print(
             'Catchhhhhhhhhhhhhhhhhhhhhhh errororororrorrorooroeoreoroeroeorero');
         print(e.toString());
@@ -176,6 +180,7 @@ class _LogInState extends State<LogIn> {
           final graphResponse = await http.get(
               'https://graph.facebook.com/v2.12/me?fields=name,email&access_token=$token');
           final profile = json.decode(graphResponse.body);
+
           print(
               'proooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooofile');
 
@@ -188,8 +193,14 @@ class _LogInState extends State<LogIn> {
           break;
         case FacebookLoginStatus.cancelledByUser:
           print('Login cancelled by the user.');
+          setState(() {
+            loading = !loading;
+          });
           break;
         case FacebookLoginStatus.error:
+          setState(() {
+            loading = !loading;
+          });
           print('Something went wrong with the login process.\n'
               'Here\'s the error Facebook gave us: ${result.errorMessage}');
           break;

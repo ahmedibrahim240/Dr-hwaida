@@ -18,6 +18,8 @@
     "Courses": "الدورات",
     "sections": "الاقسام",
     "delateVisleMess":"تم إلغاء الزيارة",
+    "addEmail":"إضافة بريد إلكتروني",
+    "addPhone":"أضف رقم الهاتف",
 
     "Events": "الأحداث",
     "gender":"النوع",
@@ -68,7 +70,7 @@
     "Cash": "نقدي",
     "CheckOut": "الدفع",
     "addCard": "إضافة بطاقة",
-    "experience":" خبرة",
+    "experience":" سنوات خبرة",
     "Review":" تقيم",
     "schedule_appoint": "حدد موعدًا",
     "confirm_appoint": "تأكيد الموعد",
