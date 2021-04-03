@@ -64,8 +64,9 @@ class _CoursesFillterState extends State<CoursesFillter> {
                     setState(() {
                       CoursesFillter.filtterTapped = index;
                       CoursesPage.fillter = fillterApi[index];
-                      MySharedPreferences.saveFilltterIndex(index);
-                      MySharedPreferences.saveFilltterType(fillterApi[index]);
+                      MySharedPreferences.saveCoursesFilltterIndex(index);
+                      MySharedPreferences.saveCoursesFilltterType(
+                          fillterApi[index]);
                     });
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(

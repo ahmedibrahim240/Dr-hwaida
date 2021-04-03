@@ -181,7 +181,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
                                   },
                                   child: Center(
                                     child: Text(
-                                      'Rating',
+                                      getTranslated(context, 'Rate'),
                                       style: AppTheme.heading.copyWith(
                                         color: Colors.white,
                                       ),

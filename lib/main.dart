@@ -40,8 +40,10 @@ class _MyAppState extends State<MyApp> {
   void didChangeDependencies() {
     getLocale().then((locale) {
       if (User.appLang == null) {
-        // ignore: unnecessary_statements
-        this._locale == null;
+        setState(() {
+          // ignore: unnecessary_statements
+          this._locale == null;
+        });
       } else {
         setState(() {
           this._locale = locale;
