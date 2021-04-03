@@ -2,8 +2,10 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/categories.dart';
+import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/categoriesCourse.dart';
+import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -34,22 +36,29 @@ class _ChosesCoursesState extends State<ChosesCourses> {
               shrinkWrap: true,
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               children: [
-                coursesSilder(
-                  context: context,
-                ),
-                // FutureBuilder(
-                //   future: CoursesApi.fetchAllCourses(),
-                //   builder: (context, snapshot) {
-                //     if (snapshot.hasData) {
-                //       return (snapshot.data == null)
-                //           ? Container()
-                //           : coursesSilder(
-                //               context: context, );
-                //     } else {
-                //       return Center(child: CircularProgressIndicator());
-                //     }
-                //   },
+                // coursesSilder(
+                //   context: context,
                 // ),
+                FutureBuilder(
+                  future: CoursesApi.fetchAllFeaturedCourses(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return (snapshot.data == null || snapshot.data.isEmpty)
+                          ? Container(
+                              child: Center(
+                                child: Text(
+                                  'لا يوجد بينات حاليا',
+                                  style: AppTheme.heading,
+                                ),
+                              ),
+                            )
+                          : coursesSilder(
+                              context: context, list: snapshot.data);
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
 
                 SizedBox(height: 10),
                 FutureBuilder(
@@ -172,6 +181,7 @@ class _ChosesCoursesState extends State<ChosesCourses> {
 
   Container coursesSilder({
     BuildContext context,
+    List list,
   }) {
     return Container(
       child: Column(
@@ -185,17 +195,17 @@ class _ChosesCoursesState extends State<ChosesCourses> {
               enlargeCenterPage: true,
               enlargeStrategy: CenterPageEnlargeStrategy.scale,
             ),
-            items: paners
+            items: list
                 .map(
                   (items) => GestureDetector(
                     onTap: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(
-                      //     builder: (_) => CoursesDetails(
-                      //       courses: items,
-                      //     ),
-                      //   ),
-                      // );
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => CoursesDetails(
+                            courses: items,
+                          ),
+                        ),
+                      );
                     },
                     child: Container(
                       child: Container(
@@ -215,16 +225,16 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(20.0),
                                       ),
-                                      image: DecorationImage(
-                                        image:
-                                            AssetImage('lib/images/event.jpg'),
-                                        fit: BoxFit.cover,
-                                      ),
+                                      // image: DecorationImage(
+                                      //   image:
+                                      //       AssetImage('lib/images/event.jpg'),
+                                      //   fit: BoxFit.cover,
+                                      // ),
                                     ),
-                                    // child: customCachedNetworkImage(
-                                    //   context: context,
-                                    //   url: items.courseImageUrl,
-                                    // ),
+                                    child: customCachedNetworkImage(
+                                      context: context,
+                                      url: items.courseImageUrl,
+                                    ),
                                   ),
                                 ),
                                 Container(
@@ -257,15 +267,11 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                                       children: <Widget>[
                                         SizedBox(height: 40),
                                         Text(
-                                          'tessssssssssssssst',
+                                          items.title,
                                           style: TextStyle(
                                             color: Colors.deepOrangeAccent,
                                             fontSize: 25,
                                           ),
-                                        ),
-                                        Text(
-                                          'tessst',
-                                          style: TextStyle(color: Colors.white),
                                         ),
                                       ],
                                     ),

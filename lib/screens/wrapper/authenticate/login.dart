@@ -5,13 +5,13 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
-// import 'package:DrHwaida/screens/wrapper/authenticate/passwordRecovery.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../sharedPreferences.dart';
 
@@ -199,32 +199,21 @@ class _LogInState extends State<LogIn> {
         print(e.toString());
       }
     }
-    // showMessage(String message) {
-    //   setState(() {
-    //     _message = message;
-    //   });
-    // }
 
-    // Future<void> _handleClickMe(message) async {
-    //   return showDialog<void>(
-    //     context: context,
-    //     barrierDismissible: false, // user must tap button!
-    //     builder: (BuildContext context) {
-    //       return CupertinoAlertDialog(
-    //         title: Text(getTranslated(context, 'system-message')),
-    //         content: Text(message),
-    //         actions: <Widget>[
-    //           CupertinoDialogAction(
-    //             child: Text(getTranslated(context, 'dismiss')),
-    //             onPressed: () {
-    //               Navigator.of(context).pop();
-    //             },
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    // }
+    _googleLogIn() async {
+      try {
+        GoogleSignIn _googleSginIn = GoogleSignIn(scopes: ['email']);
+        await _googleSginIn.signIn();
+        setState(() {
+          loading = !loading;
+        });
+        print(_googleSginIn.currentUser.displayName);
+        print(_googleSginIn.currentUser.id);
+      } catch (e) {
+        print("catssssssssss eroooooooooooooor");
+        print(e.toString());
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -477,7 +466,12 @@ class _LogInState extends State<LogIn> {
                                       Expanded(
                                         flex: 2,
                                         child: CustomButtonWithchild(
-                                          onPress: () {},
+                                          onPress: () {
+                                            setState(() {
+                                              loading = !loading;
+                                            });
+                                            _googleLogIn();
+                                          },
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -495,6 +489,9 @@ class _LogInState extends State<LogIn> {
                                         flex: 2,
                                         child: CustomButtonWithchild(
                                           onPress: () {
+                                            setState(() {
+                                              loading = !loading;
+                                            });
                                             _fblogin();
                                           },
                                           child: Row(

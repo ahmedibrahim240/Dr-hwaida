@@ -13,8 +13,11 @@ class ConsultantApi {
     List<ConsulAvailable> listOfConsulAvailable = [];
 
     try {
-      var response = await http.get(Utils.Consultant_URL,
-          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var response = await http.get(Utils.Consultant_URL, headers: {
+        'Accept': 'application/json',
+        'x-api-key': User.userToken,
+        "Connection": "keep-alive",
+      });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
@@ -74,8 +77,10 @@ class ConsultantApi {
     Consultant consultant;
 
     try {
-      var response = await http.get(Utils.Consultant_URL + "/$id",
-          headers: {'Accept': 'application/json'});
+      var response = await http.get(Utils.Consultant_URL + "/$id", headers: {
+        'Accept': 'application/json',
+        "Connection": "keep-alive",
+      });
       Map<String, dynamic> jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         print('done');
@@ -130,8 +135,11 @@ class ConsultantApi {
     List<ConsulAvailable> listOfConsulAvailable = [];
 
     try {
-      var response = await http.get(Utils.SEARCHBYNAME_URL + "$name",
-          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var response = await http.get(Utils.SEARCHBYNAME_URL + "$name", headers: {
+        'Accept': 'application/json',
+        'x-api-key': User.userToken,
+        "Connection": "keep-alive",
+      });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
@@ -187,8 +195,11 @@ class ConsultantRateApi {
     // List<RatingUser> listOfUsers = [];
 
     try {
-      var response = await http.get(Utils.Consultant_URL + "/$id/rates",
-          headers: {'Accept': 'application/json'});
+      var response =
+          await http.get(Utils.Consultant_URL + "/$id/rates", headers: {
+        'Accept': 'application/json',
+        "Connection": "keep-alive",
+      });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {
@@ -226,8 +237,11 @@ class FiltterConsultantApi {
     });
 
     try {
-      var response = await http.get(uri.toString(),
-          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var response = await http.get(uri.toString(), headers: {
+        'Accept': 'application/json',
+        'x-api-key': User.userToken,
+        "Connection": "keep-alive",
+      });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var itmes in jsonData['data']) {

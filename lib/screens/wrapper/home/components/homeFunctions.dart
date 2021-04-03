@@ -6,12 +6,15 @@ import 'package:DrHwaida/models/consultantApi.dart';
 
 import 'package:DrHwaida/models/courses.dart';
 import 'package:DrHwaida/models/coursesApi.dart';
+import 'package:DrHwaida/models/eventApi.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
+import 'package:DrHwaida/screens/Evaents/eventsPageView.dart';
 import 'package:DrHwaida/screens/Evaents/eventspage.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:DrHwaida/screens/courses/chosesColurses.dart';
 
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -357,18 +360,114 @@ sctionTitle({String title, Function onTap, BuildContext context}) {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 paner(BuildContext context) {
-  return Card(
-    elevation: 4,
-    child: Container(
-      height: 120,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('lib/images/event.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-    ),
+  return FutureBuilder(
+    future: EventsApi.fetchAllEvent(),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        List list = snapshot.data;
+        return (snapshot.data == null || snapshot.data.isEmpty)
+            ? Container(
+                child: Center(
+                  child: Text(
+                    'لا يوجد بينات حاليا',
+                    style: AppTheme.heading,
+                  ),
+                ),
+              )
+            : Container(
+                child: Column(
+                  children: <Widget>[
+                    CarouselSlider(
+                      options: CarouselOptions(
+                        autoPlayInterval: Duration(seconds: 2),
+                        // autoPlay: true,
+                        // reverse: widget.reverse,
+                        aspectRatio: 2.0,
+                        enlargeCenterPage: true,
+                        enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                      ),
+                      items: list
+                          .map(
+                            (items) => GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => EventsPageView(
+                                      events: items,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                child: Container(
+                                  child: ClipRRect(
+                                      child: Stack(
+                                    children: <Widget>[
+                                      ClipRRect(
+                                        child: Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 140,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0),
+                                            ),
+                                          ),
+                                          child: customCachedNetworkImage(
+                                            context: context,
+                                            url: items.imageUl,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        height: 140,
+                                        child: Container(
+                                          height: 100,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Color.fromARGB(145, 0, 0, 0),
+                                                Color.fromARGB(0, 0, 0, 0)
+                                              ],
+                                              begin: Alignment.bottomCenter,
+                                              end: Alignment.topCenter,
+                                            ),
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: <Widget>[
+                                              SizedBox(height: 80),
+                                              Text(
+                                                items.title,
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ],
+                ),
+              );
+      } else {
+        return Center(child: CircularProgressIndicator());
+      }
+    },
   );
 }
 
