@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class ConusltantSearch extends SearchDelegate {
                 return (snapshot.data == null || snapshot.data.isEmpty)
                     ? Container(
                         child: Center(
-                          child: Text('لم يتم العصور علي بينات '),
+                          child: Text(getTranslated(context, "searchFiled")),
                         ),
                       )
                     : ListView.builder(

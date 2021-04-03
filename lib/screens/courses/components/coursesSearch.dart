@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/coursesApi.dart';
-import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
+import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:flutter/material.dart';
 
 class CoursesSearch extends SearchDelegate {
@@ -43,7 +44,7 @@ class CoursesSearch extends SearchDelegate {
                 return (snapshot.data == null || snapshot.data.isEmpty)
                     ? Container(
                         child: Center(
-                          child: Text('لم يتم العصور علي بينات '),
+                          child: Text(getTranslated(context, "searchFiled")),
                         ),
                       )
                     : ListView.builder(
@@ -74,8 +75,8 @@ class CoursesSearch extends SearchDelegate {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (_) => ConsultantPageView(
-                                    consultant: snapshot.data[i],
+                                  builder: (_) => CoursesDetails(
+                                    courses: snapshot.data[i],
                                   ),
                                 ),
                               );
