@@ -103,10 +103,16 @@ class _LogInState extends State<LogIn> {
 
     _loginWithFB(fbID, name) async {
       try {
-        var response = await http.post(Utils.FACEBOOK_URL, body: {
-          'facebook_id': fbID,
-          'name': name,
-        });
+        var response = await http.post(
+          Utils.FACEBOOK_URL,
+          body: {
+            'facebook_id': fbID,
+            'name': name,
+          },
+          headers: {
+            'lang': User.apiLang,
+          },
+        );
         print(response.statusCode);
 
         Map<String, dynamic> map = json.decode(response.body);
@@ -178,7 +184,11 @@ class _LogInState extends State<LogIn> {
           final token = result.accessToken.token;
 
           final graphResponse = await http.get(
-              'https://graph.facebook.com/v2.12/me?fields=name,email&access_token=$token');
+            'https://graph.facebook.com/v2.12/me?fields=name,email&access_token=$token',
+            headers: {
+              'lang': User.apiLang,
+            },
+          );
           final profile = json.decode(graphResponse.body);
 
           print(

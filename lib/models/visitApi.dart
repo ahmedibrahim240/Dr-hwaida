@@ -12,6 +12,7 @@ class VisitsApi {
 
     var response = await http.get(Utils.VISITS_URL, headers: {
       'x-api-key': User.userToken,
+      'lang': User.apiLang,
     });
     var jsonData = json.decode(response.body);
     print(User.userToken);

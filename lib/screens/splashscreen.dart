@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
@@ -22,6 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
   getDateOfUser() async {
     User.userLogIn = await MySharedPreferences.getUserSingIn();
     User.userToken = await MySharedPreferences.getUserUserToken();
+    if (User.appLang == null) {
+      print(Platform.localeName);
+      setState(() {
+        MySharedPreferences.saveAppLang(Platform.localeName);
+        MySharedPreferences.saveApiLang(apiLang());
+      });
+    }
+    User.apiLang = await MySharedPreferences.getApiLang();
   }
 
   @override

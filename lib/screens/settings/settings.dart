@@ -349,12 +349,15 @@ class _SettingsState extends State<Settings> {
 
     MySharedPreferences.saveAppLang(_locale.toString());
     User.appLang = await MySharedPreferences.getAppLang();
+    MySharedPreferences.saveApiLang(apiLang());
+    User.apiLang = await MySharedPreferences.getApiLang();
   }
 
   chagePassword({String oldPassword, String newPasswrod}) async {
     try {
       var response = await http.post(Utils.CHANGEPASSWORD_URL, headers: {
-        'x-api-key': User.userToken
+        'x-api-key': User.userToken,
+        'lang': User.apiLang,
       }, body: {
         'new_password': newPassword,
         'old_password': oldPassword,

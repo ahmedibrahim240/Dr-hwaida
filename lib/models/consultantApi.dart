@@ -17,6 +17,7 @@ class ConsultantApi {
         'Accept': 'application/json',
         'x-api-key': User.userToken,
         "Connection": "keep-alive",
+        'lang': User.apiLang,
       });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
@@ -80,6 +81,7 @@ class ConsultantApi {
       var response = await http.get(Utils.Consultant_URL + "/$id", headers: {
         'Accept': 'application/json',
         "Connection": "keep-alive",
+        'lang': User.apiLang,
       });
       Map<String, dynamic> jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
@@ -139,6 +141,7 @@ class ConsultantApi {
         'Accept': 'application/json',
         'x-api-key': User.userToken,
         "Connection": "keep-alive",
+        'lang': User.apiLang,
       });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
@@ -199,6 +202,7 @@ class ConsultantRateApi {
           await http.get(Utils.Consultant_URL + "/$id/rates", headers: {
         'Accept': 'application/json',
         "Connection": "keep-alive",
+        'lang': User.apiLang,
       });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
@@ -241,6 +245,7 @@ class FiltterConsultantApi {
         'Accept': 'application/json',
         'x-api-key': User.userToken,
         "Connection": "keep-alive",
+        'lang': User.apiLang,
       });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {

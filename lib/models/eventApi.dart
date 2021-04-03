@@ -13,6 +13,7 @@ class EventsApi {
         // 'Accept': 'application/json',
         'x-api-key': User.userToken,
         "Connection": "keep-alive",
+        'lang': User.apiLang,
       });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
@@ -45,8 +46,12 @@ class EventsApi {
     List<CustomEvent> listOfEvent = [];
 
     try {
-      var response = await http.get(Utils.MYEVENTS_URL,
-          headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+      var response = await http.get(Utils.MYEVENTS_URL, headers: {
+        'Accept': 'application/json',
+        'x-api-key': User.userToken,
+        "Connection": "keep-alive",
+        'lang': User.apiLang,
+      });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {
         for (var items in jsonData['data']) {

@@ -62,6 +62,9 @@ class _RegisterState extends State<Register> {
           'gender': gender,
           'status': status,
         },
+        headers: {
+          'lang': User.apiLang,
+        },
       );
       print('stuates Code:${response.statusCode}');
       print(body);

@@ -7,8 +7,11 @@ import 'dart:convert';
 class CoutactUSApi {
   static Future<Settinges> gitContactUS() async {
     Settinges settinges;
-    var response = await http.get(Utils.SETTINGES_URL,
-        headers: {'Accept': 'application/json', 'x-api-key': User.userToken});
+    var response = await http.get(Utils.SETTINGES_URL, headers: {
+      'Accept': 'application/json',
+      'x-api-key': User.userToken,
+      'lang': User.apiLang,
+    });
     var jsonData = json.decode(response.body);
     try {
       if (response.statusCode == 200) {

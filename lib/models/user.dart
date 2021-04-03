@@ -7,6 +7,7 @@ class User {
   static String userGender;
   static String userPassword;
   static var appLang;
+  static var apiLang;
   static String userlat;
   static String userlong;
   static String prefs;

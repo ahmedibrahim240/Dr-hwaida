@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:DrHwaida/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:DrHwaida/models/utils.dart';
 
@@ -14,6 +15,9 @@ class AboutUSApi {
     AboutUS aboutUS;
     var response = await http.get(
       Utils.AboutUS_URL,
+      headers: {
+        'lang': User.apiLang,
+      },
     );
     var jsonData = json.decode(response.body);
     print(jsonData);
