@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
     User.userlong = await MySharedPreferences.getUserlong();
     User.appLang = await MySharedPreferences.getAppLang();
     User.apiLang = await MySharedPreferences.getApiLang();
+    print("ApiLang: " + User.apiLang);
   }
 
   gitFillterType() {

@@ -29,8 +29,13 @@ class _SplashScreenState extends State<SplashScreen> {
         MySharedPreferences.saveAppLang(Platform.localeName);
         MySharedPreferences.saveApiLang(apiLang());
       });
+    } else {
+      MySharedPreferences.saveApiLang(apiLang());
     }
     User.apiLang = await MySharedPreferences.getApiLang();
+    MySharedPreferences.saveApiLang(apiLang());
+    print('Api:' + User.apiLang);
+    print('Applanshard:${User.appLang}');
   }
 
   @override

@@ -1,7 +1,6 @@
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
-import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';

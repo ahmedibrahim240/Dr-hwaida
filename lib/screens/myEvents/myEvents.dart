@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/eventApi.dart';
 import 'package:DrHwaida/screens/myEvents/myEventsPageView.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +28,9 @@ class _MyEventsState extends State<MyEvents> {
                     ? Container(
                         child: Center(
                           child: Text(
-                            'لا يوجد بينات حاليا',
+                            getTranslated(context, 'networkError'),
                             style: AppTheme.heading,
+                            textAlign: TextAlign.center,
                           ),
                         ),
                       )

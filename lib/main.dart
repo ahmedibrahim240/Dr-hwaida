@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/routes.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,15 +32,21 @@ class _MyAppState extends State<MyApp> {
       _locale = locale;
       // DBHelper.saveAppLang(locale.toString());
     });
-    // print('Applan:' + locale.toString());
+    print('Applan:' + locale.toString());
+    print('Applanshard:' + User.appLang);
   }
 
   @override
   void didChangeDependencies() {
     getLocale().then((locale) {
-      setState(() {
-        this._locale = locale;
-      });
+      if (User.appLang == null) {
+        // ignore: unnecessary_statements
+        this._locale == null;
+      } else {
+        setState(() {
+          this._locale = locale;
+        });
+      }
     });
     super.didChangeDependencies();
   }

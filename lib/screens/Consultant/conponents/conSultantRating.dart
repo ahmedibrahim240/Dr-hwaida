@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/sttingesApi.dart';
 import 'package:http/http.dart' as http;
 
@@ -87,7 +88,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
                               children: [
                                 Center(
                                   child: Text(
-                                    'Add your rate',
+                                    getTranslated(context, 'addRate'),
                                     style: AppTheme.heading.copyWith(
                                       color: customColor,
                                     ),
@@ -126,7 +127,8 @@ class _ConsultantRatingState extends State<ConsultantRating> {
                                     });
                                   },
                                   decoration: conectedTextFormStyle(
-                                    lableText: 'Add comment',
+                                    lableText:
+                                        getTranslated(context, 'addComment'),
                                   ),
                                 ),
                                 SizedBox(height: 20),
@@ -148,7 +150,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
                                       ? 'please add your answer'
                                       : null,
                                   decoration: conectedTextFormStyle(
-                                    lableText: 'Answer',
+                                    lableText: getTranslated(context, 'answer'),
                                   ),
                                 ),
                                 SizedBox(height: 10),

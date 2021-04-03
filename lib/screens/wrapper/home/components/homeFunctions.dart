@@ -27,8 +27,9 @@ FutureBuilder<List<Consultant>> getConsultant() {
             ? Container(
                 child: Center(
                   child: Text(
-                    'لا يوجد بينات حاليا \n أو الاتصال بالانتر نت ضعيف',
+                    getTranslated(context, 'networkError'),
                     style: AppTheme.heading,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               )
@@ -79,8 +80,9 @@ FutureBuilder<List<Courses>> getCourses() {
             ? Container(
                 child: Center(
                   child: Text(
-                    'لا يوجد بينات حاليا',
+                    getTranslated(context, 'networkError'),
                     style: AppTheme.heading,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               )
@@ -369,8 +371,9 @@ paner(BuildContext context) {
             ? Container(
                 child: Center(
                   child: Text(
-                    'لا يوجد بينات حاليا',
+                    getTranslated(context, 'networkError'),
                     style: AppTheme.heading,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               )

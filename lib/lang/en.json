@@ -100,6 +100,8 @@
     "experience":"Years Experience",
     "Review":" Review",
     "About":" About",
+    "addComment":"add comment",
+    "answer":"answer",
     "Items_Was_added":" Added successfully !",
     "Cart":" Cart",
     "chooseDate":" you should choose date and time",
@@ -144,6 +146,7 @@
     "Recent":"Recent",
     "HD_Certified":"HD Certified",
     "Rate":"Rating",
+    "addRate":"Add your rating",
     "instructor":"Instructor",
     "priceLow":"Price High to low",
     "priceHigh":"Price High to low",
@@ -153,7 +156,8 @@
     "videos":"Videos",
     "end_time":"End time",
     "total_time":"Total hours",
-    
+    "networkError":"There is currently no data or there is a problem connecting to the Internet, please try again",
+    "myCouresIsempaty":"'You must buy dollars first \n If you actually buy \n Courses will be displayed upon completion of the purchase process'",
     "Day":"Day"
     
     

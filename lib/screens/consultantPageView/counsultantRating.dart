@@ -1,5 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,15 @@ class _CounsultantRatingState extends State<CounsultantRating> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return (snapshot.data == null)
-                ? Container()
+                ? Container(
+                    child: Center(
+                      child: Text(
+                        getTranslated(context, 'networkError'),
+                        style: AppTheme.heading,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
                 : ListView.builder(
                     shrinkWrap: true,
                     primary: false,

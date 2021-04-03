@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/courses/mycoursesdetails.dart';
 import 'package:DrHwaida/screens/wrapper/home/components/homeFunctions.dart';
@@ -47,7 +48,7 @@ class _MyCoursesState extends State<MyCourses> {
               ? Container(
                   child: Center(
                     child: Text(
-                      'يجب شراء الدوارات اولا \n اذا قمت بالشراء فعلا \nسيتم عرض الدورات فور اكمال عمليه الشراء',
+                      getTranslated(context, "myCouresIsempaty"),
                       style: AppTheme.heading,
                       textAlign: TextAlign.center,
                     ),

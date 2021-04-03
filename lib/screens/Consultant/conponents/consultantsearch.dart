@@ -1,7 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/models/consultantApi.dart';
 import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ConusltantSearch extends SearchDelegate {

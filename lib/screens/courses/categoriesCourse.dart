@@ -1,3 +1,5 @@
+import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
@@ -48,8 +50,16 @@ class _CategoriesCourseState extends State<CategoriesCourse> {
       future: CoursesApi.fetchAllCategoriesCourses(widget.cateId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return (snapshot.data == null)
-              ? Container()
+          return (snapshot.data == null || snapshot.data.isEpmty)
+              ? Container(
+                  child: Center(
+                    child: Text(
+                      getTranslated(context, 'networkError'),
+                      style: AppTheme.heading,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                )
               : GridView.count(
                   crossAxisCount: 2,
                   crossAxisSpacing: 5,

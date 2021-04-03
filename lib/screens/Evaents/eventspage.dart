@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/eventApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
@@ -29,7 +30,11 @@ class _EventsPageState extends State<EventsPage> {
                   return (snapshot.data == null || snapshot.data.isEmpty)
                       ? Container(
                           child: Center(
-                            child: Text('لا يوجد بينات حاليا'),
+                            child: Text(
+                              getTranslated(context, 'networkError'),
+                              style: AppTheme.heading,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         )
                       : ListView.builder(

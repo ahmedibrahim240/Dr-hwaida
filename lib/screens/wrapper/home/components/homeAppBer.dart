@@ -1,5 +1,5 @@
 import 'package:DrHwaida/constants/themes.dart';
-import 'package:DrHwaida/screens/Consultant/conponents/consultantsearch.dart';
+// import 'package:DrHwaida/screens/Consultant/conponents/consultantsearch.dart';
 import 'package:DrHwaida/screens/cart/cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,15 +31,15 @@ class CustomHomeAppBer extends StatelessWidget {
                 onPressed: () => scaffoldKey.currentState.openDrawer(),
                 icon: Icon(Icons.menu),
               ),
-              IconButton(
-                onPressed: () {
-                  showSearch(
-                    context: context,
-                    delegate: ConusltantSearch(),
-                  );
-                },
-                icon: Icon(Icons.search),
-              ),
+              // IconButton(
+              //   onPressed: () {
+              //     showSearch(
+              //       context: context,
+              //       delegate: ConusltantSearch(),
+              //     );
+              //   },
+              //   icon: Icon(Icons.search),
+              // ),
             ],
           ),
           IconButton(

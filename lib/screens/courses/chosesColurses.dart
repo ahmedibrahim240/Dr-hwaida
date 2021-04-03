@@ -47,8 +47,9 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                           ? Container(
                               child: Center(
                                 child: Text(
-                                  'لا يوجد بينات حاليا',
+                                  getTranslated(context, 'networkError'),
                                   style: AppTheme.heading,
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             )
@@ -65,8 +66,16 @@ class _ChosesCoursesState extends State<ChosesCourses> {
                   future: CategoriesApi.fetchAllCategories(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return (snapshot.data == null)
-                          ? Container()
+                      return (snapshot.data == null || snapshot.data.isEmpty)
+                          ? Container(
+                              child: Center(
+                                child: Text(
+                                  getTranslated(context, 'networkError'),
+                                  style: AppTheme.heading,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            )
                           : Container(
                               padding: EdgeInsets.symmetric(horizontal: 20),
                               child: GridView.count(
