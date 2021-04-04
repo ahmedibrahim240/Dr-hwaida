@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import '../sharedPreferences.dart';
 import 'onboarding/onboarding.dart';
@@ -38,11 +39,31 @@ class _SplashScreenState extends State<SplashScreen> {
     print('Applanshard:${User.appLang}');
   }
 
+  bool _connectionStatus = false;
+  Connectivity connectivity;
+  StreamSubscription<ConnectivityResult> subscription;
+
   @override
   void initState() {
     getDateOfUser();
 
     super.initState();
+    connectivity = new Connectivity();
+    subscription =
+        connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+      print("result______________________________________");
+      print(result);
+      if (result == ConnectivityResult.wifi ||
+          result == ConnectivityResult.mobile) {
+        setState(() {
+          _connectionStatus = !_connectionStatus;
+        });
+      } else {
+        _connectionStatus = !_connectionStatus;
+      }
+    });
+    print("_connectionStatus:$_connectionStatus");
+
     Timer(
       Duration(seconds: 5),
       () {

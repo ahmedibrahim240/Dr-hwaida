@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:DrHwaida/constants/constans.dart';
+import 'package:DrHwaida/interNetCon.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/routes.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localization/app_localization.dart';
 import 'localization/localization_constants.dart';
+import 'package:connectivity/connectivity.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,6 +29,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool _connectionStatus = false;
+  Connectivity connectivity;
+  StreamSubscription<ConnectivityResult> subscription;
+
   Locale _locale;
   setLocale(Locale locale) async {
     setState(() {
@@ -37,24 +44,48 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  void didChangeDependencies() {
-    getLocale().then((locale) {
-      if (User.appLang == null) {
+  void initState() {
+    super.initState();
+    connectivity = new Connectivity();
+    subscription =
+        connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.wifi ||
+          result == ConnectivityResult.mobile) {
         setState(() {
-          // ignore: unnecessary_statements
-          this._locale == null;
+          _connectionStatus = !_connectionStatus;
         });
       } else {
-        setState(() {
-          this._locale = locale;
-        });
+        _connectionStatus = !_connectionStatus;
       }
+    });
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    getLocale().then((locale) {
+      // if (User.appLang == null) {
+      //   setState(() {
+      //     // ignore: unnecessary_statements
+      //     this._locale == null;
+      //   });
+      // } else {
+      setState(() {
+        this._locale = locale;
+      });
+      // }
     });
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("_connectionStatus:$_connectionStatus");
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -64,7 +95,8 @@ class _MyAppState extends State<MyApp> {
         primaryColor: customColor,
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      initialRoute: SplashScreen.route,
+      initialRoute:
+          (_connectionStatus) ? EnterNitCON.route : SplashScreen.route,
       routes: routes,
       locale: _locale,
       supportedLocales: [
@@ -78,7 +110,7 @@ class _MyAppState extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       localeResolutionCallback: (deviceLocale, supportedLocales) {
-        if (_locale == null) {
+        if (User.appLang == null) {
           for (var locale in supportedLocales) {
             if (locale.languageCode == Platform.localeName.split('_')[0] &&
                 locale.countryCode == Platform.localeName.split('_')[1]) {
@@ -88,8 +120,14 @@ class _MyAppState extends State<MyApp> {
 
           return supportedLocales.first;
         } else {
-          print("_locale:$_locale");
-          return _locale;
+          for (var locale in supportedLocales) {
+            if (locale.languageCode == User.appLang.split('_')[0] &&
+                locale.countryCode == User.appLang.split('_')[1]) {
+              return locale;
+            }
+          }
+
+          return supportedLocales.first;
         }
       },
     );

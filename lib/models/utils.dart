@@ -78,6 +78,8 @@ class Utils {
   // ignore: non_constant_identifier_names
   static final FACEBOOK_URL = BASE_URL + "/social/facebook";
   // ignore: non_constant_identifier_names
+  static final GOOGLE_URL = BASE_URL + "/social/google";
+  // ignore: non_constant_identifier_names
   static final CoursesFILLTER_URL = BASE_URL + "/courses_filter";
   // ignore: non_constant_identifier_names
   static final CONTACTUS_URL = BASE_URL + "/send_message";

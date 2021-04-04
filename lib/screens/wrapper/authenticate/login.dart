@@ -171,6 +171,75 @@ class _LogInState extends State<LogIn> {
       }
     }
 
+    _loginWithGOOGLe({googleID, name}) async {
+      try {
+        var response = await http.post(
+          Utils.GOOGLE_URL,
+          body: {
+            'google_id': googleID,
+            'name': name,
+          },
+          headers: {
+            'lang': User.apiLang,
+          },
+        );
+        print(response.statusCode);
+
+        Map<String, dynamic> map = json.decode(response.body);
+        print(map);
+        setState(
+          () async {
+            // print('this is the userData data ${userData}');
+            if (map['success'] == true) {
+              setState(() {
+                User.userToken = map['data']['api_token'].toString();
+              });
+              MySharedPreferences.saveUserSingIn(true);
+              MySharedPreferences.saveUserSkipLogIn(false);
+              MySharedPreferences.saveUserUserPassword(password);
+
+              MySharedPreferences.saveUserUserName(
+                map['data']['name'].toString(),
+              );
+              MySharedPreferences.saveUserUserPhoneNumber(
+                map['data']['mobile'].toString(),
+              );
+              MySharedPreferences.saveUserUserGender(
+                map['data']['gender'].toString(),
+              );
+              MySharedPreferences.saveUserUserAge(
+                map['data']['age'].toString(),
+              );
+              MySharedPreferences.saveUserUserStutas(
+                map['data']['status'].toString(),
+              );
+              MySharedPreferences.saveUserUserToken(
+                map['data']['api_token'].toString(),
+              );
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (_) => Home(),
+                ),
+              );
+            } else {
+              setState(() {
+                error = map['message'].toString();
+                loading = !loading;
+              });
+            }
+          },
+        );
+        // Navigator.pop(context);
+      } catch (e) {
+        setState(() {
+          loading = !loading;
+        });
+        print(
+            'Catchhhhhhhhhhhhhhhhhhhhhhh errororororrorrorooroeoreoroeroeorero');
+        print(e.toString());
+      }
+    }
+
     final FacebookLogin facebookSignIn = new FacebookLogin();
     // Future<Null>
     _fblogin() async {
@@ -230,6 +299,10 @@ class _LogInState extends State<LogIn> {
         });
         print(_googleSginIn.currentUser.displayName);
         print(_googleSginIn.currentUser.id);
+        _loginWithGOOGLe(
+          googleID: _googleSginIn.currentUser.id,
+          name: _googleSginIn.currentUser.displayName,
+        );
       } catch (e) {
         print("catssssssssss eroooooooooooooor");
         print(e.toString());
