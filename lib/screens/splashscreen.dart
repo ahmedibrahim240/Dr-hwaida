@@ -41,6 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   bool _connectionStatus = false;
   Connectivity connectivity;
+  // ignore: cancel_subscriptions
   StreamSubscription<ConnectivityResult> subscription;
 
   @override

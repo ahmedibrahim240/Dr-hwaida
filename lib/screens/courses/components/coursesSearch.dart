@@ -30,7 +30,60 @@ class CoursesSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return null;
+    return query.isEmpty
+        ? Container()
+        : FutureBuilder(
+            future: CoursesApi.cursesSearch(query),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return (snapshot.data == null || snapshot.data.isEmpty)
+                    ? Container(
+                        child: Center(
+                          child: Text(getTranslated(context, "searchFiled")),
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, i) {
+                          return ListTile(
+                            leading: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                  child: (snapshot.data[i].courseImageUrl ==
+                                          null)
+                                      ? Container(
+                                          child: Icon(
+                                            Icons.image,
+                                            color: Colors.lightBlueAccent,
+                                          ),
+                                        )
+                                      : customCachedNetworkImage(
+                                          context: context,
+                                          url: snapshot.data[i].courseImageUrl,
+                                        )),
+                            ),
+                            title: Text(snapshot.data[i].title),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => CoursesDetails(
+                                    courses: snapshot.data[i],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          );
   }
 
   @override

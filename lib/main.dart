@@ -49,13 +49,16 @@ class _MyAppState extends State<MyApp> {
     connectivity = new Connectivity();
     subscription =
         connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
+      print(result);
       if (result == ConnectivityResult.wifi ||
           result == ConnectivityResult.mobile) {
         setState(() {
-          _connectionStatus = !_connectionStatus;
+          _connectionStatus = false;
         });
       } else {
-        _connectionStatus = !_connectionStatus;
+        setState(() {
+          _connectionStatus = true;
+        });
       }
     });
   }

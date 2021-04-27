@@ -79,6 +79,24 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
+  Future<Null> onRefresh() async {
+    setState(() {
+      looding = !looding;
+    });
+
+    await Future.delayed(
+      Duration(seconds: 2),
+      () {
+        setState(() {
+          looding = !looding;
+        });
+      },
+    );
+    return null;
+  }
+
+  bool looding = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,53 +108,60 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Menu(),
       ),
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height - 130,
-            child: ListView(
-              shrinkWrap: true,
-              primary: true,
-              children: [
-                CustomHomeAppBer(scaffoldKey: scaffoldKey),
-                rowofHmeTaps(context),
-                paner(context),
-                sctionTitle(
-                    title: getTranslated(context, "consultants"),
-                    context: context,
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => ConsultantPage(),
+      body: RefreshIndicator(
+        onRefresh: onRefresh,
+        child: Stack(
+          children: [
+            (looding)
+                ? Container()
+                : Container(
+                    height: MediaQuery.of(context).size.height - 130,
+                    child: ListView(
+                      shrinkWrap: true,
+                      primary: true,
+                      // physics: AlwaysScrollableScrollPhysics(),
+                      children: [
+                        CustomHomeAppBer(scaffoldKey: scaffoldKey),
+                        rowofHmeTaps(context),
+                        paner(context),
+                        sctionTitle(
+                            title: getTranslated(context, "consultants"),
+                            context: context,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => ConsultantPage(),
+                                ),
+                              );
+                            }),
+                        Container(
+                          height: 200,
+                          child: getConsultant(),
                         ),
-                      );
-                    }),
-                Container(
-                  height: 200,
-                  child: getConsultant(),
-                ),
-                sctionTitle(
-                    title: getTranslated(context, 'Courses'),
-                    context: context,
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => CoursesPage(title: 'All Courses'),
+                        sctionTitle(
+                            title: getTranslated(context, 'Courses'),
+                            context: context,
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      CoursesPage(title: 'All Courses'),
+                                ),
+                              );
+                            }),
+                        Container(
+                          height: 200,
+                          child: getCourses(),
                         ),
-                      );
-                    }),
-                Container(
-                  height: 200,
-                  child: getCourses(),
-                ),
-              ],
+                      ],
+                    ),
+                  ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomBottomNavigationBar(),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

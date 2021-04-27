@@ -305,19 +305,10 @@ class _CheckOutState extends State<CheckOut> {
       'events': eventID,
     };
 
-    // print(jsonEncode(body));
-    // print(jsonEncode(coursesID));
-    // print(jsonEncode(eventID));
     try {
       var response = await http.post(
         Utils.CHECKOUT_URL,
         body: jsonEncode(body),
-
-        // {
-        //   'visit': visit,
-        //   'courses': jsonEncode(coursesID),
-        //   'events': jsonEncode(eventID),
-        // },
         headers: {
           'x-api-key': User.userToken,
           'Content-Type': 'application/json'
