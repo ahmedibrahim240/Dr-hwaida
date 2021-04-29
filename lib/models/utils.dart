@@ -40,6 +40,8 @@ class Utils {
   // ignore: non_constant_identifier_names
   static final Consultant_URL = BASE_URL + "/consultants";
   // ignore: non_constant_identifier_names
+  static final Update_fcm_URL = BASE_URL + "/clients/update_fcm?fcm_token=";
+  // ignore: non_constant_identifier_names
   static final EVENTS_URL = BASE_URL + "/events";
   // ignore: non_constant_identifier_names
   static final COURSES_URL = BASE_URL + "/courses";
@@ -51,6 +53,7 @@ class Utils {
   static final COURSESRATE_URL = BASE_URL + "/rates/course";
   // ignore: non_constant_identifier_names
   static final REGISTER_URL = BASE_URL + "/clients/register";
+
   // ignore: non_constant_identifier_names
   static final REGISTERASCONSUL_URL = BASE_URL + "/requests";
   // ignore: non_constant_identifier_names

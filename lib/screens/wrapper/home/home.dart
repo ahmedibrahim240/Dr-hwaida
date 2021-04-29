@@ -1,6 +1,7 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
+import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/consultantfillter.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
@@ -8,9 +9,11 @@ import 'package:DrHwaida/screens/courses/components/coursesfillter.dart';
 import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'components/homeAppBer.dart';
 import 'components/homeFunctions.dart';
 
@@ -21,6 +24,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final FirebaseMessaging _fcm = FirebaseMessaging();
+  String fcmToken;
+
   var scaffoldKey = GlobalKey<ScaffoldState>();
   getDateOfUser() async {
     User.userAge = await MySharedPreferences.getUserUserAge();
@@ -75,8 +81,30 @@ class _HomeState extends State<Home> {
     getDateOfUser();
     gitFillterType();
     gitFillterIndex();
-    print(User.userToken);
+    gitFCMToken();
     super.initState();
+  }
+
+  gitFCMToken() {
+    _fcm.getToken().then(
+      (token) {
+        print(token);
+        updateFcmToken(token);
+      },
+    );
+  }
+
+  updateFcmToken(var token) async {
+    try {
+      var response = await http.put(Utils.Update_fcm_URL + '$token', headers: {
+        'x-api-key': User.userToken.toString(),
+      });
+      var jsonData = json.decode(response.body);
+      print(jsonData);
+    } catch (e) {
+      print('Cash updateFcmToken');
+      print(e);
+    }
   }
 
   Future<Null> onRefresh() async {
