@@ -9,7 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:html/parser.dart';
 
-const customColor = Color(0xfff4DC0B1);
+const customColor = Color(0xfffA900D4);
+const customColor2 = Color(0xfff39200);
 const customColorIcon = Color(0xfff807d7d);
 const customColorDivider = Color(0xfffe1e1e1);
 const customColorGray = Color(0xfff7d7d7d);

@@ -25,7 +25,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final FirebaseMessaging _fcm = FirebaseMessaging();
-  String fcmToken;
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
   getDateOfUser() async {
