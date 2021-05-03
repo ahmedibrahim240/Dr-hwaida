@@ -11,6 +11,7 @@ import 'package:DrHwaida/screens/notifications/notifications.dart';
 import 'package:DrHwaida/screens/settings/settings.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
 import 'package:DrHwaida/screens/visitshistory/visitsHistory.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/registerAsConsultant/registerAsConsultant.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,9 @@ class _MenuBodyState extends State<MenuBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.height - 290,
+      height: (User.userSkipLogIn == true)
+          ? widget.height - 40
+          : widget.height - 290,
       child: Stack(
         children: [
           ListView(
@@ -195,7 +198,7 @@ class _MenuBodyState extends State<MenuBody> {
                         if (User.userSkipLogIn == true) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (_) => SplashScreen(),
+                              builder: (_) => Authenticate(),
                             ),
                           );
                         } else {
