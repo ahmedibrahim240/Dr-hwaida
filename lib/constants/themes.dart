@@ -15,11 +15,13 @@ class AppTheme {
     color: Colors.black,
   );
   static final containerBackground = LinearGradient(
-    begin: Alignment.topRight,
-    end: Alignment.bottomLeft,
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
     colors: [
-      customColor,
-      customColor2,
+      Color(0xfffa901d4),
+      Color(0xfffA8932d7),
+      Color(0xfffA5486dd),
+      Color(0xfff33b9e1),
     ],
   );
 }

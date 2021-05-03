@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:DrHwaida/constants/constans.dart';
-import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print("_connectionStatus:$_connectionStatus");
 
     Timer(
-      Duration(seconds: 5),
+      Duration(seconds: 10),
       () {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
@@ -84,43 +83,28 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
         backgroundColor: customColor,
       ),
-      body: Stack(
-        fit: StackFit.expand,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: height,
-            width: width,
-            decoration: BoxDecoration(
-              gradient: AppTheme.containerBackground,
-            ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(height: 80),
-              Center(
-                child: Container(
-                  height: 200,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('lib/images/logo.png'),
-                      fit: BoxFit.fitHeight,
-                    ),
-                  ),
+          Center(
+            child: Container(
+              height: 200,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('lib/images/logo.png'),
+                  fit: BoxFit.fitHeight,
                 ),
               ),
-              SizedBox(height: 20),
-              CircularProgressIndicator(),
-            ],
+            ),
           ),
+          SizedBox(height: 20),
+          CircularProgressIndicator(),
         ],
       ),
     );

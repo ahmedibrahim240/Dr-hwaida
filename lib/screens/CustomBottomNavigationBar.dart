@@ -141,9 +141,13 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     width: 50,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: (Helper.tappedBottomShet == 2)
-                          ? customColor
-                          : customColorGray,
+                      border: Border.all(
+                        color: (Helper.tappedBottomShet == 2)
+                            ? customColor
+                            : customColorGray,
+                        width: 2,
+                      ),
+                      color: Colors.white,
                       image: DecorationImage(
                         image: AssetImage('lib/images/logo.png'),
                         fit: BoxFit.fitWidth,
