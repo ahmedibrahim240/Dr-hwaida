@@ -59,12 +59,6 @@ class _HomeState extends State<Home> {
         MySharedPreferences.saveFilltterIndex(1);
       });
     }
-    setState(() {
-      CoursesPage.fillter = 'latest';
-      MySharedPreferences.saveCoursesFilltterType('latest');
-
-      MySharedPreferences.saveCoursesFilltterIndex(0);
-    });
   }
 
   gitFillterIndex() async {

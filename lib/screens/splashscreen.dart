@@ -24,7 +24,6 @@ class _SplashScreenState extends State<SplashScreen> {
     User.userLogIn = await MySharedPreferences.getUserSingIn();
     User.userToken = await MySharedPreferences.getUserUserToken();
     if (User.appLang == null) {
-      print(Platform.localeName);
       setState(() {
         MySharedPreferences.saveAppLang(Platform.localeName);
         MySharedPreferences.saveApiLang(apiLang());

@@ -50,9 +50,14 @@ FutureBuilder<List<Consultant>> getAllConsultant(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      snapshot.data[index].name,
-                                      style: AppTheme.heading,
+                                    SizedBox(
+                                      height: 25,
+                                      width: MediaQuery.of(context).size.width -
+                                          180,
+                                      child: Text(
+                                        snapshot.data[index].name,
+                                        style: AppTheme.heading,
+                                      ),
                                     ),
                                     Row(
                                       children: [
@@ -60,10 +65,17 @@ FutureBuilder<List<Consultant>> getAllConsultant(
                                           Icons.location_pin,
                                           color: Colors.black38,
                                         ),
-                                        Text(
-                                          snapshot.data[index].address,
-                                          style: AppTheme.subHeading
-                                              .copyWith(color: customColor),
+                                        SizedBox(
+                                          height: 25,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              180,
+                                          child: Text(
+                                            snapshot.data[index].address,
+                                            style: AppTheme.subHeading
+                                                .copyWith(color: customColor),
+                                          ),
                                         ),
                                       ],
                                     ),

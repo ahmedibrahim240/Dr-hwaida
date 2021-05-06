@@ -39,11 +39,8 @@ class _ConsultantPageState extends State<ConsultantPage> {
       body: NetworkSensitive(
         child: Stack(
           children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 50,
+            Container(
+              height: MediaQuery.of(context).size.height - 110,
               child: ListView(
                 shrinkWrap: true,
                 primary: false,
