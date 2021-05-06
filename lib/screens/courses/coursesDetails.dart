@@ -8,6 +8,7 @@ import 'package:DrHwaida/models/utils.dart';
 import 'package:DrHwaida/screens/cart/cart.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dbhelper.dart';
+import 'package:DrHwaida/services/network_sensitive.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -128,56 +129,58 @@ class _CoursesDetailsState extends State<CoursesDetails> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(),
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height - 150,
-            child: ListView(
-              shrinkWrap: true,
-              primary: true,
-              padding: EdgeInsets.symmetric(vertical: 10),
-              children: [
-                courseCard(),
-                SizedBox(height: 4),
-                aboutThisCourse(context),
-                (widget.courses.features != null) ? qAs() : Container(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: CustomButtonWithchild(
-                    color: customColor,
-                    onPress: () async {
-                      ConsultantProdect prodect = ConsultantProdect({
-                        'type': 'courses',
-                        'consultantId': widget.courses.id,
-                        // 'dateId': _timeID,
-                        'title': widget.courses.title,
-                        'price': double.parse(widget.courses.newPrice),
-                        'proImageUrl': widget.courses.courseImageUrl,
-                        // 'date': _date,
-                        // 'time': _time,
-                      });
-                      await helper.createProduct(prodect);
+      body: NetworkSensitive(
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height - 150,
+              child: ListView(
+                shrinkWrap: true,
+                primary: true,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                children: [
+                  courseCard(),
+                  SizedBox(height: 4),
+                  aboutThisCourse(context),
+                  (widget.courses.features != null) ? qAs() : Container(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomButtonWithchild(
+                      color: customColor,
+                      onPress: () async {
+                        ConsultantProdect prodect = ConsultantProdect({
+                          'type': 'courses',
+                          'consultantId': widget.courses.id,
+                          // 'dateId': _timeID,
+                          'title': widget.courses.title,
+                          'price': double.parse(widget.courses.newPrice),
+                          'proImageUrl': widget.courses.courseImageUrl,
+                          // 'date': _date,
+                          // 'time': _time,
+                        });
+                        await helper.createProduct(prodect);
 
-                      showmyDialog(context: context);
-                    },
-                    child: Center(
-                      child: Text(
-                        getTranslated(context, "Add_to_Cart"),
-                        style: AppTheme.heading.copyWith(
-                          color: Colors.white,
+                        showmyDialog(context: context);
+                      },
+                      child: Center(
+                        child: Text(
+                          getTranslated(context, "Add_to_Cart"),
+                          style: AppTheme.heading.copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomBottomNavigationBar(),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/conponents/conSultantRating.dart';
 import 'package:DrHwaida/screens/consultantPageView/counsultantRating.dart';
 import 'package:DrHwaida/screens/scheduleAppo/scheduleAppo.dart';
+import 'package:DrHwaida/services/network_sensitive.dart';
 import 'package:flutter/material.dart';
 import '../CustomBottomNavigationBar.dart';
 
@@ -33,26 +34,28 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
         backgroundColor: customColor,
         toolbarHeight: 0,
       ),
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height - 100,
-            child: ListView(
-              shrinkWrap: true,
-              primary: true,
-              children: [
-                consultantData(context),
-                CounsultantRating(
-                  id: widget.consultant.id,
-                ),
-              ],
+      body: NetworkSensitive(
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height - 100,
+              child: ListView(
+                shrinkWrap: true,
+                primary: true,
+                children: [
+                  consultantData(context),
+                  CounsultantRating(
+                    id: widget.consultant.id,
+                  ),
+                ],
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomBottomNavigationBar(),
+            ),
+          ],
+        ),
       ),
     );
   }

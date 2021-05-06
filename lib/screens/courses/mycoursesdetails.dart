@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/courses.dart';
+import 'package:DrHwaida/services/network_sensitive.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -131,91 +132,93 @@ class _MyCoursesDetailsState extends State<MyCoursesDetails> {
     return Scaffold(
       appBar: AppBar(),
       key: _scaffoldKey,
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height - 170,
-            child: ListView(
-              shrinkWrap: true,
-              primary: true,
-              children: [
-                (widget.courses.lessons.length == 0)
-                    ? Container()
-                    : Card(
-                        elevation: 4,
-                        child: Column(
-                          children: [
-                            youtubePlayers(_controller),
-                          ],
+      body: NetworkSensitive(
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height - 170,
+              child: ListView(
+                shrinkWrap: true,
+                primary: true,
+                children: [
+                  (widget.courses.lessons.length == 0)
+                      ? Container()
+                      : Card(
+                          elevation: 4,
+                          child: Column(
+                            children: [
+                              youtubePlayers(_controller),
+                            ],
+                          ),
                         ),
-                      ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      (widget.courses.lessons.length == 0)
-                          ? Container()
-                          : taps(
-                              index: 0,
-                              title: getTranslated(context, 'lecture'),
-                              onTap: () {
-                                setState(
-                                  () {
-                                    lecTapped = 0;
-                                  },
-                                );
-                              },
-                            ),
-                      SizedBox(width: 20),
-                      taps(
-                        index: 1,
-                        title: getTranslated(context, 'more'),
-                        onTap: () {
-                          setState(
-                            () {
-                              lecTapped = 1;
-                            },
-                          );
-                        },
-                      ),
-                      SizedBox(width: 20),
-                      taps(
-                        index: 2,
-                        title: getTranslated(context, 'Review'),
-                        onTap: () {
-                          setState(
-                            () {
-                              lecTapped = 2;
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                (lecTapped == 0 && (widget.courses.lessons.length > 0))
-                    ? lectureBody()
-                    : (lecTapped == 1)
-                        ? Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: Center(
-                              child: Text(
-                                parseHtmlString(widget.courses.contant),
-                                style: AppTheme.subHeading,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        (widget.courses.lessons.length == 0)
+                            ? Container()
+                            : taps(
+                                index: 0,
+                                title: getTranslated(context, 'lecture'),
+                                onTap: () {
+                                  setState(
+                                    () {
+                                      lecTapped = 0;
+                                    },
+                                  );
+                                },
                               ),
-                            ),
-                          )
-                        : reviewBody(),
-              ],
+                        SizedBox(width: 20),
+                        taps(
+                          index: 1,
+                          title: getTranslated(context, 'more'),
+                          onTap: () {
+                            setState(
+                              () {
+                                lecTapped = 1;
+                              },
+                            );
+                          },
+                        ),
+                        SizedBox(width: 20),
+                        taps(
+                          index: 2,
+                          title: getTranslated(context, 'Review'),
+                          onTap: () {
+                            setState(
+                              () {
+                                lecTapped = 2;
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  (lecTapped == 0 && (widget.courses.lessons.length > 0))
+                      ? lectureBody()
+                      : (lecTapped == 1)
+                          ? Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Center(
+                                child: Text(
+                                  parseHtmlString(widget.courses.contant),
+                                  style: AppTheme.subHeading,
+                                ),
+                              ),
+                            )
+                          : reviewBody(),
+                ],
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomBottomNavigationBar(),
+            ),
+          ],
+        ),
       ),
     );
   }

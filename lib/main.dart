@@ -1,17 +1,17 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:DrHwaida/constants/constans.dart';
-import 'package:DrHwaida/interNetCon.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/routes.dart';
 import 'package:DrHwaida/screens/splashscreen.dart';
+import 'package:DrHwaida/services/connectivity_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
+import 'enums/connectivity_status.dart';
 import 'localization/app_localization.dart';
 import 'localization/localization_constants.dart';
-import 'package:connectivity/connectivity.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,10 +29,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _connectionStatus = false;
-  Connectivity connectivity;
-  StreamSubscription<ConnectivityResult> subscription;
-
   Locale _locale;
   setLocale(Locale locale) async {
     setState(() {
@@ -41,32 +37,6 @@ class _MyAppState extends State<MyApp> {
     });
     print('Applan:' + locale.toString());
     print('Applanshard:' + User.appLang);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    connectivity = new Connectivity();
-    subscription =
-        connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-      print(result);
-      if (result == ConnectivityResult.wifi ||
-          result == ConnectivityResult.mobile) {
-        setState(() {
-          _connectionStatus = false;
-        });
-      } else {
-        setState(() {
-          _connectionStatus = true;
-        });
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    subscription.cancel();
-    super.dispose();
   }
 
   @override
@@ -88,51 +58,52 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    print("_connectionStatus:$_connectionStatus");
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        canvasColor: Colors.white,
-        scaffoldBackgroundColor: Colors.white,
-        primaryIconTheme: IconThemeData(color: Colors.white),
-        primaryColor: customColor,
-        iconTheme: IconThemeData(color: Colors.white),
+    return StreamProvider<ConnectivityStatus>(
+      builder: (context) => ConnectivityService().connectionStatusController,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          canvasColor: Colors.white,
+          scaffoldBackgroundColor: Colors.white,
+          primaryIconTheme: IconThemeData(color: Colors.white),
+          primaryColor: customColor,
+          iconTheme: IconThemeData(color: Colors.white),
+        ),
+        initialRoute: SplashScreen.route,
+        routes: routes,
+        locale: _locale,
+        supportedLocales: [
+          const Locale('ar', 'EG'),
+          const Locale('en', 'US'),
+        ],
+        localizationsDelegates: [
+          AppLocalization.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        localeResolutionCallback: (deviceLocale, supportedLocales) {
+          if (User.appLang == null) {
+            for (var locale in supportedLocales) {
+              if (locale.languageCode == Platform.localeName.split('_')[0] &&
+                  locale.countryCode == Platform.localeName.split('_')[1]) {
+                return locale;
+              }
+            }
+
+            return supportedLocales.first;
+          } else {
+            for (var locale in supportedLocales) {
+              if (locale.languageCode == User.appLang.split('_')[0] &&
+                  locale.countryCode == User.appLang.split('_')[1]) {
+                return locale;
+              }
+            }
+
+            return supportedLocales.first;
+          }
+        },
       ),
-      initialRoute:
-          (_connectionStatus) ? EnterNitCON.route : SplashScreen.route,
-      routes: routes,
-      locale: _locale,
-      supportedLocales: [
-        const Locale('ar', 'EG'),
-        const Locale('en', 'US'),
-      ],
-      localizationsDelegates: [
-        AppLocalization.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      localeResolutionCallback: (deviceLocale, supportedLocales) {
-        if (User.appLang == null) {
-          for (var locale in supportedLocales) {
-            if (locale.languageCode == Platform.localeName.split('_')[0] &&
-                locale.countryCode == Platform.localeName.split('_')[1]) {
-              return locale;
-            }
-          }
-
-          return supportedLocales.first;
-        } else {
-          for (var locale in supportedLocales) {
-            if (locale.languageCode == User.appLang.split('_')[0] &&
-                locale.countryCode == User.appLang.split('_')[1]) {
-              return locale;
-            }
-          }
-
-          return supportedLocales.first;
-        }
-      },
     );
   }
 }

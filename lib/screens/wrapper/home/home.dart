@@ -8,6 +8,7 @@ import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/components/coursesfillter.dart';
 import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:DrHwaida/screens/menu/menu.dart';
+import 'package:DrHwaida/services/network_sensitive.dart';
 import 'package:DrHwaida/sharedPreferences.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -135,59 +136,61 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Menu(),
       ),
-      body: RefreshIndicator(
-        onRefresh: onRefresh,
-        child: Stack(
-          children: [
-            (looding)
-                ? Container()
-                : Container(
-                    height: MediaQuery.of(context).size.height - 130,
-                    child: ListView(
-                      shrinkWrap: true,
-                      primary: true,
-                      // physics: AlwaysScrollableScrollPhysics(),
-                      children: [
-                        CustomHomeAppBer(scaffoldKey: scaffoldKey),
-                        rowofHmeTaps(context),
-                        paner(context),
-                        sctionTitle(
-                            title: getTranslated(context, "consultants"),
-                            context: context,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) => ConsultantPage(),
-                                ),
-                              );
-                            }),
-                        Container(
-                          height: 200,
-                          child: getConsultant(),
-                        ),
-                        sctionTitle(
-                            title: getTranslated(context, 'Courses'),
-                            context: context,
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (_) =>
-                                      CoursesPage(title: 'All Courses'),
-                                ),
-                              );
-                            }),
-                        Container(
-                          height: 200,
-                          child: getCourses(),
-                        ),
-                      ],
+      body: NetworkSensitive(
+        child: RefreshIndicator(
+          onRefresh: onRefresh,
+          child: Stack(
+            children: [
+              (looding)
+                  ? Container()
+                  : Container(
+                      height: MediaQuery.of(context).size.height - 130,
+                      child: ListView(
+                        shrinkWrap: true,
+                        primary: true,
+                        // physics: AlwaysScrollableScrollPhysics(),
+                        children: [
+                          CustomHomeAppBer(scaffoldKey: scaffoldKey),
+                          rowofHmeTaps(context),
+                          paner(context),
+                          sctionTitle(
+                              title: getTranslated(context, "consultants"),
+                              context: context,
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) => ConsultantPage(),
+                                  ),
+                                );
+                              }),
+                          Container(
+                            height: 200,
+                            child: getConsultant(),
+                          ),
+                          sctionTitle(
+                              title: getTranslated(context, 'Courses'),
+                              context: context,
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        CoursesPage(title: 'All Courses'),
+                                  ),
+                                );
+                              }),
+                          Container(
+                            height: 200,
+                            child: getCourses(),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: CustomBottomNavigationBar(),
-            ),
-          ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: CustomBottomNavigationBar(),
+              ),
+            ],
+          ),
         ),
       ),
     );

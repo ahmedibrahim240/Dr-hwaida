@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/models/user.dart';
-import 'package:connectivity/connectivity.dart';
+import 'package:DrHwaida/services/network_sensitive.dart';
 import 'package:flutter/material.dart';
 import '../sharedPreferences.dart';
 import 'onboarding/onboarding.dart';
@@ -38,31 +38,11 @@ class _SplashScreenState extends State<SplashScreen> {
     print('Applanshard:${User.appLang}');
   }
 
-  bool _connectionStatus = false;
-  Connectivity connectivity;
-  // ignore: cancel_subscriptions
-  StreamSubscription<ConnectivityResult> subscription;
-
   @override
   void initState() {
     getDateOfUser();
 
     super.initState();
-    connectivity = new Connectivity();
-    subscription =
-        connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-      print("result______________________________________");
-      print(result);
-      if (result == ConnectivityResult.wifi ||
-          result == ConnectivityResult.mobile) {
-        setState(() {
-          _connectionStatus = !_connectionStatus;
-        });
-      } else {
-        _connectionStatus = !_connectionStatus;
-      }
-    });
-    print("_connectionStatus:$_connectionStatus");
 
     Timer(
       Duration(seconds: 10),
@@ -88,24 +68,26 @@ class _SplashScreenState extends State<SplashScreen> {
         toolbarHeight: 0,
         backgroundColor: customColor,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Container(
-              height: 200,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('lib/images/logo.png'),
-                  fit: BoxFit.fitHeight,
+      body: NetworkSensitive(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Container(
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('lib/images/logo.png'),
+                    fit: BoxFit.fitHeight,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 20),
-          CircularProgressIndicator(),
-        ],
+            SizedBox(height: 20),
+            CircularProgressIndicator(),
+          ],
+        ),
       ),
     );
   }

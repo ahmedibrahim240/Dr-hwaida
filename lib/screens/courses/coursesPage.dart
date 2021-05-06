@@ -4,6 +4,7 @@ import 'package:DrHwaida/models/coursesApi.dart';
 import 'package:DrHwaida/screens/CustomBottomNavigationBar.dart';
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
 import 'package:DrHwaida/screens/wrapper/home/components/homeFunctions.dart';
+import 'package:DrHwaida/services/network_sensitive.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,27 +23,29 @@ class _CoursesPageState extends State<CoursesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height - 140,
-            child: ListView(
-              shrinkWrap: true,
-              primary: true,
-              children: [
-                consultantAppBer(
-                  context,
-                ),
-                coursesgraidView(),
-                SizedBox(height: 20),
-              ],
+      body: NetworkSensitive(
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height - 140,
+              child: ListView(
+                shrinkWrap: true,
+                primary: true,
+                children: [
+                  consultantAppBer(
+                    context,
+                  ),
+                  coursesgraidView(),
+                  SizedBox(height: 20),
+                ],
+              ),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: CustomBottomNavigationBar(),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CustomBottomNavigationBar(),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -10,6 +10,7 @@ import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/comp
 import 'package:DrHwaida/screens/wrapper/authenticate/signUp/singUpUserInfo/components/status.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:DrHwaida/services/dataBase.dart';
+import 'package:DrHwaida/services/network_sensitive.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:io';
@@ -79,196 +80,198 @@ class _UserProfileState extends State<UserProfile> {
           if (snapshot.hasData) {
             Users userData = snapshot.data;
 
-            return Stack(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height - 150,
-                  child: ListView(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 40,
-                    ),
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          UserPorfileImage(
-                            userimgUrl: userData.userImageUrl,
-                            gender: userData.userGender,
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            (name) ?? userData.name,
-                            style: AppTheme.heading.copyWith(
-                              fontSize: 20,
-                              color: customColor,
-                            ),
-                          ),
-                        ],
+            return NetworkSensitive(
+              child: Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height - 150,
+                    child: ListView(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 40,
                       ),
-                      SizedBox(height: 20),
-                      Form(
-                        child: Column(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            TextFormField(
-                              initialValue: userData.name,
-                              onChanged: (val) {
-                                setState(
-                                  () {
-                                    name = val;
-                                  },
-                                );
-                              },
-                              decoration: InputDecoration(
-                                suffixIcon: Icon(
-                                  Icons.edit,
-                                ),
-                                prefixIcon: Container(
-                                  margin: EdgeInsets.all(8),
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    gradient: AppTheme.containerBackground,
-                                  ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.person,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            TextFormField(
-                              initialValue: userData.phoneNumber,
-                              keyboardType: TextInputType.phone,
-                              onChanged: (val) {
-                                setState(
-                                  () {
-                                    userPhone = val;
-                                  },
-                                );
-                              },
-                              decoration: InputDecoration(
-                                suffixIcon: Icon(
-                                  Icons.edit,
-                                ),
-                                prefixIcon: Container(
-                                  margin: EdgeInsets.all(8),
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    gradient: AppTheme.containerBackground,
-                                  ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.phone,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            TextFormField(
-                              initialValue: userData.email,
-                              onChanged: (val) {
-                                setState(
-                                  () {
-                                    userEmail = val;
-                                  },
-                                );
-                              },
-                              decoration: InputDecoration(
-                                suffixIcon: Icon(
-                                  Icons.edit,
-                                ),
-                                prefixIcon: Container(
-                                  margin: EdgeInsets.all(8),
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    gradient: AppTheme.containerBackground,
-                                  ),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.email,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Status(
-                                    stauts: userData.userStutes,
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  flex: 1,
-                                  child: Age(
-                                    age: userData.userBrDate,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 20),
-                            Gender(
+                            UserPorfileImage(
+                              userimgUrl: userData.userImageUrl,
                               gender: userData.userGender,
                             ),
                             SizedBox(height: 20),
-                            RaisedButton(
-                              color: customColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              onPressed: () {
-                                DatabaseServices(
-                                        userToken: User.userToken,
-                                        context: context)
-                                    .upDateUserData(
-                                  age: (Age.resAge) ?? userData.userBrDate,
-                                  userEmail: (userEmail) ?? userData.email,
-                                  name: (name) ?? userData.name,
-                                  status: (Status.resStautes) ??
-                                      userData.userStutes,
-                                  gender:
-                                      (Gender.resGender) ?? userData.userGender,
-                                  phoneNummber:
-                                      (userPhone) ?? userData.phoneNumber,
-                                  userImage: (UserPorfileImage.image) ?? null,
-                                  context: context,
-                                );
-                              },
-                              child: Text(
-                                getTranslated(context, 'save'),
-                                style: AppTheme.heading.copyWith(
-                                  color: Colors.white,
-                                ),
+                            Text(
+                              (name) ?? userData.name,
+                              style: AppTheme.heading.copyWith(
+                                fontSize: 20,
+                                color: customColor,
                               ),
                             ),
-                            SizedBox(height: 20),
                           ],
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 20),
+                        Form(
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                initialValue: userData.name,
+                                onChanged: (val) {
+                                  setState(
+                                    () {
+                                      name = val;
+                                    },
+                                  );
+                                },
+                                decoration: InputDecoration(
+                                  suffixIcon: Icon(
+                                    Icons.edit,
+                                  ),
+                                  prefixIcon: Container(
+                                    margin: EdgeInsets.all(8),
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: AppTheme.containerBackground,
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.person,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              TextFormField(
+                                initialValue: userData.phoneNumber,
+                                keyboardType: TextInputType.phone,
+                                onChanged: (val) {
+                                  setState(
+                                    () {
+                                      userPhone = val;
+                                    },
+                                  );
+                                },
+                                decoration: InputDecoration(
+                                  suffixIcon: Icon(
+                                    Icons.edit,
+                                  ),
+                                  prefixIcon: Container(
+                                    margin: EdgeInsets.all(8),
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: AppTheme.containerBackground,
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.phone,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              TextFormField(
+                                initialValue: userData.email,
+                                onChanged: (val) {
+                                  setState(
+                                    () {
+                                      userEmail = val;
+                                    },
+                                  );
+                                },
+                                decoration: InputDecoration(
+                                  suffixIcon: Icon(
+                                    Icons.edit,
+                                  ),
+                                  prefixIcon: Container(
+                                    margin: EdgeInsets.all(8),
+                                    height: 40,
+                                    width: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15),
+                                      gradient: AppTheme.containerBackground,
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.email,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Status(
+                                      stauts: userData.userStutes,
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Age(
+                                      age: userData.userBrDate,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 20),
+                              Gender(
+                                gender: userData.userGender,
+                              ),
+                              SizedBox(height: 20),
+                              RaisedButton(
+                                color: customColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                onPressed: () {
+                                  DatabaseServices(
+                                          userToken: User.userToken,
+                                          context: context)
+                                      .upDateUserData(
+                                    age: (Age.resAge) ?? userData.userBrDate,
+                                    userEmail: (userEmail) ?? userData.email,
+                                    name: (name) ?? userData.name,
+                                    status: (Status.resStautes) ??
+                                        userData.userStutes,
+                                    gender: (Gender.resGender) ??
+                                        userData.userGender,
+                                    phoneNummber:
+                                        (userPhone) ?? userData.phoneNumber,
+                                    userImage: (UserPorfileImage.image) ?? null,
+                                    context: context,
+                                  );
+                                },
+                                child: Text(
+                                  getTranslated(context, 'save'),
+                                  style: AppTheme.heading.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomBottomNavigationBar(),
-                ),
-              ],
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: CustomBottomNavigationBar(),
+                  ),
+                ],
+              ),
             );
           } else {
             return Container(
