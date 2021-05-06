@@ -158,7 +158,7 @@
     "videos":"Videos",
     "end_time":"End time",
     "total_time":"Total hours",
-    "networkError":"There is currently no data or there is a problem connecting to the Internet, please try again",
+    "networkError":"There is currently no data ",
     "myCouresIsempaty":"'You must buy dollars first \n If you actually buy \n Courses will be displayed upon completion of the purchase process'",
     "Day":"Day"
     

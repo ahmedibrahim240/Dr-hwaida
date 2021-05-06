@@ -145,37 +145,10 @@ class _HomeState extends State<Home> {
                         // physics: AlwaysScrollableScrollPhysics(),
                         children: [
                           CustomHomeAppBer(scaffoldKey: scaffoldKey),
-                          rowofHmeTaps(context),
+                          // rowofHmeTaps(context),
                           paner(context),
-                          sctionTitle(
-                              title: getTranslated(context, "consultants"),
-                              context: context,
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (_) => ConsultantPage(),
-                                  ),
-                                );
-                              }),
-                          Container(
-                            height: 200,
-                            child: getConsultant(),
-                          ),
-                          sctionTitle(
-                              title: getTranslated(context, 'Courses'),
-                              context: context,
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (_) =>
-                                        CoursesPage(title: 'All Courses'),
-                                  ),
-                                );
-                              }),
-                          Container(
-                            height: 200,
-                            child: getCourses(),
-                          ),
+                          getConsultant(),
+                          getCourses(),
                         ],
                       ),
                     ),

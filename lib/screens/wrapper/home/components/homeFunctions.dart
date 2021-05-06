@@ -14,6 +14,7 @@ import 'package:DrHwaida/screens/consultantPageView/consultantPageView.dart';
 import 'package:DrHwaida/screens/courses/chosesColurses.dart';
 
 import 'package:DrHwaida/screens/courses/coursesDetails.dart';
+import 'package:DrHwaida/screens/courses/coursesPage.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,44 +25,53 @@ FutureBuilder<List<Consultant>> getConsultant() {
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         return (snapshot.data == null || snapshot.data.isEmpty)
-            ? Container(
-                child: Center(
-                  child: Text(
-                    getTranslated(context, 'networkError'),
-                    style: AppTheme.heading,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
-            : ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: snapshot.data.length,
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                itemBuilder: (context, index) {
-                  print(snapshot.data[index].badges);
-                  return consulHomeCard(
-                    context: context,
-                    imageUrl: snapshot.data[index].image,
-                    oldPrie: snapshot.data[index].coust,
-                    newPrie: snapshot.data[index].total_coust,
-                    consulName: snapshot.data[index].name,
-                    discount: snapshot.data[index].discount,
-                    rate: double.parse(
-                      snapshot.data[index].rate,
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => ConsultantPageView(
-                            consultant: snapshot.data[index],
-                            consulId: snapshot.data[index].id,
+            ? Container()
+            : Column(
+                children: [
+                  sctionTitle(
+                      title: getTranslated(context, "consultants"),
+                      context: context,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => ConsultantPage(),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                },
+                        );
+                      }),
+                  Container(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      itemBuilder: (context, index) {
+                        print(snapshot.data[index].badges);
+                        return consulHomeCard(
+                          context: context,
+                          imageUrl: snapshot.data[index].image,
+                          oldPrie: snapshot.data[index].coust,
+                          newPrie: snapshot.data[index].total_coust,
+                          consulName: snapshot.data[index].name,
+                          discount: snapshot.data[index].discount,
+                          rate: double.parse(
+                            snapshot.data[index].rate,
+                          ),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => ConsultantPageView(
+                                  consultant: snapshot.data[index],
+                                  consulId: snapshot.data[index].id,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
               );
       } else {
         return Center(child: CircularProgressIndicator());
@@ -77,35 +87,45 @@ FutureBuilder<List<Courses>> getCourses() {
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         return (snapshot.data == null || snapshot.data.isEmpty)
-            ? Container(
-                child: Center(
-                  child: Text(
-                    getTranslated(context, 'networkError'),
-                    style: AppTheme.heading,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
-            : ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: snapshot.data.length,
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                itemBuilder: (context, index) {
-                  return homeCoursesCard(
+            ? Container()
+            : Column(
+                children: [
+                  sctionTitle(
+                    title: getTranslated(context, 'Courses'),
+                    context: context,
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => CoursesDetails(
-                            courses: snapshot.data[index],
-                          ),
+                          builder: (_) => CoursesPage(title: 'All Courses'),
                         ),
                       );
                     },
-                    courses: snapshot.data[index],
-                    context: context,
-                  );
-                },
+                  ),
+                  Container(
+                    height: 200,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      itemBuilder: (context, index) {
+                        return homeCoursesCard(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => CoursesDetails(
+                                  courses: snapshot.data[index],
+                                ),
+                              ),
+                            );
+                          },
+                          courses: snapshot.data[index],
+                          context: context,
+                        );
+                      },
+                    ),
+                  ),
+                ],
               );
       } else {
         return Center(child: CircularProgressIndicator());
@@ -368,15 +388,7 @@ paner(BuildContext context) {
       if (snapshot.hasData) {
         List list = snapshot.data;
         return (snapshot.data == null || snapshot.data.isEmpty)
-            ? Container(
-                child: Center(
-                  child: Text(
-                    getTranslated(context, 'networkError'),
-                    style: AppTheme.heading,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
+            ? Container()
             : Container(
                 child: Column(
                   children: <Widget>[
