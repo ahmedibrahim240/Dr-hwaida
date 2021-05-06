@@ -3,6 +3,8 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:DrHwaida/constants/constans.dart';
+
 
 class CoutactUSApi {
   static Future<Settinges> gitContactUS() async {
@@ -10,7 +12,7 @@ class CoutactUSApi {
     var response = await http.get(Utils.SETTINGES_URL, headers: {
       'Accept': 'application/json',
       'x-api-key': User.userToken,
-      'lang': User.apiLang,
+        'lang': apiLang(),
     });
     var jsonData = json.decode(response.body);
     try {

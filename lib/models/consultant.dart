@@ -65,4 +65,3 @@ class AvailableTimes {
   });
 }
 
-List<Consultant> consultantList = [];

@@ -48,6 +48,10 @@ class _LogInState extends State<LogIn> {
             'mobile': phoneNummber,
             'password': password,
           },
+          headers: {
+                 'lang': apiLang(),
+
+        },
         );
 
         Map<String, dynamic> map = json.decode(response.body);
@@ -110,7 +114,7 @@ class _LogInState extends State<LogIn> {
             'name': name,
           },
           headers: {
-            'lang': User.apiLang,
+                 'lang': apiLang(),
           },
         );
         print(response.statusCode);
@@ -186,7 +190,7 @@ class _LogInState extends State<LogIn> {
           final graphResponse = await http.get(
             'https://graph.facebook.com/v2.12/me?fields=name,email&access_token=$token',
             headers: {
-              'lang': User.apiLang,
+                   'lang': apiLang(),
             },
           );
           final profile = json.decode(graphResponse.body);
@@ -230,7 +234,7 @@ class _LogInState extends State<LogIn> {
             'name': name,
           },
           headers: {
-            'lang': User.apiLang,
+                 'lang': apiLang(),
           },
         );
         print(response.statusCode);

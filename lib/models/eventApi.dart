@@ -3,6 +3,8 @@ import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:DrHwaida/constants/constans.dart';
+
 
 class EventsApi {
   static Future<List<CustomEvent>> fetchAllEvent() async {
@@ -13,7 +15,7 @@ class EventsApi {
         // 'Accept': 'application/json',
         'x-api-key': User.userToken,
         "Connection": "keep-alive",
-        'lang': User.apiLang,
+        'lang':apiLang(),
       });
       var jsonData = json.decode(response.body);
       if (response.statusCode == 200) {

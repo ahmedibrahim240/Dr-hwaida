@@ -198,7 +198,7 @@ class _RegisterAsConsultantState extends State<RegisterAsConsultant> {
         },
         headers: {
           'Accept': "application/json",
-          'lang': User.apiLang,
+                 'lang': apiLang(),
         },
       );
       Map<String, dynamic> map = json.decode(response.body);

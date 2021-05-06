@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:DrHwaida/models/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:DrHwaida/models/utils.dart';
+import 'package:DrHwaida/constants/constans.dart';
 
 class AboutUS {
   final String imageUrl;
@@ -16,7 +16,7 @@ class AboutUSApi {
     var response = await http.get(
       Utils.AboutUS_URL,
       headers: {
-        'lang': User.apiLang,
+        'lang': apiLang(),
       },
     );
     var jsonData = json.decode(response.body);
