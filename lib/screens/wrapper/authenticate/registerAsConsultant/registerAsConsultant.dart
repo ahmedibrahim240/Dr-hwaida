@@ -1,7 +1,6 @@
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
-import 'package:DrHwaida/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:DrHwaida/models/utils.dart';
 import 'package:http/http.dart' as http;
