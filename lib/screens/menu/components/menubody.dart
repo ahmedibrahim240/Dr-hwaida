@@ -39,7 +39,7 @@ class _MenuBodyState extends State<MenuBody> {
   Widget build(BuildContext context) {
     return Container(
       height: (User.userSkipLogIn == true)
-          ? widget.height - 40
+          ? widget.height - 50
           : widget.height - 290,
       child: Stack(
         children: [

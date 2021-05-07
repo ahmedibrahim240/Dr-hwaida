@@ -32,7 +32,7 @@ class _MenuState extends State<Menu> {
                   userImageurl: userImgUrl,
                   userName: userName,
                 ),
-          (User.appLang == true)
+          (User.userSkipLogIn != false)
               ? Container()
               : Divider(
                   color: Colors.grey[300],

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static final TextStyle heading = TextStyle(
-    fontFamily: 'Cairo',
-    fontWeight: FontWeight.w700,
+    fontFamily: 'BebasNeue',
+    fontWeight: FontWeight.w600,
     fontSize: 12,
     letterSpacing: 1.2,
     color: Colors.black,
   );
   static final TextStyle subHeading = TextStyle(
-    fontFamily: 'Cairo',
+    fontFamily: 'BebasNeue',
     fontSize: 10,
     color: Colors.black,
   );

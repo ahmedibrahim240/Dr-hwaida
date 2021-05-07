@@ -112,7 +112,10 @@ flutter:
         - asset: lib/fonts/Cairo-Regular.ttf
         - asset: lib/fonts/Cairo-Bold.ttf
         - asset: lib/fonts/Cairo-SemiBold.ttf
-          
+    - family: BebasNeue
+      fonts:
+        - asset: lib/fonts/BebasNeue-Regular.ttf
+        
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
