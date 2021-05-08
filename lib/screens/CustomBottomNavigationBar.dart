@@ -64,14 +64,14 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                             Icons.person,
                             color: (Helper.tappedBottomShet == 1)
                                 ? customColor
-                                : customColorGray,
+                                : customColor.withOpacity(.5),
                           ),
                           Text(
                             getTranslated(context, 'profile'),
                             style: AppTheme.heading.copyWith(
                               color: (Helper.tappedBottomShet == 1)
                                   ? customColor
-                                  : customColorGray,
+                                  : customColor.withOpacity(.5),
                               fontSize: 10,
                             ),
                           ),
@@ -101,14 +101,14 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                             Icons.home,
                             color: (Helper.tappedBottomShet == 0)
                                 ? customColor
-                                : customColorGray,
+                                : customColor.withOpacity(.5),
                           ),
                           Text(
                             getTranslated(context, 'home_page'),
                             style: AppTheme.heading.copyWith(
                               color: (Helper.tappedBottomShet == 0)
                                   ? customColor
-                                  : customColorGray,
+                                  : customColor.withOpacity(.5),
                               fontSize: 10,
                             ),
                           ),
@@ -144,12 +144,12 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       border: Border.all(
                         color: (Helper.tappedBottomShet == 2)
                             ? customColor
-                            : customColorGray,
+                            : customColor.withOpacity(.5),
                         width: 2,
                       ),
                       color: Colors.white,
                       image: DecorationImage(
-                        image: AssetImage('lib/images/logo.png'),
+                        image: AssetImage('lib/images/logowhite.png'),
                         fit: BoxFit.fitWidth,
                       ),
                     ),
@@ -161,7 +161,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       style: AppTheme.heading.copyWith(
                         color: (Helper.tappedBottomShet == 2)
                             ? customColor
-                            : customColorGray,
+                            : customColor.withOpacity(.5),
                         fontSize: 10,
                       ),
                     ),

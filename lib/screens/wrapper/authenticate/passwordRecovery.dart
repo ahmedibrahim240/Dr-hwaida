@@ -2,6 +2,7 @@ import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/verfyPassword.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PasswordRecovery extends StatefulWidget {
@@ -13,6 +14,9 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
   final _formKey = GlobalKey<FormState>();
   bool verification = true;
   bool changePass = false;
+  String phone;
+  String verificationCode;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +63,20 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                       ),
                       SizedBox(height: 40),
                       TextFormField(
+                        onChanged: (val) {
+                          setState(() {
+                            phone = val;
+                          });
+                        },
+                        keyboardType: TextInputType.phone,
                         style: TextStyle(color: Colors.black),
+                        validator: (val) => val.isEmpty
+                            ? getTranslated(context, "valid_email_phone")
+                            : null,
                         decoration: InputDecoration(
                           fillColor: Colors.white,
                           filled: true,
+                          labelText: getTranslated(context, "phone_num"),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
@@ -83,9 +97,12 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                       CustomButton(
                         text: getTranslated(context, "send"),
                         onPress: () {
+                          _verifyPhone();
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (_) => VerifyPhone(),
+                              builder: (_) => VerifyPhone(
+                                phone: phone,
+                              ),
                             ),
                           );
                         },
@@ -98,6 +115,31 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
           ),
         ),
       ),
+    );
+  }
+
+  _verifyPhone() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      codeAutoRetrievalTimeout: (String verificationId) {
+        setState(() {
+          verificationCode = verificationId;
+        });
+        print('verificationId:$verificationId');
+      },
+      codeSent: (String verificationId, [int forceResendingToken]) {
+        setState(() {
+          verificationCode = verificationId;
+        });
+        print('verificationId:$verificationId');
+      },
+      timeout: Duration(seconds: 60),
+      phoneNumber: '+2' + phone,
+      verificationCompleted: (PhoneAuthCredential phoneAuthCredential) {
+        print(verificationCode);
+      },
+      verificationFailed: (FirebaseAuthException error) {
+        print(error);
+      },
     );
   }
 }

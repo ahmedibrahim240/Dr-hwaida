@@ -150,6 +150,8 @@
     "catchError"                                           : "An error occurred during transmission, please try again later",
     "AdministrativeMessage"                           : "AdministrativeMessage",
     "trylater"                           : "Please try again in one minute",
+"interNet":"No internet connection",
+
     "Recent":"Recent",
     "HD_Certified":"HD Certified",
     "takepictuer":"Take a picture",

@@ -5,6 +5,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/models/utils.dart';
+import 'package:DrHwaida/screens/wrapper/authenticate/passwordRecovery.dart';
 import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +50,8 @@ class _LogInState extends State<LogIn> {
             'password': password,
           },
           headers: {
-                 'lang': apiLang(),
-
-        },
+            'lang': apiLang(),
+          },
         );
 
         Map<String, dynamic> map = json.decode(response.body);
@@ -114,7 +114,7 @@ class _LogInState extends State<LogIn> {
             'name': name,
           },
           headers: {
-                 'lang': apiLang(),
+            'lang': apiLang(),
           },
         );
         print(response.statusCode);
@@ -190,7 +190,7 @@ class _LogInState extends State<LogIn> {
           final graphResponse = await http.get(
             'https://graph.facebook.com/v2.12/me?fields=name,email&access_token=$token',
             headers: {
-                   'lang': apiLang(),
+              'lang': apiLang(),
             },
           );
           final profile = json.decode(graphResponse.body);
@@ -234,7 +234,7 @@ class _LogInState extends State<LogIn> {
             'name': name,
           },
           headers: {
-                 'lang': apiLang(),
+            'lang': apiLang(),
           },
         );
         print(response.statusCode);
@@ -480,12 +480,12 @@ class _LogInState extends State<LogIn> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          // Navigator.of(context).push(
-                                          //   MaterialPageRoute(
-                                          //     builder: (_) =>
-                                          //         PasswordRecovery(),
-                                          //   ),
-                                          // );
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (_) =>
+                                                  PasswordRecovery(),
+                                            ),
+                                          );
                                         },
                                         child: Text(
                                           getTranslated(context, "password?"),

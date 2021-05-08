@@ -63,8 +63,7 @@ class _RegisterState extends State<Register> {
           'status': status,
         },
         headers: {
-                 'lang': apiLang(),
-
+          'lang': apiLang(),
         },
       );
       print('stuates Code:${response.statusCode}');

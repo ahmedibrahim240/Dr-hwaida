@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           canvasColor: Colors.white,
-          scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: Color(0xffff1f1f1),
           primaryIconTheme: IconThemeData(color: Colors.white),
           primaryColor: customColor,
           iconTheme: IconThemeData(color: Colors.white),

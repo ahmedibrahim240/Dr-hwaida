@@ -3,19 +3,23 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/chagePassword.dart';
 // import 'package:DrHwaida/screens/wrapper/authenticate/chagePassword.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:code_fields/code_fields.dart';
 
 class VerifyPhone extends StatefulWidget {
+  final String phone;
+
+  const VerifyPhone({Key key, this.phone}) : super(key: key);
   @override
   _VerifyPhoneState createState() => _VerifyPhoneState();
 }
 
 class _VerifyPhoneState extends State<VerifyPhone> {
   final _formKey = GlobalKey<FormState>();
-  final int codeLength = 4;
-
+  final int codeLength = 6;
+  String verificationCode;
   String validateCode(String code) {
     if (code.length < codeLength)
       return "من فضلك اكمل الكود";
@@ -26,6 +30,35 @@ class _VerifyPhoneState extends State<VerifyPhone> {
     return null;
   }
 
+  _verifyPhone() async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      codeAutoRetrievalTimeout: (String verificationId) {
+        setState(() {
+          verificationCode = verificationId;
+        });
+        print('verificationId:$verificationId');
+      },
+      codeSent: (String verificationId, [int forceResendingToken]) {
+        setState(() {
+          verificationCode = verificationId;
+        });
+        print('verificationId:$verificationId');
+      },
+      timeout: Duration(seconds: 60),
+      phoneNumber: '+2' + widget.phone,
+      verificationCompleted: (PhoneAuthCredential phoneAuthCredential) {
+        print(verificationCode);
+      },
+      verificationFailed: (FirebaseAuthException error) {
+        print(error);
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
   // void onButtonPressed() {
   //   if (_formKey.currentState.validate()) {
   //     _formKey.currentState.save();
@@ -78,7 +111,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                         ),
                       ),
                       Text(
-                        getTranslated(context, "sent_code_to") + ' 0102412151',
+                        getTranslated(context, "sent_code_to") + widget.phone,
                         style: AppTheme.subHeading.copyWith(),
                       ),
                       SizedBox(height: 40),
@@ -120,7 +153,9 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                             ),
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              _verifyPhone();
+                            },
                             child: Text(
                               getTranslated(context, "resend"),
                               style: AppTheme.heading.copyWith(

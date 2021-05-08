@@ -72,6 +72,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
               vertical: 20,
             ),
             decoration: BoxDecoration(
+              color: Colors.white,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(15),
                 bottomRight: Radius.circular(15),

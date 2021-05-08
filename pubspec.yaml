@@ -54,7 +54,8 @@ dependencies:
   geolocator:
   # flutter_phone_direct_caller: ^1.0.1
   shared_preferences:
-  # firebase_auth: 
+  firebase_auth:
+  firebase_core: 
   # cloud_firestore: 
   provider: ^2.0.1
   google_sign_in:
