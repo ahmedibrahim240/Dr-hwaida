@@ -42,7 +42,8 @@ class _CounsultantRatingState extends State<CounsultantRating> {
                             CircleAvatar(
                               minRadius: 30,
                               maxRadius: 30,
-                              child: (snapshot.data[index].image != null)
+                              child: (snapshot.data[index].image != null &&
+                                      snapshot.data[index].image != '')
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(100),
                                       child: Container(
@@ -102,7 +103,12 @@ class _CounsultantRatingState extends State<CounsultantRating> {
                                 ),
                                 SizedBox(height: 5),
                                 Text(
-                                  (snapshot.data[index].comment) ?? "",
+                                  (snapshot.data[index].comment == null ||
+                                          snapshot.data[index].comment ==
+                                              "null" ||
+                                          snapshot.data[index].comment == '')
+                                      ? ""
+                                      : snapshot.data[index].comment,
                                   style: AppTheme.subHeading,
                                 ),
                               ],

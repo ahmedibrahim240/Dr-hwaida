@@ -20,6 +20,7 @@ import '../CustomBottomNavigationBar.dart';
 
 class UserProfile extends StatefulWidget {
   final String userName;
+  static bool loading = false;
 
   final String userimgUrl;
 
@@ -235,6 +236,9 @@ class _UserProfileState extends State<UserProfile> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 onPressed: () {
+                                  setState(() {
+                                    UserProfile.loading = !UserProfile.loading;
+                                  });
                                   DatabaseServices(
                                           userToken: User.userToken,
                                           context: context)
@@ -253,7 +257,9 @@ class _UserProfileState extends State<UserProfile> {
                                   );
                                 },
                                 child: Text(
-                                  getTranslated(context, 'save'),
+                                  (UserProfile.loading == true)
+                                      ? 'جاري الحفظ'
+                                      : getTranslated(context, 'save'),
                                   style: AppTheme.heading.copyWith(
                                     color: Colors.white,
                                   ),
@@ -446,13 +452,13 @@ class _UserPorfileImageState extends State<UserPorfileImage> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              title: Text("Pick from Gallery"),
+              title: Text(getTranslated(context, "Gallery")),
               onTap: () {
                 _loadPicker(ImageSource.gallery, context);
               },
             ),
             ListTile(
-              title: Text("Take a pictuer"),
+              title: Text(getTranslated(context, "takepictuer")),
               onTap: () {
                 _loadPicker(ImageSource.camera, context);
               },

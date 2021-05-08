@@ -76,6 +76,7 @@ class _HomeState extends State<Home> {
     gitFillterIndex();
     gitFCMToken();
     super.initState();
+    print("User.userToken:${User.userToken}");
   }
 
   gitFCMToken() {

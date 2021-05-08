@@ -16,6 +16,14 @@ class Utils {
         imgURl = 'lib/images/man.png';
         return imgURl;
         break;
+      case 'ذكر':
+        imgURl = 'lib/images/man.png';
+        return imgURl;
+        break;
+      case 'أنثى':
+        imgURl = 'lib/images/female.png';
+        return imgURl;
+        break;
       case 'Female':
         imgURl = 'lib/images/female.png';
         return imgURl;

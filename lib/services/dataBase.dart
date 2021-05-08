@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:DrHwaida/constants/constans.dart';
 import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
+import 'package:DrHwaida/screens/userProfile/userprofile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -19,8 +20,13 @@ class DatabaseServices {
   Map<String, dynamic> map;
   gituserData() async {
     try {
-      var response = await http
-          .get(Utils.GITUSERDATA_URL, headers: {'x-api-key': userToken});
+      var response = await http.get(
+        Utils.GITUSERDATA_URL,
+        headers: {
+          'x-api-key': userToken,
+          'lang': apiLang(),
+        },
+      );
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         print(response.statusCode.toString());
@@ -80,24 +86,55 @@ class DatabaseServices {
       dio.interceptors
           .add(InterceptorsWrapper(onRequest: (RequestOptions options) async {
         var customHeaders = {
-          'x-api-key': userToken,
+          'x-api-key': User.userToken,
         };
         options.headers.addAll(customHeaders);
         return options;
       }));
 
       Response response = await dio.post(Utils.UPDATEUSERDATA_URL, data: data);
-      print(response.data.toString());
-      if (response.data['success'] != false) {
-        showMyDialog(
-            context: context, message: getTranslated(context, "savaProChange"));
+      print(response.statusCode.toString());
+      if (response.statusCode == 200) {
+        if (response.data['success'] != false) {
+          UserProfile.loading = !UserProfile.loading;
+          showMyDialog(
+              context: context,
+              message: getTranslated(context, "savaProChange"));
+        } else {
+          showMyDialog(context: context, message: response.data['message']);
+        }
+      } else if (response.statusCode == 429) {
+        UserProfile.loading = !UserProfile.loading;
+
+        showCatchDialog(
+          context: context,
+          message: getTranslated(context, 'trylater'),
+        );
+      } else if (response.statusCode == 500) {
+        UserProfile.loading = !UserProfile.loading;
+
+        showCatchDialog(
+          context: context,
+          message: getTranslated(context, 'catchError'),
+        );
       } else {
-        showMyDialog(context: context, message: response.data['message']);
+        UserProfile.loading = !UserProfile.loading;
+
+        showCatchDialog(
+          context: context,
+          message: getTranslated(context, 'catchError'),
+        );
       }
     } catch (e) {
-      print('errrrroe');
-
+      print('Update Ussser Data');
       print(e.toString());
+
+      UserProfile.loading = !UserProfile.loading;
+
+      showCatchDialog(
+        context: context,
+        message: getTranslated(context, 'catchError'),
+      );
     }
   }
 
@@ -147,7 +184,7 @@ Future<void> showMyDialog({BuildContext context, var message}) async {
         actions: <Widget>[
           TextButton(
             child: Text(
-              'Cancel',
+              getTranslated(context, 'Cancel'),
               style: AppTheme.heading.copyWith(
                 color: customColor,
               ),

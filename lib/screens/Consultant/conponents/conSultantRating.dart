@@ -29,7 +29,7 @@ class ConsultantRating extends StatefulWidget {
 }
 
 class _ConsultantRatingState extends State<ConsultantRating> {
-  double rate;
+  double rate = 2.5;
   bool loading = false;
   String error = '';
   String coment;
@@ -102,7 +102,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
                                 SizedBox(height: 10),
                                 Center(
                                   child: SmoothStarRating(
-                                    rating: 0,
+                                    rating: rate,
                                     size: 25,
                                     onRated: (val) {
                                       setState(() {
@@ -147,7 +147,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
                                     });
                                   },
                                   validator: (val) => val.isEmpty
-                                      ? 'please add your answer'
+                                      ? getTranslated(context, 'addAnswers')
                                       : null,
                                   decoration: conectedTextFormStyle(
                                     lableText: getTranslated(context, 'answer'),
@@ -159,24 +159,17 @@ class _ConsultantRatingState extends State<ConsultantRating> {
                                 CustomButtonWithchild(
                                   color: customColor,
                                   onPress: () {
-                                    setState(() {
-                                      loading = !loading;
-                                    });
-                                    if (rate != null) {
-                                      if (_formKey.currentState.validate()) {
-                                        addRating(
-                                          answer: anwser,
-                                          coment: coment,
-                                          rate: rate,
-                                          id: widget.consultant_id,
-                                          lang: lang,
-                                        );
-                                      }
-                                    } else {
+                                    if (_formKey.currentState.validate()) {
                                       setState(() {
                                         loading = !loading;
-                                        error = 'plesse add your rate';
                                       });
+                                      addRating(
+                                        answer: anwser,
+                                        coment: coment,
+                                        rate: rate,
+                                        id: widget.consultant_id,
+                                        lang: lang,
+                                      );
                                     }
                                   },
                                   child: Center(
@@ -203,6 +196,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
 
   addRating(
       {double rate, String coment, String answer, int id, String lang}) async {
+    print(apiLang());
     try {
       var response = await http.post(
         Utils.RATE_URL,
@@ -214,6 +208,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
         },
         headers: {
           'x-api-key': User.userToken,
+          "lang": apiLang(),
         },
       );
 
@@ -225,7 +220,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
         });
         _scaffoldKey.currentState.showSnackBar(
           new SnackBar(
-            content: new Text('thank you for rating'),
+            content: new Text(getTranslated(context, 'RateThank')),
           ),
         );
       } else {
@@ -236,7 +231,7 @@ class _ConsultantRatingState extends State<ConsultantRating> {
         print(map['message']);
         _scaffoldKey.currentState.showSnackBar(
           new SnackBar(
-            content: new Text('Your rating failed,please try again'),
+            content: new Text(map['message'].toString()),
           ),
         );
       }

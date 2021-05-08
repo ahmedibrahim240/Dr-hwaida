@@ -1,4 +1,5 @@
 import 'package:DrHwaida/constants/themes.dart';
+import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/wrapper/authenticate/authenticate.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -32,6 +33,58 @@ Widget youtubePlayer(YoutubePlayerController controller) {
 }
 
 ////////////////////////////////////////////////////////////
+///
+Future<void> showCatchDialog({
+  BuildContext context,
+  String message,
+  Function onTap,
+  String buttonText,
+}) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Center(
+                child: Text(
+                  getTranslated(context, 'AdministrativeMessage'),
+                  style: AppTheme.heading.copyWith(
+                    color: customColor,
+                  ),
+                ),
+              ),
+              Center(
+                child: Text(
+                  message,
+                  style: AppTheme.subHeading,
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text(
+              buttonText ?? getTranslated(context, 'Cancel'),
+              style: AppTheme.heading.copyWith(
+                color: customColor,
+              ),
+            ),
+            onPressed: onTap ??
+                () {
+                  Navigator.of(context).pop();
+                },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+///
 apiLang() {
   switch (User.appLang) {
     case 'ar_EG':
@@ -62,27 +115,29 @@ String gitnewPrice({String descaound, String price}) {
 }
 
 /////////////////////////////////////
-customCachedNetworkImage({String url, BuildContext context}) {
-  if (url == null || url == '') {
-    return Container(
-      child: Icon(
-        Icons.image,
-        color: Colors.lightBlueAccent,
-      ),
-    );
-  } else {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      child: CachedNetworkImage(
-        imageUrl: url,
-        fit: BoxFit.cover,
-        progressIndicatorBuilder: (context, url, downloadProgress) => Center(
-            child: CircularProgressIndicator(
-          value: downloadProgress.progress,
-        )),
-        errorWidget: (context, url, error) => Icon(Icons.error),
-      ),
-    );
+customCachedNetworkImage({String url, BuildContext context, BoxFit boxFit}) {
+  try {
+    if (url == null || url == '') {
+      return Container();
+    } else {
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        child: (Uri.parse(url).isAbsolute)
+            ? CachedNetworkImage(
+                imageUrl: url,
+                fit: (boxFit) ?? BoxFit.cover,
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              )
+            : Icon(
+                Icons.image,
+                color: customColor,
+              ),
+      );
+    }
+  } catch (e) {
+    print(e.toString());
   }
 }
 
@@ -97,7 +152,7 @@ Future<void> showMyDialog({BuildContext context}) async {
           child: ListBody(
             children: <Widget>[
               Text(
-                'you Shoud be login frist',
+                getTranslated(context, 'loginfirst'),
                 style: AppTheme.heading.copyWith(
                   color: customColor,
                 ),
@@ -108,7 +163,7 @@ Future<void> showMyDialog({BuildContext context}) async {
         actions: <Widget>[
           TextButton(
             child: Text(
-              'Cancel',
+              getTranslated(context, 'Cancel'),
               style: AppTheme.heading.copyWith(
                 color: customColor,
               ),
@@ -123,7 +178,7 @@ Future<void> showMyDialog({BuildContext context}) async {
               borderRadius: BorderRadius.circular(35),
             ),
             child: Text(
-              'LogIn',
+              getTranslated(context, "Entry"),
               style: AppTheme.heading.copyWith(
                 color: Colors.white,
               ),

@@ -209,9 +209,6 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                             color: customColor,
                             onPress: () {
                               if (User.userSkipLogIn != true) {
-                                print(widget.consultant.question);
-                                print(widget.consultant.id);
-
                                 flitter(
                                   context: context,
                                   child: ConsultantRating(
@@ -282,7 +279,7 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
                               children: [
                                 (widget.consultant.discount != '0')
                                     ? Text(
-                                        widget.consultant.coust + '\$',
+                                        widget.consultant.coust + ' EPG',
                                         style: AppTheme.subHeading.copyWith(
                                           color: customColorIcon,
                                           decoration:
