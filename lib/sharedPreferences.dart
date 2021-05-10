@@ -7,7 +7,7 @@ class MySharedPreferences {
   static String sharedPrefUserLong = 'Long';
   static String sharedPrefUserselectedProImage = 'IsSelected';
   static String sharedPrefAppLang = 'AppLan';
-  static String sharedPrefApiLang = 'ApiLang';
+  // static String sharedPrefApiLang = 'ApiLang';
   static String sharedPrefUserPre = 'pref';
   static String sharedPrefUserName = 'UserName';
   static String sharedPrefUserUserEmail = 'UserEmail';
@@ -91,10 +91,10 @@ class MySharedPreferences {
     return await preferences.setString(sharedPrefAppLang, appLang);
   }
 
-  static Future<bool> saveApiLang(String apiLang) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return await preferences.setString(sharedPrefApiLang, apiLang);
-  }
+  // static Future<bool> saveApiLang(String apiLang) async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   return await preferences.setString(sharedPrefApiLang, apiLang);
+  // }
 
   static Future<bool> saveUserPrfe(String appLang) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -212,11 +212,11 @@ class MySharedPreferences {
     return appLang;
   }
 
-  static getApiLang() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var appLang = preferences.getString(sharedPrefApiLang);
-    return appLang;
-  }
+  // static getApiLang() async {
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //   var appLang = preferences.getString(sharedPrefApiLang);
+  //   return appLang;
+  // }
 
   static getUserPre() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();

@@ -85,8 +85,8 @@ class _MyAppState extends State<MyApp> {
         localeResolutionCallback: (deviceLocale, supportedLocales) {
           if (User.appLang == null) {
             for (var locale in supportedLocales) {
-              if (locale.languageCode == Platform.localeName.split('_')[0] &&
-                  locale.countryCode == Platform.localeName.split('_')[1]) {
+              if (locale.languageCode == Platform.localeName.split('_')[0]) {
+                print("locale:$locale");
                 return locale;
               }
             }
@@ -94,8 +94,7 @@ class _MyAppState extends State<MyApp> {
             return supportedLocales.first;
           } else {
             for (var locale in supportedLocales) {
-              if (locale.languageCode == User.appLang.split('_')[0] &&
-                  locale.countryCode == User.appLang.split('_')[1]) {
+              if (locale.languageCode == User.appLang.split('_')[0]) {
                 return locale;
               }
             }

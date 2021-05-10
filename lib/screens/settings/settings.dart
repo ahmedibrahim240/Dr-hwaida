@@ -349,8 +349,8 @@ class _SettingsState extends State<Settings> {
 
     MySharedPreferences.saveAppLang(_locale.toString());
     User.appLang = await MySharedPreferences.getAppLang();
-    MySharedPreferences.saveApiLang(apiLang());
-    User.apiLang = await MySharedPreferences.getApiLang();
+    // MySharedPreferences.saveApiLang(apiLang());
+    // User.apiLang = await MySharedPreferences.getApiLang();
   }
 
   chagePassword({String oldPassword, String newPasswrod}) async {

@@ -3,7 +3,7 @@ import 'package:DrHwaida/constants/themes.dart';
 import 'package:DrHwaida/localization/localization_constants.dart';
 import 'package:DrHwaida/models/user.dart';
 import 'package:DrHwaida/screens/Consultant/consultant.dart';
-import 'package:DrHwaida/screens/splashscreen.dart';
+import 'package:DrHwaida/screens/wrapper/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -166,7 +166,7 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
             child: ListBody(
               children: <Widget>[
                 Text(
-                  'You should allow to get your location before complete your search,',
+                  getTranslated(context, 'locatinMess'),
                   style: AppTheme.heading.copyWith(
                     color: customColor,
                   ),
@@ -181,7 +181,7 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
                 borderRadius: BorderRadius.circular(35),
               ),
               child: Text(
-                'Allow',
+                getTranslated(context, 'Allow'),
                 style: AppTheme.heading.copyWith(
                   color: Colors.white,
                 ),
@@ -201,14 +201,13 @@ class _ConsultantFillterState extends State<ConsultantFillter> {
                   print('geoposition Erorr:' + e.toString());
                 }
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => SplashScreen()),
+                  MaterialPageRoute(builder: (BuildContext context) => Home()),
                 );
               },
             ),
             TextButton(
               child: Text(
-                'Cancel',
+                getTranslated(context, 'cancel'),
                 style: AppTheme.heading.copyWith(
                   color: customColor,
                 ),

@@ -33,7 +33,7 @@ class _OnBoardState extends State<OnBoard> {
   saveFillterIndex() async {
     User.userlat = await MySharedPreferences.getUserLat();
     User.userlong = await MySharedPreferences.getUserlong();
-    User.apiLang = await MySharedPreferences.getApiLang();
+    // User.apiLang = await MySharedPreferences.getApiLang();
     if (User.userlat != null && User.userlong != null) {
       MySharedPreferences.saveFilltterIndex(0);
       MySharedPreferences.saveFilltterType('location');

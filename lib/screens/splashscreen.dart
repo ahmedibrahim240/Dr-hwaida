@@ -24,17 +24,17 @@ class _SplashScreenState extends State<SplashScreen> {
     User.userLogIn = await MySharedPreferences.getUserSingIn();
     User.userToken = await MySharedPreferences.getUserUserToken();
     if (User.appLang == null) {
-      setState(() {
-        MySharedPreferences.saveAppLang(Platform.localeName);
-        MySharedPreferences.saveApiLang(apiLang());
-      });
-    } else {
-      MySharedPreferences.saveApiLang(apiLang());
+      if (Platform.localeName.split('_')[0] == 'ar') {
+        setState(() {
+          MySharedPreferences.saveAppLang('ar_EG');
+        });
+      } else {
+        setState(() {
+          MySharedPreferences.saveAppLang('en_US');
+        });
+      }
     }
-    User.apiLang = await MySharedPreferences.getApiLang();
-    MySharedPreferences.saveApiLang(apiLang());
-    print('Api:' + User.apiLang);
-    print('Applanshard:${User.appLang}');
+    User.appLang = await MySharedPreferences.getAppLang();
   }
 
   @override

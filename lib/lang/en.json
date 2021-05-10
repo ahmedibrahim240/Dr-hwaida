@@ -151,6 +151,10 @@
     "AdministrativeMessage"                           : "AdministrativeMessage",
     "trylater"                           : "Please try again in one minute",
 "interNet":"No internet connection",
+"locatinMess":"You should allow to get your location before complete your search,",
+
+"Allow":"Allow",
+
 
     "Recent":"Recent",
     "HD_Certified":"HD Certified",
