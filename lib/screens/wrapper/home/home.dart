@@ -77,6 +77,7 @@ class _HomeState extends State<Home> {
     gitFCMToken();
     super.initState();
     print("User.userToken:${User.userToken}");
+    print("User.Lang:${User.appLang}:${apiLang()}");
   }
 
   gitFCMToken() {

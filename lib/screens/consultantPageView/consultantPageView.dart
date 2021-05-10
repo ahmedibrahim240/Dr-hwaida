@@ -83,9 +83,8 @@ class _ConsultantPageViewState extends State<ConsultantPageView> {
               ),
             ),
             child: Align(
-              alignment: (User.appLang == "ar_EG")
-                  ? Alignment.topRight
-                  : Alignment.topLeft,
+              alignment:
+                  (apiLang() == "ar") ? Alignment.topRight : Alignment.topLeft,
               child: InkWell(
                 onTap: () {
                   Navigator.of(context).pop();

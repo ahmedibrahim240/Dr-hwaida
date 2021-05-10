@@ -64,7 +64,8 @@ class _ComingSoonState extends State<ComingSoon> {
             ),
           ),
           Align(
-            alignment: Alignment.topLeft,
+            alignment:
+                (apiLang() == "ar") ? Alignment.topRight : Alignment.topLeft,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
