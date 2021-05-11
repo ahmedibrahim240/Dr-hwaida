@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static final TextStyle heading = TextStyle(
     fontFamily: 'BebasNeue',
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w700,
     fontSize: 12,
     letterSpacing: 1.2,
     color: Colors.black,
