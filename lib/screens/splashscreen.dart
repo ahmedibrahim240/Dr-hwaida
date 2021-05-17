@@ -24,6 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
     User.userLogIn = await MySharedPreferences.getUserSingIn();
     User.userToken = await MySharedPreferences.getUserUserToken();
     if (User.appLang == null) {
+      // setState(() {
+      //   MySharedPreferences.saveAppLang(Platform.localeName);
+      // });
       if (Platform.localeName.split('_')[0] == 'ar') {
         setState(() {
           MySharedPreferences.saveAppLang('ar_EG');

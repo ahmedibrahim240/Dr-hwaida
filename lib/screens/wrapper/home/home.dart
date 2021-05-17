@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
           child: Stack(
             children: [
               (looding)
-                  ? Container()
+                  ?  Center(child: CircularProgressIndicator())
                   : Container(
                       height: MediaQuery.of(context).size.height - 130,
                       child: ListView(
