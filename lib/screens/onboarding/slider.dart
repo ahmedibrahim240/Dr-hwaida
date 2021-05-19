@@ -42,7 +42,7 @@ class CustomSlider extends StatelessWidget {
             SizedBox(height: 10),
             Center(
               child: Text(
-                title,
+                title ?? '',
                 style: AppTheme.heading.copyWith(color: customColor),
               ),
             ),
@@ -52,6 +52,7 @@ class CustomSlider extends StatelessWidget {
               child: Center(
                 child: Text(
                   contant,
+                  textAlign: TextAlign.center,
                   style: AppTheme.subHeading.copyWith(
                     height: 1.5,
                     letterSpacing: .07,

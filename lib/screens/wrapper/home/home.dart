@@ -68,6 +68,15 @@ class _HomeState extends State<Home> {
     CoursesPage.fillter = await MySharedPreferences.getCoursesFiltterType();
   }
 
+  gitFCMToken() {
+    _fcm.getToken().then(
+      (token) {
+        print(token);
+        updateFcmToken(token);
+      },
+    );
+  }
+
   @override
   void initState() {
     getDateOfUser();
@@ -77,15 +86,6 @@ class _HomeState extends State<Home> {
     super.initState();
     print("User.userToken:${User.userToken}");
     print("User.Lang:${User.appLang}:${apiLang()}");
-  }
-
-  gitFCMToken() {
-    _fcm.getToken().then(
-      (token) {
-        print(token);
-        updateFcmToken(token);
-      },
-    );
   }
 
   updateFcmToken(var token) async {
@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
           child: Stack(
             children: [
               (looding)
-                  ?  Center(child: CircularProgressIndicator())
+                  ? Center(child: CircularProgressIndicator())
                   : Container(
                       height: MediaQuery.of(context).size.height - 130,
                       child: ListView(

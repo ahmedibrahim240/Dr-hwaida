@@ -75,29 +75,7 @@ class OnBoarding extends StatefulWidget {
 class _OnBoardingState extends State<OnBoarding> {
   int _currentPage = 0;
   PageController _controller = PageController();
-  List<Widget> _pages = [
-    CustomSlider(
-      title: 'Title',
-      contant:
-          'Title Contant Title Contant Title Contant Title ContantTitle Contant Title Contant Title Contant Title Contant Title Contant Title Contant  ',
-      image: 'lib/images/img3.png',
-      backImage: 'lib/images/back2.png',
-    ),
-    CustomSlider(
-      title: 'Title',
-      contant:
-          'Title Contant Title Contant Title Contant Title ContantTitle Contant Title Contant Title Contant Title Contant Title Contant Title Contant',
-      image: 'lib/images/img1.png',
-      backImage: 'lib/images/back3.png',
-    ),
-    CustomSlider(
-      title: 'Title',
-      contant:
-          'Title Contant Title Contant Title Contant Title ContantTitle Contant Title Contant Title Contant Title Contant Title Contant Title Contant',
-      image: 'lib/images/img2.png',
-      backImage: 'lib/images/back2.png',
-    ),
-  ];
+
   _onChanged(int index) {
     setState(() {
       _currentPage = index;
@@ -106,6 +84,26 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> _pages = [
+      CustomSlider(
+        // title: 'Title',
+        contant: getTranslated(context, 'onBord1'),
+        image: 'lib/images/img3.png',
+        backImage: 'lib/images/back2.png',
+      ),
+      CustomSlider(
+        // title: 'Title',
+        contant: getTranslated(context, 'onBord2'),
+        image: 'lib/images/img1.png',
+        backImage: 'lib/images/back3.png',
+      ),
+      CustomSlider(
+        // title: 'Title',
+        contant: getTranslated(context, 'onBord3'),
+        image: 'lib/images/img2.png',
+        backImage: 'lib/images/back2.png',
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
